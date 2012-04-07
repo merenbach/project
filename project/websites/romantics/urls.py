@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 sitemaps = {}
 
 urlpatterns = patterns('',
-        url(r'^$', TemplateView.as_view(template_name='home.html'), name='home_url_name'),
+        #url(r'^$', TemplateView.as_view(template_name='home.html'), name='home_url_name'),
         # Examples:
         # url(r'^$', 'project.views.home', name='home'),
         # url(r'^project/', include('project.foo.urls')),
