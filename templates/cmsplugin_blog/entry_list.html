@@ -1,0 +1,45 @@
+{% extends "cmsplugin_blog/cmsplugin_blog_base.html" %}
+{% load additions_tags pagination_tags i18n placeholder_tags cmsplugin_blog_tags simple_translation_tags %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="alternate" type="application/rss+xml" title="RSS feed for tag &quot;{{ tag|escape }}&quot;" href="{% if request.LANGUAGE_CODE %}/{{ request.LANGUAGE_CODE }}{% endif %}{% url blog_rss_tagged tag %}" />
+<link rel="alternate" type="application/rss+xml" title="RSS feed for tag &quot;{{ tag|escape }}&quot; (any language)" href="{% if request.LANGUAGE_CODE %}/{{ request.LANGUAGE_CODE }}{% endif %}{% url blog_rss_any_tagged tag %}" />
+{% endblock extrahead %}
+
+{% block title %}Blog entries tagged &ldquo;{{ tag }}&rdquo;{% endblock %}
+{% block pagetitle %}Blog entries tagged "{{ tag }}"{% endblock %}
+
+{% block breadcrumb %}
+{{ block.super }}
+<li>&raquo;</li>
+<li>Tagged</li>
+<li>&raquo;</li>
+<li><a href="{% url blog_archive_tagged tag=tag %}">{{ tag }}</a></li>
+{% endblock %}
+
+{% block left-col %}
+{{ block.super }}
+
+{% comment %}<h1>{% trans "Entries tagged" %} "{{ tag }}"</h1>{% endcomment %}
+{% autopaginate object_list as entries %}
+{% for entry in entries %}
+{% with entry|get_preferred_translation_from_request:request as title %}
+{% with entry.placeholders|choose_placeholder:"content" as content %}
+<div class="roundbox">
+    <div class="node-title"><a href="{{ title.get_absolute_url }}">{{ title }}</a></div>
+    <div class="node-meta">dated {{ entry.pub_date|date:"Y-m-d \@ H:i" }}</div>
+    {% if content %}<div class="node-excerpt">{% render_placeholder content %}</div>{% endif %}
+    {% render_tag_links_detail entry %}
+</div>
+{% endwith %}
+{% endwith %}
+{% empty %}
+<div class="roundbox">
+    <em>No entries exist for this tag.</em>
+</div>
+{% comment %}<p>{% trans "No entries tagged" %} "{{ tag }}"</p>{% endcomment %}
+{% endfor %}
+{% paginate %}
+{% render_tag_links %}
+{% endblock %}

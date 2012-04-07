@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{# load i18n sekizai_tags menu_tags placeholder_tags analytics simple_translation_tags #}
+{% load sekizai_tags %}
+{% load compress %}
+{% load analytics %}
+{% load flatpages tags %}
+{# this site makes use of the awesome normalize.css #}
+{# /*! normalize.css 2011-11-04T15:38 UTC - http://github.com/necolas/normalize.css */ #}
+{% addtoblock "css" %}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/normalize.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sticky.css">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/screen.less" charset="utf-8" media="screen">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/antiscreen.css" media="handheld">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/antiscreen.css" media="only screen and (max-device-width:480px)">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/handheld.css" media="handheld, only screen and (max-device-width:480px)">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/nav.less">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/print.css" media="print">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/search.less">
+{% endcompress %}
+{% endaddtoblock %}
+{% addtoblock "js" %}
+{% compress js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/suckerfish.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
+{% endcompress %}
+{% endaddtoblock %}
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block pagetitle %}Title{% endblock %}</title>
+        <link rel="icon" type="image/png" href="/favicon.ico">
+        <link rel="shortcut icon" type="image/png" href="/favicon.ico">
+        <meta name="viewport" content="width=device-width">
+        <meta name="author" content="Andrew Merenbach">
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/html5.js"></script>
+        <![endif]-->
+        {% render_block "css" %}
+        {% block extrahead %}{% endblock %}
+        <!--[if IE]>
+        <style type="text/css">
+            .clearfix {
+            zoom: 1;     /* triggers hasLayout */
+            }  /* Only IE can see inside the conditional comment
+            and read this CSS rule. Don't ever use a normal HTML
+            comment inside the CC or it will close prematurely. */
+        </style>
+        <![endif]-->
+
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #wrap {display:table;height:100%;}
+        </style>
+        <![endif]-->
+
+        {% analytics_async %}
+    </head>
+    <body>
+        <div id="body-inner">
+            <div id="wrapper">
+                <header id="header" class="clearfix">
+                <div id="branding">
+                    {% block branding %}{% endblock %}
+                </div>
+                {% block search_placeholder %}
+                <form class="searchform" method="get" action="/search/">
+                    <ul>
+                        {# Is this a bit of a kludge? #}
+                        <li><input type="text" name="q" value="{{ query|default_if_none:"" }}"></li>
+                        <li><button type="submit">Search</button></li>
+                    </ul>
+                </form>
+                {% endblock %}
+                </header>
+                {% block navigation %}
+                <nav id="nav">
+                <ul class="clearfix">
+                    {% block navigation_items %}
+                    {% get_flatpages as flatpages %}
+                    {% for page in flatpages %}
+                    <li class="{% active page.url %}"><a href="{{ page.url }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                    {% endblock %}
+                </ul>
+                </nav>
+                {% endblock %}
+                <section id="main">
+                    {% block breadcrumbs_placeholder %}
+                    {% comment %}
+                    <nav class="breadcrumbs">
+                        <ul>
+                            {% block breadcrumb %}
+                            {% show_breadcrumb %}
+                            {% endblock %}
+                        </ul>
+                        </nav>
+                        {% endcomment %}
+                    {% endblock %}
+                    <h1>{% block title %}Title{% endblock %}</h1>
+                    {% block base_content %}{% endblock %}
+                </section>
+                {% comment %}<div class="push"></div>{% endcomment %}
+            </div>
+            <footer id="footer">
+            {% block copyright %}{% endblock %}
+            </footer>
+        </div>
+        {% render_block "js" %}
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

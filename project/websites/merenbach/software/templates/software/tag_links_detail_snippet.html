@@ -1,0 +1,14 @@
+{% load software_tags tagging_tags sekizai_tags %}
+
+{% if tags %}
+<div class="node-tags clearfix">
+    <ul>
+        <li>tagged</li>
+        {% for tag in tags %}
+        <li><a href="{% url software_tag_detail tag=tag %}">{{ tag }}</a></li>
+        {% empty %}
+        <li>none</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

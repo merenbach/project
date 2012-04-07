@@ -1,0 +1,832 @@
+{% extends "base.html" %}
+{% load sekizai_tags %}
+{% load compress %}
+{% load dajaxice_templatetags %}
+
+{% block pagetitle %}Ciphers | {{ block.super }}{% endblock %}
+{% block title %}Ciphers{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{% compress css %}
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_form.less">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_help.less">
+{% endcompress %}
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+
+{% compress js %}
+{% dajaxice_js_import "js/dajaxice.core.js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/dajax/jquery.dajax.core.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+function transcodeAffine() {
+	var message = $('#af_source').val();
+	var multiplier = $('#af_multiplier').val();
+	var additive = $('#af_additive').val();
+	var filter = $('#af_filter').is(':checked') ? true : false;
+	var lower = $('#af_lower').is(':checked') ? true : false;
+	var chunk = parseInt($('#af_chunk').val());
+	var encode = ($('input:radio[name=af_operation]:checked').val() == 'encode') ? true : false;
+
+	if (message != '') {
+		$('#af_target').val('Processing...');
+		Dajaxice.project.websites.merenbach.ciphers.transcode_affine(Dajax.process, {
+			'message': message,
+			'multiplier': multiplier,
+			'additive': additive,
+			'lower': lower,
+			'should_filter': filter,
+			'chunk': chunk,
+			'encode': encode
+		});
+	}
+}
+
+function transcodeAtbash() {
+	var message = $('#at_source').val();
+	var filter = $('#at_filter').is(':checked') ? true : false;
+	var lower = $('#at_lower').is(':checked') ? true : false;
+	var chunk = parseInt($('#at_chunk').val());
+
+
+	if (message != '') {
+		$('#at_target').val('Processing...');
+		Dajaxice.project.websites.merenbach.ciphers.transcode_atbash(Dajax.process, {
+			'message': message,
+			'lower': lower,
+			'should_filter': filter,
+			'chunk': chunk
+		});
+	}
+}
+
+function transcodeBeaufort() {
+	var message = $('#bf_source').val();
+	var passphrase = $('#bf_passphrase').val();
+	var primer = parseInt($('#bf_primer').val());
+	var alphakey = $('#bf_alphakey').val();
+	var digits = $('#bf_digits').is(':checked') ? true : false;
+	var filter = $('#bf_filter').is(':checked') ? true : false;
+	var lower = $('#bf_lower').is(':checked') ? true : false;
+	var chunk = parseInt($('#bf_chunk').val());
+
+	if (message != '') {
+		$('#bf_target').val('Processing...');
+		Dajaxice.project.websites.merenbach.ciphers.transcode_beaufort(Dajax.process, {
+			'message': message,
+			'passphrase': passphrase,
+			'keyword': alphakey,
+			'primer': primer,
+			'use_digits': digits,
+			'lower': lower,
+			'should_filter': filter,
+			'chunk': chunk
+		});
+	}
+}
+
+function transcodeCaesar() {
+	var message = $('#cr_source').val();
+	var shift = $('#cr_shift').val();
+	var filter = $('#cr_filter').is(':checked') ? true : false;
+	var lower = $('#cr_lower').is(':checked') ? true : false;
+	var chunk = parseInt($('#cr_chunk').val());
+	var encode = ($('input:radio[name=cr_operation]:checked').val() == 'encode') ? true : false;
+
+	if (message != '') {
+		$('#cr_target').val('Processing...');
+		Dajaxice.project.websites.merenbach.ciphers.transcode_caesar(Dajax.process, {
+			'message': message,
+			'shift': shift,
+			'lower': lower,
+			'should_filter': filter,
+			'chunk': chunk,
+			'encode': encode
+		});
+	}
+}
+
+function transcodeCodeword() {
+	var message = $('#cw_source').val();
+	var keyword = $('#cw_keyword').val();
+	var filter = $('#cw_filter').is(':checked') ? true : false;
+	var lower = $('#cw_lower').is(':checked') ? true : false;
+	var chunk = parseInt($('#cw_chunk').val());
+	var encode = ($('input:radio[name=cw_operation]:checked').val() == 'encode') ? true : false;
+
+	if (message != '') {
+		$('#cw_target').val('Processing...');
+		Dajaxice.project.websites.merenbach.ciphers.transcode_codeword(Dajax.process, {
+			'message': message,
+			'keyword': keyword,
+			'lower': lower,
+			'should_filter': filter,
+			'chunk': chunk,
+			'encode': encode
+		});
+	}
+}
+
+function transcodeVigenere() {
+	var message = $('#vi_source').val();
+	var passphrase = $('#vi_passphrase').val();
+	var primer = parseInt($('#vi_primer').val());
+	var alphakey = $('#vi_alphakey').val();
+	var autoclave = ($('input:radio[name=vi_autoclave]:checked').val() == 'text') ? true : false;
+	var digits = $('#vi_digits').is(':checked') ? true : false;
+	var filter = $('#vi_filter').is(':checked') ? true : false;
+	var lower = $('#vi_lower').is(':checked') ? true : false;
+	var chunk = parseInt($('#vi_chunk').val());
+	var encode = ($('input:radio[name=vi_operation]:checked').val() == 'encode') ? true : false;
+
+	if (message != '') {
+		$('#vi_target').val('Processing...');
+		Dajaxice.project.websites.merenbach.ciphers.transcode_vigenere(Dajax.process, {
+			'message': message,
+			'passphrase': passphrase,
+			'autoclave': autoclave,
+			'keyword': alphakey,
+			'primer': primer,
+			'use_digits': digits,
+			'lower': lower,
+			'should_filter': filter,
+			'chunk': chunk,
+			'encode': encode
+		});
+	}
+}
+
+$('#scheme').change(function() {
+	el_id = $(this).val();
+	$('.pane').hide();
+	$('#' + el_id + '_pane').show();
+});
+
+$(document).ready(function() {
+	$('.pane').hide();
+
+	$('#affine_pane button').click(transcodeAffine);
+	$('#atbash_pane button').click(transcodeAtbash);
+	$('#caesar_pane button').click(transcodeCaesar);
+	$('#beaufort_pane button').click(transcodeBeaufort);
+	$('#codeword_pane button').click(transcodeCodeword);
+	$('#vigenere_pane button').click(transcodeVigenere);
+
+	$('#intro_pane').show();
+	window.onbeforeunload = function() {
+	};
+});
+
+</script>
+{% endcompress %}
+{% endblock %}
+
+{% block base_content %}
+{{ block.super }}
+
+<form class="labform" method="post" action="/ciphers">
+	<noscript>
+		<fieldset>
+			<ol class="jserror">
+				<li>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</li>
+			</ol>
+		</fieldset>
+	</noscript>
+	<section>
+		<fieldset style="margin-bottom: 10px;">
+			<ol>
+				<li>
+					<label>
+						<span style="font-weight: bold;">Cipher Scheme</span>
+						<select id="scheme">
+							<option value="intro">Introduction</option>
+							<option value="affine">Affine</option>
+							<option value="atbash">Atbash</option>
+							<option value="beaufort">Beaufort</option>
+							<!--<option value="beaufortautokey">Beaufort Autoclave (custom)</option>-->
+							<option value="caesar">Caesar</option>
+							<option value="codeword">Codeword</option>
+							<!--<option value="gronsfeld">x Gronsfeld</option>-->
+							<!--<option value="variant">x Variant Beaufort</option>-->
+							<option value="vigenere">Vigen&#232;re</option>
+						</select>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The cipher scheme to use</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="intro_pane">
+		<fieldset>
+			<ol>
+				<li>
+					Welcome to Andrew Merenbach's cipher tool suite.  Encryption schemes provided include affine, Atbash, Beaufort, Caesar shift, codeword, <!--variant Beaufort (including an autoclave version),-->and Vigen&#232;re (including an autoclave option).
+				</li>
+				<li>
+					<strong>This tool requires JavaScript.</strong>  This page makes moderate use of CSS standards and HTML5; please ensure that your browser observes these requirements.
+				</li>
+				<li>
+					To begin, please select a scheme from the menu.
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="affine_pane">
+		<fieldset>
+			<ol>
+				<li>The affine cipher, a monoalphabetic substitution cipher, makes use of an intriguing multiplier and additive to generate letters based upon a simple formula (which varies based upon the multiplier and additive).  This also represents its downfall, for if an attacker finds two letters, the whole formula can be discerned.</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Parameters</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Source Text</span>
+						<textarea id="af_source" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Multiplier</span>
+						<input type="number" id="af_multiplier" value="1" required>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The multiplier with which to transcode the text</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Additive</span>
+						<input type="number" id="af_additive" value="0" required>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The additive with which to transcode the text</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Options</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input id="af_filter" type="checkbox">Filter Text</label>
+							</li>
+							<li>
+								<label><input id="af_lower" type="checkbox">Convert to Lowercase</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<label>
+						<span>Chunk Size</span>
+						<input type="number" id="af_chunk" value="0">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Operation</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input name="af_operation" type="radio" value="encode" checked>Encode</label>
+							</li>
+							<li>
+								<label><input name="af_operation" type="radio" value="decode">Decode</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
+					</fieldset>
+				</li>
+				<li class="code-button-wrapper">
+					<button type="button">Transcode</button>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Output</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Target Text</span>
+						<textarea id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Clear Alphabet</span>
+						<input type="text" id="af_plaintext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Code Alphabet</span>
+						<input type="text" id="af_ciphertext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="atbash_pane">
+		<fieldset>
+			<ol>
+				<li>The Atbash cipher, with old Hebrew roots, reverses here the plaintext alphabet under itself to create the ciphertext alphabet.  A becomes Z, B becomes Y, C becomes X, and M becomes N.  This represents a fairly simple monoalphabetic substitution cipher.</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Parameters</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Source Text</span>
+						<textarea id="at_source" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Options</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input id="at_filter" type="checkbox">Filter Text</label>
+							</li>
+							<li>
+								<label><input id="at_lower" type="checkbox">Convert to Lowercase</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<label>
+						<span>Chunk Size</span>
+						<input type="number" id="at_chunk" value="0">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
+				</li>
+				<li class="code-button-wrapper">
+					<button type="button">Transcode</button>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Output</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Target Text</span>
+						<textarea id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Clear Alphabet</span>
+						<input type="text" id="at_plaintext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Code Alphabet</span>
+						<input type="text" id="at_ciphertext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="beaufort_pane">
+		{% comment %}
+		<fieldset>
+			<ol>
+				<li>Description goes here.</li>
+			</ol>
+		</fieldset>
+		{% endcomment %}
+		<fieldset>
+			<legend>Parameters</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Source Text</span>
+						<textarea id="bf_source" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Passphrase</span>
+						<textarea id="bf_passphrase" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The passphrase with which to transcode the text</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Primer Index</span>
+						<input type="number" min="0" value="0" id="bf_primer">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Alphabet Key</span>
+						<input type="text" id="bf_alphakey">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The keyword with which to generate the alphabetic tableaux</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Transcoding</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input id="bf_digits" type="checkbox">Allow Digits</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Options</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input id="bf_filter" type="checkbox">Filter Text</label>
+							</li>
+							<li>
+								<label><input id="bf_lower" type="checkbox">Convert to Lowercase</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<label>
+						<span>Chunk Size</span>
+						<input type="number" id="bf_chunk" value="0">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
+				</li>
+				<li class="code-button-wrapper">
+					<button type="button">Transcode</button>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Output</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Target Text</span>
+						<textarea id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="caesar_pane">
+		<fieldset>
+			<ol>
+				<li>Ciphertext letters in this monoalphabetic substitution cipher represent their plaintext counterparts shifted by some number of letters.  Julius Caesar allegedly employed this monoalphabetic substitution cipher, with a shift of three letters, for military purposes.</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Parameters</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Source Text</span>
+						<textarea id="cr_source" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Offset</span>
+						<input type="number" min="0" max="25" value="3" id="cr_shift" required>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The offset by which to shift the ciphertext alphabet</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Options</span>
+						</legend>
+						<ol>
+							<li>
+								<label>
+									<input id="cr_filter" type="checkbox">
+									Filter Text
+								</label>
+							</li>
+							<li>
+								<label>
+									<input id="cr_lower" type="checkbox">
+									Convert to Lowercase
+								</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<label>
+						<span>Chunk Size</span>
+						<input type="number" id="cr_chunk" value="0">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Operation</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input name="cr_operation" type="radio" value="encode" checked>Encode</label>
+							</li>
+							<li>
+								<label><input name="cr_operation" type="radio" value="decode">Decode</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
+					</fieldset>
+				</li>
+				<li class="code-button-wrapper">
+					<button type="button">Transcode</button>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Output</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Target Text</span>
+						<textarea id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Clear Alphabet</span>
+						<input type="text" id="cr_plaintext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Code Alphabet</span>
+						<input type="text" id="cr_ciphertext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="codeword_pane">
+		<fieldset>
+			<ol>
+				<li>One of the easiest monoalphabetic substitution ciphers to implement&#8212;save for, possibly, the Caesar shift and the Atbash cipher&#8212;the codeword creates a ciphertext alphabet from a keyword followed by the plaintext alphabet minus the keyword's letters.</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Parameters</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Source Text</span>
+						<textarea id="cw_source" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Keyword</span>
+						<input type="text" id="cw_keyword" required>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The keyword with which to transcode the text</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Options</span>
+						</legend>
+						<ol>
+							<li>
+								<label>
+									<input id="cw_filter" type="checkbox">
+									Filter Text
+								</label>
+							</li>
+							<li>
+								<label>
+									<input id="cw_lower" type="checkbox">
+									Convert to Lowercase
+								</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<label>
+						<span>Chunk Size</span>
+						<input type="number" id="cw_chunk" value="0">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Operation</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input name="cw_operation" type="radio" value="encode" checked>Encode</label>
+							</li>
+							<li>
+								<label><input name="cw_operation" type="radio" value="decode">Decode</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
+					</fieldset>
+				</li>
+				<li class="code-button-wrapper">
+					<button type="button">Transcode</button>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Output</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Target Text</span>
+						<textarea id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Clear Alphabet</span>
+						<input type="text" id="cw_plaintext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Code Alphabet</span>
+						<input type="text" id="cw_ciphertext" value="" readonly="readonly">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+	<section class="pane" id="vigenere_pane">
+		<fieldset>
+			<ol>
+				<li>One of the most popular of the aging ciphers, the Vigen&#232;re&#8212;a polyalphabetic substitution cipher that encrypts and decrypts using a tabula recta&#8212;has over the years endured much scrutiny and, perhaps, abuse.  One can implement the cipher fairly easily on a sheet of paper, and some computer software can make transcoding large messages with it practically instantaneous.  Those encoding messages, however, frequently use passphrases shorter than the message itself, which renders the message vulnerable to attacks, such as frequency analysis.  Reusing a passphrase and, for that matter, using a passphrase with native words at all, can present pitfalls.  To secure the encryption, a long string of pure gibberish, used once (for both encoding and decoding), would present, theoretically, a fairly difficult challenge (to say the least) to any interceptors.</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Parameters</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Source Text</span>
+						<textarea id="vi_source" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Passphrase</span>
+						<textarea id="vi_passphrase" rows="4" cols="20"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The passphrase with which to transcode the text</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Primer Index</span>
+						<input type="number" min="0" value="0" id="vi_primer">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span></a>
+				</li>
+				<li>
+					<label>
+						<span>Alphabet Key</span>
+						<input type="text" id="vi_alphakey">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The keyword with which to generate the alphabetic tableaux</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Transcoding</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input id="vi_digits" type="checkbox">Allow Digits</label>
+							</li>
+						</ol>
+					</fieldset>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Autoclave</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input name="vi_autoclave" type="radio" value="key" checked>Key Autokey</label>
+							</li>
+							<li>
+								<label><input name="vi_autoclave" type="radio" value="text">Text Autokey</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Key autokey (the default) repeats the characters in the key, up to the message length.  Text autokey appends the plaintext of the message to the key, which can prove more secure when the original key is shorter than the message.</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Options</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input id="vi_filter" type="checkbox">Filter Text</label>
+							</li>
+							<li>
+								<label><input id="vi_lower" type="checkbox">Convert to Lowercase</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+					</fieldset>
+				</li>
+				<li>
+					<label>
+						<span>Chunk Size</span>
+						<input type="number" id="vi_chunk" value="0">
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
+				</li>
+				<li>
+					<fieldset>
+						<legend>
+							<span>Operation</span>
+						</legend>
+						<ol>
+							<li>
+								<label><input name="vi_operation" type="radio" value="encode" checked>Encode</label>
+							</li>
+							<li>
+								<label><input name="vi_operation" type="radio" value="decode">Decode</label>
+							</li>
+						</ol>
+						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
+					</fieldset>
+				</li>
+				<li class="code-button-wrapper">
+					<button type="button">Transcode</button>
+				</li>
+			</ol>
+		</fieldset>
+		<fieldset>
+			<legend>Output</legend>
+			<ol>
+				<li>
+					<label>
+						<span>Target Text</span>
+						<textarea id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
+					</label>
+					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
+				</li>
+			</ol>
+		</fieldset>
+	</section>
+</form>
+{% endblock %}
+
+{% comment %}
+<div id="descriptionforgronsfeld">The Gronsfeld cipher functions very similarly to the Vigen&#232;re (and related) ciphers.  The ciphertext alphabet, however, comprises numbers (0-9), rather than letters.  Although fewer alphabets are available for encoding (10 instead of 26), the ease of creating a lengthy numeric key may make up for this.  As a note, other sites may implement this mechanism somewhat differently.</div>
+<div id="descriptionforvariant">The variant Beaufort cipher is functionally identical to the Vigen&#232;re cipher, except that the encryption and decryption steps are reversed.</div>
+<div id="descriptionforvigenereautokey">For ciphers involving the tabula recta, the autoclave (or autokey) variant descriptor indicates in most cases that the plaintext will be appended to the key <em>during encoding</em>.  Essentially, a four-letter passphrase would effectively match, in length, its associated message.  This takes significantly more effort to decode than, say, a four-letter passphrase on non-autoclave versions of a cipher, where the passphrase will simply repeat.  Irrespective of whether one uses an autoclave cipher, perhaps the most secure method of encrypting a tabule recta message is to use a long string of gibberish (in letters) as the passphrase and mark it down for use as a one-time pad.  This transcends, ultimately, the differences between the autoclave and non-autoclave forms.</div>
+{% endcomment %}

@@ -1,0 +1,48 @@
+/*.blog-archive-item {
+margin-top: 1em;
+}
+
+.blog-archive-item:first-child {
+margin-top: 0;
+}*/
+
+/*.blog-archive-excerpt {
+padding-top: 0.5em;
+}*/
+/*padding-left: 0.5em;
+border-left: solid 0.5em rgb(160, 160, 160);*/
+/*border-top: solid 0.5em transparent;
+border-bottom: solid 0.5em transparent;*/
+
+
+/*.gray-bg-220 {
+background-color: rgb(220, 220, 220);
+}
+
+.gray-bg-220 a {
+text-decoration: none;
+font-weight: bold;
+}*/
+
+/*.blog-archive-year-wrapper {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 1em;
+}
+
+.blog-archive-year-content {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}*/
+
+/*.blog-error {
+background-image: url('/media/images/stripes_red_black.png');
+padding: 0.25em 0.5em;
+border: solid gray 1px;
+font-weight: bold;
+text-shadow: 0.1em 0.1em 0.2em white;
+}*/
+
+

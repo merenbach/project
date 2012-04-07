@@ -1,0 +1,239 @@
+/* ---- html5 ---- */
+
+/* used for li elements in order to remove requirement for the "clearfix" */
+div.styled-form form, div.styled-form form fieldset, div.styled-form form legend, div.styled-form form ol, div.styled-form form li {
+	margin: 0;
+	padding: 0;
+}
+
+/*	background-color: #9cbc2c;*/
+div.styled-form form {
+	margin: 2em auto;
+	background-color: rgb(160, 160, 255);
+	padding: 20px;
+	width: 420px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.styled-form form fieldset {
+	border: none;
+	margin-bottom: 10px;
+}
+
+div.styled-form form fieldset:last-of-type {
+	margin-bottom: 0;
+}
+
+div.styled-form form legend {
+	color: #384313;
+	background-color: transparent;
+	font-size: 16px;
+	font-weight: bold;
+	padding-bottom: 10px;
+	text-shadow: 0 1px 1px rgb(160, 160, 192);
+}
+/*	text-shadow: 0 1px 1px #c0d576;
+*/
+
+div.styled-form form ol {
+	margin-top: 0;
+	padding-left: 0;
+}
+
+div.styled-form form ol li {
+	background: rgb(192, 192, 255);
+	background: rgba(255, 255, 255, 0.3);
+	border-color: rgb(220, 220, 255);
+	border-color: rgba(255, 255, 255, 0.6);
+	border-style: solid;
+	border-width: 2px;
+	line-height: 30px;
+	list-style: none;
+	padding: 5px 10px;
+	margin-bottom: 2px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.styled-form form ol ol {
+	display: inline-block;
+}
+
+div.styled-form form ol ol li {
+	background: none;
+	border: none;
+	display: inline;
+}
+
+div.styled-form form label {
+	vertical-align: top;
+	display: inline-block;
+	font-size: 13px;
+	font-weight: normal;
+	width: 120px;
+}
+
+div.styled-form form ol ol label {
+	vertical-align: baseline;
+}
+
+div.styled-form form fieldset fieldset legend {
+	color: #111111;
+	font-size: 13px;
+	font-weight: normal;
+	padding-bottom: 0;
+	text-shadow: none;
+}
+
+div.styled-form form fieldset fieldset label {
+	background:none no-repeat left 50%;
+	line-height: 20px;
+	width: auto;
+}
+
+/*div.styled-form form label[for=visa] {
+	background-image: url(visa.gif);
+}
+
+div.styled-form form label[for=amex] {
+	background-image: url(amex.gif);
+}
+
+div.styled-form form label[for=mastercard] {
+	background-image: url(mastercard.gif);
+}*/
+
+div.styled-form form fieldset fieldset label:hover {
+	cursor: pointer;
+}
+
+div.styled-form form input:not([type=radio]):not([type=checkbox]),
+div.styled-form form textarea {
+	background: #ffffff;
+	border: none;
+	font: 13px Courier, Georgia, "Times New Roman", Times, serif;
+	outline: none;
+	padding: 5px;
+	width: 220px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	border-radius: 3px;
+}
+
+div.styled-form form input:not([type=submit]):focus,
+div.styled-form form textarea:focus {
+	background: #eaeaea;
+}
+
+div.styled-form form textarea {
+	height: 8em;
+}
+
+div.styled-form form input[type=radio],
+div.styled-form form input[type=checkbox] {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+/*	background: #384313;
+*/
+div.styled-form form button {
+	background: rgb(96, 96, 192);
+	border: none;
+	color: #ffffff;
+	display: block;
+	font: 18px Georgia, "Times New Roman", Times, serif;
+	letter-spacing: 1px;
+	margin: auto;
+	padding: 7px 25px;
+	text-shadow: 0 1px 1px #000000;
+	text-transform: uppercase;
+	
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+	border-radius: 20px;
+}
+/*	border: solid black 2px;
+*/
+
+div.styled-form form button:hover {
+	background: rgb(64, 64, 192);
+	cursor: pointer;
+}
+
+/*div.styled-form form button:active {
+	background: rgb(64, 128, 32);
+	border: solid white 2px;
+}*/
+
+
+/*ol.row-list {
+	list-style-type: disc;
+	margin-top: 0;
+	padding-left: 0;
+	display: none;
+}
+
+ol.row-list li {
+	display: inline-block;
+}*/
+
+/*.label-cell {
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+	width: 120px;
+}
+
+.input-cell {
+	vertical-align: top;
+	display: inline-block;
+	text-align: left;
+	width: 220px;
+}
+
+.help-cell {
+	display: inline-block;
+	vertical-align: top;
+	text-align: right;
+	width: 3em;
+}
+
+.wide-cell {
+	padding-right: 5px;
+	margin: 0;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+	width: 340px;
+}*/
+
+ol#jserror {	
+	color: black;
+	background-color: yellow;
+	background-color: rgba(255, 255, 0, 0.75);
+	border: solid red 2px;
+	border: solid rgba(255, 0, 0, 0.25) 2px;
+	font-weight: bold;
+	font-size: 0.9em;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	text-align: center;
+}
+
+html[xmlns] .clearfix {
+	display: block;
+}
+
+* html .clearfix {
+	height: 1%;
+}

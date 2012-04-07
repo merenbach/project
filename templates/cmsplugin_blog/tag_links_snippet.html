@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load cmsplugin_blog_tags tagging_tags sekizai_tags %}
+
+{% if tags %}
+<h1>See entries tagged&hellip;</h1>
+<div class="roundbox">
+    <ul class="tag-list clearfix">
+        {% for tag in tags %}
+        <li><a href="{% url blog_archive_tagged tag=tag %}">{{ tag }}</a></li>
+        {% empty %}
+        <li><em>No tags have been created.</em></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

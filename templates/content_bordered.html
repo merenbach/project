@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block base_content %}
+{{ block.super }}
+<div class="roundbox">
+    {% comment %}
+    {% if object.pub_date %}
+    <div class="node-date">dated {{ object.pub_date|date:"Y-m-d \@ H:m" }}</div>
+    {% endif %}
+    {% endcomment %}
+
+    {% block content %}{% endblock %}
+</div>
+{% endblock base_content %}

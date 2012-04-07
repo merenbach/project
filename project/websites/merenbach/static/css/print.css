@@ -1,0 +1,39 @@
+body {
+    background: white;
+    font-size: 12pt;
+}
+
+#header, #header-inner {
+    padding: 0;
+    margin: 0;
+    height: auto;
+}
+
+#branding {
+    float: none;
+    font-size: 2em;
+}
+
+#header img,
+#header .searchbox,
+#nav,
+.breadcrumbs {
+    display: none;
+}
+
+#wrapper, #content, #footer {
+    width: auto;
+    margin: 0 5%;
+    padding: 0;
+    border: 0;
+    float: none !important;
+    color: black;
+    background: transparent none;
+}
+
+a:link, a:visited {
+    color: rgb(96, 128, 160);
+    background: transparent;
+    font-weight: bold;
+    text-decoration: underline;
+}

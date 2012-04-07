@@ -1,0 +1,8 @@
+{% extends 'content_bordered.html' %}
+{% load markup %}
+{% load flatpages %}
+{% block pagetitle %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+{% block content %}
+{{ flatpage.content|markdown }}
+{% endblock %}

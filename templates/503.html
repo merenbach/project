@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>We're down for maintenance.</title>
+        <style>
+            body{
+                background: #fbfbfb;
+                font-family: "Helvetica Neue", Arial, sans-serif;
+            }
+            h1{
+                line-height: 84px;
+                font-size: 84px;
+                text-transform: uppercase;
+                text-align: center;
+                color: #3e3e3e;
+                margin: 0 auto;
+                margin-top: 10%;
+            }
+            p { font-size: 21px; }
+            div{
+                margin: 0 auto;
+                width: 50%;
+                text-align: center;
+            }
+            
+            .message-box {
+                margin: 1em auto;
+            }
+
+            .message {
+                font-size: 1.4em;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div>
+            <h1>Down</h1>
+            <p>This site is currently undergoing scheduled maintenance.  Please see the messages below for more information:</p>
+            {% for message in messages %}
+            <div class="message-box">
+                <span class="message">{{ message.message|safe }}</span>
+                <br />
+                {% if message.end_time %}
+                <em>Service window begins {{ message.start_time|date:"F j, Y  H:i" }} and ends {{ message.end_time|date:"F j, Y  H:i" }}.</em>
+                {% else %}
+                <em>Service window begins {{ message.start_time|date:"F j, Y  H:i" }}.</em>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+    </body>
+</html>

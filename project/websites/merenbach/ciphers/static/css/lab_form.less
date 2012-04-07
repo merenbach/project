@@ -1,0 +1,287 @@
+/* ---- html5 ---- */
+
+/*	background-color: #9cbc2c;*/
+.labform {
+    margin: 0;  /* not really necessary */
+    padding: 0; /* not really necessary */
+
+    margin: 2em auto;
+    background-color: rgb(160, 160, 255);
+    padding: 20px;
+    width: 420px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+
+    fieldset, legend, ol, li {
+        margin: 0;
+        padding: 0;
+    }
+
+    fieldset {
+        border: none;
+        margin-bottom: 10px;
+        
+        &:last-of-type { margin-bottom: 0; }
+        
+        fieldset {
+            legend {
+                color: #111111;
+                font-size: 13px;
+                font-weight: normal;
+                padding-bottom: 0;
+                text-shadow: none;
+            }
+
+            label {
+                background:none no-repeat left 50%;
+                line-height: 20px;
+                width: auto;
+        
+                &:hover { cursor: pointer; }
+            }
+        }
+    }
+
+    legend {
+        color: #384313;
+        background-color: transparent;
+        font-size: 16px;
+        font-weight: bold;
+        padding-bottom: 10px;
+        text-shadow: 0 1px 1px rgb(160, 160, 192);
+        /*	text-shadow: 0 1px 1px #c0d576; */
+    }
+
+    ol {
+        margin-top: 0;
+        padding-left: 0;
+
+        li {
+            .clearfix;
+
+            background: rgb(192, 192, 255);
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgb(220, 220, 255);
+            border-color: rgba(255, 255, 255, 0.6);
+            border-style: solid;
+            border-width: 2px;
+            line-height: 30px;
+            list-style: none;
+            padding: 5px 10px;
+            margin-bottom: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        label {
+            vertical-align: top;
+            display: inline-block;
+            font-size: 13px;
+            font-weight: normal;
+            width: 360px;
+
+            span {
+                float: left;
+                width: 120px;
+            }
+
+            .clearfix;
+        }
+
+        fieldset {
+            legend {
+                float: left;
+
+                span {
+                    float: left;
+                    width: 120px;
+                }
+
+                .clearfix;
+            }
+
+            ol {
+                float: left;
+
+                li {
+                    padding: 0 0 0 10px;
+                    background: none;
+                    border: none;
+                    float: left;
+                }
+
+                li:first-child {
+                    padding-left: 0;
+                }
+                
+                label { vertical-align: baseline; }
+
+                .clearfix;
+            }
+
+            .clearfix;
+        }
+    }
+
+    input:not([type=radio]):not([type=checkbox]),
+    textarea {
+        background: #ffffff;
+        border: none;
+        font: 13px Courier, Georgia, "Times New Roman", Times, serif;
+        outline: none;
+        padding: 5px;
+        width: 220px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -khtml-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    input:not([type=submit]):focus,
+    textarea:focus {
+        background: #eaeaea;
+    }
+
+    textarea { height: 8em; }
+
+    input[type=radio],
+    input[type=checkbox] {
+        display: inline-block;
+        margin-right: 5px;
+        /*	background: #384313; */
+    }
+
+    .code-button-wrapper {
+        text-align: center;
+
+        button, input[type=submit] {
+            background: rgb(96, 96, 192);
+            border: none;
+            color: #ffffff;
+            display: inline-block;
+            *display: inline;
+            font: 18px Georgia, "Times New Roman", Times, serif;
+            letter-spacing: 1px;
+            margin: 0 auto;
+            padding: 7px 25px;
+            text-shadow: 0 1px 1px #000000;
+            text-transform: uppercase;
+
+            -moz-border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -khtml-border-radius: 20px;
+            border-radius: 20px;
+            /*	border: solid black 2px; */
+
+            &:hover {
+                background: rgb(64, 64, 192);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .jserror {	
+        color: black;
+        background-color: yellow;
+        background-color: rgba(255, 255, 0, 0.75);
+        border: solid red 2px;
+        border: solid rgba(255, 0, 0, 0.25) 2px;
+        font-weight: bold;
+        font-size: 0.9em;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 10px !important;
+    }
+
+    /* add a margin to intro paragraphs */
+    li.introduction div {
+        margin-top: 1em;
+
+        /* no margin on the first "paragraph" */
+        &:first-child { margin-top: 0; }
+    }
+
+    .subwrap { text-align: center; }
+}
+
+/*.labform label[for=visa] {
+background-image: url(visa.gif);
+}
+
+.labform label[for=amex] {
+background-image: url(amex.gif);
+}
+
+.labform label[for=mastercard] {
+background-image: url(mastercard.gif);
+}*/
+
+
+/*.labform button:active {
+background: rgb(64, 128, 32);
+border: solid white 2px;
+}*/
+
+
+/*ol.row-list {
+list-style-type: disc;
+margin-top: 0;
+padding-left: 0;
+display: none;
+}
+
+ol.row-list li {
+display: inline-block;
+}*/
+
+/*.label-cell {
+display: inline-block;
+vertical-align: top;
+text-align: left;
+width: 120px;
+}
+
+.input-cell {
+vertical-align: top;
+display: inline-block;
+text-align: left;
+width: 220px;
+}
+
+.help-cell {
+display: inline-block;
+vertical-align: top;
+text-align: right;
+width: 3em;
+}
+
+.wide-cell {
+padding-right: 5px;
+margin: 0;
+display: inline-block;
+vertical-align: top;
+text-align: left;
+width: 340px;
+}*/
+
+/* For modern browsers */
+.clearfix {
+    &:before,
+    &:after {
+        content:"";
+        display:table;
+    }
+
+    &:after { clear:both; }
+
+    /* For IE 6/7 (trigger hasLayout) */
+    zoom:1;
+}
+

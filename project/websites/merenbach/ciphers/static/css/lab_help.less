@@ -1,0 +1,66 @@
+/* help buttons and text */
+a.formhelp {
+    float: right;
+    position: relative;
+    z-index: 24;
+    line-height: 1em;
+    //display: inline-block;
+
+    z-index: 25;
+    
+    text-decoration: none !important;
+    
+    font-family: 'Times New Roman', 'Times', serif;
+    font-weight: normal;
+
+    text-align: center;
+    vertical-align: baseline;
+
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding: 0.5em;
+    margin: 0;
+
+    color: black;
+    background-color: rgb(192, 224, 128);
+    background-color: rgba(255, 255, 128, 0.5);
+
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -khtml-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    /*
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+     */
+
+    span { display: none; }
+
+    &:hover {
+        background-color: rgb(255, 255, 64);
+        background-color: rgba(255, 255, 64, 1.0);
+    
+        span {
+            display: inline-block;
+            position: absolute;
+            top: 0em;
+            right: 4em;
+            width: 32em;
+            margin: 0.25em;
+            padding: 0.5em;
+            color: black;
+            background-color: rgb(255, 255, 128);
+            border-style: solid;
+            border-color: rgb(160, 160, 160);
+            border-width: 1px;
+            font-family: Verdana, sans-serif;
+            font-weight: normal;
+            font-size: 10px;
+            background-position: 0 0;	
+            text-align: left;
+        }
+    }
+}

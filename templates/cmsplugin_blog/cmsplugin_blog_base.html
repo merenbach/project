@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load cms_tags placeholder_tags sekizai_tags menu_tags cmsplugin_blog_tags %}
+
+{% block breadcrumb %}
+{{ block.super }}
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{% comment %}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/blog.css" />{% endcomment %}
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="{% url blog_rss %}" />
+{% endblock extrahead %}
+
+{% block base_content %}
+{% block body %}
+<div>
+    <div id="blog-column-left">
+        {% block left-col %}{% endblock %}
+    </div>
+    {% comment %}
+    <div id="blog-column-right">
+        {% block right-col %}{% endblock %}
+    </div>
+    {% endcomment %}
+</div>
+{% endblock body %}
+{% endblock base_content %}
+

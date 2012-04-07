@@ -1,0 +1,76 @@
+{% extends "search/base.html" %}
+{% load pagination_tags highlight i18n %}
+{% load cms_tags menu_tags placeholder_tags %}
+{% comment %}
+{% block breadcrumb %}
+{{ block.super }}
+{% if query %}
+<li>&raquo;</li>
+<li><a href="{{ request.get_full_path }}">{{ query }}</a></li>
+{% endif %}
+{% endblock %}
+{% endcomment %}
+
+{% block search_form %}
+
+<div class="roundbox">
+    <form class="searchform wireframe" method="get" action="{{ request.path }}">
+        <ul class="search-fields">
+            {# form.as_ul #}
+            <li><input type="text" name="q" value="{{ query|default_if_none:"" }}"></li>
+            <li><button type="submit">{% trans "Search" %}</button></li>
+        </ul>
+    </form>
+</div>
+
+{% endblock search_form %}
+
+{% comment %}
+{% block refine_search %}
+{% if facets.fields.language %}
+<h2>{% trans "Refine by" %}</h2>
+<h3>{% trans "Language" %}</h3>
+<ul>
+    {% for language in facets.fields.language %}
+    <li><a href="{{ request.get_full_path }}&amp;selected_facets=language_exact:{{ language.0 }}">{{ language.0 }}</a> ({{ language.1 }})</li>
+    {% endfor %}
+</ul>
+{% else %}
+{% endif %}
+{% endblock refine_search %}
+{% endcomment %}
+
+{% block search_results %}
+{% if query %}
+<h1>{% trans "Results" %}</h1>
+<div class="search-results">
+    {% for result in page.object_list %}
+    <div class="roundbox">
+        <div class="node-title"><a href="{{ result.url }}">{{ result.title }}</a></div>
+        <div class="node-meta">
+            {% if result.content_type == "cms.title" %}
+            {% trans "Page" %}
+            {% else %}
+            {% if result.content_type == "cmsplugin_blog.entrytitle" %}
+            {% trans "Blog entry" %}
+            {% else %}
+            {{ result.verbose_name }}
+            {% endif %}
+            {% endif %}
+        </div>
+        {% if result.text %}<div class="node-excerpt">{% highlight result.text with query %}</div>{% endif %}
+    </div>
+    {% empty %}
+    <div class="roundbox">
+        <p>{% trans "No results were found for your search." %}</p>
+        <p>Please ensure that your spelling is correct and that your search is general enough.  If you are using quotes around a phrase to narrow your search, you may wish to remove them in order to broaden the scope of your query.</p>
+    </div>
+{% endfor %}
+{% with page as page_obj %}
+{% paginate  %}
+{% endwith %}
+</div>
+{% else %}
+{# Show some example queries to run, maybe query syntax, something else? #}
+{% endif %}
+{% endblock search_results %}

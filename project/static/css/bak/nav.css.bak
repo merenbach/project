@@ -1,0 +1,106 @@
+#nav {
+	/*float: left;*/
+	background-color: black;
+}
+
+#nav ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: block;
+	white-space: nowrap;
+}
+
+#nav ul li {
+	float: left;
+	display: block;
+	/*width: 10em;*/
+	padding: 0.25em 0.5em;
+	
+}
+
+#nav ul li li {
+	float: none;
+	padding: 0;
+}
+
+#nav ul li ul {
+	position: absolute;
+	/*width: 10em;*/
+	left: -999em;
+	
+	border: solid rgb(64, 64, 64) 1px;
+	border-top: none;
+	
+	margin-top: 0.25em;
+
+	background-color: rgb(128, 0, 0);
+	font-size: 0.9em;
+}
+
+/* all links */
+#nav ul li a {
+	border: none;
+	display: block;
+	/*width: 10em;*/
+}
+
+#nav ul li:hover ul, #nav ul li.sfhover ul {
+	left: auto;
+}
+
+/* top-level links, but catch-all */
+#nav ul li a:link, #nav ul li a:visited {
+	padding: 0.25em 0.5em;
+
+	color: white;
+	text-decoration: none;
+}
+/*
+	-moz-border-radius:		1em;
+	-webkit-border-radius:	1em;
+	-khtml-border-radius:	1em;
+	border-radius:			1em;
+*/
+
+#nav ul li a { color: white; }
+#nav ul li a:hover  { color: white; }
+#nav ul li a:active { color: rgb(255, 192, 0); }
+
+#nav ul li.selected > a { color: rgb(255, 192, 0); }
+#nav ul li.selected > a:hover { color: white; }
+#nav ul li.selected > a:active { color: rgb(255, 192, 0); }
+
+/* top-level links get underlines on hover */
+/*#nav > ul > li > a:hover { text-decoration: underline; }*/
+#nav ul li > a:hover { text-decoration: underline; }
+
+/* sublinks appear white and undecorated */
+#nav ul li li a {
+	display: block;
+	text-decoration: none;
+	/*border-left-style: solid;
+	border-left-color: transparent;
+	border-left-width: 0.5em;*/
+
+	/*border-right: solid transparent 0.25em;*/	/* balance out border-left */
+}
+
+/*#nav ul li li a:hover {
+	border-left-color: rgb(255, 192, 0);
+}*/
+/*#nav ul li li a:hover { background-color: rgb(128, 0, 0); }*/
+
+/* selected top-level links get the underline treatment when hovered over */
+/*#nav ul li.selected li a {
+	color: white;
+	text-decoration: none;
+}*/
+
+/*#nav ul li.selected a:hover {
+	text-decoration: none;
+}
+
+#nav ul li.selected a:active {
+	text-decoration: underline;
+}*/

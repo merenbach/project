@@ -1,0 +1,23 @@
+{% extends 'html_base.html' %}
+{% load tags %}
+{% block title %}{% endblock %}
+{% block pagetitle %}Andrew&rsquo;s Den{% endblock %}
+{% block navigation_items %}
+{{ block.super }}
+{% comment %}
+{% url software_url_name as software %}
+{% url ciphers_url_name as ciphers %}
+<li class="{% active software %}"><a href="{{ software }}">Software</a></li>
+<li class="{% active ciphers %}"><a href="{{ ciphers }}">Ciphers</a></li>
+{% endcomment %}
+{% endblock %}
+{% block branding %}
+    {{ block.super }}
+    <a class="logo" href="/"><img src="{{ STATIC_URL }}img/floral-heart-outline-thick-scaled.png" alt="Logo"></a>
+    <a href="/">Andrew&rsquo;s Den</a>
+    <div class="slogan">Share a spot of tea!</div>
+{% endblock %}
+{% block copyright %}
+    {{ block.super }}
+    <span>Copyright &copy; 2011&ndash;2012 by Andrew Merenbach &bull; <a href="/admin/">Admin</a> &bull; Powered by <a href="https://www.djangoproject.com/" target="_blank">Django</a></span>
+{% endblock %}
