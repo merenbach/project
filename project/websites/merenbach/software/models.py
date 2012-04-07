@@ -39,7 +39,7 @@ class Software(models.Model):
     #app_icon = models.ImageField('application icon', upload_to='images/software', blank=True)
     pub_date = models.DateTimeField('date published', blank=True)
     is_published = models.BooleanField('is published')
-    
+
     class Meta:
         verbose_name = 'software'
         verbose_name_plural = 'software'

@@ -1,6 +1,6 @@
 import datetime
 from haystack import indexes
-from project.websites.merenbach.software.models import Software
+from websites.merenbach.software.models import Software
 
 class SoftwareIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
