@@ -15,9 +15,8 @@
     {% if form %}
         <div class="roundbox">
             {% block contact_message %}
-            Please feel free to use the below form to get in touch.
+                Please feel free to use the below form to get in touch.
             {% endblock %}
-            <strong>This form is currently under construction.  Please check back later.</strong>
         </div>
         <div id="contact_form_wrapper">
             <form class="wireframe" action="/contact/" method="POST">{% csrf_token %}
@@ -31,6 +30,6 @@
             </form>
         </div>
     {% else %}
-        {% block contact_thanks %}Thank you for your message.{% endblock %}
+        Something went wrong.  Please try again later.
     {% endif %}
 {% endblock %}

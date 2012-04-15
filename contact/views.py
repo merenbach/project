@@ -1,4 +1,4 @@
-import project.settings
+from project import settings
 from django.shortcuts import render_to_response
 from contact.forms import ContactForm
 from django.template import RequestContext
@@ -16,22 +16,27 @@ def send_message(request):
             sender = form.cleaned_data['sender']
             #cc_myself = form.cleaned_data['cc_myself']
 
-            if settings.CONTACT_RECIPIENTS:
+            if settings.CONTACT_RECIPIENTS and len(settings.CONTACT_RECIPIENTS) > 0:
                 recipients = settings.CONTACT_RECIPIENTS
                 #if cc_myself:
                 #    recipients.append(sender)
-
                 from django.core.mail import send_mail
                 email = EmailMessage(subject, message, sender, recipients, headers = {'Reply-To': sender})
                 #send_mail(subject, message, sender, recipients)
                 email.send()
-                return HttpResponseRedirect('/contact/') # Redirect after POST
+                return HttpResponseRedirect('/contact/thanks/') # Redirect after POST
                 #return HttpResponseRedirect(reverse('contact.views.send_message')) # Redirect after POST
             #return HttpResponseRedirect('/contact/') # Redirect after POST
+        else:
+            # validation failed
+            context_dict.update(form=form)
     else:
         form = ContactForm() # An unbound form
         context_dict.update(form=form)
     return render_to_response('contact/contact.html', context_dict, context_instance=RequestContext(request))
 
-#def thanks(request):
-#    return render_to_response('contact/thanks.html')
+def thanks(request):
+    context_dict = {}
+    #context_dict.update(thanks=True)
+    return render_to_response('contact/thanks.html', context_dict, context_instance=RequestContext(request))
+

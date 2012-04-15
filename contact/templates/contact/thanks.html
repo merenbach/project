@@ -1,0 +1,16 @@
+{% extends "content_bordered.html" %}
+{% load sekizai_tags %}
+{% load compress %}
+
+{% block pagetitle %}Contact | {{ block.super }}{% endblock %}
+{% block title %}Contact{% endblock %}
+
+{% block extrahead %}
+{% compress css %}
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/contact.less">
+{% endcompress %}
+{% endblock %}
+
+{% block content %}
+    {% block contact_thanks %}Thank you for your message.{% endblock %}
+{% endblock %}

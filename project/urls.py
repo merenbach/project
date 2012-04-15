@@ -21,7 +21,8 @@ if hasattr(settings, "OVERLOAD_SITE_MODULE"):
     sitemaps.update(site_sitemaps)
 
 urlpatterns = patterns('',
-    (r'^search/', include('haystack.urls')),
+    (r'^contact/', include('contact.urls')),
+    #(r'^search/', include('haystack.urls')),
     #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
     # Examples:
     # url(r'^$', 'project.views.home', name='home'),

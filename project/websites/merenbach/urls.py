@@ -18,7 +18,6 @@ urlpatterns = patterns('',
         #url(r'^$', TemplateView.as_view(template_name='home.html'), name='home_url_name'),
         (r'^ciphers/$', include('project.websites.merenbach.ciphers.urls')),
         (r'^software/', include('project.websites.merenbach.software.urls')),
-        (r'^contact/', include('contact.urls')),
         #(r'^google67b472340d465ad6.html$', 'test'),
         #url(r'^$', 'project.views.home', name='home'),
         # Examples:
