@@ -1,8 +1,7 @@
 settings.py
 *.pyc
 *.mov
-*.zip
-*.dmg
 *.tgz
 *.gz
 whoosh_index/
+.DS_Store
