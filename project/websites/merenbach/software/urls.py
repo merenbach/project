@@ -14,6 +14,7 @@ urlpatterns = patterns('',
                 queryset=Software.objects.order_by('-pub_date'),
                 context_object_name='software_list',
                 template_name='software/index.html'),
+            name='software',
             ),
 
         url(r'^(?P<slug>[-a-z0-9]+)/$',

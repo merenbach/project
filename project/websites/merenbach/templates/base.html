@@ -2,14 +2,12 @@
 {% load tags %}
 {% block title %}{% endblock %}
 {% block pagetitle %}Andrew&rsquo;s Den{% endblock %}
-{% block navigation_items %}
+{% block navigation_overrides %}
 {{ block.super }}
-{% comment %}
-{% url software_url_name as software %}
-{% url ciphers_url_name as ciphers %}
-<li class="{% active software %}"><a href="{{ software }}">Software</a></li>
-<li class="{% active ciphers %}"><a href="{{ ciphers }}">Ciphers</a></li>
-{% endcomment %}
+{% url software as software_url %}
+{% url ciphers as ciphers_url %}
+<li class="{% active software_url %}"><a href="{{ software_url }}">Software</a></li>
+<li class="{% active ciphers_url %}"><a href="{{ ciphers_url }}">Ciphers</a></li>
 {% endblock %}
 {% block branding %}
     {{ block.super }}

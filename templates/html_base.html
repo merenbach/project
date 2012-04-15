@@ -80,10 +80,11 @@
                 <nav id="nav">
                 <ul class="clearfix">
                     {% block navigation_items %}
-                    {% get_flatpages as flatpages %}
-                    {% for page in flatpages %}
-                    <li class="{% active page.url %}"><a href="{{ page.url }}">{{ page.title }}</a></li>
-                    {% endfor %}
+                    {% url home as home_url %}
+                    {% url contact as contact_url %}
+                    <li class="{% active home_url %}"><a href="{{ home_url }}">Home</a></li>
+                    {% block navigation_overrides %}{% endblock %}
+                    <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
                     {% endblock %}
                 </ul>
                 </nav>

@@ -21,20 +21,26 @@ if hasattr(settings, "OVERLOAD_SITE_MODULE"):
     sitemaps.update(site_sitemaps)
 
 urlpatterns = patterns('',
-    (r'^contact/', include('contact.urls')),
-    #(r'^search/', include('haystack.urls')),
-    #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
-    # Examples:
-    # url(r'^$', 'project.views.home', name='home'),
-    # url(r'^project/', include('project.foo.urls')),
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+        #url(r'^$', 'project.views.home', name='home'),
+        url(r'^contact/', include('contact.urls'), name='contact'),
+        #(r'^search/', include('haystack.urls')),
+        #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
+        # Examples:
+        # url(r'^$', 'project.views.home', name='home'),
+        # url(r'^project/', include('project.foo.urls')),
+        url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+        # Uncomment the admin/doc line below to enable admin documentation:
+        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
-)
+        # Uncomment the next line to enable the admin:
+        url(r'^admin/', include(admin.site.urls)),
+        )
+
+urlpatterns += patterns('django.contrib.flatpages.views',
+        url(r'^$', 'flatpage', {'url': '/'}, name='home'),
+        #url(r'^license/$', 'flatpage', {'url': '/license/'}, name='license'),
+        )
 
 if hasattr(settings, "OVERLOAD_SITE_MODULE"):
     exec ("from {}.urls import urlpatterns as site_urls".format(settings.OVERLOAD_SITE_MODULE))
