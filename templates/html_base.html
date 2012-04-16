@@ -82,8 +82,10 @@
                     {% block navigation_items %}
                     {% url home as home_url %}
                     {% url contact as contact_url %}
+                    {% url haystack_search as search_url %}
                     <li class="{% active home_url %}"><a href="{{ home_url }}">Home</a></li>
                     {% block navigation_overrides %}{% endblock %}
+                    <li class="{% active search_url %}"><a href="{{ search_url }}">Search</a></li>
                     <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
                     {% endblock %}
                 </ul>

@@ -22,8 +22,8 @@ if hasattr(settings, "OVERLOAD_SITE_MODULE"):
 
 urlpatterns = patterns('',
         #url(r'^$', 'project.views.home', name='home'),
-        url(r'^contact/', include('contact.urls'), name='contact'),
-        #(r'^search/', include('haystack.urls')),
+        url(r'^contact/', include('contact.urls')),
+        url(r'^search/', include('haystack.urls')),
         #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
         # Examples:
         # url(r'^$', 'project.views.home', name='home'),
