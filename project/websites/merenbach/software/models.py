@@ -10,6 +10,9 @@ from urlparse import urljoin
 from tagging.fields import TagField
 from tagging.models import Tag
 
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
+
 SOFTWARE_PATH = os.path.join(settings.STATIC_ROOT, 'software')
 
 #SOFTWARE_CATEGORY_DICT = {
@@ -39,6 +42,9 @@ class Software(models.Model):
     #app_icon = models.ImageField('application icon', upload_to='images/software', blank=True)
     pub_date = models.DateTimeField('date published', blank=True)
     is_published = models.BooleanField('is published')
+    site = models.ForeignKey(Site)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
 
     class Meta:
         verbose_name = 'software'

@@ -20,9 +20,17 @@ from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet
 from haystack.views import SearchView
 from haystack.views import search_view_factory
+from haystack.query import SQ
 
+#sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
+#sqs = SearchQuerySet().filter(site__id=1)
+sid = settings.SITE_ID
+sqs = SearchQuerySet().filter(SQ(sites__id=sid) | SQ(site_id=sid))
+# other possibilities and iterations (some more useful/illustrative than others):
 #sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID).order_by("-pub_date")
-sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
+#sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
+#sqs = SearchQuerySet().filter(site=1)
+#sqs = SearchQuerySet().filter(SQ(sites__id=settings.SITE_ID) | SQ(model_name=u'software'))
 
 if hasattr(settings, "OVERLOAD_SITE_MODULE"):
     exec ("from {}.urls import sitemaps as site_sitemaps".format(settings.OVERLOAD_SITE_MODULE))

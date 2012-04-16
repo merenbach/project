@@ -324,5 +324,6 @@ for a in TITLES:
             description=a['description'],
             pub_date=a['pub_date'].replace(tzinfo=utc),
             #pub_date = datetime.datetime.now(),
+            site_id = 1,
             )
     s.save()
