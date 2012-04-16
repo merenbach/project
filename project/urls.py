@@ -16,6 +16,14 @@ sitemaps = {
 
 handler500 = 'views.server_error'
 
+from haystack.forms import SearchForm
+from haystack.query import SearchQuerySet
+from haystack.views import SearchView
+from haystack.views import search_view_factory
+
+#sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID).order_by("-pub_date")
+sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
+
 if hasattr(settings, "OVERLOAD_SITE_MODULE"):
     exec ("from {}.urls import sitemaps as site_sitemaps".format(settings.OVERLOAD_SITE_MODULE))
     sitemaps.update(site_sitemaps)
@@ -23,7 +31,12 @@ if hasattr(settings, "OVERLOAD_SITE_MODULE"):
 urlpatterns = patterns('',
         #url(r'^$', 'project.views.home', name='home'),
         url(r'^contact/', include('contact.urls')),
-        url(r'^search/', include('haystack.urls')),
+        #url(r'^search/', include('haystack.urls')),
+        url(r'^search/', search_view_factory(
+            view_class=SearchView,
+            searchqueryset=sqs,
+            form_class=SearchForm),
+            name='haystack_search'),
         #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
         # Examples:
         # url(r'^$', 'project.views.home', name='home'),
