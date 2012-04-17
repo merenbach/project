@@ -1,68 +1,38 @@
 var Dajaxice = {
     
-        project: {
-    
-            
-    
-      
-    
-        websites: {
-    
-            
-    
-      
-    
-        merenbach: {
-    
-            
-    
-      
-    
         ciphers: {
     
             
             transcode_affine: function(callback_function, argv, custom_settings){
-                Dajaxice.call('project.websites.merenbach.ciphers.transcode_affine', callback_function, argv, custom_settings);
+                Dajaxice.call('ciphers.transcode_affine', callback_function, argv, custom_settings);
             },
     
             
             transcode_atbash: function(callback_function, argv, custom_settings){
-                Dajaxice.call('project.websites.merenbach.ciphers.transcode_atbash', callback_function, argv, custom_settings);
+                Dajaxice.call('ciphers.transcode_atbash', callback_function, argv, custom_settings);
             },
     
             
             transcode_beaufort: function(callback_function, argv, custom_settings){
-                Dajaxice.call('project.websites.merenbach.ciphers.transcode_beaufort', callback_function, argv, custom_settings);
+                Dajaxice.call('ciphers.transcode_beaufort', callback_function, argv, custom_settings);
             },
     
             
             transcode_caesar: function(callback_function, argv, custom_settings){
-                Dajaxice.call('project.websites.merenbach.ciphers.transcode_caesar', callback_function, argv, custom_settings);
+                Dajaxice.call('ciphers.transcode_caesar', callback_function, argv, custom_settings);
             },
     
             
             transcode_codeword: function(callback_function, argv, custom_settings){
-                Dajaxice.call('project.websites.merenbach.ciphers.transcode_codeword', callback_function, argv, custom_settings);
+                Dajaxice.call('ciphers.transcode_codeword', callback_function, argv, custom_settings);
             },
     
             
             transcode_vigenere: function(callback_function, argv, custom_settings){
-                Dajaxice.call('project.websites.merenbach.ciphers.transcode_vigenere', callback_function, argv, custom_settings);
+                Dajaxice.call('ciphers.transcode_vigenere', callback_function, argv, custom_settings);
             }
     
             
-    
-        }
-    
-    
-    
-        }
-    
-    
-    
-        }
-    
-    
     
         }
         ,

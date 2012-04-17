@@ -34,7 +34,7 @@ function transcodeAffine() {
 
 	if (message != '') {
 		$('#af_target').val('Processing...');
-		Dajaxice.project.websites.merenbach.ciphers.transcode_affine(Dajax.process, {
+		Dajaxice.ciphers.transcode_affine(Dajax.process, {
 			'message': message,
 			'multiplier': multiplier,
 			'additive': additive,
@@ -55,7 +55,7 @@ function transcodeAtbash() {
 
 	if (message != '') {
 		$('#at_target').val('Processing...');
-		Dajaxice.project.websites.merenbach.ciphers.transcode_atbash(Dajax.process, {
+		Dajaxice.ciphers.transcode_atbash(Dajax.process, {
 			'message': message,
 			'lower': lower,
 			'should_filter': filter,
@@ -76,7 +76,7 @@ function transcodeBeaufort() {
 
 	if (message != '') {
 		$('#bf_target').val('Processing...');
-		Dajaxice.project.websites.merenbach.ciphers.transcode_beaufort(Dajax.process, {
+		Dajaxice.ciphers.transcode_beaufort(Dajax.process, {
 			'message': message,
 			'passphrase': passphrase,
 			'keyword': alphakey,
@@ -99,7 +99,7 @@ function transcodeCaesar() {
 
 	if (message != '') {
 		$('#cr_target').val('Processing...');
-		Dajaxice.project.websites.merenbach.ciphers.transcode_caesar(Dajax.process, {
+		Dajaxice.ciphers.transcode_caesar(Dajax.process, {
 			'message': message,
 			'shift': shift,
 			'lower': lower,
@@ -120,7 +120,7 @@ function transcodeCodeword() {
 
 	if (message != '') {
 		$('#cw_target').val('Processing...');
-		Dajaxice.project.websites.merenbach.ciphers.transcode_codeword(Dajax.process, {
+		Dajaxice.ciphers.transcode_codeword(Dajax.process, {
 			'message': message,
 			'keyword': keyword,
 			'lower': lower,
@@ -145,7 +145,7 @@ function transcodeVigenere() {
 
 	if (message != '') {
 		$('#vi_target').val('Processing...');
-		Dajaxice.project.websites.merenbach.ciphers.transcode_vigenere(Dajax.process, {
+		Dajaxice.ciphers.transcode_vigenere(Dajax.process, {
 			'message': message,
 			'passphrase': passphrase,
 			'autoclave': autoclave,

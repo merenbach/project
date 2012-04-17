@@ -4,7 +4,7 @@ from django.contrib.auth import models as auth_models
 
 from tagging.models import Tag
 
-from project.websites.merenbach.software.models import Software
+from software.models import Software
 
 register = template.Library()
 

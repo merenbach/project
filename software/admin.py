@@ -1,5 +1,4 @@
-from project.websites.merenbach.software.models import Software
-#from polls.models import Choice
+from software.models import Software
 from django.contrib import admin
 
 #class ChoiceInline(admin.TabularInline):

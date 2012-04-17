@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic import DetailView, ListView
-from project.websites.merenbach.software.models import Software
+from software.models import Software
 from tagging.views import tagged_object_list
 
 urlpatterns = patterns('',

@@ -1,6 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
-from project.websites.merenbach.software.models import Software
+from software.models import Software
 
 class SoftwareSitemap(Sitemap):
 	changefreq = "never"
