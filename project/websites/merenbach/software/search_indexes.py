@@ -13,6 +13,7 @@ class SoftwareIndex(indexes.SearchIndex, indexes.Indexable):
     #author = CharField(model_attr='user')
     pub_date = indexes.DateTimeField(model_attr='pub_date')
     pub_site = indexes.IntegerField(model_attr='site__id')
+    is_published = indexes.BooleanField(model_attr='is_published')
     #def get_queryset(self):
     #    return Software.objects.filter(is_published=True, pub_date__lte=datetime.datetime.now())
 

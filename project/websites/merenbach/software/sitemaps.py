@@ -7,7 +7,7 @@ class SoftwareSitemap(Sitemap):
 	priority = 0.5
 
 	def items(self):
-		return Software.objects.all()
+		return Software.objects.filter(is_published=True).all()
 
 	def lastmod(self, obj):
 		return obj.pub_date
