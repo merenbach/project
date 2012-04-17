@@ -1,7 +1,10 @@
 # README for Project
 
-## TODO
-Basically, we need to filter the sites being indexed.
+## Notes
+- To get flatpages (per site) filtered per site search form *and* to get Software indexed and showing up on merenbach.com *only*, I had to rename the "site" attribute on the search index for Software to something like pub_site.  Maybe it was conflicting with something else, elsewhere in the system.
+
+## TODO(NE)
+Basically, we need(ed) to filter the sites being indexed.
 
 This entails adjusting the SearchQuerySet, as described [here](http://stackoverflow.com/questions/6138604/how-to-django-haystack-multisite).
 

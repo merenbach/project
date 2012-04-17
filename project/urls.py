@@ -8,6 +8,13 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
+# Haystack search
+from haystack.forms import SearchForm
+from haystack.query import SearchQuerySet
+from haystack.views import SearchView
+from haystack.views import search_view_factory
+from haystack.query import SQ
+
 # sitemaps
 from django.contrib.sitemaps import FlatPageSitemap
 sitemaps = {
@@ -16,17 +23,12 @@ sitemaps = {
 
 handler500 = 'views.server_error'
 
-from haystack.forms import SearchForm
-from haystack.query import SearchQuerySet
-from haystack.views import SearchView
-from haystack.views import search_view_factory
-from haystack.query import SQ
-
+sq1 = SQ(sites__id=settings.SITE_ID)
+sq2 = SQ(pub_site=settings.SITE_ID)
+sqs = SearchQuerySet().filter(sq1 | sq2)
+# other possibilities and iterations (some more useful/illustrative than others):
 #sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
 #sqs = SearchQuerySet().filter(site__id=1)
-sid = settings.SITE_ID
-sqs = SearchQuerySet().filter(SQ(sites__id=sid) | SQ(site_id=sid))
-# other possibilities and iterations (some more useful/illustrative than others):
 #sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID).order_by("-pub_date")
 #sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
 #sqs = SearchQuerySet().filter(site=1)
