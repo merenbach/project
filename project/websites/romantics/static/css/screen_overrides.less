@@ -1,0 +1,52 @@
+/* mixins */
+@side-border: solid 1px #304860;
+.content-bordered {
+	border-left: @side-border;
+	border-right: @side-border;
+}
+
+.vertical-gradient (@fg, @bg, @from, @to) {
+	color: @fg;
+	background-color: @bg;
+
+	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to')"; /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  @from,  @to); /* for firefox 3.6+ */ 
+}
+
+html, body {
+	background-color: #B2877C;
+}
+
+#header {
+	.vertical-gradient(#CCCCCC, #406080, #9AB478, #103020);
+}
+
+#footer {
+	.vertical-gradient(#CCCCCC, #303840, #9AB478, #103020);
+
+	a {
+		color: #72A4FD;
+		&:active { color: yellow; }
+	}
+}
+
+#body-inner {
+	background-color: white;
+	color: black;
+}
+
+#branding a {
+	color: black;
+}
+
+/* general link catch-all */
+#main a {
+	color: #0000DC;
+	&:active { color: red; }
+}
+
+#wrapper {
+    background-color: #e3ffbe;
+}
+

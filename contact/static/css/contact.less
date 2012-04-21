@@ -1,137 +1,25 @@
-/* http://24ways.org/2009/have-a-field-day-with-html5-forms */
-
-/* ---- html5 ---- */
-
-#contact_form_wrapper form {
-    margin: 0;
-    padding: 0;
-
-    fieldset, legend, ol, li {
+.contact-form {
+    ul, li {
         margin: 0;
         padding: 0;
+        list-style-type: none;
     }
 
-    fieldset { border: none; }
-
-    ol, ul {
-        margin-top: 0;
-        padding-left: 0;
-
-        li {
-            list-style: none;
-            padding: 0.5em 0;
-            margin-bottom: 2px;
-
-            label {
-                margin-bottom: 0.375em;
-                margin-right: 2em;
-                vertical-align: top;
-                display: block;
-                font-weight: normal;
-                /*width: 120px;*/
-                /*width: 12em;*/
-
-                span {
-                    display: block;
-                    padding-bottom: 0.25em;
-                }
-            }
-
-            .clearfix;
-        }
-
-        ol, ul {
-            display: inline-block;
-
-            li {
-                background: none;
-                border: none;
-                display: inline;
-            }
-
-            label { vertical-align: baseline; }
-        }
+    .submit-wrapper {
+        text-align: center;
     }
-
-    fieldset fieldset {
-        legend {
-            color: #111111;
-            font-size: 13px;
-            font-weight: normal;
-            padding-bottom: 0;
-            text-shadow: none;
-        }
-
-        label {
-            background:none no-repeat left 50%;
-            line-height: 20px;
-            width: auto;
-
-            &:hover { cursor: pointer; }
-        }
-    }
-
-    input, textarea {
-        width: 100%;
-        display: block;
-    }
-
-    /*input[type=checkbox] {
-        width: auto;
-        display: inline;
-    }*/
-
-    textarea { height: 8em; }
 
     .errorlist {
-        .clearfix;
-
         float: right;
 
         li {
-            float: left;
-
             color: red;
-            font-size: 0.9em;
+            font-size: 0.85em;
             padding: 0;
+            vertical-align: middle;
             /*font-style: oblique;*/
-            /*	background: #384313;*/
+            /*  background: #384313;*/
         }
-    }
-
-    .submit-container {
-        text-align: center;
-
-        button {
-            margin: 0.5em auto;
-        }
-    }
-
-
-    #mcaptcha-image {
-        display: block;
-        margin: 0.75em auto 0;
-        text-align: center;
-    }
-
-    .challengebox {
-        margin: 0.5em auto 1em;
-        text-align: center;
-
-        #recaptcha_area { margin: 0 auto; }
     }
 }
 
-/* For modern browsers */
-.clearfix {
-    &:before,
-    &:after {
-        content: "";
-        display: table;
-    }
-
-    &:after { clear: both; }
-
-    /* For IE 6/7 (trigger hasLayout) */
-    zoom: 1;
-}

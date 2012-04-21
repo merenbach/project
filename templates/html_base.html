@@ -9,22 +9,18 @@
 {% addtoblock "css" %}
 {% compress css %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/normalize.css">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/sticky.css">
 <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/screen.less" charset="utf-8" media="screen">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/screen_overrides.less" charset="utf-8" media="screen">
+<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/antiscreen.css" media="handheld">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/antiscreen.css" media="only screen and (max-device-width:480px)">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/handheld.css" media="handheld, only screen and (max-device-width:480px)">
-<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/nav.less">
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/print.css" media="print">
-<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/search.less">
 {% endcompress %}
 {% endaddtoblock %}
 {% addtoblock "js" %}
-{% compress js %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/suckerfish.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
-{% endcompress %}
 {% endaddtoblock %}
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -56,55 +52,64 @@
         <![endif]-->
 
         {% analytics_async %}
+        
+        {% compress js %}
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        {% endcompress %}
     </head>
     <body>
         <div id="body-inner">
             <div id="wrapper">
-                <header id="header" class="clearfix">
+                <header id="header">
+                <section class="header-inner clearfix">
                 <div id="branding">
                     {% block branding %}{% endblock %}
                 </div>
-                {% block search_placeholder %}
-                <form class="searchform" method="get" action="/search/">
-                    <ul>
-                        {# Is this a bit of a kludge? #}
-                        <li><input type="text" name="q" value="{{ query|default_if_none:"" }}"></li>
-                        <li><button type="submit">Search</button></li>
-                    </ul>
-                </form>
+                </section>
+                {% block navigation %}
+                <nav class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="/">
+                            {% block new_branding %}{% endblock %}
+                        </a>
+                        <ul class="nav clearfix">
+                            {% block navigation_items %}
+                            {% url home as home_url %}
+                            {% url contact as contact_url %}
+                            {% url haystack_search as search_url %}
+                            <li class="{% active home_url %}"><a href="{{ home_url }}">Home</a></li>
+                            {% block navigation_overrides %}{% endblock %}
+                            <li class="{% active search_url %}"><a href="{{ search_url }}">Search</a></li>
+                            <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
+                            {% endblock %}
+                        </ul>
+                        <form class="navbar-search pull-right">
+                            <input type="search" class="search-query" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
+                        </form>
+                    </div>
+                </div>
+                </nav>
                 {% endblock %}
                 </header>
-                {% block navigation %}
-                <nav id="nav">
-                <ul class="clearfix">
-                    {% block navigation_items %}
-                    {% url home as home_url %}
-                    {% url contact as contact_url %}
-                    {% url haystack_search as search_url %}
-                    <li class="{% active home_url %}"><a href="{{ home_url }}">Home</a></li>
-                    {% block navigation_overrides %}{% endblock %}
-                    <li class="{% active search_url %}"><a href="{{ search_url }}">Search</a></li>
-                    <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
+                <section id="main">
+                {% block breadcrumbs_placeholder %}
+                {% comment %}
+                <nav class="breadcrumbs">
+                <ul>
+                    {% block breadcrumb %}
+                    {% show_breadcrumb %}
                     {% endblock %}
                 </ul>
                 </nav>
+                {% endcomment %}
                 {% endblock %}
-                <section id="main">
-                    {% block breadcrumbs_placeholder %}
-                    {% comment %}
-                    <nav class="breadcrumbs">
-                        <ul>
-                            {% block breadcrumb %}
-                            {% show_breadcrumb %}
-                            {% endblock %}
-                        </ul>
-                        </nav>
-                        {% endcomment %}
-                    {% endblock %}
-                    {% block base_content %}
-                    <h1>{% block title %}Title{% endblock %}</h1>
-                    {% block content %}{% endblock %}
-                    {% endblock %}
+                {% block base_content %}
+                <h1>{% block title %}Title{% endblock %}</h1>
+                {% block content %}{% endblock %}
+                {% endblock %}
                 </section>
                 {% comment %}<div class="push"></div>{% endcomment %}
             </div>

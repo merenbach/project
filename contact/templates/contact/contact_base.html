@@ -18,17 +18,14 @@
                 Please feel free to use the below form to get in touch.
             {% endblock %}
         </div>
-        <div id="contact_form_wrapper">
-            <form class="wireframe" action="/contact/" method="POST">{% csrf_token %}
-                <ul>
-                    {{ form.as_ul }}
-                </ul>
-                <fieldset class="submit-container">
-                    <button type="submit">Send Message</button>
-                    {# <button type="submit">{{ contact.submit }}</button> #}
-                </fieldset>
-            </form>
-        </div>
+        <form class="contact-form" action="/contact/" method="POST">{% csrf_token %}
+            <ul>
+                {{ form.as_ul }}
+            </ul>
+            <fieldset class="submit-wrapper">
+                <button class="btn" type="submit">Send Message</button>
+            </fieldset>
+        </form>
     {% else %}
         Something went wrong.  Please try again later.
     {% endif %}

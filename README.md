@@ -1,5 +1,11 @@
 # README for Project
 
+## TODO
+- Make sure we're using *only* the CSS files that we need
+- Make sure that CSS files are included in the right order
+- Fix styling on contact form
+    - MAKE SURE WE ARE CLEARING OUR FLOATS
+
 ## Notes
 - To get flatpages (per site) filtered per site search form *and* to get Software indexed and showing up on merenbach.com *only*, I had to rename the "site" attribute on the search index for Software to something like pub_site.  Maybe it was conflicting with something else, elsewhere in the system.
 

@@ -1,5 +1,5 @@
 {% extends "search/base.html" %}
-{% load pagination_tags highlight i18n %}
+{% load pagination_tags highlight %}
 {% comment %}
 {% block breadcrumb %}
 {{ block.super }}
@@ -16,12 +16,9 @@
 {% block search_form %}
 
 <div class="roundbox">
-    <form class="searchform wireframe" method="get" action="{{ request.path }}">
-        <ul class="search-fields">
-            {# form.as_ul #}
-            <li><input type="text" name="q" value="{{ query|default_if_none:"" }}"></li>
-            <li><button type="submit">{% trans "Search" %}</button></li>
-        </ul>
+    <form class="form-search" method="get" action="{{ request.path }}">
+        <input class="input-medium search-query" type="search" name="q" value="{{ query|default_if_none:"" }}">
+        <button class="btn" type="submit">Search</button>
     </form>
 </div>
 
@@ -44,17 +41,17 @@
 
 {% block search_results %}
 {% if query %}
-<h1>{% trans "Results" %}</h1>
+<h1>Results</h1>
 <div class="search-results">
     {% for result in page.object_list %}
     <div class="roundbox">
         <div class="node-title"><a href="{{ result.url }}">{{ result.title }}</a></div>
         <div class="node-meta">
             {% if result.content_type == "cms.title" %}
-            {% trans "Page" %}
+            Page
             {% else %}
             {% if result.content_type == "cmsplugin_blog.entrytitle" %}
-            {% trans "Blog entry" %}
+            Blog entry
             {% else %}
             {{ result.verbose_name }}
             {% endif %}
@@ -64,7 +61,7 @@
     </div>
     {% empty %}
     <div class="roundbox">
-        <p>{% trans "No results were found for your search." %}</p>
+        <p>No results were found for your search.</p>
         <p>Please ensure that your spelling is correct and that your search is general enough.  If you are using quotes around a phrase to narrow your search, you may wish to remove them in order to broaden the scope of your query.</p>
     </div>
 {% endfor %}

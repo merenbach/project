@@ -11,6 +11,7 @@
     <a href="{{ object.image.url }}"><img src="{{ object.get_display_url }}" alt="{{ object.title }}"/></a>
     {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
 </div>
+{% comment %}
 {% if object.public_galleries %}
 <h2>This photo is found in the following galleries:</h2>
 <ol>
@@ -19,5 +20,6 @@
 {% endfor %}
 </ol>
 {% endif %}
+{% endcomment %}
 
 {% endblock %}

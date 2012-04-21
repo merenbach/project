@@ -2,6 +2,9 @@
 {% load tags %}
 {% block title %}{% endblock %}
 {% block pagetitle %}The Romantics{% endblock %}
+{% block new_branding %}
+{#<img src="{{ STATIC_URL }}img/floral-heart-outline-32.png" alt="Logo">#}The Romantics
+{% endblock %}
 {% block navigation_overrides %}
 {{ block.super }}
 {% url our_story as our_story_url %}
