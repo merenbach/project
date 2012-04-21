@@ -3,10 +3,10 @@
 {% load photologue_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
+{% block pagetitle %}{{ object.title }}{% endblock %}
 
-{% block base_content %}
+{% block content %}
 
-<h1>{{ object.title }}</h1>
 <div class="gallery-photo">
     <a href="{{ object.image.url }}"><img src="{{ object.get_display_url }}" alt="{{ object.title }}"/></a>
     {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}

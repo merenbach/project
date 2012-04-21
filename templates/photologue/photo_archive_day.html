@@ -1,10 +1,9 @@
 {% extends "photologue/root.html" %}
 
 {% block title %}Photos for {{ day|date }}{% endblock %}
+{% block pagetitle %}Photos for {{ day|date }}{% endblock %}
 
-{% block base_content %}
-
-<h1>Photos for {{ day|date }}</h1>
+{% block content %}
 
 {% if object_list %}
     {% for photo in object_list %}

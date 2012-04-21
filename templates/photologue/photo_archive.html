@@ -1,10 +1,9 @@
 {% extends "photologue/root.html" %}
 
 {% block title %}Latest Photos{% endblock %}
+{% block pagetitle %}Latest Photos{% endblock %}
 
-{% block base_content %}
-
-<h1>Latest Photos</h1>
+{% block content %}
 
 {% if latest %}
     {% for photo in latest %}
