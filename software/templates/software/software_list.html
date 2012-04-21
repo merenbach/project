@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "software/root.html" %}
 {% load software_tags %}
 
 {% block breadcrumb %}
@@ -12,7 +12,8 @@
 {% block title %}Software tagged &ldquo;{{ tag }}&rdquo;{% endblock %}
 {% block pagetitle %}Software tagged "{{ tag }}"{% endblock %}
 
-{% block base_content %}
+{% block content %}
+{{ block.super }}
 {% if software_list %}
 {% for software in software_list %}
 <div class="roundbox">

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "content_bordered.html" %}
 {% load i18n %}
 
 {% block breadcrumbs_placeholder %}{% endblock %}
@@ -6,8 +6,7 @@
 {% block title %}{% trans 'Page not found (404)' %}{% endblock %}
 {% block pagetitle %}{% trans 'Page not found (404)' %}{% endblock %}
 
-{% block base_content %}
-
+{% block content %}
 <div class="roundbox" style="text-align: center;">
     {#<h3 style="padding-bottom: 0.5em;">&ldquo;What&mdash;the other page you didn&rsquo;t like?&rdquo;</h3>#}
     <h3 style="padding-bottom: 0.5em;">&ldquo;It is pitch black.  You are likely to be eaten by a <a href="http://en.wikipedia.org/wiki/Grue_(monster)">grue</a>.&rdquo;</h3>
@@ -15,5 +14,4 @@
     <h4>You seem to have wandered into uncharted territory (<em>viz.</em>, this error page).</h4>
     {# trans "We're sorry, but the requested page could not be found." #}
 </div>
-
 {% endblock %}

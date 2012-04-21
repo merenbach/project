@@ -101,8 +101,10 @@
                         </nav>
                         {% endcomment %}
                     {% endblock %}
+                    {% block base_content %}
                     <h1>{% block title %}Title{% endblock %}</h1>
-                    {% block base_content %}{% endblock %}
+                    {% block content %}{% endblock %}
+                    {% endblock %}
                 </section>
                 {% comment %}<div class="push"></div>{% endcomment %}
             </div>
