@@ -62,25 +62,31 @@
     <body>
         <div id="body-inner">
             <div id="wrapper">
-                <header id="header">
                 {% block navigation %}
                 <nav class="navbar navbar-fixed-top">
                 <div class="navbar-inner">
                     <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
                         <a class="brand" href="/">
                             {% block new_branding %}{% endblock %}
                         </a>
-                        <ul class="nav clearfix">
-                            {% block navigation_items %}
-                            {% url home as home_url %}
-                            {% url contact as contact_url %}
-                            {% url haystack_search as search_url %}
-                            <li class="{% active home_url %}"><a href="{{ home_url }}">Home</a></li>
-                            {% block navigation_overrides %}{% endblock %}
-                            <li class="{% active search_url %}"><a href="{{ search_url }}">Search</a></li>
-                            <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
-                            {% endblock %}
-                        </ul>
+                        <div class="nav-collapse">
+                            <ul class="nav">
+                                {% block navigation_items %}
+                                {% url home as home_url %}
+                                {% url contact as contact_url %}
+                                {% url haystack_search as search_url %}
+                                <li class="{% active home_url %}"><a href="{{ home_url }}">Home</a></li>
+                                {% block navigation_overrides %}{% endblock %}
+                                <li class="{% active search_url %}"><a href="{{ search_url }}">Search</a></li>
+                                <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
+                                {% endblock %}
+                            </ul>
+                        </div>
                         <form class="navbar-search pull-right">
                             <input type="search" class="search-query" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
                         </form>
@@ -88,10 +94,9 @@
                 </div>
                 </nav>
                 {% endblock %}
-                <section class="header-inner clearfix">
-                <div id="branding">
+                <header id="header">
+                <section id="branding">
                     {% block branding %}{% endblock %}
-                </div>
                 </section>
                 </header>
                 <section id="main">

@@ -48,6 +48,10 @@ html, body {
 	background-color: white;
 }
 
+body, body * {
+    font-family: 'Georgia', 'Times', 'Times New Roman', serif !important;
+}
+
 /*body {
     padding-top: 40px;
 }*/
@@ -142,12 +146,14 @@ nav.breadcrumbs ul {
 }*/
 
 #branding {
+    /*padding: 40px 1em 1em;*/  /* navbar height */
+    /*border-top: -40px solid #fff;*/ /*soak up wrapper negative top margin and start at top of viewport*/
 	font-family: 'Georgia', 'Times', 'Times New Roman', serif;
 	/*background: url('/media/images/header-large7.jpg') no-repeat;*/
-	float: left;
+	/*float: left;*/
 	display: block;
 	font-weight: bold;
-	padding: 1em;
+    padding: 1em;
 
 	a {
 		color: blue;
@@ -188,10 +194,19 @@ nav.breadcrumbs ul {
 	}
 }
 
+#header { /* Add top padding for full-width layout */
+    padding-top: 40px;
+}
+@media (max-width: 979px) {
+    #header { /* Remove top padding when top navbar goes static */
+        padding-top: 0;
+        margin-top: -18px;
+    }
+}
 
 #header {
-    padding-top: 21px;  /* half of navbar plus one */
-    border-top: 21px solid #fff; /*soak up wrapper negative top margin and start at top of viewport*/
+    /*padding-top: 21px;*/  /* half of navbar plus one */
+    /*border-top: 21px solid #fff;*/ /*soak up wrapper negative top margin and start at top of viewport*/
 	white-space: nowrap;
     .form-search {
         float: right;
@@ -379,38 +394,6 @@ ul.tag-list {
 	}
 }
 
-form.wireframe {
-	font-size: 0.9em;
-
-	/* form elements */
-	textarea,
-	button,
-	input[type=text],
-	input[type=submit] {
-
-		/*font-family: Georgia, "Times New Roman", Times, serif;*/
-		outline: none;
-		padding: 0.25em 0.5em;
-
-		.border-radius(0.25em);
-		.box-sizing(border-box);
-
-		border: solid 1px #606060;
-		background-color: white;
-
-		&:focus {
-			background-color: #F2F2F2;
-			.box-shadow(inset 0 0 1px 304050);
-		}
-	}
-
-	button,
-	input[type=submit] {
-		&:hover { cursor: pointer; }
-		&:active { background-color: #D0D0D0; }
-	}
-}
-
 code {
 	padding: 0 0.25em;
 	word-wrap: break-word;
@@ -438,6 +421,9 @@ code {
         font-family: 'Georgia', 'Times', 'Times New Roman', serif;
     }
 }
+/*#footer {
+    font-family: 'Georgia', 'Times', 'Times New Roman', serif;
+}*/
 
 /* detail */
 ul.downloads {
