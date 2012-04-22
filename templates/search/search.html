@@ -16,7 +16,7 @@
 {% block search_form %}
 
 <div class="roundbox">
-    <form class="form-search" method="get" action="{{ request.path }}">
+    <form class="well form-search" method="GET" action="{{ request.path }}">
         <input class="input-medium search-query" type="search" name="q" value="{{ query|default_if_none:"" }}">
         <button class="btn" type="submit">Search</button>
     </form>

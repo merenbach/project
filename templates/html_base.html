@@ -52,7 +52,7 @@
         <![endif]-->
 
         {% analytics_async %}
-        
+
         {% compress js %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.16.custom.min.js"></script>
@@ -63,11 +63,6 @@
         <div id="body-inner">
             <div id="wrapper">
                 <header id="header">
-                <section class="header-inner clearfix">
-                <div id="branding">
-                    {% block branding %}{% endblock %}
-                </div>
-                </section>
                 {% block navigation %}
                 <nav class="navbar navbar-fixed-top">
                 <div class="navbar-inner">
@@ -93,6 +88,11 @@
                 </div>
                 </nav>
                 {% endblock %}
+                <section class="header-inner clearfix">
+                <div id="branding">
+                    {% block branding %}{% endblock %}
+                </div>
+                </section>
                 </header>
                 <section id="main">
                 {% block breadcrumbs_placeholder %}
