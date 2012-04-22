@@ -1,11 +1,11 @@
-#body-inner {
+#wrapper, #footer {
     min-width:  0 !important;
     max-width:  none !important;
 }
 
-#header {
+/*#header {
     font-size: 0.85em;
-}
+}*/
 
 /*body .mini-search-form input[type=text] {
     width: 10em;

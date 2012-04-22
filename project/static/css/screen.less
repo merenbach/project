@@ -7,12 +7,6 @@
 @import url(http://fonts.googleapis.com/css?family=Istok+Web:700italic,400,700,400italic);*/
 
 /* mixins */
-@side-border: solid 1px black;
-.content-bordered {
-	border-left: @side-border;
-	border-right: @side-border;
-}
-
 .border-radius (@radius) {
 	border-radius: @radius;
 	-moz-border-radius: @radius;
@@ -64,9 +58,8 @@ body, body * {
 	background: -moz-linear-gradient(top,  #FFF,  #000); /* for firefox 3.6+ */
 
 	line-height: 2em;
-	padding: 0 0.5em;
+	padding: 0;
 	text-align: center;
-	.content-bordered;
 
 	span {
 		font-size: 0.9em;
@@ -88,14 +81,10 @@ white-space: nowrap;
 /*font-family: 'Open Sans', sans-serif;*/
 
 
-#body-inner {
-	height: 100%;
-	background-color: white;
-	color: black;
-	/*font-size: 0.9em;*/
-	margin: 0 auto;
-	padding: 0;
-	min-width: 640px;
+#wrapper, #footer {
+	margin-left: auto;
+    margin-right: auto;
+    min-width: 640px;
 	max-width: 1024px;
 }
 
@@ -145,44 +134,15 @@ nav.breadcrumbs ul {
     }
 }*/
 
-#branding {
-    /*padding: 40px 1em 1em;*/  /* navbar height */
-    /*border-top: -40px solid #fff;*/ /*soak up wrapper negative top margin and start at top of viewport*/
-	font-family: 'Georgia', 'Times', 'Times New Roman', serif;
-	/*background: url('/media/images/header-large7.jpg') no-repeat;*/
-	/*float: left;*/
-	display: block;
-	font-weight: bold;
-    padding: 1em;
-
-	a {
-		color: blue;
-		font-size: 2em;
-		text-decoration: none;
-
-		img {
-			border: 0;
-			vertical-align: top;
-			height: 1.75em;
-			float: left;
-			margin-right: 0.25em;
-		}
-	}
-
-	.slogan {
-		display: block;
-		margin-top: 0.25em;
-		font-size: 0 0.7em;
-		font-style: oblique;
-	}
-
-	.clearfix;
-}
-
 #main {
 	padding-top: 0.375em;
 	padding-left: 0.75em;
 	padding-right: 0.75em;
+
+
+    #content {
+        padding-top: 0.375em;
+    }
 
 	/* general link catch-all */
 	a {
@@ -192,80 +152,36 @@ nav.breadcrumbs ul {
 		&:hover { text-decoration: underline; }
 		&:active { color: red; }
 	}
+
+    article {
+        padding: 0.25em;
+    }
 }
 
-#header { /* Add top padding for full-width layout */
+#main { /* Add top padding for full-width layout */
     padding-top: 40px;
 }
 @media (max-width: 979px) {
-    #header { /* Remove top padding when top navbar goes static */
+    #main { /* Remove top padding when top navbar goes static */
         padding-top: 0;
         margin-top: -18px;
     }
 }
-
-#header {
-    /*padding-top: 21px;*/  /* half of navbar plus one */
-    /*border-top: 21px solid #fff;*/ /*soak up wrapper negative top margin and start at top of viewport*/
-	white-space: nowrap;
-    .form-search {
-        float: right;
-        padding: 1.75em 1em 0;
-        input {
-            vertical-align: middle;
-        }
+/*@media (max-width: 767px) {
+    #header {
+        margin-left: -20px;
+        margin-right: -20px;
     }
-}
+}*/
 
 #main .form-search {
+    background-color: transparent;
+    margin-bottom: 0;
     text-align: center;
     input {
         vertical-align: middle;
     }
 }
-
-/* citations */
-/*div.citation {
-	margin: 0 0 0 0.5in;
-	text-indent: -0.5in;
-	line-height: 2em;
-}*/
-
-/*div.citation span.title {
- * font-style: oblique;
- */
-
-/*div.citation span.url {
- *  word-wrap: break-word;
- *  font-family: 'Courier New', 'Courier', monospace;
- *  }
- */
-
-/* misc */
-/*div.para {
- * text-indent: 0.5in;
- * }
- *
- * div.para:first-child {
- * text-indent: 0;
- * }
- *
- *div.para {
- * margin-bottom: 1em;
- *}
- */
-
-/* is this in use? */
-/*.floated-photo-box {
-float: left;
-}
-
-.floated-photo-box img {
-width: 12em;
-border: solid gray 1px;
-margin: 0 1em 1em 0;
-padding: 0;
-}*/
 
 /* For modern browsers */
 .clearfix {
@@ -386,53 +302,31 @@ ul.tag-list {
 		padding-right: 0.5em;
 		margin: 0;
 	}
-
-	/* this will require some testing for consistency */
-	p, blockquote, h1, h2, h3, h4, h5, h6, ul, ol {
-		margin-top: 1em;
-		&:first-child { margin-top: 0; }
-	}
 }
-
-code {
-	padding: 0 0.25em;
-	word-wrap: break-word;
-}
-
-/*.codebox {
-	background-color: rgb(223, 219, 195);
-	padding: 0.25 0.5em;
-	border: dotted 1px rgb(128, 128, 128);
-	line-height: 1.6em;
-}
-
-.codebox code {
-	background-color: transparent;
-	padding: 0;
-}*/
-
 
 #wrapper {
     background-color: white;
-    .content-bordered;
 
     font-family: 'Georgia', 'Times', 'Times New Roman', serif;
     p {
         font-family: 'Georgia', 'Times', 'Times New Roman', serif;
     }
 }
-/*#footer {
-    font-family: 'Georgia', 'Times', 'Times New Roman', serif;
-}*/
 
-/* detail */
-ul.downloads {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
+.search-results {
 
-	li {
-		margin-top: 0.375em;
-		&:first-child { margin-top: 0; }
-	}
+    li {
+        /*padding-bottom: 0;*/
+        margin-bottom: 0;
+        
+        .title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .label {
+            vertical-align: text-top;
+            margin-left: 0.125em;
+        }
+    }
 }

@@ -1,3 +1,0 @@
-{% extends 'search/cms_search.html' %}
-
-{# just duplicating #}

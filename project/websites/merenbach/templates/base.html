@@ -1,10 +1,8 @@
-{% extends 'html_base.html' %}
-{% load tags %}
+{% extends "html_base.html" %}
+{% load core_tags %}
 {% block title %}{% endblock %}
 {% block pagetitle %}Andrew&rsquo;s Den{% endblock %}
-{% block new_branding %}
-{#<img src="{{ STATIC_URL }}img/floral-heart-outline-32.png" alt="Logo">#}Andrew&rsquo;s Den
-{% endblock %}
+{% block project %}Andrew&rsquo;s Den{% endblock %}
 {% block navigation_overrides %}
 {{ block.super }}
 {% url software as software_url %}

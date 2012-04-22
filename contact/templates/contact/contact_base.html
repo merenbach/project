@@ -1,4 +1,4 @@
-{% extends "content_bordered.html" %}
+{% extends "base.html" %}
 {% load sekizai_tags %}
 {% load compress %}
 
@@ -13,13 +13,13 @@
 
 {% block content %}
     {% if form %}
-        <div class="roundbox">
-            {% block contact_message %}
-                Please feel free to use the below form to get in touch.
-            {% endblock %}
-        </div>
-        <form class="contact-form" action="/contact/" method="POST">{% csrf_token %}
-            <ul>
+        <form class="well well-small contact-form" action="/contact/" method="POST">{% csrf_token %}
+            <p class="blurb">
+                {% block contact_message %}
+                    Please feel free to use the below form to get in touch.
+                {% endblock %}
+            </p>
+            <ul class="unstyled">
                 {{ form.as_ul }}
             </ul>
             <fieldset class="submit-wrapper">

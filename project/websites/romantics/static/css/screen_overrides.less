@@ -1,10 +1,4 @@
 /* mixins */
-@side-border: solid 1px #304860;
-.content-bordered {
-	border-left: @side-border;
-	border-right: @side-border;
-}
-
 .vertical-gradient (@fg, @bg, @from, @to) {
 	color: @fg;
 	background-color: @bg;
@@ -12,6 +6,29 @@
 	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to')"; /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to)); /* for webkit browsers */
 	background: -moz-linear-gradient(top,  @from,  @to); /* for firefox 3.6+ */ 
+}
+
+h1 {
+    background-color: #815448;
+}
+
+.austen {
+    display: block;
+
+    img {
+        display: block;
+        width: 100px;
+    }
+    
+    &.austen-left {
+        float: left;
+        margin: 0 1em 0.5em 0;
+    }
+
+    &.austen-right {
+        float: right;
+        margin: 0 0 0.5em 1em;
+    }
 }
 
 html, body {
@@ -23,17 +40,23 @@ html, body {
 }
 
 #footer {
-	.vertical-gradient(#CCCCCC, #303840, #9AB478, #103020);
+color: #333;
+background: #9AB478;
+/*.vertical-gradient(#CCCCCC, #303840, #9AB478, #103020);*/
 
 	a {
-		color: #72A4FD;
-		&:active { color: yellow; }
+		color: #144E1A;
+		&:active { color: #B2877C; }
 	}
 }
 
 #body-inner {
 	background-color: white;
 	color: black;
+}
+
+#branding {
+display: none;
 }
 
 #branding a {
