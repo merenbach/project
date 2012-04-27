@@ -56,7 +56,7 @@
             {% endif %}
             {% endif %}
         </span>
-        {% if result.text %}<summary>{% highlight result.text with query %}</summary>{% endif %}
+        {% if result.text %}<div>{% highlight result.text with query %}</div>{% endif %}
     </li>
     {% empty %}
     <li class="well well-small">No results were found for your search.  Please ensure that your spelling is correct and that your search is general enough.</li>
