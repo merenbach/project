@@ -40,6 +40,7 @@ if hasattr(settings, "OVERLOAD_SITE_MODULE"):
 
 urlpatterns = patterns('',
         #url(r'^$', 'project.views.home', name='home'),
+        url(r'^blog/', include('articles.urls')),
         url(r'^contact/', include('contact.urls')),
         #url(r'^search/', include('haystack.urls')),
         url(r'^search/', search_view_factory(
