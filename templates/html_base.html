@@ -73,6 +73,8 @@
                         <ul class="nav">
                             {% block navigation_items %}
                             {% url contact as contact_url %}
+                            {% url articles_archive as blog_url %}
+                            <li class="{% active blog_url %}"><a href="{{ blog_url }}">Blog</a></li>
                             {% block navigation_overrides %}{% endblock %}
                             <li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
                             {% endblock %}
