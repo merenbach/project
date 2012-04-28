@@ -105,7 +105,9 @@
             <section id="content">
             {% block base_content %}
             <h1>{% block title %}Title{% endblock %}</h1>
+            <section id="content_inner">
             {% block content %}{% endblock %}
+            </section>
             {% endblock %}
             </section>
             </section>

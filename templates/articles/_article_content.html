@@ -1,5 +1,6 @@
 {% load i18n %}
-<article id="article-content" class="article">
+<article id="article-content" class="article cf">
+    <span class="label label-info">{{ article.publish_date|date:"Y-m-d" }}</span>
     {{ article.rendered_content|safe }}
 </article>
 

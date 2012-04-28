@@ -1,7 +1,7 @@
 {% load humanize %}
 
-<div id="article-meta">
-    <p style="font-style: oblique;">Published {{ article.publish_date|naturalday }} by <a href="{% url articles_by_author article.author.username %}" title="Read other articles by this author">{{ article.author.get_name }}</a></p>
+<section id="article-meta" class="cf">
+    <p>&ndash; <a href="{% url articles_by_author article.author.username %}" title="Read other articles by this author">{{ article.author.get_name }}</a></p>
     {% if article.tags.count %}
     <nav class="tags btn-group dropup">
     <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
@@ -74,6 +74,5 @@
         {% if forloop.last %}</ol>{% endif %}
     {% endfor %}
     {% endcomment %}
-</div>
-<div class="clear"></div>
+</section>
 

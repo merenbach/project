@@ -153,8 +153,7 @@ class ArticleManager(models.Manager):
                 Q(expiration_date__isnull=True) |
                 Q(expiration_date__gte=now),
                 publish_date__lte=now,
-                is_active=True,
-                sites__id=settings.SITE_ID)
+                is_active=True)
 
     def live(self, user=None):
         """Retrieves all live articles"""
