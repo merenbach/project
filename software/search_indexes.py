@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 from project import settings
 from haystack import indexes
 from software.models import Software
@@ -14,8 +14,6 @@ class SoftwareIndex(indexes.SearchIndex, indexes.Indexable):
     pub_date = indexes.DateTimeField(model_attr='pub_date')
     pub_site = indexes.IntegerField(model_attr='site__id')
     is_published = indexes.BooleanField(model_attr='is_published')
-    #def get_queryset(self):
-    #    return Software.objects.filter(is_published=True, pub_date__lte=datetime.datetime.now())
 
     def prepare_pub_site(self, obj):
         return obj.site.id
@@ -25,4 +23,4 @@ class SoftwareIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self):
         """Used when the entire index for model is updated."""
-        return self.get_model().objects.filter(pub_date__lte=datetime.datetime.now()).filter(is_published=True)
+        return self.get_model().objects.filter(pub_date__lte=timezone.now()).filter(is_published=True)
