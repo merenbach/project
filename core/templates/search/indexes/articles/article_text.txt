@@ -1,0 +1,6 @@
+{% load markup %}
+{{ object.author|safe }}
+{{ object.slug|safe }}
+{{ object.content|markdown:"safe" }}
+{{ object.tags|safe }}
+

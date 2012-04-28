@@ -54,9 +54,6 @@ def display_blog_page(request, tag=None, username=None, year=None, month=None, p
         articles = Article.objects.live(user=request.user)
         template = 'articles/article_list.html'
 
-    # [am] filter by site
-    articles = articles.filter(sites__id=settings.SITE_ID)
-
     # paginate the articles
     paginator = Paginator(articles, ARTICLE_PAGINATION,
                           orphans=int(ARTICLE_PAGINATION / 4))

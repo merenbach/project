@@ -17,8 +17,10 @@ from haystack.query import SQ
 
 # sitemaps
 from django.contrib.sitemaps import FlatPageSitemap
+from core.sitemaps import ArticleSitemap
 sitemaps = {
         'pages': FlatPageSitemap,
+        'articles': ArticleSitemap,
         }
 
 handler500 = 'views.server_error'

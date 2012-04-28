@@ -12,7 +12,7 @@
 
 {% block pagetitle %}Search | {{ block.super }}{% endblock %}
 {% block title %}Search{% endblock %}
-
+{% comment %}
 {% block search_form %}
 
     <form class="well well-small form-search" method="GET" action="{{ request.path }}">
@@ -21,7 +21,7 @@
     </form>
 
 {% endblock search_form %}
-
+{% endcomment %}
 {% comment %}
 {% block refine_search %}
 {% if facets.fields.language %}
@@ -39,7 +39,7 @@
 
 {% block search_results %}
 {% if query %}
-<h1>Results</h1>
+{% comment %}<h1>Results</h1>{% endcomment %}
 <section class="search-results">
 <ul class="unstyled">
     {% for result in page.object_list %}

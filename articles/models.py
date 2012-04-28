@@ -152,7 +152,8 @@ class ArticleManager(models.Manager):
                 Q(expiration_date__isnull=True) |
                 Q(expiration_date__gte=now),
                 publish_date__lte=now,
-                is_active=True)
+                is_active=True,
+                sites__id=settings.SITE_ID)
 
     def live(self, user=None):
         """Retrieves all live articles"""
@@ -164,7 +165,7 @@ class ArticleManager(models.Manager):
             return qs
         else:
             # only show live articles to regular users
-            return qs.filter(status__is_live=True)
+            return qs.filter(status__is_live=True, sites__id=settings.SITE_ID)
 
 MARKUP_HELP = _("""Select the type of markup you are using in this article.
 <ul>
@@ -474,7 +475,7 @@ class Article(models.Model):
         if not self._next:
             try:
                 qs = Article.objects.live().exclude(id__exact=self.id)
-                article = qs.filter(publish_date__gte=self.publish_date).order_by('publish_date')[0]
+                article = qs.filter(sites__id=settings.SITE_ID, publish_date__gte=self.publish_date).order_by('publish_date')[0]
             except (Article.DoesNotExist, IndexError):
                 article = None
             self._next = article
@@ -487,7 +488,7 @@ class Article(models.Model):
         if not self._previous:
             try:
                 qs = Article.objects.live().exclude(id__exact=self.id)
-                article = qs.filter(publish_date__lte=self.publish_date).order_by('-publish_date')[0]
+                article = qs.filter(sites__id=settings.SITE_ID, publish_date__lte=self.publish_date).order_by('-publish_date')[0]
             except (Article.DoesNotExist, IndexError):
                 article = None
             self._previous = article
