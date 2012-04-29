@@ -4,22 +4,27 @@
 {% block pagetitle %}Latest Photo Galleries{% endblock %}
 
 {% block content %}
-
+{{ block.super }}
+<article>
 {% if latest %}
+<ul class="unstyled">
     {% for gallery in latest %}
-    <div class="photo-gallery">
-        <h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a></h2>
+    <li class="photo-gallery">
+    <h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a></h2>
+    <ul class="thumbnails">
         {% for photo in gallery.sample|slice:sample_size %}
-        <div class="gallery-photo">
-            <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
-        </div>
+        <li class="gallery-photo span2">
+        <a class="thumbnail" data-title="{{ photo.title }}" data-image="{{ photo.get_display_url }}" data-toggle="modal" data-target="#gallery_modal" href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+        </li>
         {% endfor %}
-    </div>
+    </ul>
+    </li>
     {% endfor %}
+</ul>
 {% else %}
-    <p>No galleries were found.</p>
+<p>No galleries were found.</p>
 {% endif %}
 
 <p><a href="{% url pl-gallery-list 1 %}">View all galleries.</a></p>
-
+</article>
 {% endblock %}

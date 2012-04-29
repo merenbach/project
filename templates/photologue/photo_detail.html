@@ -3,7 +3,7 @@
 {% load photologue_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
-{% block pagetitle %}{{ object.title }}{% endblock %}
+{% block pagetitle %}{{ object.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 
