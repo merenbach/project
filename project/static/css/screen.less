@@ -53,16 +53,13 @@ body, body * {
 #footer {
 	color: white;
 	background-color: black;
-	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#000000')"; /* for IE */
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#000)); /* for webkit browsers */
-	background: -moz-linear-gradient(top,  #FFF,  #000); /* for firefox 3.6+ */
 
 	line-height: 2em;
 	padding: 0;
 	text-align: center;
 
 	span {
-		font-size: 0.9em;
+		font-size: 0.85em;
 		display: block;
 	}
 
@@ -84,7 +81,7 @@ white-space: nowrap;
 #wrapper, #footer {
 	margin-left: auto;
     margin-right: auto;
-    /*min-width: 640px;*/
+    min-width: 480px;
 	max-width: 1024px;
 }
 
@@ -280,19 +277,21 @@ ul.tag-list {
 }
 
 .search-results, .article-list {
-
     li {
-        /*padding-bottom: 0;*/
-        margin-bottom: 0;
-        
-        .title {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
+        padding-bottom: 0.5em;
 
-        .label {
-            vertical-align: text-top;
-            margin-left: 0.125em;
+        .well {
+            margin-bottom: 0;
+        
+            .title {
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+
+            .label {
+                vertical-align: text-top;
+                margin-left: 0.125em;
+            }
         }
     }
 }

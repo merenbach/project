@@ -24,7 +24,7 @@
         <title>{% block pagetitle %}Title{% endblock %}</title>
         <link rel="icon" type="image/png" href="/favicon.ico">
         <link rel="shortcut icon" type="image/png" href="/favicon.ico">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width{% comment %}, initial-scale=1.0{% endcomment %}">
         <meta name="author" content="Andrew Merenbach">
         <!--[if lt IE 9]>
         <script type="text/javascript" src="{{ STATIC_URL }}js/html5.js"></script>
@@ -83,7 +83,7 @@
                             <input type="search" class="search-query span2" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
                         </form>
                         <ul class="nav pull-right">
-                            <li><a href="/admin/">Admin</a></li>
+                            <li><a href="https://www.djangoproject.com/" target="_blank">Django</a></li>
                         </ul>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
             {% comment %}<div class="push"></div>{% endcomment %}
         </div>
         <footer id="footer">
-        {% block copyright %}{% endblock %}
+        <span>{% block copyright %}Copyright &copy; 2011&ndash;{% now "Y" %}{% endblock %}</span>
         </footer>
         {% render_block "js" %}
         {% block extra_js %}{% endblock %}

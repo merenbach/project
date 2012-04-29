@@ -43,7 +43,8 @@
 <section class="search-results">
 <ul class="unstyled">
     {% for result in page.object_list %}
-    <li class="well well-small">
+    <li>
+    <div class="well well-small">
         <span class="title"><a href="{{ result.url }}">{{ result.title }}</a></span>
         <span class="label">
             {% if result.content_type == "cms.title" %}
@@ -57,6 +58,7 @@
             {% endif %}
         </span>
         {% if result.text %}<div>{% highlight result.text with query %}</div>{% endif %}
+    </div>
     </li>
     {% empty %}
     <li class="well well-small">No results were found for your search.  Please ensure that your spelling is correct and that your search is general enough.</li>
