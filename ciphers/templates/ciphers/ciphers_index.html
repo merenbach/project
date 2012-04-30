@@ -1,15 +1,12 @@
 {% extends "base.html" %}
-{% load sekizai_tags %}
-{% load compress %}
-{% load dajaxice_templatetags %}
+{% load sekizai_tags compress dajaxice_templatetags %}
 
 {% block pagetitle %}Ciphers | {{ block.super }}{% endblock %}
 {% block title %}Ciphers{% endblock %}
-
 {% block extrahead %}
 {{ block.super }}
 {% compress css %}
-<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_form.less">
+{#<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_form.less">#}
 <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_help.less">
 {% endcompress %}
 {% endblock %}
@@ -188,20 +185,20 @@ $(document).ready(function() {
 {% block content %}
 {{ block.super }}
 
-<form class="labform" method="post" action="/ciphers">
-	<noscript>
-		<fieldset>
-			<ol class="jserror">
-				<li>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</li>
-			</ol>
-		</fieldset>
-	</noscript>
-	<section>
-		<fieldset style="margin-bottom: 10px;">
-			<ol>
-				<li>
-					<label>
-						<span style="font-weight: bold;">Cipher Scheme</span>
+<article>
+	<p>This page represents an ever-evolving attempt at making a multifunctional text encryption and decryption tool.  There are plenty like this (and probably better than this) elsewhere on the Internet, so if you seek style and flair, you might wish to reconsider directing others to this specific page.</p>
+
+	<p>That said, this particular encryption tool differs from many others in one important respect: it uses AJAX to perform the encryption and decryption server-side.  This isn't "safer" by any stretch (quite the opposite, perhaps), but it lets me make the code (written in Python, server-side) more maintainable without changing much in terms of browser integration.</p>
+
+	<form class="well form-horizontal" method="post" action="{% url ciphers %}">
+		<noscript>
+			<p>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</p>
+		</noscript>
+		<section>
+			<fieldset style="margin-bottom: 10px;">
+				<div class="control-group">
+					<label class="control-label" for="scheme">Cipher Scheme</label>
+					<div class="controls">
 						<select id="scheme">
 							<option value="intro">Introduction</option>
 							<option value="affine">Affine</option>
@@ -214,615 +211,491 @@ $(document).ready(function() {
 							<!--<option value="variant">x Variant Beaufort</option>-->
 							<option value="vigenere">Vigen&#232;re</option>
 						</select>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The cipher scheme to use</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="intro_pane">
-		<fieldset>
-			<ol>
-				<li>
-					Welcome to Andrew Merenbach's cipher tool suite.  Encryption schemes provided include affine, Atbash, Beaufort, Caesar shift, codeword, <!--variant Beaufort (including an autoclave version),-->and Vigen&#232;re (including an autoclave option).
-				</li>
-				<li>
-					<strong>This tool requires JavaScript.</strong>  This page makes moderate use of CSS standards and HTML5; please ensure that your browser observes these requirements.
-				</li>
-				<li>
-					To begin, please select a scheme from the menu.
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="affine_pane">
-		<fieldset>
-			<ol>
-				<li>The affine cipher, a monoalphabetic substitution cipher, makes use of an intriguing multiplier and additive to generate letters based upon a simple formula (which varies based upon the multiplier and additive).  This also represents its downfall, for if an attacker finds two letters, the whole formula can be discerned.</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Parameters</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Source Text</span>
-						<textarea id="af_source" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Multiplier</span>
+						<p class="help-block">The cipher scheme to use</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="pane" id="intro_pane">
+			<p>
+				Welcome to Andrew Merenbach's cipher tool suite.  Encryption schemes provided include affine, Atbash, Beaufort, Caesar shift, codeword, <!--variant Beaufort (including an autoclave version),-->and Vigen&#232;re (including an autoclave option).
+			</p>
+			<p>
+				<strong>This tool requires JavaScript.</strong>  This page makes moderate use of CSS standards and HTML5; please ensure that your browser observes these requirements.
+			</p>
+			<p>
+				To begin, please select a scheme from the menu.
+			</p>
+		</section>
+		<section class="pane" id="affine_pane">
+			<p>The affine cipher, a monoalphabetic substitution cipher, makes use of an intriguing multiplier and additive to generate letters based upon a simple formula (which varies based upon the multiplier and additive).  This also represents its downfall, for if an attacker finds two letters, the whole formula can be discerned.</p>
+			<fieldset>
+				<legend>Parameters</legend>
+				<div class="control-group">
+					<label class="control-label">Source Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="af_source" rows="4" cols="20"></textarea>
+						<p class="help-block">The text to transcode</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Multiplier</label>
+					<div class="controls">
 						<input type="number" id="af_multiplier" value="1" required>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The multiplier with which to transcode the text</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Additive</span>
+						<p class="help-block">The multiplier with which to transcode the text</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Additive</label>
+					<div class="controls">
 						<input type="number" id="af_additive" value="0" required>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The additive with which to transcode the text</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Options</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input id="af_filter" type="checkbox">Filter Text</label>
-							</li>
-							<li>
-								<label><input id="af_lower" type="checkbox">Convert to Lowercase</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<label>
-						<span>Chunk Size</span>
+						<p class="help-block">The additive with which to transcode the text</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Options</span>
+					</legend>
+					<div class="control-group">
+						<div class="controls">
+							<label class="checkbox inline"><input id="af_filter" type="checkbox">Filter Text</label>
+							<label class="checkbox inline"><input id="af_lower" type="checkbox">Convert to Lowercase</label>
+							<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+						</div>
+					</div>
+				</fieldset>
+				<div class="control-group">
+					<label class="control-label" for="af_chunk">Chunk Size</label>
+					<div class="controls">
 						<input type="number" id="af_chunk" value="0">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Operation</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input name="af_operation" type="radio" value="encode" checked>Encode</label>
-							</li>
-							<li>
-								<label><input name="af_operation" type="radio" value="decode">Decode</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
-					</fieldset>
-				</li>
-				<li class="code-button-wrapper">
-					<button type="button">Transcode</button>
-				</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Output</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Target Text</span>
-						<textarea id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Clear Alphabet</span>
+						<p class="help-block">The chunk size for the output</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Operation</span>
+					</legend>
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio inline"><input name="af_operation" type="radio" value="encode" checked>Encode</label>
+							<label class="radio inline"><input name="af_operation" type="radio" value="decode">Decode</label>
+							<p class="help-block">Should the program encode or decode the text?</p>
+						</div>
+					</div>
+				</fieldset>
+				<div class="form-actions">
+					<button class="btn" type="button">Transcode</button>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Output</legend>
+				<div class="control-group">
+					<label class="control-label">Target Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<p class="help-block">The result of the transcoding process</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Clear Alphabet</label>
+					<div class="controls">
 						<input type="text" id="af_plaintext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Code Alphabet</span>
+						<p class="help-block">The standard alphabet, in canonical order</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Code Alphabet</label>
+					<div class="controls">
 						<input type="text" id="af_ciphertext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="atbash_pane">
-		<fieldset>
-			<ol>
-				<li>The Atbash cipher, with old Hebrew roots, reverses here the plaintext alphabet under itself to create the ciphertext alphabet.  A becomes Z, B becomes Y, C becomes X, and M becomes N.  This represents a fairly simple monoalphabetic substitution cipher.</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Parameters</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Source Text</span>
-						<textarea id="at_source" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
-				</li>
-				<li>
+						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="pane" id="atbash_pane">
+			<p>The Atbash cipher, with old Hebrew roots, reverses here the plaintext alphabet under itself to create the ciphertext alphabet.  A becomes Z, B becomes Y, C becomes X, and M becomes N.  This represents a fairly simple monoalphabetic substitution cipher.</p>
+			<fieldset>
+				<legend>Parameters</legend>
+				<div class="control-group">
+					<label class="control-label">Source Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="at_source" rows="4" cols="20"></textarea>
+						<p class="help-block">The text to transcode</p>
+					</div>
+				</div>
+				<div class="control-group">
 					<fieldset>
 						<legend>
 							<span>Options</span>
 						</legend>
-						<ol>
-							<li>
-								<label><input id="at_filter" type="checkbox">Filter Text</label>
-							</li>
-							<li>
-								<label><input id="at_lower" type="checkbox">Convert to Lowercase</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
+						<div class="controls">
+							<label class="checkbox inline"><input id="at_filter" type="checkbox">Filter Text</label>
+							<label class="checkbox inline"><input id="at_lower" type="checkbox">Convert to Lowercase</label>
+							<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+						</div>
 					</fieldset>
-				</li>
-				<li>
-					<label>
-						<span>Chunk Size</span>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Chunk Size</label>
+					<div class="controls">
 						<input type="number" id="at_chunk" value="0">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
-				</li>
-				<li class="code-button-wrapper">
-					<button type="button">Transcode</button>
-				</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Output</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Target Text</span>
-						<textarea id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Clear Alphabet</span>
+						<p class="help-block">The chunk size for the output</p>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button class="btn" type="button">Transcode</button>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Output</legend>
+				<div class="control-group">
+					<label class="control-label">Target Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<p class="help-block">The result of the transcoding process</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Clear Alphabet</label>
+					<div class="controls">
 						<input type="text" id="at_plaintext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Code Alphabet</span>
+						<p class="help-block">The standard alphabet, in canonical order</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Code Alphabet</label>
+					<div class="controls">
 						<input type="text" id="at_ciphertext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="beaufort_pane">
-		{% comment %}
-		<fieldset>
-			<ol>
-				<li>Description goes here.</li>
-			</ol>
-		</fieldset>
-		{% endcomment %}
-		<fieldset>
-			<legend>Parameters</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Source Text</span>
-						<textarea id="bf_source" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Passphrase</span>
-						<textarea id="bf_passphrase" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The passphrase with which to transcode the text</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Primer Index</span>
+						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="pane" id="beaufort_pane">
+			{% comment %}
+			<p>Description goes here.</p>
+			{% endcomment %}
+			<fieldset>
+				<legend>Parameters</legend>
+				<div class="control-group">
+					<label class="control-label">Source Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="bf_source" rows="4" cols="20"></textarea>
+						<p class="help-block">The text to transcode</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Passphrase</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="bf_passphrase" rows="4" cols="20"></textarea>
+						<p class="help-block">The passphrase with which to transcode the text</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Primer Index</label>
+					<div class="controls">
 						<input type="number" min="0" value="0" id="bf_primer">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Alphabet Key</span>
+						<p class="help-block">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Alphabet Key</label>
+					<div class="controls">
 						<input type="text" id="bf_alphakey">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The keyword with which to generate the alphabetic tableaux</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Transcoding</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input id="bf_digits" type="checkbox">Allow Digits</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Options</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input id="bf_filter" type="checkbox">Filter Text</label>
-							</li>
-							<li>
-								<label><input id="bf_lower" type="checkbox">Convert to Lowercase</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<label>
-						<span>Chunk Size</span>
+						<p class="help-block">The keyword with which to generate the alphabetic tableaux</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Transcoding</span>
+					</legend>
+					<div class="controls">
+						<label class="checkbox inline"><input id="bf_digits" type="checkbox">Allow Digits</label>
+						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<span>Options</span>
+					</legend>
+					<div class="controls">
+						<label class="checkbox inline"><input id="bf_filter" type="checkbox">Filter Text</label>
+						<label class="checkbox inline"><input id="bf_lower" type="checkbox">Convert to Lowercase</label>
+						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+					</div>
+				</fieldset>
+				<div class="control-group">
+					<label class="control-label">Chunk Size</label>
+					<div class="controls">
 						<input type="number" id="bf_chunk" value="0">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
-				</li>
-				<li class="code-button-wrapper">
-					<button type="button">Transcode</button>
-				</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Output</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Target Text</span>
-						<textarea id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="caesar_pane">
-		<fieldset>
-			<ol>
-				<li>Ciphertext letters in this monoalphabetic substitution cipher represent their plaintext counterparts shifted by some number of letters.  Julius Caesar allegedly employed this monoalphabetic substitution cipher, with a shift of three letters, for military purposes.</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Parameters</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Source Text</span>
-						<textarea id="cr_source" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Offset</span>
+						<p class="help-block">The chunk size for the output</p>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button class="btn" type="button">Transcode</button>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Output</legend>
+				<div class="control-group">
+					<label class="control-label">Target Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<p class="help-block">The result of the transcoding process</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="pane" id="caesar_pane">
+			<p>Ciphertext letters in this monoalphabetic substitution cipher represent their plaintext counterparts shifted by some number of letters.  Julius Caesar allegedly employed this monoalphabetic substitution cipher, with a shift of three letters, for military purposes.</p>
+			<fieldset>
+				<legend>Parameters</legend>
+				<div class="control-group">
+					<label class="control-label">Source Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="cr_source" rows="4" cols="20"></textarea>
+						<p class="help-block">The text to transcode</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Offset</label>
+					<div class="controls">
 						<input type="number" min="0" max="25" value="3" id="cr_shift" required>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The offset by which to shift the ciphertext alphabet</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Options</span>
-						</legend>
-						<ol>
-							<li>
-								<label>
-									<input id="cr_filter" type="checkbox">
-									Filter Text
-								</label>
-							</li>
-							<li>
-								<label>
-									<input id="cr_lower" type="checkbox">
-									Convert to Lowercase
-								</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<label>
-						<span>Chunk Size</span>
+						<p class="help-block">The offset by which to shift the ciphertext alphabet</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Options</span>
+					</legend>
+					<div class="controls">
+						<label class="checkbox inline"><input id="cr_filter" type="checkbox">Filter Text</label>
+						<label class="checkbox inline"><input id="cr_lower" type="checkbox">Convert to Lowercase</label>
+						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+					</div>
+				</fieldset>
+				<div class="control-group">
+					<label class="control-label">Chunk Size</label>
+					<div class="controls">
 						<input type="number" id="cr_chunk" value="0">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
-				</li>
-				<li>
+						<p class="help-block">The chunk size for the output</p>
+					</div>
+				</div>
+				<div>
 					<fieldset>
 						<legend>
 							<span>Operation</span>
 						</legend>
-						<ol>
-							<li>
-								<label><input name="cr_operation" type="radio" value="encode" checked>Encode</label>
-							</li>
-							<li>
-								<label><input name="cr_operation" type="radio" value="decode">Decode</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
+						<div class="controls">
+							<label class="radio inline"><input name="cr_operation" type="radio" value="encode" checked>Encode</label>
+							<label class="radio inline"><input name="cr_operation" type="radio" value="decode">Decode</label>
+							<p class="help-block">Should the program encode or decode the text?</p>
+						</div>
 					</fieldset>
-				</li>
-				<li class="code-button-wrapper">
-					<button type="button">Transcode</button>
-				</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Output</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Target Text</span>
-						<textarea id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Clear Alphabet</span>
+				</div>
+				<div class="form-actions">
+					<button class="btn" type="button">Transcode</button>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Output</legend>
+				<div class="control-group">
+					<label class="control-label">Target Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<p class="help-block">The result of the transcoding process</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Clear Alphabet</label>
+					<div class="controls">
 						<input type="text" id="cr_plaintext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Code Alphabet</span>
+						<p class="help-block">The standard alphabet, in canonical order</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Code Alphabet</label>
+					<div class="controls">
 						<input type="text" id="cr_ciphertext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="codeword_pane">
-		<fieldset>
-			<ol>
-				<li>One of the easiest monoalphabetic substitution ciphers to implement&#8212;save for, possibly, the Caesar shift and the Atbash cipher&#8212;the codeword creates a ciphertext alphabet from a keyword followed by the plaintext alphabet minus the keyword's letters.</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Parameters</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Source Text</span>
-						<textarea id="cw_source" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Keyword</span>
+						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="pane" id="codeword_pane">
+			<p>One of the easiest monoalphabetic substitution ciphers to implement&#8212;save for, possibly, the Caesar shift and the Atbash cipher&#8212;the codeword creates a ciphertext alphabet from a keyword followed by the plaintext alphabet minus the keyword's letters.</p>
+			<fieldset>
+				<legend>Parameters</legend>
+				<div class="control-group">
+					<label class="control-label">Source Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="cw_source" rows="4" cols="20"></textarea>
+						<p class="help-block">The text to transcode</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Keyword</label>
+					<div class="controls">
 						<input type="text" id="cw_keyword" required>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The keyword with which to transcode the text</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Options</span>
-						</legend>
-						<ol>
-							<li>
-								<label>
-									<input id="cw_filter" type="checkbox">
-									Filter Text
-								</label>
-							</li>
-							<li>
-								<label>
-									<input id="cw_lower" type="checkbox">
-									Convert to Lowercase
-								</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<label>
-						<span>Chunk Size</span>
+						<p class="help-block">The keyword with which to transcode the text</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Options</span>
+					</legend>
+					<div class="controls">
+						<label class="checkbox inline">
+							<input id="cw_filter" type="checkbox">
+							Filter Text
+						</label>
+						<label class="checkbox inline">
+							<input id="cw_lower" type="checkbox">
+							Convert to Lowercase
+						</label>
+						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+					</div>
+				</fieldset>
+				<div class="control-group">
+					<label class="control-label">Chunk Size</label>
+					<div class="controls">
 						<input type="number" id="cw_chunk" value="0">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Operation</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input name="cw_operation" type="radio" value="encode" checked>Encode</label>
-							</li>
-							<li>
-								<label><input name="cw_operation" type="radio" value="decode">Decode</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
-					</fieldset>
-				</li>
-				<li class="code-button-wrapper">
-					<button type="button">Transcode</button>
-				</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Output</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Target Text</span>
-						<textarea id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Clear Alphabet</span>
+						<p class="help-block">The chunk size for the output</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Operation</span>
+					</legend>
+					<div class="controls">
+						<label class="radio inline"><input name="cw_operation" type="radio" value="encode" checked>Encode</label>
+						<label class="radio inline"><input name="cw_operation" type="radio" value="decode">Decode</label>
+						<p class="help-block">Should the program encode or decode the text?</p>
+					</div>
+				</fieldset>
+				<div class="form-actions">
+					<button class="btn" type="button">Transcode</button>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Output</legend>
+				<div class="control-group">
+					<label class="control-label">Target Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<p class="help-block">The result of the transcoding process</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Clear Alphabet</label>
+					<div class="controls">
 						<input type="text" id="cw_plaintext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The standard alphabet, in canonical order</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Code Alphabet</span>
+						<p class="help-block">The standard alphabet, in canonical order</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Code Alphabet</label>
+					<div class="controls">
 						<input type="text" id="cw_ciphertext" value="" readonly="readonly">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The ciphertext alphabet, used to encode the text</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-	<section class="pane" id="vigenere_pane">
-		<fieldset>
-			<ol>
-				<li>One of the most popular of the aging ciphers, the Vigen&#232;re&#8212;a polyalphabetic substitution cipher that encrypts and decrypts using a tabula recta&#8212;has over the years endured much scrutiny and, perhaps, abuse.  One can implement the cipher fairly easily on a sheet of paper, and some computer software can make transcoding large messages with it practically instantaneous.  Those encoding messages, however, frequently use passphrases shorter than the message itself, which renders the message vulnerable to attacks, such as frequency analysis.  Reusing a passphrase and, for that matter, using a passphrase with native words at all, can present pitfalls.  To secure the encryption, a long string of pure gibberish, used once (for both encoding and decoding), would present, theoretically, a fairly difficult challenge (to say the least) to any interceptors.</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Parameters</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Source Text</span>
-						<textarea id="vi_source" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The text to transcode</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Passphrase</span>
-						<textarea id="vi_passphrase" rows="4" cols="20"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The passphrase with which to transcode the text</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Primer Index</span>
+						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+		<section class="pane" id="vigenere_pane">
+			<p>One of the most popular of the aging ciphers, the Vigen&#232;re&#8212;a polyalphabetic substitution cipher that encrypts and decrypts using a tabula recta&#8212;has over the years endured much scrutiny and, perhaps, abuse.  One can implement the cipher fairly easily on a sheet of paper, and some computer software can make transcoding large messages with it practically instantaneous.  Those encoding messages, however, frequently use passphrases shorter than the message itself, which renders the message vulnerable to attacks, such as frequency analysis.  Reusing a passphrase and, for that matter, using a passphrase with native words at all, can present pitfalls.  To secure the encryption, a long string of pure gibberish, used once (for both encoding and decoding), would present, theoretically, a fairly difficult challenge (to say the least) to any interceptors.</p>
+			<fieldset>
+				<legend>Parameters</legend>
+				<div class="control-group">
+					<label class="control-label">Source Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="vi_source" rows="4" cols="20"></textarea>
+						<p class="help-block">The text to transcode</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Passphrase</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="vi_passphrase" rows="4" cols="20"></textarea>
+						<p class="help-block">The passphrase with which to transcode the text</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Primer Index</label>
+					<div class="controls">
 						<input type="number" min="0" value="0" id="vi_primer">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span></a>
-				</li>
-				<li>
-					<label>
-						<span>Alphabet Key</span>
+						<p class="help-block">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Alphabet Key</label>
+					<div class="controls">
 						<input type="text" id="vi_alphakey">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The keyword with which to generate the alphabetic tableaux</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Transcoding</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input id="vi_digits" type="checkbox">Allow Digits</label>
-							</li>
-						</ol>
-					</fieldset>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Autoclave</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input name="vi_autoclave" type="radio" value="key" checked>Key Autokey</label>
-							</li>
-							<li>
-								<label><input name="vi_autoclave" type="radio" value="text">Text Autokey</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Key autokey (the default) repeats the characters in the key, up to the message length.  Text autokey appends the plaintext of the message to the key, which can prove more secure when the original key is shorter than the message.</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Options</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input id="vi_filter" type="checkbox">Filter Text</label>
-							</li>
-							<li>
-								<label><input id="vi_lower" type="checkbox">Convert to Lowercase</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</span></a>
-					</fieldset>
-				</li>
-				<li>
-					<label>
-						<span>Chunk Size</span>
+						<p class="help-block">The keyword with which to generate the alphabetic tableaux</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Transcoding</span>
+					</legend>
+					<div class="controls">
+						<label class="checkbox inline"><input id="vi_digits" type="checkbox">Allow Digits</label>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<span>Autoclave</span>
+					</legend>
+					<div class="controls">
+						<label class="radio inline"><input name="vi_autoclave" type="radio" value="key" checked>Key Autokey</label>
+						<label class="radio inline"><input name="vi_autoclave" type="radio" value="text">Text Autokey</label>
+						<p class="help-block">Key autokey (the default) repeats the characters in the key, up to the message length.  Text autokey appends the plaintext of the message to the key, which can prove more secure when the original key is shorter than the message.</p>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>
+						<span>Options</span>
+					</legend>
+					<div class="controls">
+						<label class="checkbox inline"><input id="vi_filter" type="checkbox">Filter Text</label>
+						<label class="checkbox inline"><input id="vi_lower" type="checkbox">Convert to Lowercase</label>
+						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
+					</div>
+				</fieldset>
+				<div class="control-group">
+					<label class="control-label">Chunk Size</label>
+					<div class="controls">
 						<input type="number" id="vi_chunk" value="0">
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The chunk size for the output</span></a>
-				</li>
-				<li>
-					<fieldset>
-						<legend>
-							<span>Operation</span>
-						</legend>
-						<ol>
-							<li>
-								<label><input name="vi_operation" type="radio" value="encode" checked>Encode</label>
-							</li>
-							<li>
-								<label><input name="vi_operation" type="radio" value="decode">Decode</label>
-							</li>
-						</ol>
-						<a href="javascript:void(0);" class="formhelp">?<span>Should the program encode or decode the text?</span></a>
-					</fieldset>
-				</li>
-				<li class="code-button-wrapper">
-					<button type="button">Transcode</button>
-				</li>
-			</ol>
-		</fieldset>
-		<fieldset>
-			<legend>Output</legend>
-			<ol>
-				<li>
-					<label>
-						<span>Target Text</span>
-						<textarea id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
-					</label>
-					<a href="javascript:void(0);" class="formhelp">?<span>The result of the transcoding process</span></a>
-				</li>
-			</ol>
-		</fieldset>
-	</section>
-</form>
+						<p class="help-block">The chunk size for the output</p>
+					</div>
+				</div>
+				<fieldset>
+					<legend>
+						<span>Operation</span>
+					</legend>
+					<div class="controls">
+						<label class="radio inline"><input name="vi_operation" type="radio" value="encode" checked>Encode</label>
+						<label class="radio inline"><input name="vi_operation" type="radio" value="decode">Decode</label>
+						<p class="help-block">Should the program encode or decode the text?</p>
+					</div>
+				</fieldset>
+				<div class="form-actions">
+					<button class="btn" type="button">Transcode</button>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Output</legend>
+				<div class="control-group">
+					<label class="control-label">Target Text</label>
+					<div class="controls">
+						<textarea class="input-xlarge" id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<p class="help-block">The result of the transcoding process</p>
+					</div>
+				</div>
+			</fieldset>
+		</section>
+	</form>
+</article>
 {% endblock %}
 
 {% comment %}
