@@ -5,12 +5,12 @@
 {% block project %}The Romantics{% endblock %}
 {% block navigation_overrides %}
 {{ block.super }}
-{% url our_story as our_story_url %}
+{# url our_story as our_story_url #}
 {% url events as events_url %}
 {% url friends_and_family as friends_and_family_url %}
 {% url pl-gallery-archive as gallery_url %}
 {% url registry as registry_url %}
-<li class="{% active our_story_url %}"><a href="{{ our_story_url }}">Our Story</a></li>
+{% comment %}<li class="{% active our_story_url %}"><a href="{{ our_story_url }}">Our Story</a></li> {% endcomment %}
 <li class="{% active events_url %}"><a href="{{ events_url }}">Wedding Day</a></li>
 <li class="{% active friends_and_family_url %}"><a href="{{ friends_and_family_url }}">Friends &amp; Family</a></li>
 <li class="{% active gallery_url %}"><a href="{{ gallery_url }}">Gallery</a></li>

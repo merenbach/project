@@ -9,7 +9,7 @@
 
 <div class="gallery-photo">
     <a href="{{ object.image.url }}"><img src="{{ object.get_display_url }}" alt="{{ object.title }}"/></a>
-    {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
+    {% if object.caption %}<p class="caption">{{ object.caption }}</p>{% endif %}
 </div>
 {% comment %}
 {% if object.public_galleries %}
