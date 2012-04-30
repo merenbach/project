@@ -13,8 +13,8 @@
 
 {% block content %}
     {% if form %}
-        <form class="well well-small contact-form" action="/contact/" method="POST">{% csrf_token %}
-            <p class="blurb">
+        <form class="contact-form" action="/contact/" method="post">{% csrf_token %}
+            <p>
                 {% block contact_message %}
                     Please feel free to use the below form to get in touch.
                 {% endblock %}
