@@ -153,7 +153,8 @@ class ArticleManager(models.Manager):
                 Q(expiration_date__isnull=True) |
                 Q(expiration_date__gte=now),
                 publish_date__lte=now,
-                is_active=True)
+                is_active=True,
+                sites__id=settings.SITE_ID)
 
     def live(self, user=None):
         """Retrieves all live articles"""
@@ -165,7 +166,7 @@ class ArticleManager(models.Manager):
             return qs
         else:
             # only show live articles to regular users
-            return qs.filter(status__is_live=True, sites__id=settings.SITE_ID)
+            return qs.filter(status__is_live=True)
 
 MARKUP_HELP = _("""Select the type of markup you are using in this article.
 <ul>
