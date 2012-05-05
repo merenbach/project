@@ -1,7 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
 from articles.models import Article
-from project import settings
 
 class ArticleSitemap(Sitemap):
 	changefreq = "never"

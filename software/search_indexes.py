@@ -1,5 +1,5 @@
 from django.utils import timezone
-from project import settings
+from django.conf import settings
 from haystack import indexes
 from software.models import Software
 

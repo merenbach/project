@@ -1,7 +1,7 @@
 from haystack import indexes
 from django.contrib.flatpages.models import FlatPage
 from articles.models import Article
-from project import settings
+#from django.conf import settings
 #from django.contrib.sites.models import Site
 #from core.indexes import SiteSearchIndex
 

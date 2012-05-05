@@ -1,4 +1,4 @@
-from project import settings
+from django.conf import settings
 from django.shortcuts import render_to_response
 from contact.forms import ContactForm
 from django.template import RequestContext

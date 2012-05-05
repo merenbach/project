@@ -36,9 +36,9 @@ sqs = SearchQuerySet().filter(sq1 | sq2)
 #sqs = SearchQuerySet().filter(site=1)
 #sqs = SearchQuerySet().filter(SQ(sites__id=settings.SITE_ID) | SQ(model_name=u'software'))
 
-if hasattr(settings, "OVERLOAD_SITE_MODULE"):
-    exec ("from {}.urls import sitemaps as site_sitemaps".format(settings.OVERLOAD_SITE_MODULE))
-    sitemaps.update(site_sitemaps)
+#if hasattr(settings, "OVERLOAD_SITE_MODULE"):
+#    exec ("from {}.urls import sitemaps as site_sitemaps".format(settings.OVERLOAD_SITE_MODULE))
+#    sitemaps.update(site_sitemaps)
 
 urlpatterns = patterns('',
         #url(r'^$', 'project.views.home', name='home'),
@@ -68,9 +68,9 @@ urlpatterns += patterns('django.contrib.flatpages.views',
         #url(r'^license/$', 'flatpage', {'url': '/license/'}, name='license'),
         )
 
-if hasattr(settings, "OVERLOAD_SITE_MODULE"):
-    exec ("from {}.urls import urlpatterns as site_urls".format(settings.OVERLOAD_SITE_MODULE))
-    urlpatterns = site_urls + urlpatterns
+#if hasattr(settings, "OVERLOAD_SITE_MODULE"):
+#    exec ("from {}.urls import urlpatterns as site_urls".format(settings.OVERLOAD_SITE_MODULE))
+#    urlpatterns = site_urls + urlpatterns
 
 if settings.DEBUG:
     urlpatterns = patterns('',
