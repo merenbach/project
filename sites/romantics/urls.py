@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
-from project.urls import urlpatterns
+from core.urls import urlpatterns
 
 urlpatterns += patterns('',
         (r'^photologue/', include('photologue.urls')),

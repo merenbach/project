@@ -2,7 +2,7 @@ from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from project.urls import urlpatterns, sitemaps
+from core.urls import urlpatterns, sitemaps
 
 # Dajaxice
 from dajaxice.core import dajaxice_autodiscover
