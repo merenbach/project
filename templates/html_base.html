@@ -26,6 +26,8 @@
         <link rel="shortcut icon" type="image/png" href="/favicon.ico">
         <meta name="viewport" content="width=device-width{% comment %}, initial-scale=1.0{% endcomment %}">
         <meta name="author" content="Andrew Merenbach">
+        <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
+        <meta name="description" content="{% block meta-description %}{% endblock %}">
         <!--[if lt IE 9]>
         <script type="text/javascript" src="{{ STATIC_URL }}js/html5.js"></script>
         <![endif]-->
@@ -37,6 +39,7 @@
 
         {% render_block "css" %}
         {% block extrahead %}{% endblock %}
+        {% block extra-head %}{% endblock %}
         <!--[if IE]>
         <style type="text/css">
             .clearfix {
