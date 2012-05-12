@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-{% load sekizai_tags compress analytics flatpages core_tags %}
+{% load sekizai_tags compress analytics core_tags %}
+{% comment %}
 {# this site makes use of the awesome normalize.css #}
 {# /*! normalize.css 2011-11-04T15:38 UTC - http://github.com/necolas/normalize.css */ #}
+{% endcomment %}
 {% addtoblock "css" %}
 {% compress css %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/normalize.css">
@@ -16,8 +18,10 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/print.css" media="print">
 {% endcompress %}
 {% endaddtoblock %}
+{% comment %}
 {# addtoblock "js" #}
 {# endaddtoblock #}
+{% endcomment %}
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta charset="UTF-8">
@@ -55,8 +59,9 @@
             #wrap {display:table;height:100%;}
         </style>
         <![endif]-->
-
+        {% if not user.is_authenticated %}
         {% analytics_async %}
+        {% endif %}
 
         {% compress js %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.2.min.js" charset="utf-8"></script>
