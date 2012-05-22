@@ -9,10 +9,9 @@
 {% endblock %}
 
 {% block title %}{{ software.title }}{% endblock %}
-{% block pagetitle %}{{ software.title }}{% endblock %}
+{% block pagetitle %}{{ software.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
-<div class="roundbox">
     {% comment %}
     <h1>{{ software.title }}</h1>
     <p><em>Version {{ software.version }} &bull; Released {{ software.pub_date|date:"d F Y @ H:m" }}</em></p>
@@ -24,8 +23,8 @@
         {% endif %}
     </div>
     {% endcomment %}
-    {% if software.version %}<div class="node-meta">version {{ software.version }}</div>{% endif %}
-    {% if software.pub_date %}<div class="node-meta">dated {{ software.pub_date|date:"Y-m-d" }}</div>{% endif %}
+    {% if software.version %}<span class="label label-info">version {{ software.version }}</span>{% endif %}
+    {% if software.pub_date %}<span class="label label-info">{{ software.pub_date|date:"Y-m-d" }}</span>{% endif %}
     <div class="node-excerpt">
         {% if software.description %}
         {{ software.description|markdown }}
@@ -34,20 +33,14 @@
         {% endif %}
     </div>
     {% render_tag_links_detail software %}
-</div>
-<div class="roundbox">
-    {% if software.app_file or software.src_file %}
-    <ul class="downloads">
+    <div style="text-align: center;">
         {% if software.app_file %}
-        <li><a href="{{ software.get_app_file_url }}">Click here</a> to download the application ({{ software.get_app_file_size|filesizeformat }}).</li>
+        <a class="btn btn-primary" href="{{ software.get_app_file_url }}">Download Application ({{ software.get_app_file_size|filesizeformat }})</a>
         {% endif %}
         {% if software.src_file %}
-        <li><a href="{{ software.get_src_file_url }}">Click here</a> to download the source ({{ software.get_src_file_size|filesizeformat }}).</li>
+        <a class="btn btn-inverse" href="{{ software.get_src_file_url }}">Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a>
         {% endif %}
-    </ul>
-    {% else %}
-    <em>No download links are currently available.</em>
-    {% endif %}
+    </div>
 </div>
-{% render_tag_links %}
+{# render_tag_links #}
 {% endblock %}

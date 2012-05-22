@@ -1,14 +1,17 @@
 {% load software_tags tagging_tags sekizai_tags %}
 
 {% if tags %}
-<div class="node-tags clearfix">
-    <ul>
-        <li>tagged</li>
+<nav class="tags btn-group dropup">
+    <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+        Tags
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
         {% for tag in tags %}
         <li><a href="{% url software_tag_detail tag=tag %}">{{ tag }}</a></li>
         {% empty %}
         <li>none</li>
         {% endfor %}
     </ul>
-</div>
+</nav>
 {% endif %}
