@@ -5,3 +5,4 @@ settings.py
 *.gz
 whoosh_index/
 .DS_Store
+backups/
