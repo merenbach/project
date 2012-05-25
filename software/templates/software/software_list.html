@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block title %}Software tagged &ldquo;{{ tag }}&rdquo;{% endblock %}
-{% block pagetitle %}Software {{ block.super }}{% endblock %}
+{% block pagetitle %}Software | {{ block.super }}{% endblock %}
 
 {% block content %}
 {{ block.super }}
@@ -39,5 +39,5 @@
 {% endfor %}
 </ul>
 {% endif %}
-{% render_tag_links %}
+{# render_tag_links #}
 {% endblock %}

@@ -33,14 +33,14 @@
         {% endif %}
     </div>
     {% render_tag_links_detail software %}
-    <div style="text-align: center;">
+    <ul class="downloads unstyled cf">
         {% if software.app_file %}
-        <a class="btn btn-primary" href="{{ software.get_app_file_url }}">Download Application ({{ software.get_app_file_size|filesizeformat }})</a>
+        <li><a class="btn btn-primary" href="{{ software.get_app_file_url }}">Download Application ({{ software.get_app_file_size|filesizeformat }})</a></li>
         {% endif %}
         {% if software.src_file %}
-        <a class="btn btn-inverse" href="{{ software.get_src_file_url }}">Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a>
+        <li><a class="btn btn-inverse" href="{{ software.get_src_file_url }}">Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a></li>
         {% endif %}
-    </div>
+    </ul>
 </div>
 {# render_tag_links #}
 {% endblock %}
