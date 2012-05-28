@@ -1,17 +1,36 @@
 # Django settings for project project.
 
 import os
-import sys
+from sys import path as sys_path
 from urlparse import urljoin
 
-PROJECT_ROOT = os.environ.get('PROJECT_ROOT')
-PROJECT_PATH = os.environ.get('PROJECT_PATH')
+# add to default paths
+paths = (
+        '/home/merenbach/webapps/django',
+        '/home/merenbach/webapps/django/project',
+        '/home/merenbach/webapps/django/lib/python2.7',
+        )
 
+for path in paths:
+    if path not in sys_path:
+        sys_path.insert(0, path)
+
+# get the settinsg path
+from django.utils import importlib
+_SETTINGS_MODULE = importlib.import_module(os.environ.get('DJANGO_SETTINGS_MODULE'))
+
+PROJECT_ROOT = os.path.realpath(os.path.dirname(_SETTINGS_MODULE.__file__))
+PROJECT_PATH = os.path.abspath(PROJECT_ROOT)
+
+if PROJECT_PATH not in sys_path:
+    sys_path.insert(0, PROJECT_PATH)
+
+# for core project files
 CORE_PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 CORE_PROJECT_PATH = os.path.abspath(CORE_PROJECT_ROOT)
 
-if CORE_PROJECT_PATH not in sys.path:
-    sys.path.insert(0, CORE_PROJECT_PATH)
+if CORE_PROJECT_PATH not in sys_path:
+    sys_path.insert(0, CORE_PROJECT_PATH)
 
 #OVERLOAD_SITE = os.environ.get('OVERLOAD_SITE')
 #OVERLOAD_SITE_MODULE = "websites.{}".format(OVERLOAD_SITE)
@@ -218,6 +237,7 @@ USE_ADDTHIS_BUTTON = False
 GOOGLE_ANALYTICS_MODEL = True
 GOOGLE_ANALYTICS_TRACK_PAGE_LOAD_TIME = True
 
+
 COMPRESS_PRECOMPILERS = (
         #('text/coffeescript', 'coffee --compile --stdio'),
         ('text/less', 'lessc {infile} {outfile}'),
@@ -226,10 +246,7 @@ COMPRESS_PRECOMPILERS = (
         )
 
 COMPRESS_OFFLINE = True
-
-#COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-
-#COMPRESS_ENABLED = True
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 HAYSTACK_CONNECTIONS = {
         'default': {

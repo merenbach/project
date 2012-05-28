@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.core.urlresolvers import resolve
 from django.core.cache import cache
 from django.db.models import Q
+from django.utils.timezone import now
 
 class MaintenanceMiddleware(object):
     def process_request(self, request):
@@ -20,9 +21,9 @@ class MaintenanceMiddleware(object):
             messages = cache.get('maintenance_messages')
         
         if not messages:
-            messages = MaintenanceMessage.objects.filter(start_time__lt=datetime.now())\
+            messages = MaintenanceMessage.objects.filter(start_time__lt=now())\
                 .filter(\
-                Q(end_time__gte=datetime.now()) | Q(end_time__isnull=True) )
+                Q(end_time__gte=now()) | Q(end_time__isnull=True) )
             cache.set('maintenance_messages', messages, getattr(settings, 'MAINTENANCE_CACHE_SECONDS', 3600))
         
         try:

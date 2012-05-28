@@ -26,6 +26,7 @@ class ArticleIndex(indexes.SearchIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='title')
     url = indexes.CharField(model_attr='get_absolute_url')
     sites = indexes.MultiValueField(model_attr='sites__all')
+    pub_date = indexes.DateTimeField(model_attr='publish_date')
 
     def prepare_sites(self, obj):
         return [a.id for a in obj.sites.all()]
