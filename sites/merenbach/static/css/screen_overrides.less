@@ -1,24 +1,9 @@
-/* mixins */
-.vertical-gradient (@fg, @bg, @from, @to) {
-	color: @fg;
-	background-color: @bg;
-
-	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to')"; /* for IE */
-	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to)); /* for webkit browsers */
-	background: -moz-linear-gradient(top,  @from,  @to); /* for firefox 3.6+ */ 
+h1 {
+    background-color: #579;
 }
 
-html, body {
-	background-color: #6080A0;
-}
-
-#footer {
-	.vertical-gradient(#CCCCCC, #406080, #406080, #102030);
-
-	a {
-		color: #72A4FD;
-		&:active { color: yellow; }
-	}
+html, body, #footer {
+	background-color: #68A;
 }
 
 .aboutpic {
@@ -26,9 +11,10 @@ html, body {
 	width: 12em;
 	display: block;
 	margin: 0.25em 0.5em 0.25em 0;
-	border: solid 1px #606060;
+	border: solid 1px #666;
 }
 
 code {
 	background-color: #DFDBC3;
 }
+

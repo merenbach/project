@@ -14,7 +14,7 @@
 	-khtml-border-radius: @radius;
 }
 
-.box-shadow (@shadow) {
+/*.box-shadow (@shadow) {
 	box-shadow: @shadow;
 	-moz-box-shadow: @shadow;
 	-webkit-box-shadow: @shadow;
@@ -26,17 +26,7 @@
 	-webkit-box-sizing: @sizing;
 	-moz-box-sizing: @sizing;
 	-ms-box-sizing: @sizing;
-}
-
-.vertical-gradient (@fg, @bg, @from, @to) {
-	color: @fg;
-	background-color: @bg;
-
-	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@from', endColorstr='@to')"; /* for IE */
-	background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to)); /* for webkit browsers */
-	background: -moz-linear-gradient(top,  @from,  @to); /* for firefox 3.6+ */ 
-}
-
+}*/
 
 html, body {
 	background-color: white;
@@ -63,13 +53,13 @@ body, body * {
 		display: block;
 	}
 
-	a {
+	/*a {
 		color: blue;
 		text-decoration: none;
 
 		&:hover { text-decoration: underline; }
 		&:active { color: yellow; }
-	}
+	}*/
 }
 
 /*
@@ -89,7 +79,7 @@ h1 {
 	margin: 0.375em 0;
 	padding: 0.25em 0.5em;
 	.border-radius(0.25em);
-	background-color: #808080;
+	background-color: #888;
 
 	color: white;
 	font-size: 1.2em;
@@ -162,14 +152,14 @@ nav.breadcrumbs ul {
     }
 }*/
 
-#main .form-search {
+/*#main .form-search {
     background-color: transparent;
     margin-bottom: 0;
     text-align: center;
     input {
         vertical-align: middle;
     }
-}
+}*/
 
 /* For modern browsers */
 .clearfix {
