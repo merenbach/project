@@ -17,7 +17,7 @@ import os
 import sys
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sites.lizcheney.settings')
-sys.path.insert(0, '/home/merenbach/webapps/django/project')
+sys.path.insert(0, '/srv/www/django/project')
 
 from core.wsgi import *
 

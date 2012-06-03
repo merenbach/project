@@ -6,9 +6,9 @@ from urlparse import urljoin
 
 # add to default paths
 paths = (
-        '/home/merenbach/webapps/django',
-        '/home/merenbach/webapps/django/project',
-        '/home/merenbach/webapps/django/lib/python2.7',
+        '/srv/www/django',
+        '/srv/www/django/project',
+        '/srv/www/django/lib/python2.7',
         )
 
 for path in paths:
@@ -178,11 +178,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'appconf',
-    'admintools_bootstrap',
-    'admin_tools',
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
+    #'admintools_bootstrap',
+    #'admin_tools',
+    #'admin_tools.theming',
+    #'admin_tools.menu',
+    #'admin_tools.dashboard',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -207,7 +207,8 @@ INSTALLED_APPS = (
     'maintenance',
     'breadcrumbs',
     'articles',
-    #'django-backup',
+    #'djcelery',
+    #'djsupervisor',
 )
 
 #if SITE_INSTALLED_APPS:
@@ -217,7 +218,8 @@ INSTALLED_APPS = (
 CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': 'unix:/home/merenbach/memcached.sock'
+            'LOCATION': '127.0.0.1:11211',
+            #'LOCATION': 'unix:/var/run/memcached/memcached.pid',
             }
         }
 
