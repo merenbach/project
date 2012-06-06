@@ -1,10 +1,15 @@
 {% if forloop.first %}<ol class="article-list unstyled">{% endif %}
     <li>
     <div class="well well-small">
-    <span class="title"><a href="{{ article.get_absolute_url }}" title="Read this article">{{ article.title }}</a></span> <span class="label">{{ article.publish_date|date:"Y-m-d" }}</span>
+    <span class="title"><a href="{{ article.get_absolute_url }}" title="Read this article">{{ article.title }}</a></span> <span class="label label-info">{{ article.publish_date|date:"Y-m-d" }}</span>
         <div class="quiet">
+	    <em>{{ article.description|safe|striptags }}</em>
+	</div>
+	{% comment %}
+       <div class="quiet">
             <em>Posted by <a href="{% url articles_by_author article.author.username %}" title="View articles posted by {{ article.author.get_name }}">{{ article.author.get_name }}</a></em>
         </div>
+	{% endcomment %}
     </div>
     </li>
 {% if forloop.last %}</ol>{% endif %}
