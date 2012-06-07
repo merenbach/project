@@ -30,17 +30,11 @@ div{
 
 <div>
 <h1>Down</h1>
-<p>The application is currently undergoing scheduled maintenance. Please see the messages below for more information:</p>
-{% for message in messages %}
-    <div class="message">{{ message.message }}<br />
-    Service window is between {{ message.start_time|date:"F j, Y  h:i a" }}
-        {% if message.end_time %}
-            and {{ message.end_time|date:"F j, Y  h:i a" }}
-            {% else %}
-            and unknown
-        {% endif %}
+<p>The application is currently undergoing scheduled maintenance. Please see the message below for more information:</p>
+    <p class="message"><strong>{{ maintenance.description }}</strong></p>
+	<div><em>Anticipated Service Window:</em></div>
+<div>{{ maintenance.start_time|date:"Y-m-d H:i" }} &ndash; {{ maintenance.end_time|date:"Y-m-d H:i" }}</div>
     </div>
-{% endfor %}
 </div>
 
 </body>

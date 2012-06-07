@@ -1,4 +1,26 @@
 # README for Project
+## Dependencies
+- pip install django-google-analytics ('google\_analytics')
+    - We are using [this version](http://pydoc.net/django_google_analytics/latest/)
+    - This version is different from the one that we had been using
+    - It differs from [this version](http://code.google.com/p/django-google-analytics/)
+- pip install django-maintenance ('maintenance')
+    - We are using [this version](https://github.com/steingrd/django-maintenance)
+    - We were using [this version](https://github.com/thinkjson/django-maintenance)
+- pip install django-photologue ('photologue')
+- pip install django-compressor ('compressor')
+- pip install django-sekizai ('sekizai')
+- pip install linaro-django-pagination ('linaro_django_pagination')
+- pip install django-tagging ('tagging')
+
+## These *might* not be necessary to include in installed\_apps
+- pip install south ('south')
+- pip install pytz ('pytz')
+
+## Others
+- #pagination
+- haystack
+- whoosh
 
 ## TODO
 - Make sure we're using *only* the CSS files that we need
