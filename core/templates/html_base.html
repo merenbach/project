@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load sekizai_tags compress analytics core_tags %}
+{% load sekizai_tags compress googleanalytics core_tags %}
 {% addtoblock "css" %}
 {% compress css %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
@@ -55,7 +55,7 @@
         </style>
         <![endif]-->
         {% if not user.is_authenticated %}
-        {% analytics_async %}
+        {% google_analytics %}
         {% endif %}
 
         {% compress js %}
