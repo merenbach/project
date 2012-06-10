@@ -119,7 +119,7 @@ STATICFILES_FINDERS = (
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -163,6 +163,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.core.context_processors.static',
         #'cms.context_processors.media',
         'sekizai.context_processors.sekizai',
+	'django.core.context_processors.csrf',
         #'zinnia.context_processors.version',    # optional
         #'django_mobile.context_processors.flavour',
         #'admintools_bootstrap.context_processors.site',

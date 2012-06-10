@@ -19,7 +19,7 @@
 {% dajaxice_js_import "js/dajaxice.core.js" %}
 {% compress js %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/dajax/jquery.dajax.core.js"></script>
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 
 function transcodeAffine() {
 	var message = $('#af_source').val();
@@ -191,7 +191,7 @@ $(document).ready(function() {
 
 	<p>That said, this particular encryption tool differs from many others in one important respect: it uses AJAX to perform the encryption and decryption server-side.  This isn't "safer" by any stretch (quite the opposite, perhaps), but it lets me make the code (written in Python, server-side) more maintainable without changing much in terms of browser integration.</p>
 
-	<form class="well form-horizontal" method="post" action="{% url ciphers %}">
+	<form class="well form-horizontal" method="post" action="{% url ciphers %}">{% csrf_token %}
 		<noscript>
 			<p>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</p>
 		</noscript>
