@@ -16,10 +16,12 @@
 <li class="{% active gallery_url %}"><a href="{{ gallery_url }}">Gallery</a></li>
 <li class="{% active registry_url %}"><a href="{{ registry_url }}">Registry</a></li>
 {% endblock %}
+{% comment %}
 {% block branding %}
     {{ block.super }}
     <a class="logo" href="/"><img src="{{ STATIC_URL }}img/austen.png" alt="Logo"></a>
     <a href="/">The Romantics</a>
     <div class="slogan">Elizabeth Cheney &amp; Andrew Merenbach</div>
 {% endblock %}
+{% endcomment %}
 {% block copyright %}{{ block.super }} Liz Cheney &amp; Andrew Merenbach{% endblock %}

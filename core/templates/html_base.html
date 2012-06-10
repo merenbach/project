@@ -98,10 +98,13 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
+{% block dropdown_links %}{% endblock %}
                                     <li><a target="_blank" href="http://www.democrats.org/">Democratic National Committee</a></li>
                                     <li><a target="_blank" href="http://ffrf.org/">Freedom From Religion Foundation</a></li>
-                                    <li><a target="_blank" href="http://www.plannedparenthood.org/">Planned Parenthood</a></li>
+				{% comment %}
+				    <li><a target="_blank" href="http://www.plannedparenthood.org/">Planned Parenthood</a></li>
 				    <li><a target="_blank" href="http://richarddawkinsfoundation.org/">Richard Dawkins Foundation</a></li>
+				{% endcomment %}
                                 </ul>
                             </li>
                             {% comment %}<li><a href="https://www.djangoproject.com/" target="_blank">Django</a></li>{% endcomment %}

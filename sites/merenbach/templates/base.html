@@ -10,10 +10,16 @@
 <li class="{% active software_url %}"><a href="{{ software_url }}">Software</a></li>
 <li class="{% active ciphers_url %}"><a href="{{ ciphers_url }}">Ciphers</a></li>
 {% endblock %}
+{% comment %}
 {% block branding %}
     {{ block.super }}
     <a class="logo" href="/"><img src="{{ STATIC_URL }}img/floral-heart-outline-thick-scaled.png" alt="Logo"></a>
     <a href="/">Andrew&rsquo;s Den</a>
     <div class="slogan">Share a spot of tea!</div>
 {% endblock %}
+{% endcomment %}
 {% block copyright %}{{ block.super }} Andrew Merenbach{% endblock %}
+{% block dropdown_links %}
+<li><a target="_blank" href="https://www.djangoproject.com/">Django</a></li>
+<li class="divider"></li>
+{% endblock %}
