@@ -65,7 +65,6 @@
         {% endcompress %}
     </head>
     <body>
-        <div id="wrapper">
             {% block navigation %}
             <nav class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -99,10 +98,11 @@
                                 </a>
                                 <ul class="dropdown-menu">
 {% block dropdown_links %}{% endblock %}
+                                    <li><a target="_blank" href="http://www.aclu.org/">American Civil Liberties Union</a></li>
                                     <li><a target="_blank" href="http://www.democrats.org/">Democratic National Committee</a></li>
                                     <li><a target="_blank" href="http://ffrf.org/">Freedom From Religion Foundation</a></li>
-				{% comment %}
 				    <li><a target="_blank" href="http://www.plannedparenthood.org/">Planned Parenthood</a></li>
+				{% comment %}
 				    <li><a target="_blank" href="http://richarddawkinsfoundation.org/">Richard Dawkins Foundation</a></li>
 				{% endcomment %}
                                 </ul>
@@ -114,31 +114,32 @@
             </div>
             </nav>
             {% endblock %}
+        <div id="wrapper">
             <section id="main">
-            {% block breadcrumbs_placeholder %}
-            {% comment %}
-            <nav class="breadcrumbs">
-            <ul>
-                {% block breadcrumb %}
-                {% show_breadcrumb %}
-                {% endblock %}
-            </ul>
-            </nav>
-            {% endcomment %}
-            {% endblock %}
-            <section id="content">
-            {% block base_content %}
-            <h1>{% block title %}Title{% endblock %}</h1>
-            <section id="content_inner">
-            {% block content %}{% endblock %}
-            </section>
-            {% endblock %}
-            </section>
+		    {% block breadcrumbs_placeholder %}
+			    {% comment %}
+			    <nav class="breadcrumbs">
+			    <ul>
+				{% block breadcrumb %}
+				{% show_breadcrumb %}
+				{% endblock %}
+			    </ul>
+			    </nav>
+			    {% endcomment %}
+		    {% endblock %}
+		    <section id="content">
+		    {% block base_content %}
+			    <h1>{% block title %}Title{% endblock %}</h1>
+			    <section id="content_inner">
+				    {% block content %}{% endblock %}
+			    </section>
+		    {% endblock %}
+		    </section>
             </section>
             {% comment %}<div class="push"></div>{% endcomment %}
         </div>
         <footer id="footer">
-        <span>{% block copyright %}Copyright &copy; 2011&ndash;{% now "Y" %}{% endblock %}</span>
+		<span>{% block copyright %}Copyright &copy; 2011&ndash;{% now "Y" %}{% endblock %}</span>
         </footer>
         {% render_block "js" %}
         {% block extra_js %}{% endblock %}

@@ -3,15 +3,16 @@
 
 {% block pagetitle %}Ciphers | {{ block.super }}{% endblock %}
 {% block title %}Ciphers{% endblock %}
-{% comment %}
 {% block extrahead %}
 {{ block.super }}
+
+{% comment %}
 {% compress css %}
 {#<link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_form.less">#}
 <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}css/lab_help.less">
 {% endcompress %}
-{% endblock %}
 {% endcomment %}
+{% endblock %}
 
 {% block extra_js %}
 {{ block.super }}
@@ -187,7 +188,7 @@ $(document).ready(function() {
 {{ block.super }}
 
 <article>
-	<p>This page represents an ever-evolving attempt at making a multifunctional text encryption and decryption tool.  There are plenty like this (and probably better than this) elsewhere on the Internet, so if you seek style and flair, you might wish to reconsider directing others to this specific page.</p>
+	<p>This page represents an ever-evolving (and ever-incomplete) attempt at making a multifunctional text encryption and decryption tool.  There are plenty like this (and better than this) elsewhere on the Internet, so if you seek style and flair, you might wish to reconsider before directing others to this specific page.</p>
 
 	<p>That said, this particular encryption tool differs from many others in one important respect: it uses AJAX to perform the encryption and decryption server-side.  This isn't "safer" by any stretch (quite the opposite, perhaps), but it lets me make the code (written in Python, server-side) more maintainable without changing much in terms of browser integration.</p>
 

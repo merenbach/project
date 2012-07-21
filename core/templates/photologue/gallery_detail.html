@@ -16,5 +16,21 @@
     {% endfor %}
 </ul>
 <p><a href="{% url pl-gallery-list 1 %}">View all galleries</a></p>
+{% comment %}
+{% if object.tags %}
+    <nav class="tags btn-group">
+    <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+        Tags
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% for tag in object.tags %}
+{{ tag }}
+        <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
+        {% endfor %}
+    </ul>
+    </nav>
+    {% endif %}
+{% endcomment %}
 </article>
 {% endblock %}
