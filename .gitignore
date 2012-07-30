@@ -1,4 +1,5 @@
-settings.py
+core/settings.py
+settings_private.py
 *.pyc
 *.mov
 *.tgz
