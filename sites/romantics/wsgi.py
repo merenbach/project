@@ -17,7 +17,8 @@ import os
 import sys
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sites.romantics.settings')
-sys.path.insert(0, '/srv/www/django/project')
+
+# determine the path to the project, which will be two parent directories up
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, os.path.pardir)))
 
 from core.wsgi import *
-
