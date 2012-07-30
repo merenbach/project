@@ -5,15 +5,15 @@ from sys import path as sys_path
 from urlparse import urljoin
 
 # add to default paths
-paths = (
-        '/srv/www/django',
-        '/srv/www/django/project',
-        '/srv/www/django/lib/python2.7',
-        )
+# paths = (
+#         '/srv/www/django',
+#         '/srv/www/django/project',
+#         '/srv/www/django/lib/python2.7',
+#         )
 
-for path in paths:
-    if path not in sys_path:
-        sys_path.insert(0, path)
+# for path in paths:
+#     if path not in sys_path:
+#         sys_path.insert(0, path)
 
 # get the settinsg path
 from django.utils import importlib
@@ -36,7 +36,7 @@ if CORE_PROJECT_PATH not in sys_path:
 #OVERLOAD_SITE_MODULE = "websites.{}".format(OVERLOAD_SITE)
 #exec ("from {}.settings import *".format(OVERLOAD_SITE_MODULE))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 #for the contact form
@@ -111,7 +111,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+#   'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 )
 
@@ -123,7 +123,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -137,8 +137,13 @@ MIDDLEWARE_CLASSES = (
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
     'breadcrumbs.middleware.FlatpageFallbackMiddleware',
     'maintenance.middleware.MaintenanceMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 )
+
+# caching middleware classes
+if not DEBUG:
+    MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES
+    MIDDLEWARE_CLASSES += ('django.middleware.cache.FetchFromCacheMiddleware',)
 
 #ROOT_URLCONF = 'project.urls'
 
@@ -216,13 +221,14 @@ INSTALLED_APPS = (
 #    INSTALLED_APPS += SITE_INSTALLED_APPS
 
 # caching
-CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
-            #'LOCATION': 'unix:/var/run/memcached/memcached.pid',
+if not DEBUG:
+    CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+                'LOCATION': '127.0.0.1:11211',
+                #'LOCATION': 'unix:/var/run/memcached/memcached.pid',
+                }
             }
-        }
 
 
 #ADMIN_TOOLS_MEDIA_URL = 'http://media.merenbach.com/static/'
@@ -248,6 +254,7 @@ COMPRESS_PRECOMPILERS = (
         #('text/x-scss', 'sass --scss {infile} {outfile}'),
         )
 
+# COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
