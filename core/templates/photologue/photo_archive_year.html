@@ -1,7 +1,7 @@
 {% extends "photologue/root.html" %}
 
-{% block title %}Photos for {{ year }}{% endblock %}
-{% block pagetitle %}Photos for {{ year }}{% endblock %}
+{% block content_title %}Photos for {{ year }}{% endblock %}
+{% block page_title %}Photos for {{ year }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 

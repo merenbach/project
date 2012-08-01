@@ -1,7 +1,7 @@
 {% extends 'articles/base.html' %}
 
-{% block title %}Entries by {{ author.get_name }}{% ifnotequal paginator.num_pages 1 %}, page {{ page_obj.number }}{% endifnotequal %}{% endblock %}
-{% block pagetitle %}Blog | {{ block.super }}{% endblock %}
+{% block content_title %}Entries by {{ author.get_name }}{% ifnotequal paginator.num_pages 1 %}, page {{ page_obj.number }}{% endifnotequal %}{% endblock %}
+{% block page_title %}Blog | {{ block.super }}{% endblock %}
 
 {% block articles-content %}
 

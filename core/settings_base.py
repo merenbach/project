@@ -254,7 +254,7 @@ COMPRESS_PRECOMPILERS = (
         #('text/x-scss', 'sass --scss {infile} {outfile}'),
         )
 
-# COMPRESS_ENABLED = True
+COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 

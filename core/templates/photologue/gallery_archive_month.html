@@ -1,7 +1,7 @@
 {% extends "photologue/root.html" %}
 
-{% block title %}Galleries for {{ month|date:"F Y" }}{% endblock %}
-{% block pagetitle %}Galleries for {{ month|date:"F Y" }} | {{ block.super }}{% endblock %}
+{% block content_title %}Galleries for {{ month|date:"F Y" }}{% endblock %}
+{% block page_title %}Galleries for {{ month|date:"F Y" }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 {{ block.super }}

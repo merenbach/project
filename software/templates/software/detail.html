@@ -8,8 +8,8 @@
 <li><a href="{{ software.get_absolute_url }}">{{ software.title }}</a></li>
 {% endblock %}
 
-{% block title %}{{ software.title }}{% endblock %}
-{% block pagetitle %}{{ software.title }} | {{ block.super }}{% endblock %}
+{% block content_title %}{{ software.title }}{% endblock %}
+{% block page_title %}{{ software.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
     {% comment %}

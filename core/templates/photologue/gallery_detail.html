@@ -1,7 +1,7 @@
 {% extends "photologue/root.html" %}
 {% load markup %}
-{% block title %}{{ object.title }}{% endblock %}
-{% block pagetitle %}{{ object.title }}{% endblock %}
+{% block content_title %}{{ object.title }}{% endblock %}
+{% block page_title %}{{ object.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
 {{ block.super }}

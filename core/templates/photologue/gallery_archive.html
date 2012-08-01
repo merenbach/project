@@ -1,7 +1,7 @@
 {% extends "photologue/root.html" %}
 
-{% block title %}Latest Photo Galleries{% endblock %}
-{% block pagetitle %}Latest Photo Galleries{% endblock %}
+{% block content_title %}Latest Photo Galleries{% endblock %}
+{% block page_title %}Latest Photo Galleries | {{ block.super }}{% endblock %}
 
 {% block content %}
 {{ block.super }}
