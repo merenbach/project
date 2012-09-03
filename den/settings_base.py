@@ -36,7 +36,7 @@ if CORE_PROJECT_PATH not in sys_path:
 #OVERLOAD_SITE_MODULE = "websites.{}".format(OVERLOAD_SITE)
 #exec ("from {}.settings import *".format(OVERLOAD_SITE_MODULE))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 #for the contact form
@@ -184,6 +184,7 @@ INSTALLED_APPS = (
     #'admin_tools.theming',
     #'admin_tools.menu',
     #'admin_tools.dashboard',
+    'admin_bootstrap',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -301,4 +302,63 @@ LOGGING = {
         },
     }
 }
+
+# formerly site-specific for merenbach.com
+
+#MEDIA_CDN_DOMAIN = 'http://cdn.merenbach.com/'
+#DJANGO_STATIC_FILE_PROXY = 'den.cdn.cdn_origin_pull_file_proxy'
+
+
+from urlparse import urljoin
+from os.path import join
+
+SITE_ID = 1
+
+# for the contact form
+CONTACT_RECIPIENTS = ('andrew@merenbach.com',)
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+MEDIA_ROOT = '/srv/www/merenbach.com/media/'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+if not DEBUG:
+    MEDIA_URL = 'http://cdn.merenbach.com/'
+else:
+    MEDIA_URL = 'http://media.merenbach.com'
+
+# Absolute path to the directory static files should be collected to.
+STATIC_ROOT = join(MEDIA_ROOT, 'static')
+
+# URL prefix for static files.
+STATIC_URL = urljoin(MEDIA_URL, 'static/')
+
+# deprecated but apparently still necessary for some things
+ADMIN_MEDIA_PREFIX = urljoin(STATIC_URL, 'admin/')
+
+ROOT_URLCONF = 'den.urls'
+
+# DISQUS
+DISQUS_FORUM_SHORTNAME = 'merenbach'
+
+# Python dotted path to the WSGI application used by Django's runserver.
+WSGI_APPLICATION = 'den.wsgi.application'
+
+INSTALLED_APPS += (
+        #'photologue',
+        'dajaxice',
+        'dajax',
+        'software',
+        'ciphers',
+        'django_clicky',
+        )
+
+CLICKY_SITE_ID = '66628570'
+#CLICKY_RENDER_NON_JS_CODE = False
+
+DAJAXICE_MEDIA_PREFIX = 'dajaxice'
+DAJAXICE_DEBUG = False
+DAJAXICE_NOTIFY_EXCEPTIONS = True
+#import logging
+#logging.basicConfig(level=logging.DEBUG)
 

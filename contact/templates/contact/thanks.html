@@ -1,15 +1,4 @@
-{% extends "base.html" %}
-{% load sekizai_tags %}
-{% load compress %}
-
-{% block pagetitle %}Contact | {{ block.super }}{% endblock %}
-{% block title %}Contact{% endblock %}
-
-{% block extrahead %}
-{% compress css %}
-<link rel="stylesheet" type="text/x-scss" href="{{ STATIC_URL }}css/contact.scss">
-{% endcompress %}
-{% endblock %}
+{% extends "contact/contact_base.html" %}
 
 {% block content %}
     {% block contact_thanks %}Thank you for your message.{% endblock %}

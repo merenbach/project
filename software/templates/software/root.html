@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% load sekizai_tags compress %}
+{% load sekizai_tags compress static %}
 {% block extrahead %}
 {{ block.super }}
 {% compress css %}
-<link rel="stylesheet" type="text/x-scss" href="{{ STATIC_URL }}css/software.scss">
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/software.scss" %}">
 {% endcompress %}
 {% endblock %}
