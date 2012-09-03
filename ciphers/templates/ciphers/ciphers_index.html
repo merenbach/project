@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load sekizai_tags compress dajaxice_templatetags %}
 
-{% block page_title %}Ciphers | {{ block.super }}{% endblock %}
-{% block content_title %}Ciphers{% endblock %}
+{% block pagetitle %}Ciphers | {{ block.super }}{% endblock %}
+{% block title %}Ciphers{% endblock %}
 {% block extrahead %}
 {{ block.super }}
 
@@ -236,7 +236,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Source Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="af_source" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="af_source" rows="4" cols="20"></textarea>
 						<p class="help-block">The text to transcode</p>
 					</div>
 				</div>
@@ -294,7 +294,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Target Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<textarea class="input-large" id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
 						<p class="help-block">The result of the transcoding process</p>
 					</div>
 				</div>
@@ -321,7 +321,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Source Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="at_source" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="at_source" rows="4" cols="20"></textarea>
 						<p class="help-block">The text to transcode</p>
 					</div>
 				</div>
@@ -353,7 +353,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Target Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<textarea class="input-large" id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
 						<p class="help-block">The result of the transcoding process</p>
 					</div>
 				</div>
@@ -382,14 +382,14 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Source Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="bf_source" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="bf_source" rows="4" cols="20"></textarea>
 						<p class="help-block">The text to transcode</p>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Passphrase</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="bf_passphrase" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="bf_passphrase" rows="4" cols="20"></textarea>
 						<p class="help-block">The passphrase with which to transcode the text</p>
 					</div>
 				</div>
@@ -442,7 +442,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Target Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<textarea class="input-large" id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
 						<p class="help-block">The result of the transcoding process</p>
 					</div>
 				</div>
@@ -455,7 +455,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Source Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="cr_source" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="cr_source" rows="4" cols="20"></textarea>
 						<p class="help-block">The text to transcode</p>
 					</div>
 				</div>
@@ -504,7 +504,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Target Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<textarea class="input-large" id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
 						<p class="help-block">The result of the transcoding process</p>
 					</div>
 				</div>
@@ -531,7 +531,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Source Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="cw_source" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="cw_source" rows="4" cols="20"></textarea>
 						<p class="help-block">The text to transcode</p>
 					</div>
 				</div>
@@ -584,7 +584,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Target Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<textarea class="input-large" id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
 						<p class="help-block">The result of the transcoding process</p>
 					</div>
 				</div>
@@ -611,14 +611,14 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Source Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="vi_source" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="vi_source" rows="4" cols="20"></textarea>
 						<p class="help-block">The text to transcode</p>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Passphrase</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="vi_passphrase" rows="4" cols="20"></textarea>
+						<textarea class="input-large" id="vi_passphrase" rows="4" cols="20"></textarea>
 						<p class="help-block">The passphrase with which to transcode the text</p>
 					</div>
 				</div>
@@ -690,7 +690,7 @@ $(document).ready(function() {
 				<div class="control-group">
 					<label class="control-label">Target Text</label>
 					<div class="controls">
-						<textarea class="input-xlarge" id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
+						<textarea class="input-large" id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
 						<p class="help-block">The result of the transcoding process</p>
 					</div>
 				</div>

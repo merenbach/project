@@ -7,3 +7,5 @@ settings_private.py
 whoosh_index/
 .DS_Store
 backups/
+.sass-cache
+*.bak
