@@ -184,7 +184,7 @@ INSTALLED_APPS = (
     #'admin_tools.theming',
     #'admin_tools.menu',
     #'admin_tools.dashboard',
-    'admin_bootstrap',
+    #'admin_bootstrap',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',

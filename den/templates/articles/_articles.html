@@ -1,5 +1,5 @@
 {% load i18n %}
-{% if forloop.first %}<ol class="article-list unstyled">{% endif %}
+{% if forloop.first %}<ol class="unstyled">{% endif %}
     <li>
 {#<span class="pull-right label label-info">{{ article.publish_date|date:"Y-m-d" }}</span>#}
     <h2><a href="{{ article.get_absolute_url }}" title="Read this article">{{ article.title }}</a> <small>{{ article.publish_date|date:"Y.m.d" }}</small></h2>

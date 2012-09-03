@@ -290,6 +290,12 @@ ul.tag-list {
     }
 }
 */
+
+
+#content blockquote {
+	word-wrap: break-word;
+}
+
 #article-meta {
     .tags {
         padding-bottom: 1em;

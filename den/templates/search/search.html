@@ -38,7 +38,6 @@
 {% endcomment %}
 
 {% block search_results %}
-<section class="search-results">
 {% if query %}
 <ul class="unstyled">
     {% for result in page.object_list %}
@@ -69,8 +68,7 @@
 {% paginate %}
 {% endwith %}
 {% else %}
-Please enter a query.
+<p>Please enter a query.</p>
 {% endif %}
-</section>
 {# Show some example queries to run, maybe query syntax, something else? #}
 {% endblock search_results %}
