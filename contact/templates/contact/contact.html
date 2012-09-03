@@ -1,7 +1,31 @@
-{% extends "contact/contact_base.html" %}
+{% extends "base.html" %}
+{% load sekizai_tags compress static %}
 
-{% block contact_message %}
-I am always happy to hear from visitors.  Please feel free to use the below form to get in touch with me.  I try to respond to messages, c&aelig;teris paribus, within 24&ndash;48 hours.
+{% block pagetitle %}Contact | {{ block.super }}{% endblock %}
+{% block title %}Contact{% endblock %}
+
+{% block extrahead %}
+{% compress css %}
+<link rel="stylesheet" type="text/x-scss" href="{% static "css/contact.scss" %}">
+{% endcompress %}
 {% endblock %}
 
-{% block contact_thanks %}Thank you for your message.{% endblock %}
+{% block content %}
+    {% if form %}
+        <form class="contact-form" action="/contact/" method="post">{% csrf_token %}
+            <p>
+                {% block contact_message %}
+			I am always happy to hear from visitors.  Please feel free to use the below form to get in touch with me.  I try to respond to messages, <em>c&aelig;teris paribus</em>, within 24&ndash;48 hours.
+                {% endblock %}
+            </p>
+            <ul class="unstyled">
+                {{ form.as_ul }}
+            </ul>
+            <fieldset class="submit-wrapper">
+                <button class="btn" type="submit">Send Message</button>
+            </fieldset>
+        </form>
+    {% else %}
+        Something went wrong.  Please try again later.
+    {% endif %}
+{% endblock %}
