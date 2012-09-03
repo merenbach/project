@@ -36,7 +36,7 @@ if CORE_PROJECT_PATH not in sys_path:
 #OVERLOAD_SITE_MODULE = "websites.{}".format(OVERLOAD_SITE)
 #exec ("from {}.settings import *".format(OVERLOAD_SITE_MODULE))
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 #for the contact form
@@ -249,7 +249,8 @@ COMPRESS_PRECOMPILERS = (
         ('text/x-scss', 'sass --scss {infile} {outfile}'),
         )
 
-COMPRESS_OFFLINE = True
+#COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 HAYSTACK_CONNECTIONS = {

@@ -1,15 +1,16 @@
+{% load i18n %}
 {% if forloop.first %}<ol class="article-list unstyled">{% endif %}
     <li>
-    <div class="well well-small">
-    <span class="title"><a href="{{ article.get_absolute_url }}" title="Read this article">{{ article.title }}</a></span> <span class="label label-info">{{ article.publish_date|date:"Y-m-d" }}</span>
-        <div class="quiet">
-	    <em>{{ article.description|safe|striptags }}</em>
-	</div>
+{#<span class="pull-right label label-info">{{ article.publish_date|date:"Y-m-d" }}</span>#}
+    <h2><a href="{{ article.get_absolute_url }}" title="Read this article">{{ article.title }}</a> <small>{{ article.publish_date|date:"Y.m.d" }}</small></h2>
+	{% comment %}{% trans "Posted on" %} <a href="{{ article.get_absolute_url }}">{{ article.publish_date|date:"Y.m.d" }}</a> {% trans "by" %} {{ article.author.first_name }} {% endcomment %}
+        <blockquote>
+	    <p>{{ article.description|safe|striptags }}</p>
+	</blockquote>
 	{% comment %}
        <div class="quiet">
             <em>Posted by <a href="{% url articles_by_author article.author.username %}" title="View articles posted by {{ article.author.get_name }}">{{ article.author.get_name }}</a></em>
         </div>
 	{% endcomment %}
-    </div>
     </li>
 {% if forloop.last %}</ol>{% endif %}

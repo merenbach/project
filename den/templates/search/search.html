@@ -43,9 +43,8 @@
 <ul class="unstyled">
     {% for result in page.object_list %}
     <li>
-    <div class="well well-small">
-        <span class="title"><a href="{{ result.url }}">{{ result.title }}</a></span>
-        <span class="label label-info">
+        <h2><a href="{{ result.url }}">{{ result.title }}</a>
+        <small>
             {% if result.content_type == "flatpages.flatpage" %}
             Page
             {% else %}
@@ -55,9 +54,12 @@
             {{ result.verbose_name }}
             {% endif %}
             {% endif %}
-        </span>
-        {% if result.text %}<div>{% highlight result.text with query %}</div>{% endif %}
-    </div>
+        </small></h2>
+        {% if result.text %}
+<blockquote>
+<p>{% highlight result.text with query %}</p>
+</blockquote>
+{% endif %}
     </li>
     {% empty %}
     <li>No results were found for your search.</li>
