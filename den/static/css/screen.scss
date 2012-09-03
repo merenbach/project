@@ -7,12 +7,12 @@
 @import url(http://fonts.googleapis.com/css?family=Istok+Web:700italic,400,700,400italic);*/
 
 /* mixins */
-@mixin border-radius ($radius) {
+/*@mixin border-radius ($radius) {
 	border-radius:         $radius;
 	-moz-border-radius:    $radius;
 	-webkit-border-radius: $radius;
 	-khtml-border-radius:  $radius;
-}
+}*/
 
 /*@mixin box-shadow ($shadow) {
 	box-shadow:         $shadow;
@@ -65,11 +65,9 @@ white-space: nowrap;
 	background-color: white;
 }*/
 
-#wrapper, #footer {
+#footer {
 	margin-left: auto;
 	margin-right: auto;
-	min-width: 360px;
-	max-width: 480px;
 }
 
 /*h1 {
@@ -242,7 +240,7 @@ ul.tag-list {
 	margin: 0.25em 0.5em 0.25em 0;
 }
 
-.roundbox {
+/*.roundbox {
 	margin: 0.75em 0;
 	@include border-radius(0.5em);
 	border: solid 1px #D0D0D0;
@@ -255,7 +253,7 @@ ul.tag-list {
 		padding-right: 0.5em;
 		margin: 0;
 	}
-}
+}*/
 
 /*.search-results h2, .article-list h2 {
 	margin-bottom: 0;
