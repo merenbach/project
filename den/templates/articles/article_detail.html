@@ -1,6 +1,6 @@
 {% extends 'articles/base.html' %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{{ article.title }} <small>{{ article.publish_date|date:"Y.m.d" }}</small>{% endblock %}
 {% block pagetitle %}{{ article.title }} | {{ block.super }}{% endblock %}
 {% block meta-keywords %}{{ article.keywords|escape }}{% endblock %}
 {% block meta-description %}{{ article.description|escape }}{% endblock %}
