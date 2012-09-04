@@ -159,6 +159,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'zinnia',
+    'disqus',
     'google_analytics',
     'contact',
     #'pagination',              # pagination (replaced)

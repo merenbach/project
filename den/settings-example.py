@@ -50,8 +50,8 @@ ADMIN_MEDIA_PREFIX = urljoin(STATIC_URL, 'admin/')
 SECRET_KEY = ''
 
 # Disqus
-DISQUS_USER_API_KEY = ''
-DISQUS_FORUM_SHORTNAME = 'merenbach'
+DISQUS_API_KEY = ''
+DISQUS_WEBSITE_SHORTNAME = 'merenbach'
 
 # Clicky
 CLICKY_SITE_ID = ''
