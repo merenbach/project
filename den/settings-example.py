@@ -53,6 +53,10 @@ SECRET_KEY = ''
 DISQUS_API_KEY = ''
 DISQUS_WEBSITE_SHORTNAME = 'merenbach'
 
+# Akismet
+AKISMET_API_KEY = ''
+AKISMET_BLOG_URL = 'http://www.merenbach.com'
+
 # Clicky
 CLICKY_SITE_ID = ''
 #CLICKY_RENDER_NON_JS_CODE = False

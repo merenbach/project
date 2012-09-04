@@ -6,5 +6,6 @@ settings.py
 whoosh_index/
 .DS_Store
 backups/
-.sass-cache
+.sass-cache/
 *.bak
+apikey.txt
