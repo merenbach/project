@@ -211,13 +211,17 @@ INSTALLED_APPS = (
     'den', # custom additions and utilities
     'maintenance',
     'breadcrumbs',
-    'articles',
+    #'articles',
+    'django_xmlrpc',
     #'djcelery',
     #'djsupervisor',
+    #'photologue',
+    'dajaxice',
+    'dajax',
+    'software',
+    'ciphers',
+    'django_clicky',
 )
-
-#if SITE_INSTALLED_APPS:
-#    INSTALLED_APPS += SITE_INSTALLED_APPS
 
 # caching
 CACHES = {
@@ -237,8 +241,8 @@ BREADCRUMBS_AUTO_HOME = True
 #BREADCRUMBS_HOME_TITLE = 'Home'
 
 # articles settings
-ARTICLES_AUTO_TAG = False
-USE_ADDTHIS_BUTTON = False
+#ARTICLES_AUTO_TAG = False
+#USE_ADDTHIS_BUTTON = False
 
 # analytics settings
 GOOGLE_ANALYTICS_MODEL = True
@@ -348,15 +352,6 @@ DISQUS_FORUM_SHORTNAME = 'merenbach'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'den.wsgi.application'
 
-INSTALLED_APPS += (
-        #'photologue',
-        'dajaxice',
-        'dajax',
-        'software',
-        'ciphers',
-        'django_clicky',
-        )
-
 CLICKY_SITE_ID = '66628570'
 #CLICKY_RENDER_NON_JS_CODE = False
 
@@ -368,3 +363,6 @@ DAJAXICE_NOTIFY_EXCEPTIONS = True
 
 ZINNIA_MARKUP_LANGUAGE = 'markdown'
 ZINNIA_WYSIWYG = False
+from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
+XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+

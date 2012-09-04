@@ -1,0 +1,4 @@
+{% load markup %}
+{{ object.content|markdown }}
+{{ object.tags|safe }}
+

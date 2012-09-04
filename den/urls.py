@@ -17,20 +17,20 @@ from haystack.query import SQ
 
 # sitemaps
 from django.contrib.sitemaps import FlatPageSitemap
-from den.sitemaps import ArticleSitemap
+#from den.sitemaps import ArticleSitemap
 #from zinnia.sitemaps import ZinniaSitemap
 from zinnia.sitemaps import EntrySitemap
 sitemaps = {
         'pages': FlatPageSitemap,
-        'articles': ArticleSitemap,
+        #'articles': ArticleSitemap,
         'zinnia': EntrySitemap,
         }
 
 handler500 = 'views.server_error'
 
-sq1 = SQ(sites__id=settings.SITE_ID)
-sq2 = SQ(pub_site=settings.SITE_ID)
-sqs = SearchQuerySet().filter(sq1 | sq2)
+###sq1 = SQ(sites__id=settings.SITE_ID)
+###sq2 = SQ(pub_site=settings.SITE_ID)
+###sqs = SearchQuerySet().filter(sq1 | sq2)
 # other possibilities and iterations (some more useful/illustrative than others):
 #sqs = SearchQuerySet().filter(sites__id=settings.SITE_ID)
 #sqs = SearchQuerySet().filter(site__id=1)
@@ -60,9 +60,10 @@ urlpatterns = patterns('',
         #url(r'^search/', include('haystack.urls')),
         url(r'^search/', search_view_factory(
             view_class=SearchView,
-            searchqueryset=sqs,
+            #searchqueryset=sqs,
             form_class=SearchForm),
             name='haystack_search'),
+	url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
         #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
         # Examples:
         # url(r'^$', 'project.views.home', name='home'),
