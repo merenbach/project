@@ -47,7 +47,8 @@
             {% if result.content_type == "flatpages.flatpage" %}
             Page
             {% else %}
-            {% if result.content_type == "articles.article" %}
+            {# if result.content_type == "articles.article" #}
+            {% if result.content_type == "zinnia.entry" %}
             Blog entry
             {% else %}
             {{ result.verbose_name }}
