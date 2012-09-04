@@ -36,7 +36,7 @@ if CORE_PROJECT_PATH not in sys_path:
 #OVERLOAD_SITE_MODULE = "websites.{}".format(OVERLOAD_SITE)
 #exec ("from {}.settings import *".format(OVERLOAD_SITE_MODULE))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 #for the contact form
@@ -366,3 +366,5 @@ DAJAXICE_NOTIFY_EXCEPTIONS = True
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 
+ZINNIA_MARKUP_LANGUAGE = 'markdown'
+ZINNIA_WYSIWYG = False

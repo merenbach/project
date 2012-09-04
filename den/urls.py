@@ -50,6 +50,8 @@ urlpatterns = patterns('',
             searchqueryset=sqs,
             form_class=SearchForm),
             name='haystack_search'),
+        url(r'^weblog/', include('zinnia.urls')),
+	url(r'^comments/', include('django.contrib.comments.urls')),
         #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
         # Examples:
         # url(r'^$', 'project.views.home', name='home'),

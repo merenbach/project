@@ -2,12 +2,15 @@
 {% load url from future %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
   <div class="entry-header">
+{% if continue_reading %}
     <h2 class="entry-title">
-      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
-        {{ object.title }}
-      </a>
+      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">{{ object.title }}</a> <small>{{ object.creation_date|date:"Y.m.d" }}</small>
     </h2>
+
+
+{% endif %}
     <p class="entry-info">
+	{% comment %}
       {% if object.authors.count %}
       {% trans "Written by" %}
       {% for author in object.authors.all %}
@@ -27,6 +30,7 @@
       <a href="{{ category.get_absolute_url }}"
          title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
          rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.
+	{% endcomment %}
     </p>
   </div>
 
@@ -44,9 +48,17 @@
       </p>
     </div>
     {% endif %}
+
+{% if not continue_reading %}
     <div class="entry-content">
-      {{ object_content }}
+	    {{ object_content }}
     </div>
+{% else %}
+	<blockquote class="entry-content">
+		<p>{{ object_content|safe|striptags }}</p>
+	</blockquote>
+{% endif %}
+{% comment %}
     {% if continue_reading %}
     <p class="continue-reading">
       <a href="{{ object.get_absolute_url }}"
@@ -56,21 +68,24 @@
       </a>
     </p>
     {% endif %}
+{% endcomment %}
   </div>
 
-  <div class="entry-footer">
-    <p class="entry-tags">
-      <strong>{% trans "Tags" %}</strong> :
+{% if not continue_reading %}
+  <div class="cf entry-footer">
+    <p class="pull-right entry-tags">
+      {% comment %}<strong>{% trans "Tags" %}</strong> :{% endcomment %}
       {% tags_for_object object as tag_list %}
       {% for tag in tag_list %}
       <a href="{% url 'zinnia_tag_detail' tag %}"
          title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
-         rel="tag">{{ tag }}</a>
+         rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}
       {% empty %}
-      <span>{% trans "No tags" %}</span>
+{% comment %}      <span>{% trans "No tags" %}</span> {% endcomment %}
       {% endfor %}
     </p>
-
+    <p><em>Fin</em></p>
+{% comment %}
     <p class="entry-shorturl">
       <strong>{% trans "Short url" %}</strong> :
       <a href="{{ object.short_url }}"
@@ -114,5 +129,7 @@
       {% endif %}
       {% endwith %}
     </p>
+{% endcomment %}
   </div>
+{% endif %}
 </div>
