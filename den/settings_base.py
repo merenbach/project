@@ -164,7 +164,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         #'cms.context_processors.media',
         'sekizai.context_processors.sekizai',
 	'django.core.context_processors.csrf',
-        #'zinnia.context_processors.version',    # optional
+        'zinnia.context_processors.version',    # optional
         #'django_mobile.context_processors.flavour',
         #'admintools_bootstrap.context_processors.site',
         'django.contrib.messages.context_processors.messages',
@@ -193,11 +193,14 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.humanize',
     'django.contrib.syndication',
+    'django.contrib.comments',
     'south',
     'sekizai',
     'pytz',
     'compressor',
     'tagging',
+    'mptt',
+    'zinnia',
     'google_analytics',
     'contact',
     #'pagination',              # pagination (replaced)
