@@ -30,6 +30,7 @@
         <meta name="author" content="Andrew Merenbach">
         <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
         <meta name="description" content="{% block meta-description %}{% endblock %}">
+        {% block link %}{% endblock %}
         <!--[if lt IE 9]>
         <script type="text/javascript" src="{% static "js/html5.js" %}"></script>
         <![endif]-->
@@ -73,7 +74,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-		    <a class="brand" href="{% url articles_archive %}">
+		    <a class="brand" href="{% url zinnia_entry_archive_index %}">
 			Andrew&rsquo;s Den
 		    </a>
                     <div class="nav-collapse">

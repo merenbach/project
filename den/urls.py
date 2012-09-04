@@ -18,9 +18,12 @@ from haystack.query import SQ
 # sitemaps
 from django.contrib.sitemaps import FlatPageSitemap
 from den.sitemaps import ArticleSitemap
+#from zinnia.sitemaps import ZinniaSitemap
+from zinnia.sitemaps import EntrySitemap
 sitemaps = {
         'pages': FlatPageSitemap,
         'articles': ArticleSitemap,
+        'zinnia': EntrySitemap,
         }
 
 handler500 = 'views.server_error'
@@ -42,16 +45,24 @@ sqs = SearchQuerySet().filter(sq1 | sq2)
 
 urlpatterns = patterns('',
         #url(r'^$', 'project.views.home', name='home'),
-        url(r'^blog/', include('articles.urls')),
+        #url(r'^blog/', include('articles.urls')),
         url(r'^contact/', include('contact.urls')),
+        #url(r'^$', include('articles.urls'), name='home'),
+        (r'^{}/'.format(settings.DAJAXICE_MEDIA_PREFIX), include('dajaxice.urls')),
+        #url(r'^$', TemplateView.as_view(template_name='home.html'), name='home_url_name'),
+        (r'^ciphers/', include('ciphers.urls')),
+        (r'^software/', include('software.urls')),
+        #(r'^google67b472340d465ad6.html$', 'test'),
+        #url(r'^$', 'project.views.home', name='home'),
+        # Examples:
+        # url(r'^$', 'project.views.home', name='home'),
+        # url(r'^project/', include('project.foo.urls')),
         #url(r'^search/', include('haystack.urls')),
         url(r'^search/', search_view_factory(
             view_class=SearchView,
             searchqueryset=sqs,
             form_class=SearchForm),
             name='haystack_search'),
-        url(r'^weblog/', include('zinnia.urls')),
-	url(r'^comments/', include('django.contrib.comments.urls')),
         #url('^googlever.html$', direct_to_template, {'template': 'google67b472340d465ad6.html'}),
         # Examples:
         # url(r'^$', 'project.views.home', name='home'),
@@ -63,6 +74,8 @@ urlpatterns = patterns('',
 
         # Uncomment the next line to enable the admin:
         url(r'^admin/', include(admin.site.urls)),
+	url(r'^comments/', include('django.contrib.comments.urls')),
+        url(r'^', include('zinnia.urls')),
         )
 
 #urlpatterns += patterns('django.contrib.flatpages.views',
@@ -74,12 +87,16 @@ urlpatterns = patterns('',
 #    exec ("from {}.urls import urlpatterns as site_urls".format(settings.OVERLOAD_SITE_MODULE))
 #    urlpatterns = site_urls + urlpatterns
 
+urlpatterns += patterns('django.contrib.flatpages.views',
+        url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
+        )
+
 if settings.DEBUG:
     urlpatterns = patterns('',
             #(r'^500/$', handler500),
             #(r'^500/$', 'django.views.defaults.server_error'),
             (r'^404/$', 'django.views.defaults.page_not_found'),
-            (r'^500/$', 'views.server_error'),  # use our custom view*
+            (r'^500/$', 'views.server_error'),  # use our custom view
             url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                 {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
             url(r'', include('django.contrib.staticfiles.urls')),
@@ -92,21 +109,4 @@ dajaxice_autodiscover()
 # sitemaps
 from software.sitemaps import SoftwareSitemap
 sitemaps.update({'software': SoftwareSitemap})
-
-urlpatterns += patterns('',
-        url(r'^$', include('articles.urls'), name='home'),
-        (r'^{}/'.format(settings.DAJAXICE_MEDIA_PREFIX), include('dajaxice.urls')),
-        #url(r'^$', TemplateView.as_view(template_name='home.html'), name='home_url_name'),
-        (r'^ciphers/', include('ciphers.urls')),
-        (r'^software/', include('software.urls')),
-        #(r'^google67b472340d465ad6.html$', 'test'),
-        #url(r'^$', 'project.views.home', name='home'),
-        # Examples:
-        # url(r'^$', 'project.views.home', name='home'),
-        # url(r'^project/', include('project.foo.urls')),
-        )
-
-urlpatterns += patterns('django.contrib.flatpages.views',
-        url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
-        )
 
