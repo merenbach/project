@@ -1,6 +1,7 @@
 # Django settings for project project.
 
-import os, sys
+import os
+import sys
 
 SITE_ID = 1
 
@@ -164,7 +165,6 @@ INSTALLED_APPS = (
     'linaro_django_pagination', # pagination
     'haystack',
     'whoosh',
-    #'photologue',
     'den', # custom additions and utilities
     'maintenance',
     'breadcrumbs',
@@ -283,3 +283,7 @@ ZINNIA_WYSIWYG = False
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
+# Override zinnia.xmlrpc with our own
+# (If this stops working, try moving to top of file)
+import zinnia_xmlrpc
+sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
