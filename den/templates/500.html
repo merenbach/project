@@ -1,13 +1,11 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block breadcrumbs_placeholder %}{% endblock %}
 
-{% block search_placeholder %}{% endblock %}
-{% block navigation_placeholder %}{% endblock %}
-
-{% block title %}Internal server error{% endblock %}
-{% block pagetitle %}Internal server error{% endblock %}
+{% block title %}{% trans "Internal server error" %} <small>500</small>{% endblock %}
+{% block pagetitle %}{% trans "Internal server error" %} | {{ block.super }}{% endblock %}
 
 {% block content %}
-There&rsquo;s been an error. It&rsquo;s been reported to the site administrators via e-mail and should be fixed shortly. Thank you for your patience.
+<p>There&rsquo;s been an error. It&rsquo;s been reported to the site administrators via e-mail and should be fixed shortly. Thank you for your patience.</p>
 {% endblock %}

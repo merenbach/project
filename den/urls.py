@@ -94,10 +94,11 @@ urlpatterns += patterns('django.contrib.flatpages.views',
 
 if settings.DEBUG:
     urlpatterns = patterns('',
-            #(r'^500/$', handler500),
             #(r'^500/$', 'django.views.defaults.server_error'),
+            (r'^403/$', 'django.views.defaults.permission_denied'),
             (r'^404/$', 'django.views.defaults.page_not_found'),
-            (r'^500/$', 'views.server_error'),  # use our custom view
+            (r'^500/$', handler500),  # use our custom view
+            #(r'^503/$', 'views.maintenance.something'),  # use our custom view
             url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                 {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
             url(r'', include('django.contrib.staticfiles.urls')),
