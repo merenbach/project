@@ -1,11 +1,3 @@
-/*@import url(http://fonts.googleapis.com/css?family=Lora:400italic,400,700,700italic);*/
-/*@import url(http://fonts.googleapis.com/css?family=Cardo:400,400italic,700);
-@import url(http://fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
-@import url(http://fonts.googleapis.com/css?family=Lato:700italic,400,400italic,700);
-@import url(http://fonts.googleapis.com/css?family=Puritan:700italic,700,400italic,400);
-@import url(http://fonts.googleapis.com/css?family=Istok+Web:700italic,400,700,400italic);*/
-
 /* mixins */
 /*@mixin border-radius ($radius) {
 	border-radius:         $radius;
@@ -28,138 +20,8 @@
 	-ms-box-sizing:     $sizing;
 }*/
 
-body {
-	color: #333;
-	background-color: #eee;
-	/*font-size: 100%;
-	line-height: 140%;*/
-	padding-top: 40px;
-}
-
-#footer {
-	line-height: 2em;
-	padding: 0;
-	text-align: center;
-
-	span {
-		font-size: 0.85em;
-		display: block;
-	}
-
-	/*a {
-		color: blue;
-		text-decoration: none;
-
-		&:hover { text-decoration: underline; }
-		&:active { color: yellow; }
-	}*/
-}
-
-/*
-white-space: nowrap;
- */
-/*font-family: 'Open Sans', sans-serif;*/
-
-
-/*#wrapper {
-	background-color: white;
-}*/
-
-#footer {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/*h1 {
-	margin: 0.375em 0;
-	padding: 0.25em 0.5em;
-	@include border-radius(0.25em);
-	background-color: #888;
-
-	color: white;
-	font-size: 1.2em;
-	line-height: 140%;
-	/ *line-height: 1.2em;* /
-	font-weight: bold;
-}*/
-
-/*nav.breadcrumbs ul {
-	font-size: 0.9em;
-	list-style-type: none;
-	margin: 0 0.5em;
-	padding: 0 0 0.25em;
-	/ *padding: 0.25em 0.5em;
-	margin: 0.5em 0;* /
-
-	li {
-		display: inline;
-		padding: 0;
-		margin: 0;
-
-		a {
-			text-decoration: none;
-			color: inherit;
-
-			&:hover { text-decoration: underline; }
-			&:active { color: red; }
-		}
-	}
-}*/
-
-/*.brand {
-    @include clearfix;
-
-    img {
-        display: block;
-        float: left;
-        height: 16px;
-        width: 16px;
-    }
-}*/
-
-/*#main {
-	padding-top: 0.375em;
-	padding-left: 0.75em;
-	padding-right: 0.75em;
-
-
-    #content {
-        padding-top: 0.375em;
-
-        #content_inner {
-            padding: 0 0.25em;
-        }
-    }
-}*/
-
-/*#main { / * Add top padding for full-width layout * /
-    padding-top: 40px;
-}
-@media (max-width: 979px) {
-    #main { / * Remove top padding when top navbar goes static * /
-        padding-top: 0;
-        margin-top: -18px;
-    }
-}*/
-/*@media (max-width: 767px) {
-    #header {
-        margin-left: -20px;
-        margin-right: -20px;
-    }
-}*/
-
-/*#main .form-search {
-    background-color: transparent;
-    margin-bottom: 0;
-    text-align: center;
-    input {
-        vertical-align: middle;
-    }
-}*/
-
 /* For modern browsers */
-
-@mixin clearfix {
+/*@mixin clearfix {
 	&:before,
 	&:after {
 		content: "";
@@ -168,71 +30,20 @@ white-space: nowrap;
 
 	&:after { clear: both; }
 
-	/* For IE 6/7 (trigger hasLayout) */
+	/ * For IE 6/7 (trigger hasLayout) * /
 	zoom: 1;
+}*/
+
+body {
+	color: #333;
+	background-color: #eee;
+	padding-top: 40px;
 }
 
-.cf {
-   @include clearfix;
-}
-
-.node-date {
-	color: #606060;
-	font-size: 0.8em;
-	margin-bottom: 1em;
-}
-
-.node-title {
-	font-size: 1.2em;
-	font-weight: bold;
-}
-
-.node-meta {
-	color: #606060;
-	font-size: 0.8em;
-}
-
-.node-excerpt {
-	padding-top: 0.75em;
-}
-
-.node-tags {
-	padding-top: 0.75em;
-	font-size: 0.8em;
-	color: #606060;
-
-	ul {
-		list-style-type: none;
-		padding: 0;
-		margin: 0;
-
-		li {
-			display: block;
-			float: left;
-			margin-left: 0.75em;
-
-			&:first-child { margin-left: 0; }
-		}
-
-		@include clearfix;
-	}
-}
-
-ul.tag-list {
-	font-size: 0.9em;
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-
-	li {
-		display: block;
-		float: left;
-		padding-left: 0.5em;
-
-		&:first-child { padding-left: 0; }
-	}
-
-	@include clearfix;
+#footer {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .aboutpic {
@@ -240,84 +51,7 @@ ul.tag-list {
 	margin: 0.25em 0.5em 0.25em 0;
 }
 
-/*.roundbox {
-	margin: 0.75em 0;
-	@include border-radius(0.5em);
-	border: solid 1px #D0D0D0;
-	padding: 0.5em 0.75em;
-	@include clearfix;
-
-	blockquote {
-		border-left: solid 0.5em #A0A0A0;
-		padding-left: 0.5em;
-		padding-right: 0.5em;
-		margin: 0;
-	}
-}*/
-
-/*.search-results h2, .article-list h2 {
-	margin-bottom: 0;
-}*/
-
-/*.search-results, .article-list, .software-list {
-    li {
-        padding-bottom: 0.5em;
-
-        .well {
-            margin-bottom: 0;
-        
-            .title {
-                font-size: 1.2em;
-                font-weight: bold;
-            }
-
-            .label {
-                vertical-align: text-top;
-                margin-left: 0.125em;
-            }
-        }
-    }
-}
-
-
-
-
-#article-content {
-    .label {
-        float: right;
-    }
-}
-*/
-
-
 #content blockquote {
 	word-wrap: break-word;
 }
 
-#article-meta {
-    .tags {
-        padding-bottom: 1em;
-    }
-}
-
-/*.photo-gallery .label {
-    float: right;
-}
-
-.gallery-photo {
-    padding-bottom: 0.5em;
-    
-    img {
-        display: block;
-        margin: 0 auto;
-        border: solid 1px #CCC;
-
-    }
-
-    .caption {
-        padding-top: 0.375em;
-        text-align: center;
-        font-style: oblique;
-    }
-}
-*/
