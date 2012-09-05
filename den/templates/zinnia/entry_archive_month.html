@@ -4,13 +4,15 @@
 
 {% block meta-description %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
 
-{% block title %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
+{% block title %}{{ block.super }} <small>{{ month|date:"Y.m" }}</small>{% endblock %}
 
 {% block body-class %}{{ block.super }} archive date month year-{{ month|date:"Y" }} month-{{ month|date:"m" }}{% endblock %}
 
+{% comment %}
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}</h1>
 {% endblock %}
+{% endcomment %}
 
 {% block content-related %}
 <h2>{% trans "Daily archives" %}</h2>

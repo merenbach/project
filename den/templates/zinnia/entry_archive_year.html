@@ -4,13 +4,15 @@
 
 {% block meta-description %}{% trans "Archives" %} {{ year }}{% endblock %}
 
-{% block title %}{% trans "Archives" %} {{ year }}{% endblock %}
+{% block title %}{{ block.super }} <small>{{ year }}</small>{% endblock %}
 
 {% block body-class %}{{ block.super }} archive date year year-{{ year }}{% endblock %}
 
+{% comment %}
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ year }}</h1>
 {% endblock %}
+{% endcomment %}
 
 {% block content-related %}
 <h2>{% trans "Monthly archives" %}</h2>
