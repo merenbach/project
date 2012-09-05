@@ -31,6 +31,7 @@
         {% endif %}
     </div>
     {% render_tag_links_detail software %}
+    <p class="muted">Fin</p>
     <ul class="downloads unstyled cf">
         {% if software.app_file %}
         <li><a class="btn btn-primary" href="{{ software.get_app_file_url }}">Download Application ({{ software.get_app_file_size|filesizeformat }})</a></li>

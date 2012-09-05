@@ -73,7 +73,7 @@
 
 {% if not continue_reading %}
   <div class="cf entry-footer">
-    <p class="pull-right entry-tags">
+    <nav class="pull-right entry-tags">
       {% comment %}<strong>{% trans "Tags" %}</strong> :{% endcomment %}
       {% tags_for_object object as tag_list %}
       {% for tag in tag_list %}
@@ -83,8 +83,8 @@
       {% empty %}
 {% comment %}      <span>{% trans "No tags" %}</span> {% endcomment %}
       {% endfor %}
-    </p>
-    <p><em>Fin</em></p>
+    </nav>
+    <p class="muted">Fin</p>
 {% comment %}
     <p class="entry-shorturl">
       <strong>{% trans "Short url" %}</strong> :
