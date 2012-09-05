@@ -9,16 +9,15 @@
 <li><a href="{% url software_tag_detail tag=tag %}">{{ tag }}</a></li>
 {% endblock %}
 
-{% block title %}Software tagged &ldquo;{{ tag }}&rdquo;{% endblock %}
+{% block title %}Software <small>Tagged &ldquo;{{ tag }}&rdquo;</small>{% endblock %}
 {% block pagetitle %}Software | {{ block.super }}{% endblock %}
 
 {% block content %}
 {{ block.super }}
 {% if software_list %}
-<ul class="software-list unstyled">
+<ul class="unstyled">
     {% for software in software_list %}
     <li>
-<div class="well well-small">
 {% comment %}
 <div class="sw-tbl-cell">
 {% if software.app_icon %}
@@ -28,12 +27,9 @@
 {% endif %}
 </div>
 {% endcomment %}
-<span class="title"><a href="{{ software.get_absolute_url }}">{{ software.title }}</a></span>
-{% if software.version %}<span class="label label-info">version {{ software.version }}</span>{% endif %}
-{% if software.pub_date %}<span class="label label-info">{{ software.pub_date|date:"Y-m-d" }}</span>{% endif %}
-{% if software.summary %}<p>{{ software.summary }}</p>{% endif %}
-{% render_tag_links_detail software %}
-</div>
+<h2><a href="{{ software.get_absolute_url }}">{{ software.title }}</a> {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}{% endif %}</h2>
+{% if software.summary %}<blockquote><p>{{ software.summary }}</p></blockquote>{% endif %}
+{% comment %}{% render_tag_links_detail software %}{% endcomment %}
 {% empty %}
 <li><em>No software is available with this tag.</em></li>
 {% endfor %}

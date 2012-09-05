@@ -9,10 +9,9 @@
 <p>Below are some of the software projects that I have at some point undertaken or ported.  At this point in time, <strong>all projects are on indefinite hiatus</strong>.  Most will likely undergo no further updates.</p>
 
 {% if software_list %}
-<ul class="software-list unstyled">
+<ul class="unstyled">
     {% for software in software_list %}
     <li>
-    <div class="well well-small">
             {% comment %}
             <div class="sw-tbl-cell">
                 {% if software.app_icon %}
@@ -22,15 +21,12 @@
                 {% endif %}
             </div>
             {% endcomment %}
-            <span class="title"><a href="{{ software.get_absolute_url }}">{{ software.title }}</a></span>
-            {% if software.version %}<span class="label label-info">version {{ software.version }}</span>{% endif %}
-            {% if software.pub_date %}<span class="label label-info">{{ software.pub_date|date:"Y-m-d" }}</span>{% endif %}
-            {% if software.summary %}<p>{{ software.summary }}</p>{% endif %}
-            {% render_tag_links_detail software %}
-        </div>
+            <h2><a href="{{ software.get_absolute_url }}">{{ software.title }}</a> {% if software.version %}{{ software.version }}{% endif %} <small>{% if software.pub_date %}{{ software.pub_date|date:"Y.m.d" }}</small>{% endif %}</h2>
+            {% if software.summary %}<blockquote><p>{{ software.summary }}</p></blockquote>{% endif %}
+            {% comment %}{% render_tag_links_detail software %}{% endcomment %}
         </li>
         {% empty %}
-            <li><em>No software is currently available.</em></li>
+            <li>No software is currently available.</li>
 {% endfor %}
     </ul>
 {% endif %}
