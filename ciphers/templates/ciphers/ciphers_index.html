@@ -213,7 +213,7 @@ $(document).ready(function() {
 							<!--<option value="variant">x Variant Beaufort</option>-->
 							<option value="vigenere">Vigen&#232;re</option>
 						</select>
-						<p class="help-block">The cipher scheme to use</p>
+						<span class="help-inline">The cipher scheme to use</span>
 					</div>
 				</div>
 			</fieldset>
@@ -237,21 +237,21 @@ $(document).ready(function() {
 					<label class="control-label">Source Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="af_source" rows="4" cols="20"></textarea>
-						<p class="help-block">The text to transcode</p>
+						<span class="help-inline">The text to transcode</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Multiplier</label>
 					<div class="controls">
 						<input type="number" id="af_multiplier" value="1" required>
-						<p class="help-block">The multiplier with which to transcode the text</p>
+						<span class="help-inline">The multiplier with which to transcode the text</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Additive</label>
 					<div class="controls">
 						<input type="number" id="af_additive" value="0" required>
-						<p class="help-block">The additive with which to transcode the text</p>
+						<span class="help-inline">The additive with which to transcode the text</span>
 					</div>
 				</div>
 				<fieldset>
@@ -270,7 +270,7 @@ $(document).ready(function() {
 					<label class="control-label" for="af_chunk">Chunk Size</label>
 					<div class="controls">
 						<input type="number" id="af_chunk" value="0">
-						<p class="help-block">The chunk size for the output</p>
+						<span class="help-inline">The chunk size for the output</span>
 					</div>
 				</div>
 				<fieldset>
@@ -295,21 +295,21 @@ $(document).ready(function() {
 					<label class="control-label">Target Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<p class="help-block">The result of the transcoding process</p>
+						<span class="help-inline">The result of the transcoding process</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Clear Alphabet</label>
 					<div class="controls">
 						<input type="text" id="af_plaintext" value="" readonly="readonly">
-						<p class="help-block">The standard alphabet, in canonical order</p>
+						<span class="help-inline">The standard alphabet, in canonical order</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Code Alphabet</label>
 					<div class="controls">
 						<input type="text" id="af_ciphertext" value="" readonly="readonly">
-						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
 					</div>
 				</div>
 			</fieldset>
@@ -322,7 +322,7 @@ $(document).ready(function() {
 					<label class="control-label">Source Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="at_source" rows="4" cols="20"></textarea>
-						<p class="help-block">The text to transcode</p>
+						<span class="help-inline">The text to transcode</span>
 					</div>
 				</div>
 				<div class="control-group">
@@ -341,7 +341,7 @@ $(document).ready(function() {
 					<label class="control-label">Chunk Size</label>
 					<div class="controls">
 						<input type="number" id="at_chunk" value="0">
-						<p class="help-block">The chunk size for the output</p>
+						<span class="help-inline">The chunk size for the output</span>
 					</div>
 				</div>
 				<div class="form-actions">
@@ -354,21 +354,21 @@ $(document).ready(function() {
 					<label class="control-label">Target Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<p class="help-block">The result of the transcoding process</p>
+						<span class="help-inline">The result of the transcoding process</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Clear Alphabet</label>
 					<div class="controls">
 						<input type="text" id="at_plaintext" value="" readonly="readonly">
-						<p class="help-block">The standard alphabet, in canonical order</p>
+						<span class="help-inline">The standard alphabet, in canonical order</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Code Alphabet</label>
 					<div class="controls">
 						<input type="text" id="at_ciphertext" value="" readonly="readonly">
-						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
 					</div>
 				</div>
 			</fieldset>
@@ -383,28 +383,28 @@ $(document).ready(function() {
 					<label class="control-label">Source Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="bf_source" rows="4" cols="20"></textarea>
-						<p class="help-block">The text to transcode</p>
+						<span class="help-inline">The text to transcode</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Passphrase</label>
 					<div class="controls">
 						<textarea class="input-large" id="bf_passphrase" rows="4" cols="20"></textarea>
-						<p class="help-block">The passphrase with which to transcode the text</p>
+						<span class="help-inline">The passphrase with which to transcode the text</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Primer Index</label>
 					<div class="controls">
 						<input type="number" min="0" value="0" id="bf_primer">
-						<p class="help-block">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</p>
+						<span class="help-inline">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Alphabet Key</label>
 					<div class="controls">
 						<input type="text" id="bf_alphakey">
-						<p class="help-block">The keyword with which to generate the alphabetic tableaux</p>
+						<span class="help-inline">The keyword with which to generate the alphabetic tableaux</span>
 					</div>
 				</div>
 				<fieldset>
@@ -430,7 +430,7 @@ $(document).ready(function() {
 					<label class="control-label">Chunk Size</label>
 					<div class="controls">
 						<input type="number" id="bf_chunk" value="0">
-						<p class="help-block">The chunk size for the output</p>
+						<span class="help-inline">The chunk size for the output</span>
 					</div>
 				</div>
 				<div class="form-actions">
@@ -443,7 +443,7 @@ $(document).ready(function() {
 					<label class="control-label">Target Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<p class="help-block">The result of the transcoding process</p>
+						<span class="help-inline">The result of the transcoding process</span>
 					</div>
 				</div>
 			</fieldset>
@@ -456,14 +456,14 @@ $(document).ready(function() {
 					<label class="control-label">Source Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="cr_source" rows="4" cols="20"></textarea>
-						<p class="help-block">The text to transcode</p>
+						<span class="help-inline">The text to transcode</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Offset</label>
 					<div class="controls">
 						<input type="number" min="0" max="25" value="3" id="cr_shift" required>
-						<p class="help-block">The offset by which to shift the ciphertext alphabet</p>
+						<span class="help-inline">The offset by which to shift the ciphertext alphabet</span>
 					</div>
 				</div>
 				<fieldset>
@@ -480,7 +480,7 @@ $(document).ready(function() {
 					<label class="control-label">Chunk Size</label>
 					<div class="controls">
 						<input type="number" id="cr_chunk" value="0">
-						<p class="help-block">The chunk size for the output</p>
+						<span class="help-inline">The chunk size for the output</span>
 					</div>
 				</div>
 				<div>
@@ -505,21 +505,21 @@ $(document).ready(function() {
 					<label class="control-label">Target Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<p class="help-block">The result of the transcoding process</p>
+						<span class="help-inline">The result of the transcoding process</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Clear Alphabet</label>
 					<div class="controls">
 						<input type="text" id="cr_plaintext" value="" readonly="readonly">
-						<p class="help-block">The standard alphabet, in canonical order</p>
+						<span class="help-inline">The standard alphabet, in canonical order</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Code Alphabet</label>
 					<div class="controls">
 						<input type="text" id="cr_ciphertext" value="" readonly="readonly">
-						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
 					</div>
 				</div>
 			</fieldset>
@@ -532,14 +532,14 @@ $(document).ready(function() {
 					<label class="control-label">Source Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="cw_source" rows="4" cols="20"></textarea>
-						<p class="help-block">The text to transcode</p>
+						<span class="help-inline">The text to transcode</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Keyword</label>
 					<div class="controls">
 						<input type="text" id="cw_keyword" required>
-						<p class="help-block">The keyword with which to transcode the text</p>
+						<span class="help-inline">The keyword with which to transcode the text</span>
 					</div>
 				</div>
 				<fieldset>
@@ -562,7 +562,7 @@ $(document).ready(function() {
 					<label class="control-label">Chunk Size</label>
 					<div class="controls">
 						<input type="number" id="cw_chunk" value="0">
-						<p class="help-block">The chunk size for the output</p>
+						<span class="help-inline">The chunk size for the output</span>
 					</div>
 				</div>
 				<fieldset>
@@ -585,21 +585,21 @@ $(document).ready(function() {
 					<label class="control-label">Target Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<p class="help-block">The result of the transcoding process</p>
+						<span class="help-inline">The result of the transcoding process</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Clear Alphabet</label>
 					<div class="controls">
 						<input type="text" id="cw_plaintext" value="" readonly="readonly">
-						<p class="help-block">The standard alphabet, in canonical order</p>
+						<span class="help-inline">The standard alphabet, in canonical order</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Code Alphabet</label>
 					<div class="controls">
 						<input type="text" id="cw_ciphertext" value="" readonly="readonly">
-						<p class="help-block">The ciphertext alphabet, used to encode the text</p>
+						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
 					</div>
 				</div>
 			</fieldset>
@@ -612,28 +612,28 @@ $(document).ready(function() {
 					<label class="control-label">Source Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="vi_source" rows="4" cols="20"></textarea>
-						<p class="help-block">The text to transcode</p>
+						<span class="help-inline">The text to transcode</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Passphrase</label>
 					<div class="controls">
 						<textarea class="input-large" id="vi_passphrase" rows="4" cols="20"></textarea>
-						<p class="help-block">The passphrase with which to transcode the text</p>
+						<span class="help-inline">The passphrase with which to transcode the text</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Primer Index</label>
 					<div class="controls">
 						<input type="number" min="0" value="0" id="vi_primer">
-						<p class="help-block">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</p>
+						<span class="help-inline">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">Alphabet Key</label>
 					<div class="controls">
 						<input type="text" id="vi_alphakey">
-						<p class="help-block">The keyword with which to generate the alphabetic tableaux</p>
+						<span class="help-inline">The keyword with which to generate the alphabetic tableaux</span>
 					</div>
 				</div>
 				<fieldset>
@@ -651,7 +651,7 @@ $(document).ready(function() {
 					<div class="controls">
 						<label class="radio inline"><input name="vi_autoclave" type="radio" value="key" checked>Key Autokey</label>
 						<label class="radio inline"><input name="vi_autoclave" type="radio" value="text">Text Autokey</label>
-						<p class="help-block">Key autokey (the default) repeats the characters in the key, up to the message length.  Text autokey appends the plaintext of the message to the key, which can prove more secure when the original key is shorter than the message.</p>
+						<span class="help-inline">Key autokey (the default) repeats the characters in the key, up to the message length.  Text autokey appends the plaintext of the message to the key, which can prove more secure when the original key is shorter than the message.</span>
 					</div>
 				</fieldset>
 				<fieldset>
@@ -668,7 +668,7 @@ $(document).ready(function() {
 					<label class="control-label">Chunk Size</label>
 					<div class="controls">
 						<input type="number" id="vi_chunk" value="0">
-						<p class="help-block">The chunk size for the output</p>
+						<span class="help-inline">The chunk size for the output</span>
 					</div>
 				</div>
 				<fieldset>
@@ -691,7 +691,7 @@ $(document).ready(function() {
 					<label class="control-label">Target Text</label>
 					<div class="controls">
 						<textarea class="input-large" id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<p class="help-block">The result of the transcoding process</p>
+						<span class="help-inline">The result of the transcoding process</span>
 					</div>
 				</div>
 			</fieldset>
