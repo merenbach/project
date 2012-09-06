@@ -102,7 +102,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'den.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'project.wsgi.application'
+WSGI_APPLICATION = 'den.wsgi.application'
 
 TEMPLATE_DIRS = (
     #'/home/merenbach/webapps/django/project/templates',
