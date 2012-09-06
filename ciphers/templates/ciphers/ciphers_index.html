@@ -3,23 +3,13 @@
 
 {% block pagetitle %}Ciphers | {{ block.super }}{% endblock %}
 {% block title %}Ciphers{% endblock %}
-{% block extrahead %}
-{{ block.super }}
-
-{% comment %}
-{% compress css %}
-{#<link rel="stylesheet" type="text/less" href="{% static "css/lab_form.less" %}">#}
-<link rel="stylesheet" type="text/less" href="{% static "css/lab_help.less" %}">
-{% endcompress %}
-{% endcomment %}
-{% endblock %}
 
 {% block extra_js %}
 {{ block.super }}
 
 {% dajaxice_js_import "js/dajaxice.core.js" %}
 {% compress js %}
-<script type="text/javascript" src="{% static "js/dajax/jquery.dajax.core.js" %}"></script>
+<script type="text/javascript" charset="utf-8" src="{% static "js/dajax/jquery.dajax.core.js" %}"></script>
 <script type="text/javascript">
 
 function transcodeAffine() {

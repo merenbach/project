@@ -14,9 +14,9 @@
 {% endaddtoblock %}
 {% addtoblock "js" %}
         {% compress js %}
-        <script type="text/javascript" src="{% static "js/jquery-1.7.2.min.js" %}" charset="utf-8"></script>
-        <script type="text/javascript" src="{% static "js/jquery-ui-1.8.16.custom.min.js" %}" charset="utf-8"></script>
-        <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.7.2.min.js" %}"></script>
+        <script type="text/javascript" charset="utf-8" src="{% static "js/jquery-ui-1.8.16.custom.min.js" %}"></script>
+        <script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
         {% endcompress %}
 {% endaddtoblock %}
 <html lang="{{ LANGUAGE_CODE }}">
@@ -36,7 +36,7 @@
         <![endif]-->
         {% comment %}
         {% compress js %}
-        <script type="text/javascript" src="{% static "js/less-1.3.0.min.js" %}" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8" src="{% static "js/less-1.3.0.min.js" %}"></script>
         {% endcompress %}
         {% endcomment %}
 
@@ -112,17 +112,6 @@
             </nav>
             {% endblock %}
 	<div class="container">
-		    {% block breadcrumbs_placeholder %}
-			    {% comment %}
-			    <nav class="breadcrumbs">
-			    <ul>
-				{% block breadcrumb %}
-				{% show_breadcrumb %}
-				{% endblock %}
-			    </ul>
-			    </nav>
-			    {% endcomment %}
-		    {% endblock %}
 		    <section id="content">
 		    {% block base_content %}
 			    <div class="page-header">
@@ -134,10 +123,19 @@
 		    {% endblock %}
 		    </section>
             {% comment %}<div class="push"></div>{% endcomment %}
-        </div>
         <footer id="footer">
+				{% if request.breadcrumbs.all %}
+				    <nav>
+					    <ul class="breadcrumb">
+						{% for breadcrumb in request.breadcrumbs %}
+							{% if not forloop.last %}<li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span class="divider">/</span></li>{% else %}<li class="active">{{ breadcrumb.name }}</li>{% endif %}
+						{% endfor %}
+					    </ul>
+				    </nav>
+				{% endif %}
 		<p class="muted">Copyright &copy; 2011&ndash;{% now "Y" %} Andrew Merenbach</p>
         </footer>
+        </div>
         {% block extra_js %}{% endblock %}
         {% if not user.is_authenticated %}
 {% track_clicky %}

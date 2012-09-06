@@ -7,6 +7,7 @@ from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
 
 def send_message(request):
+    request.breadcrumbs('Contact', reverse('contact'))
     context_dict = {}
     if request.method == 'POST': # If the form has been submitted...
         form = ContactForm(request.POST) # A form bound to the POST data
@@ -42,6 +43,7 @@ def send_message(request):
     return render_to_response('contact/contact.html', context_dict, context_instance=RequestContext(request))
 
 def thanks(request):
+    request.breadcrumbs(('Contact', reverse('contact')), ('Thanks', reverse('contact-thanks')))
     context_dict = {}
     #context_dict.update(thanks=True)
     return render_to_response('contact/thanks.html', context_dict, context_instance=RequestContext(request))
