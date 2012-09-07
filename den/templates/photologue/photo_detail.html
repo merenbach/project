@@ -1,0 +1,25 @@
+{% extends "photologue/root.html" %}
+
+{% load photologue_tags %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+
+{% comment %}<h1>{{ object.title }}</h1>{% endcomment %}
+<div class="gallery-photo">
+    <a href="{{ object.image.url }}"><img class="img-polaroid" src="{{ object.get_display_url }}" alt="{{ object.title }}"></a>
+    {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
+</div>
+{% comment %}
+{% if object.public_galleries %}
+<h2>This photo is found in the following galleries:</h2>
+<ol>
+{% for gallery in object.public_galleries %}
+    <li>{%previous_in_gallery object gallery%} <a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a> {%next_in_gallery object gallery%}</li>
+{% endfor %}
+</ol>
+{% endif %}
+{% endcomment %}
+
+{% endblock %}

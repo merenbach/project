@@ -42,7 +42,6 @@ handler500 = 'views.server_error'
 #if hasattr(settings, "OVERLOAD_SITE_MODULE"):
 #    exec ("from {}.urls import sitemaps as site_sitemaps".format(settings.OVERLOAD_SITE_MODULE))
 #    sitemaps.update(site_sitemaps)
-
 urlpatterns = patterns('',
         #url(r'^$', 'project.views.home', name='home'),
         #url(r'^blog/', include('articles.urls')),
@@ -52,6 +51,7 @@ urlpatterns = patterns('',
         #url(r'^$', TemplateView.as_view(template_name='home.html'), name='home_url_name'),
         (r'^ciphers/', include('ciphers.urls')),
         (r'^software/', include('software.urls')),
+        (r'^photologue/', include('photologue_urls')),
         #(r'^google67b472340d465ad6.html$', 'test'),
         #url(r'^$', 'project.views.home', name='home'),
         # Examples:
@@ -87,6 +87,9 @@ urlpatterns = patterns('',
 #if hasattr(settings, "OVERLOAD_SITE_MODULE"):
 #    exec ("from {}.urls import urlpatterns as site_urls".format(settings.OVERLOAD_SITE_MODULE))
 #    urlpatterns = site_urls + urlpatterns
+
+#from photologue_urls import urlpatterns as pups
+#urlpatterns += pups
 
 urlpatterns += patterns('django.contrib.flatpages.views',
         url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),

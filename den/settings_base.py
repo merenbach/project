@@ -173,7 +173,7 @@ INSTALLED_APPS = (
     'django_xmlrpc',
     #'djcelery',
     #'djsupervisor',
-    #'photologue',
+    'photologue',
     'dajaxice',
     'dajax',
     'software',
@@ -288,3 +288,7 @@ XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 # (If this stops working, try moving to top of file)
 import zinnia_xmlrpc
 sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
+
+# Override photologue.urls with our own.
+#import photologue_urls
+#sys.modules['photologue.urls'] = photologue_urls

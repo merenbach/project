@@ -1,0 +1,22 @@
+{% extends "photologue/root.html" %}
+{% load markup %}
+{% load url from future %}
+
+{% block title %}{{ object.title }} <small>{{ object.date_added|date:"Y.m.d" }}</small>{% endblock %}
+{% block pagetitle %}{{ object.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+{% comment %}<h1>{{ object.title }}</h1>{% endcomment %}
+{% comment %}<h2>Originally published {{ object.date_added|date:"l, F jS, Y" }}</h2>{% endcomment %}
+{% if object.description %}<p>{{ object.description|markdown }}</p>{% endif %}
+<ul class="thumbnails photo-gallery">
+    {% for photo in object.public %}
+	<li class="span4 gallery-photo">
+		<a class="thumbnail" href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"></a>
+	</li>
+    {% endfor %}
+</ul>
+<p><a href="{% url 'pl-gallery-list' 1 %}">View all galleries</a></p>
+
+{% endblock %}

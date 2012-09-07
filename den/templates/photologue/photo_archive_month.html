@@ -1,0 +1,24 @@
+{% extends "photologue/root.html" %}
+{% load url from future %}
+
+{% block title %}Photos <small>{{ month|date:"Y.m" }}</small>{% endblock %}
+{% block pagetitle %}Photos | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+{% comment %}<h1>Photos for {{ month|date:"F Y" }}</h1>{% endcomment %}
+
+{% if object_list %}
+    <ul class="thumbnails">
+    {% for photo in object_list %}
+	<li class="span2 gallery-photo">
+		<a class="thumbnail" href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"></a>
+	</li>
+    {% endfor %}
+    </ul>
+{% else %}
+<p>No photos were found.</p>
+{% endif %}
+<p><a href="{% url 'pl-photo-list' 1 %}">View all photographs</a></p>
+
+{% endblock %}

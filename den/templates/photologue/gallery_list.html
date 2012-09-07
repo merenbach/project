@@ -1,0 +1,37 @@
+{% extends "photologue/root.html" %}
+{% load url from future %}
+
+{% block title %}All Galleries{% endblock %}
+{% block pagetitle %}All Galleries | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+{% comment %}<h1>All galleries</h1>{% endcomment %}
+
+{% if object_list %}
+    {% for gallery in object_list %}
+    <ul class="unstyled photo-gallery">
+	<li>
+		<h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a> <small>{{ gallery.date_added|date:"Y.m.d" }}</small></h2>
+		<ul class="thumbnails">
+		{% for photo in gallery.sample %}
+			<li class="span2 gallery-photo">
+			    <a class="thumbnail" href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"></a>
+			</li>
+		{% endfor %}
+		</ul>
+	</li>
+    </ul>
+    {% endfor %}
+{% else %}
+    <p>No galleries were found.</p>
+{% endif %}
+
+{% if is_paginated %}
+<p>{{ hits }} galleries total.</p>
+<div id="page_controls">
+    <p>{% if has_previous %}<a href="{% url 'pl-gallery-list' previous %}">Previous</a> | {% endif %} page {{ page }} of {{ pages }} {% if has_next %}| <a href="{% url 'pl-gallery-list' next %}">Next</a>{% endif %}</p>
+</div>
+{% endif %}
+
+{% endblock %}

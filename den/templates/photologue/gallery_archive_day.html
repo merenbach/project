@@ -1,0 +1,32 @@
+{% extends "photologue/root.html" %}
+{% load url from future %}
+
+{% block title %}Galleries <small>{{ day|date:"Y.m.d" }}</small>{% endblock %}
+{% block pagetitle %}Galleries | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+{% comment %}<h1>Galleries for {{ day|date }}</h1>{% endcomment %}
+
+{% if object_list %}
+    {% for gallery in object_list %}
+    <ul class="unstyled photo-gallery">
+	    <li>
+		<h2>{{ gallery.title }}</h2>
+		<ul class="thumbnails">
+			{% for photo in gallery.sample %}
+			<li class="span2 gallery-photo">
+			    <a class="thumbnail" href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"></a>
+			</li>
+			{% endfor %}
+		</ul>
+	</li>
+    </ul>
+    {% endfor %}
+{% else %}
+    <p>No galleries were found.</p>
+{% endif %}
+
+<p><a href="{% url 'pl-gallery-list' 1 %}">View all galleries.</a></p>
+
+{% endblock %}
