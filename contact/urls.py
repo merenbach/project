@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url, include
-from django.views.generic import TemplateView
+from contact.views import ContactView, ContactThanksView
 
 urlpatterns = patterns('',
-        url(r'^$', 'contact.views.send_message', name='contact'),
-        url(r'^thanks/$', 'contact.views.thanks', name='contact-thanks'),
-        )
+    url(r'^$', ContactView.as_view(), name='contact'),
+    url(r'^thanks/$', ContactThanksView.as_view(), name='contact-thanks'),
+)

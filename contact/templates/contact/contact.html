@@ -4,14 +4,6 @@
 {% block pagetitle %}Contact | {{ block.super }}{% endblock %}
 {% block title %}Contact{% endblock %}
 
-{% comment %}
-{% block extrahead %}
-{% compress css %}
-<link rel="stylesheet" type="text/x-scss" href="{% static "css/contact.scss" %}">
-{% endcompress %}
-{% endblock %}
-{% endcomment %}
-
 {% block content %}
     {% if form %}
 	<p>
@@ -20,18 +12,20 @@
 		{% endblock %}
 	</p>
 	<form class="form-horizontal contact-form" action="/contact/" method="post">{% csrf_token %}
-		{% for c in form %}
-			<div class="control-group {% if c.errors %}error{% endif %}">
-				<label class="control-label" for="id_{{ c.name }}">{{ c.label }}</label>
+		{% for field in form %}
+			<div class="control-group {% if field.errors %}{{ form.error_css_class }}{% endif %}">
+                {{ field.label_tag }}
 				<div class="controls">
-					{{ c }}
-					<ul class="unstyled help-inline">{% for error in c.errors %}{{ error }}{% endfor %}</ul>
+					<div class="input-prepend">
+                        <span class="add-on"><label for="id_{{ field.name }}"><i class="{% for key, value in form.field_icons.items %}{% if field.name == key %}{{ value }}{% endif %}{% endfor %}"></i></label></span>{{ field }}
+                    </div>
+                    {{ field.errors }}
 				</div>
 			</div>
 		{% endfor %}
 		<div class="control-group">
 			<div class="controls">
-				<button type="submit" class="btn">Send Message</button>
+				<button type="submit" class="btn btn-primary">Send Message</button>
 			</div>
 		</div>
         </form>

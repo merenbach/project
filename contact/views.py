@@ -1,72 +1,73 @@
 from django.conf import settings
-from django.shortcuts import render_to_response
-from contact.forms import ContactForm
-from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
+from django.views.generic import TemplateView
 
-def send_message(request):
-    request.breadcrumbs('Contact', reverse('contact'))
-    context_dict = {}
-    if request.method == 'POST': # If the form has been submitted...
-        form = ContactForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
-            sender = form.cleaned_data['sender']
-            #cc_myself = form.cleaned_data['cc_myself']
+from contact.forms import ContactForm
 
-            if settings.CONTACT_RECIPIENTS and len(settings.CONTACT_RECIPIENTS) > 0:
-		recipients = settings.CONTACT_RECIPIENTS
-		#if cc_myself:
-		#    recipients.append(sender)
-                headers = {
-                    'Reply-To': sender,
-                    'X-Spam-Flag': 'Yes' if akismet_check(request, message, sender) else 'No',
+class ContactView(TemplateView):
+    template_name = 'contact/contact.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        request.breadcrumbs('Contact', reverse('contact'))
+        if request.method == 'POST': # If the form has been submitted...
+            form = ContactForm(request.POST) # A form bound to the POST data
+            if form.is_valid(): # All validation rules pass
+                subject = form.cleaned_data['subject']
+                message = form.cleaned_data['message']
+                sender = form.cleaned_data['sender']
+                #cc_myself = form.cleaned_data['cc_myself']
+
+                if settings.CONTACT_RECIPIENTS and len(settings.CONTACT_RECIPIENTS) > 0:
+                    recipients = settings.CONTACT_RECIPIENTS
+                    #if cc_myself:
+                    #    recipients.append(sender)
+                    headers = {
+                        'Reply-To': sender,
+                        'X-Spam-Flag': 'Yes' if self.akismet_check(request, message, sender) else 'No',
+                    }
+                    from django.core.mail import send_mail
+                    email = EmailMessage(subject, message, sender, recipients, headers=headers)
+                    #send_mail(subject, message, sender, recipients)
+                    email.send()
+                    return HttpResponseRedirect(reverse('contact-thanks')) # Redirect after POST
+                    #return HttpResponseRedirect(reverse('contact.views.send_message')) # Redirect after POST
+        return super(ContactView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(ContactView, self).get_context_data(**kwargs)
+        # Add in the form
+        context['form'] = ContactForm()
+        return context
+
+    def akismet_check(self, request, message, sender, debug=False):
+        """ Check a contact form submission with Akismet.  Return Yes for spam (or error), No for ham. """
+        rv = True
+        from akismet import Akismet
+        api = Akismet(settings.AKISMET_API_KEY, settings.AKISMET_BLOG_URL)
+        #agent='Django contact form'
+        if api.verify_key():
+            try:
+                data = {
+                    'user_ip': request.META.get('REMOTE_ADDR', '127.0.0.1'),
+                    'user_agent': request.META.get('USER_AGENT', ''),
+                    'referrer': request.META.get('HTTP_REFERER', ''),
+                    'comment_type': 'comment',
+                    'comment_author': sender,
                 }
-		from django.core.mail import send_mail
-		email = EmailMessage(subject, message, sender, recipients, headers=headers)
-		#send_mail(subject, message, sender, recipients)
-		email.send()
-		return HttpResponseRedirect('/contact/thanks/') # Redirect after POST
-		#return HttpResponseRedirect(reverse('contact.views.send_message')) # Redirect after POST
-            else:
-		context_dict.update(form=form)
-	    #return HttpResponseRedirect('/contact/') # Redirect after POST
-        else:
-            # validation failed
-            context_dict.update(form=form)
-    else:
-        form = ContactForm() # An unbound form
-        context_dict.update(form=form)
-    return render_to_response('contact/contact.html', context_dict, context_instance=RequestContext(request))
+                rv = api.comment_check(message.encode('utf-8'), data=data, build_data=True, DEBUG=debug)
+            except:
+                pass
+        return rv
 
-def thanks(request):
-    request.breadcrumbs(('Contact', reverse('contact')), ('Thanks', reverse('contact-thanks')))
-    context_dict = {}
-    #context_dict.update(thanks=True)
-    return render_to_response('contact/thanks.html', context_dict, context_instance=RequestContext(request))
-
-def akismet_check(request, message, sender, debug=False):
-    """ Check a contact form submission with Akismet.  Return Yes for spam (or error), No for ham. """
-    rv = True
-    from akismet import Akismet
-    api = Akismet(settings.AKISMET_API_KEY, settings.AKISMET_BLOG_URL)
-    #agent='Django contact form'
-    if api.verify_key():
-        try:
-		data = {
-		    'user_ip': request.META.get('REMOTE_ADDR', '127.0.0.1'),
-		    'user_agent': request.META.get('USER_AGENT', ''),
-		    'referrer': request.META.get('HTTP_REFERER', ''),
-		    'comment_type': 'comment',
-		    'comment_author': sender,
-		}
-		rv = api.comment_check(message.encode('utf-8'), data=data, build_data=True, DEBUG=debug)
-        except:
-            pass
-    return rv
+class ContactThanksView(TemplateView):
+    template_name = 'contact/thanks.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        request.breadcrumbs(('Contact', reverse('contact')), ('Thanks', reverse('contact-thanks')))
+        return super(ContactThanksView, self).dispatch(request, *args, **kwargs)
 
 """
     from akismet import Akismet
