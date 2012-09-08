@@ -15,16 +15,13 @@ framework.
 """
 import os
 
-#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "den.settings")
 
-### temp?
+# Add the project to the Python path
 import sys
-#sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.realpath(__file__))))
-sys.path.insert(0, '/srv/www/merenbach.com/django/den')
-### end temp???
-
-#os.environ["CELERY_LOADER"] = "django"
+path = os.path.abspath(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+if path not in sys.path:
+    sys.path.insert(0, path)
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
