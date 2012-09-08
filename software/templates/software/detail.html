@@ -32,13 +32,13 @@
     </div>
     {% render_tag_links_detail software %}
     <p class="muted"><em>Fin</em></p>
-    <ul class="downloads unstyled clearfix">
+    <div class="btn-group downloads">
         {% if software.app_file %}
-        <li><a class="btn btn-primary" href="{{ software.get_app_file_url }}">Download Application ({{ software.get_app_file_size|filesizeformat }})</a></li>
+        <a class="btn btn-primary" href="{{ software.get_app_file_url }}"><i class="icon-download-alt icon-white"></i> Download Application ({{ software.get_app_file_size|filesizeformat }})</a>
         {% endif %}
         {% if software.src_file %}
-        <li><a class="btn btn-inverse" href="{{ software.get_src_file_url }}">Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a></li>
+        <a class="btn btn-inverse" href="{{ software.get_src_file_url }}"><i class="icon-file icon-white"></i> Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a>
         {% endif %}
-    </ul>
+    </div>
 {# render_tag_links #}
 {% endblock %}
