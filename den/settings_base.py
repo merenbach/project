@@ -3,12 +3,10 @@
 import os
 import sys
 
-SITE_ID = 1
-
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'den.wsgi.application'
 
-# get the settinsg path
+# get the settings path
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 PROJECT_PATH = os.path.abspath(PROJECT_ROOT)
 
@@ -25,26 +23,19 @@ if PROJECT_PATH not in sys.path:
 #    if path not in sys_path:
 #        sys_path.insert(0, path)
 
-#OVERLOAD_SITE = os.environ.get('OVERLOAD_SITE')
-#OVERLOAD_SITE_MODULE = "websites.{}".format(OVERLOAD_SITE)
-#exec ("from {}.settings import *".format(OVERLOAD_SITE_MODULE))
-
 PREPEND_WWW = True
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
+# In a Windows environment this must be set to your system time zone.
 TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-#SITE_ID = 1
+SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -106,7 +97,6 @@ ROOT_URLCONF = 'den.urls'
 WSGI_APPLICATION = 'den.wsgi.application'
 
 TEMPLATE_DIRS = (
-    #'/home/merenbach/webapps/django/project/templates',
     os.path.join(PROJECT_PATH, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -134,7 +124,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'appconf',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -145,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.syndication',
     'django.contrib.comments',
     'south',
+    'appconf',
     'sekizai',
     'pytz',
     'compressor',
@@ -198,19 +188,12 @@ LOGGING = {
     }
 }
 
-# App-specific settings
-#ADMIN_TOOLS_MEDIA_URL = 'http://media.merenbach.com/static/'
-
 # Maintenance (currently having no effect)
 MAINTENANCE_DISABLE_FOR_SUPERUSER = True
 
 # Breadcrumbs
 BREADCRUMBS_AUTO_HOME = True
 #BREADCRUMBS_HOME_TITLE = 'Home'
-
-# Articles
-#ARTICLES_AUTO_TAG = False
-##USE_ADDTHIS_BUTTON = False
 
 # Django Compressor
 COMPRESS_PRECOMPILERS = (
@@ -220,7 +203,7 @@ COMPRESS_PRECOMPILERS = (
         ('text/x-scss', 'sass --scss {infile} {outfile}'),
         )
 
-#COMPRESS_OFFLINE = True
+# COMPRESS_OFFLINE = True
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
@@ -230,19 +213,11 @@ HAYSTACK_CONNECTIONS = {
         'default': {
             'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
             'PATH': os.path.join(PROJECT_ROOT, 'whoosh_index'),
-            #'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+            # 'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
             'TIMEOUT': 60 * 5,
             'INCLUDE_SPELLING': True,
             'BATCH_SIZE': 100,
             },
-        #'default{}'.format(SITE_ID): {
-        #    'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        #    'PATH': os.path.join(os.path.dirname(__file__), 'websites', OVERLOAD_SITE, 'whoosh_index'),
-        #    #'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
-        #    'TIMEOUT': 60 * 5,
-        #    'INCLUDE_SPELLING': True,
-        #    'BATCH_SIZE': 100,
-        #    },
         }
 
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
@@ -258,7 +233,7 @@ CONTACT_RECIPIENTS = ('andrew@merenbach.com',)
 
 # Dajax/DajaxIce
 DAJAXICE_MEDIA_PREFIX = 'dajaxice'
-DAJAXICE_DEBUG = True
+DAJAXICE_DEBUG = False
 DAJAXICE_NOTIFY_EXCEPTIONS = True
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
