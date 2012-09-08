@@ -69,7 +69,7 @@ urlpatterns = patterns('',
         # url(r'^$', 'project.views.home', name='home'),
         # url(r'^project/', include('project.foo.urls')),
         url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-        url(r'^admin_tools/', include('admin_tools.urls')),
+        #url(r'^admin_tools/', include('admin_tools.urls')),
         # Uncomment the admin/doc line below to enable admin documentation:
         url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
