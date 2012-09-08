@@ -59,7 +59,11 @@ AKISMET_BLOG_URL = 'http://www.merenbach.com'
 
 # Clicky
 CLICKY_SITE_ID = ''
-#CLICKY_RENDER_NON_JS_CODE = False
+# CLICKY_RENDER_NON_JS_CODE = False
+
+# Google Analytics
+GOOGLE_ANALYTICS_PROPERTY_ID = ''
+# GOOGLE_ANALYTICS_SITE_SPEED = False
 
 # my customizations
 EMAIL_HOST = 'smtp.gmail.com'

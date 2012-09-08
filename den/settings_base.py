@@ -17,7 +17,7 @@ if PROJECT_PATH not in sys.path:
 
 # add to default paths
 #paths = (
-#	PROJECT_PATH,
+#   PROJECT_PATH,
 #        #os.path.realpath(os.path.dirname(PROJECT_PATH)),
 #        )
 #
@@ -114,14 +114,14 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
-        #'django.contrib.auth.context_processors.debug',
+        #'django.core.context_processors.debug',
         'django.core.context_processors.i18n',
         'django.core.context_processors.request',
         'django.core.context_processors.media',
         'django.core.context_processors.static',
         #'cms.context_processors.media',
         'sekizai.context_processors.sekizai',
-	'django.core.context_processors.csrf',
+        'django.core.context_processors.csrf',
         'zinnia.context_processors.version',    # optional
         #'django_mobile.context_processors.flavour',
         #'admintools_bootstrap.context_processors.site',
@@ -160,7 +160,6 @@ INSTALLED_APPS = (
     'mptt',
     'zinnia',
     'disqus',
-    'google_analytics',
     'contact',
     #'pagination',              # pagination (replaced)
     'linaro_django_pagination', # pagination
@@ -178,7 +177,7 @@ INSTALLED_APPS = (
     'dajax',
     'software',
     'ciphers',
-    'django_clicky',
+    'analytical',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -223,10 +222,6 @@ BREADCRUMBS_AUTO_HOME = True
 # Articles
 #ARTICLES_AUTO_TAG = False
 ##USE_ADDTHIS_BUTTON = False
-
-# Google Analytics
-GOOGLE_ANALYTICS_MODEL = True
-GOOGLE_ANALYTICS_TRACK_PAGE_LOAD_TIME = True
 
 # Django Compressor
 COMPRESS_PRECOMPILERS = (
