@@ -5,7 +5,7 @@ from cypher import *
 import random
 from django.utils.encoding import smart_unicode
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def transcode_affine(request, message='', multiplier=1, additive=0, lower=False, should_filter=False, chunk=0, encode=True):
 	tc = AffineTranscoder()
 	result = tc.transcode(message=message, multiplier=int(multiplier), additive=int(additive), lower=bool(lower), should_filter=bool(should_filter), chunk=int(chunk), encode=bool(encode))
@@ -15,7 +15,7 @@ def transcode_affine(request, message='', multiplier=1, additive=0, lower=False,
 	dajax.assign('#af_ciphertext', 'value', str(tc.alphabet.target_alphabet))
 	return dajax.json()
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def transcode_atbash(request, message='', lower=False, should_filter=False, chunk=0):
 	tc = AtbashTranscoder()
 	result = tc.transcode(message=message, lower=bool(lower), should_filter=bool(should_filter), chunk=int(chunk))
@@ -25,7 +25,7 @@ def transcode_atbash(request, message='', lower=False, should_filter=False, chun
 	dajax.assign('#at_ciphertext', 'value', str(tc.alphabet.target_alphabet))
 	return dajax.json()
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def transcode_beaufort(request, message='', passphrase='', keyword=None, primer=0, use_digits=False, lower=False, should_filter=False, chunk=0):
 	tc = BeaufortTranscoder()
 	result = tc.transcode(message=message, passphrase=passphrase, keyword=keyword, primer=int(primer), use_digits=bool(use_digits), lower=bool(lower), should_filter=bool(should_filter), chunk=int(chunk))
@@ -33,7 +33,7 @@ def transcode_beaufort(request, message='', passphrase='', keyword=None, primer=
 	dajax.assign('#bf_target', 'value', smart_unicode(result))
 	return dajax.json()
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def transcode_caesar(request, message='', shift=0, lower=False, should_filter=False, chunk=0, encode=True):
 	tc = CaesarTranscoder()
 	result = tc.transcode(message=message, shift=shift, lower=bool(lower), should_filter=bool(should_filter), chunk=int(chunk), encode=bool(encode))
@@ -43,7 +43,7 @@ def transcode_caesar(request, message='', shift=0, lower=False, should_filter=Fa
 	dajax.assign('#cr_ciphertext', 'value', str(tc.alphabet.target_alphabet))
 	return dajax.json()
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def transcode_codeword(request, message='', keyword=None, lower=False, should_filter=False, chunk=0, encode=True):
 	tc = CodewordTranscoder()
 	result = tc.transcode(message=message, keyword=keyword, lower=bool(lower), should_filter=bool(should_filter), chunk=int(chunk), encode=bool(encode))
@@ -53,7 +53,7 @@ def transcode_codeword(request, message='', keyword=None, lower=False, should_fi
 	dajax.assign('#cw_ciphertext', 'value', str(tc.alphabet.target_alphabet))
 	return dajax.json()
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def transcode_vigenere(request, message='', passphrase='', autoclave=False, keyword=None, primer=0, use_digits=False, lower=False, should_filter=False, chunk=0, encode=True):
 	tc = VigenereTranscoder()
 	result = tc.transcode(message=message, passphrase=passphrase, autoclave=bool(autoclave), keyword=keyword, use_digits=bool(use_digits), lower=bool(lower), should_filter=bool(should_filter), chunk=int(chunk), encode=bool(encode))

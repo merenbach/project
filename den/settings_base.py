@@ -72,6 +72,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
+    'dajaxice.finders.DajaxiceFinder',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -114,17 +115,14 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
-        #'django.core.context_processors.debug',
+        # 'django.core.context_processors.debug',
         'django.core.context_processors.i18n',
         'django.core.context_processors.request',
         'django.core.context_processors.media',
         'django.core.context_processors.static',
-        #'cms.context_processors.media',
         'sekizai.context_processors.sekizai',
         'django.core.context_processors.csrf',
         'zinnia.context_processors.version',    # optional
-        #'django_mobile.context_processors.flavour',
-        #'admintools_bootstrap.context_processors.site',
         'django.contrib.messages.context_processors.messages',
         )
 
@@ -137,12 +135,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'appconf',
-    #'admintools_bootstrap',
-    #'admin_tools',
-    #'admin_tools.theming',
-    #'admin_tools.menu',
-    #'admin_tools.dashboard',
-    #'admin_bootstrap',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -168,10 +160,7 @@ INSTALLED_APPS = (
     'den', # custom additions and utilities
     'maintenance',
     'breadcrumbs',
-    #'articles',
     'django_xmlrpc',
-    #'djcelery',
-    #'djsupervisor',
     'photologue',
     'dajaxice',
     'dajax',
@@ -269,7 +258,7 @@ CONTACT_RECIPIENTS = ('andrew@merenbach.com',)
 
 # Dajax/DajaxIce
 DAJAXICE_MEDIA_PREFIX = 'dajaxice'
-DAJAXICE_DEBUG = False
+DAJAXICE_DEBUG = True
 DAJAXICE_NOTIFY_EXCEPTIONS = True
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
