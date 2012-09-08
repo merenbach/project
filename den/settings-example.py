@@ -28,14 +28,14 @@ DATABASES = {
 }
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/srv/www/example.com/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 if not DEBUG:
-    MEDIA_URL = 'http://cdn.merenbach.com/'
+    MEDIA_URL = 'http://cdn.example.com/'
 else:
-    MEDIA_URL = 'http://media.merenbach.com'
+    MEDIA_URL = 'http://media.example.com/'
 
 # Absolute path to the directory static files should be collected to.
 STATIC_ROOT = join(MEDIA_ROOT, 'static')

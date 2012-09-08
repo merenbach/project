@@ -237,6 +237,7 @@ COMPRESS_PRECOMPILERS = (
         )
 
 #COMPRESS_OFFLINE = True
+COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = False
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
