@@ -709,12 +709,12 @@ table#change-history tbody th {
 
 /* PAGE STRUCTURE */
 
-#container {
+/*#container {
     position: relative;
     width: 100%;
     min-width: 760px;
     padding: 0;
-}
+    }*/
 
 #content {
     margin: 10px 15px;
