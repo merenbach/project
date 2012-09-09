@@ -37,7 +37,7 @@
         <a class="btn btn-primary" href="{{ software.get_app_file_url }}"><i class="icon-download-alt icon-white"></i> Download Application ({{ software.get_app_file_size|filesizeformat }})</a>
         {% endif %}
         {% if software.src_file %}
-        <a class="btn btn-inverse" href="{{ software.get_src_file_url }}"><i class="icon-file icon-white"></i> Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a>
+        <a class="btn" href="{{ software.get_src_file_url }}"><i class="icon-file"></i> Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a>
         {% endif %}
     </div>
 {# render_tag_links #}

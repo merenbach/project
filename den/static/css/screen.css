@@ -1,0 +1,19 @@
+body {
+	color: #333;
+	background-color: #eee;
+	padding-top: 40px;
+}
+
+#footer p {
+	text-align: center;
+}
+
+.aboutpic {
+	width: 12em;
+	margin: 0.25em 0.5em 0.25em 0;
+}
+
+#content blockquote {
+	word-wrap: break-word;
+}
+

@@ -1,7 +1,6 @@
 # README for Project
 
 ## TODO
-- Merge html\_base.html into base.html
 - Remove outdated/unused CSS (sticky, normalize, handheld, antiscreen (?))
 
 ## Dependencies

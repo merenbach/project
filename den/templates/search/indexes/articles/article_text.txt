@@ -1,6 +1,0 @@
-{% load markup %}
-{{ object.author|safe }}
-{{ object.slug|safe }}
-{{ object.content|markdown }}
-{{ object.tags|safe }}
-

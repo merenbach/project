@@ -2,65 +2,53 @@
 {% load sekizai_tags compress core_tags static analytical %}
 
 {% addtoblock "css" %}
-{% compress css %}
-	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/x-scss" href="{% static "css/screen.scss" %}" charset="utf-8" media="screen">
-	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-responsive.min.css" %}">
-	<link rel="stylesheet" type="text/css" href="{% static "css/antiscreen.css" %}" media="handheld">
-	<link rel="stylesheet" type="text/css" href="{% static "css/antiscreen.css" %}" media="only screen and (max-device-width:480px)">
-	<link rel="stylesheet" type="text/css" href="{% static "css/handheld.css" %}" media="handheld, only screen and (max-device-width:480px)">
-	<link rel="stylesheet" type="text/css" href="{% static "css/print.css" %}" media="print">
-{% endcompress %}
+    {% compress css %}
+    	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    	<link rel="stylesheet" type="text/css" href="{% static "css/screen.css" %}" media="screen">
+    	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-responsive.min.css" %}">
+    	<link rel="stylesheet" type="text/css" href="{% static "css/print.css" %}" media="print">
+    {% endcompress %}
+	<!--[if IE]>
+		<style type="text/css">
+			.clearfix {
+				zoom: 1;	 /* triggers hasLayout */
+			}  /* Only IE can see inside the conditional comment
+			and read this CSS rule. Don't ever use a normal HTML
+			comment inside the CC or it will close prematurely. */
+		</style>
+	<![endif]-->
+
+	<!--[if !IE 7]>
+		<style type="text/css">
+			#wrap {display:table;height:100%;}
+		</style>
+	<![endif]-->
 {% endaddtoblock %}
 {% addtoblock "js" %}
-{% compress js %}
-	<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.1.min.js" %}"></script>
-	<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
-{% endcompress %}
+    {% compress js %}
+    	<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.1.min.js" %}"></script>
+    	<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
+    {% endcompress %}
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
+	<![endif]-->
 {% endaddtoblock %}
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
-    	<meta charset="UTF-8">
+    	<meta charset="utf-8">
     	<title>{% block title %}{% endblock %} | Andrew&rsquo;s Den</title>
     	{% analytical_head_top %}
     	<link rel="icon" type="image/png" href="/favicon.ico">
     	<link rel="shortcut icon" type="image/png" href="/favicon.ico">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	{% comment %}<meta name="viewport" content="width=device-width{% acomment %}, initial-scale=1.0{% aendcomment %}">{% endcomment %}
     	<meta name="author" content="Andrew Merenbach">
     	<meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
     	<meta name="description" content="{% block meta-description %}{% endblock %}">
     	{% block link %}{% endblock %}
-    	<!--[if lt IE 9]>
-    		<script type="text/javascript" src="{% static "js/html5.js" %}"></script>
-    	<![endif]-->
-    	{% comment %}
-    	{% compress js %}
-    	<script type="text/javascript" charset="utf-8" src="{% static "js/less-1.3.0.min.js" %}"></script>
-    	{% endcompress %}
-    	{% endcomment %}
-
-    	{% render_block "css" %}
     	{% block extrahead %}{% endblock %}
-    	{% block extra-head %}{% endblock %}
-    	<!--[if IE]>
-    		<style type="text/css">
-    			.clearfix {
-    				zoom: 1;	 /* triggers hasLayout */
-    			}  /* Only IE can see inside the conditional comment
-    			and read this CSS rule. Don't ever use a normal HTML
-    			comment inside the CC or it will close prematurely. */
-    		</style>
-    	<![endif]-->
-
-    	<!--[if !IE 7]>
-    		<style type="text/css">
-    			#wrap {display:table;height:100%;}
-    		</style>
-    	<![endif]-->
-		
+    	{% render_block "css" %}
     	{% render_block "js" %}
-
     	{% analytical_head_bottom %}
     </head>
     <body>
@@ -116,7 +104,6 @@
     		<section id="content">
     			{% block base_content %}{% endblock %}
     		</section>
-    		{% comment %}<div class="push"></div>{% endcomment %}
     		<footer id="footer">
     			{% comment %}
     			{% if request.breadcrumbs.all %}

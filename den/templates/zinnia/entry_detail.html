@@ -1,9 +1,10 @@
 {% extends "zinnia/entry_detail_base.html" %}
 {% load i18n disqus_tags %}
-{% block title %}{{ block.super }} <small>{{ object.creation_date|date:"Y.m.d" }}</small>{% endblock %}
+
+{% block subtitle %} <small>{{ object.creation_date|date:"Y.m.d" }}</small>{% endblock %}
 
 {% block entry-widgets %}
-<div class="entry-widgets">
+<nav class="entry-widgets">
 	<ul class="pager">
 		{% with previous_entry=object.previous_entry %}
 			{% if previous_entry %}
@@ -28,9 +29,7 @@
 			{% endif %}
 		{% endwith %}
 	</ul>
-</div>
-
-
+</nav>
 {% endblock %}
 {% block entry-comments %}{% endblock %}
 {% block entry-pingbacks %}{% endblock %}
