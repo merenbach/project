@@ -33,9 +33,9 @@ a.section:link, a.section:visited {
 
 /* GLOBAL DEFAULTS */
 
-p, ol, ul, dl {
+/*p, ol, ul, dl {
     margin: .2em 0 .8em 0;
-}
+}*/
 
 p {
     padding: 0;
@@ -84,10 +84,10 @@ h5 {
     letter-spacing: 1px;
 }
 
-ul li {
+/*ul li {
     list-style-type: square;
     padding: 1px 0;
-}
+}*/
 
 ul.plainlist {
     margin-left: 0 !important;
@@ -101,10 +101,10 @@ li ul {
     margin-bottom: 0;
 }
 
-li, dt, dd {
+/*li, dt, dd {
     font-size: 11px;
     line-height: 14px;
-}
+}*/
 
 dt {
     font-weight: bold;

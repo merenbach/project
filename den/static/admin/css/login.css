@@ -12,7 +12,8 @@ body.login {
 .login #container {
     background: white;
     border: 1px solid #ccc;
-    width: 28em;
+    width: 36em;
+/*    width: 28em;*/
     min-width: 300px;
     margin-left: auto;
     margin-right: auto;
