@@ -10,8 +10,8 @@
 {% endblock %}
 {% endcomment %}
 
-{% block pagetitle %}Search | {{ block.super }}{% endblock %}
 {% block title %}Search{% endblock %}
+{% block subtitle %}{% if query %} <small>&ldquo;{{ query }}&rdquo;</small>{% endif %}{% endblock %}
 {% comment %}
 {% block search_form %}
 

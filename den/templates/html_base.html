@@ -21,7 +21,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
     	<meta charset="UTF-8">
-    	<title>{% block pagetitle %}Title{% endblock %}</title>
+    	<title>{% block title %}{% endblock %} | Andrew&rsquo;s Den</title>
     	{% analytical_head_top %}
     	<link rel="icon" type="image/png" href="/favicon.ico">
     	<link rel="shortcut icon" type="image/png" href="/favicon.ico">
@@ -79,13 +79,14 @@
     				</a>
     				<div class="nav-collapse">
     					<ul class="nav">
-    						{% block navigation_items %}
+                            {% url about as about_url %}
+                            {% url software as software_url %}
+                            {% url ciphers as ciphers_url %}
     						{% url contact as contact_url %}
-    						{% comment %}{% url articles_archive as blog_url %}
-    						<li class="{% active blog_url %}"><a href="{{ blog_url }}">Blog</a></li>{% endcomment %}
-    						{% block navigation_overrides %}{% endblock %}
+                            <li class="{% active about_url %}"><a href="{{ about_url }}">About</a></li>
+                            <li class="{% active software_url %}"><a href="{{ software_url }}">Software</a></li>
+                            <li class="{% active ciphers_url %}"><a href="{{ ciphers_url }}">Ciphers</a></li>
     						<li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
-    						{% endblock %}
     					</ul>
     					<form class="navbar-search pull-left" method="GET" action="{% url haystack_search %}">
     						<input type="search" class="search-query" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
@@ -113,14 +114,7 @@
     	{% endblock %}
     	<div class="container">
     		<section id="content">
-    			{% block base_content %}
-    			<div class="page-header">
-    				<h1>{% block title %}Untitled{% endblock %}</h1>
-    			</div>
-    			<section id="content_inner">
-    				{% block content %}{% endblock %}
-    			</section>
-    			{% endblock %}
+    			{% block base_content %}{% endblock %}
     		</section>
     		{% comment %}<div class="push"></div>{% endcomment %}
     		<footer id="footer">

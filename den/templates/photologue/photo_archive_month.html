@@ -1,8 +1,8 @@
 {% extends "photologue/root.html" %}
 {% load url from future %}
 
-{% block title %}Photos <small>{{ month|date:"Y.m" }}</small>{% endblock %}
-{% block pagetitle %}Photos | {{ block.super }}{% endblock %}
+{% block title %}Photos{% endblock %}
+{% block subtitle %} <small>{{ month|date:"Y.m" }}</small>{% endblock %}
 
 {% block content %}
 

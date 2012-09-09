@@ -9,8 +9,8 @@
 <li><a href="{% url software_tag_detail tag=tag %}">{{ tag }}</a></li>
 {% endblock %}
 
-{% block title %}Software <small>Tagged &ldquo;{{ tag }}&rdquo;</small>{% endblock %}
-{% block pagetitle %}Software | {{ block.super }}{% endblock %}
+{% block title %}Software{% endblock %}
+{% block subtitle %} <small>Tagged &ldquo;{{ tag }}&rdquo;</small>{% endblock %}
 
 {% block content %}
 {{ block.super }}

@@ -2,8 +2,8 @@
 {% load markup %}
 {% load url from future %}
 
-{% block title %}{{ object.title }} <small>{{ object.date_added|date:"Y.m.d" }}</small>{% endblock %}
-{% block pagetitle %}{{ object.title }} | {{ block.super }}{% endblock %}
+{% block title %}{{ object.title }}{% endblock %}
+{% block subtitle %} <small>{{ object.date_added|date:"Y.m.d" }}</small>{% endblock %}
 
 {% block content %}
 

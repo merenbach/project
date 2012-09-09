@@ -3,8 +3,8 @@
 
 {% block breadcrumbs_placeholder %}{% endblock %}
 
-{% block title %}{% trans "Internal server error" %} <small>500</small>{% endblock %}
-{% block pagetitle %}{% trans "Internal server error" %} | {{ block.super }}{% endblock %}
+{% block title %}{% trans "Internal server error" %}{% endblock %}
+{% block subtitle %} <small>500</small>{% endblock %}
 
 {% block content %}
 <p>There&rsquo;s been an error. It&rsquo;s been reported to the site administrators via e-mail and should be fixed shortly. Thank you for your patience.</p>
