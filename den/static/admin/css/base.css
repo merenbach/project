@@ -13,14 +13,14 @@ body {
 
 /* LINKS */
 
-a:link, a:visited {
+/*a:link, a:visited {
     color: #5b80b2;
     text-decoration: none;
-}
+}*/
 
-a:hover {
+/*a:hover {
     color: #036;
-}
+}*/
 
 a img {
     border: none;
