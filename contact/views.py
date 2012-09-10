@@ -1,46 +1,43 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.mail import EmailMessage
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import TemplateView
-
+from django.views.generic.edit import FormView
 from contact.forms import ContactForm
 
-class ContactView(TemplateView):
+class ContactView(FormView):
     template_name = 'contact/contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contact-thanks')
     
     def dispatch(self, request, *args, **kwargs):
         request.breadcrumbs('Contact', reverse('contact'))
-        if request.method == 'POST': # If the form has been submitted...
-            form = ContactForm(request.POST) # A form bound to the POST data
-            if form.is_valid(): # All validation rules pass
-                subject = form.cleaned_data['subject']
-                message = form.cleaned_data['message']
-                sender = form.cleaned_data['sender']
-                #cc_myself = form.cleaned_data['cc_myself']
-
-                if settings.CONTACT_RECIPIENTS and len(settings.CONTACT_RECIPIENTS) > 0:
-                    recipients = settings.CONTACT_RECIPIENTS
-                    #if cc_myself:
-                    #    recipients.append(sender)
-                    headers = {
-                        'Reply-To': sender,
-                        'X-Spam-Flag': 'Yes' if self.akismet_check(request, message, sender) else 'No',
-                    }
-                    from django.core.mail import send_mail
-                    email = EmailMessage(subject, message, sender, recipients, headers=headers)
-                    #send_mail(subject, message, sender, recipients)
-                    email.send()
-                    return HttpResponseRedirect(reverse('contact-thanks')) # Redirect after POST
-                    #return HttpResponseRedirect(reverse('contact.views.send_message')) # Redirect after POST
         return super(ContactView, self).dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(ContactView, self).get_context_data(**kwargs)
-        # Add in the form
-        context['form'] = ContactForm()
-        return context
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        if form.is_valid(): # All validation rules pass
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data['sender']
+            #cc_myself = form.cleaned_data['cc_myself']
+
+            if settings.CONTACT_RECIPIENTS and len(settings.CONTACT_RECIPIENTS) > 0:
+                recipients = settings.CONTACT_RECIPIENTS
+                #if cc_myself:
+                #    recipients.append(sender)
+                headers = {
+                    'Reply-To': sender,
+                    'X-Spam-Flag': 'Yes' if self.akismet_check(self.request, message, sender) else 'No',
+                }
+                from django.core.mail import send_mail
+                email = EmailMessage(subject, message, sender, recipients, headers=headers)
+                #send_mail(subject, message, sender, recipients)
+                email.send()
+                # return HttpResponseRedirect(reverse('contact-thanks')) # Redirect after POST
+        return super(ContactView, self).form_valid(form)
 
     def akismet_check(self, request, message, sender, debug=False):
         """ Check a contact form submission with Akismet.  Return Yes for spam (or error), No for ham. """
