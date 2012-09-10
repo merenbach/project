@@ -105,7 +105,7 @@
     			{% block base_content %}{% endblock %}
     		</section>
     		<footer id="footer">
-    			{% comment %}
+                {% block breadcrumb %}
     			{% if request.breadcrumbs.all %}
     			<nav>
     				<ul class="breadcrumb">
@@ -115,7 +115,7 @@
     				</ul>
     			</nav>
     			{% endif %}
-    			{% endcomment %}
+                {% endblock %}
     			<p class="muted">Copyright &copy; 2011&ndash;{% now "Y" %} Andrew Merenbach</p>
     		</footer>
     	</div>

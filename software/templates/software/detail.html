@@ -2,12 +2,6 @@
 {% load markup %}
 {% load software_tags %}
 
-{% block breadcrumb %}
-{{ block.super }}
-<li>&raquo;</li>
-<li><a href="{{ software.get_absolute_url }}">{{ software.title }}</a></li>
-{% endblock %}
-
 {% block title %}{{ software.title }}{% endblock %}
 {% block subtitle %} {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}</small>{% endif %}{% endblock %}
 
@@ -40,5 +34,4 @@
         <a class="btn" href="{{ software.get_src_file_url }}"><i class="icon-file"></i> Download Source Code ({{ software.get_src_file_size|filesizeformat }})</a>
         {% endif %}
     </div>
-{# render_tag_links #}
 {% endblock %}

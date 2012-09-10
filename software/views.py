@@ -17,7 +17,12 @@ class SoftwareDetailView(DetailView):
     queryset = Software.objects.filter(is_published=True).order_by('title')
 
     def dispatch(self, request, *args, **kwargs):
-        # request.breadcrumbs(('Software', reverse('software')), (self.get_queryset().get_title(), reverse('software_detail')))
+        try:
+            slug = kwargs.get('slug', None)
+        except KeyError:
+            raise http404
+        if slug is not None:
+            request.breadcrumbs(('Software', reverse('software')), (self.queryset.all()[0].title, reverse('software_detail', kwargs={'slug': slug})))
         return super(SoftwareDetailView, self).dispatch(request, *args, **kwargs)
 
 class SoftwareTagView(ListView):
@@ -26,11 +31,11 @@ class SoftwareTagView(ListView):
     allow_empty = True
 
     def dispatch(self, request, *args, **kwargs):
-        # request.breadcrumbs('Software', reverse('software'))
         try:
             self.tag = kwargs.pop('tag')
         except KeyError:
             raise http404
+        request.breadcrumbs(('Software', reverse('software')), ('Tagged "' + self.tag + '"', reverse('software_tag_detail', kwargs={'tag': self.tag})))
         return super(SoftwareTagView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
