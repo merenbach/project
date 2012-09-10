@@ -13,27 +13,27 @@
 {% block subtitle %} <small>Tagged &ldquo;{{ tag }}&rdquo;</small>{% endblock %}
 
 {% block content %}
-{{ block.super }}
-{% if software_list %}
-<ul class="unstyled">
-    {% for software in software_list %}
-    <li>
-{% comment %}
-<div class="sw-tbl-cell">
-{% if software.app_icon %}
-<a href="{{ software.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ software.app_icon }}" alt="{{ software.title }} icon" /></a>
-{% else %}
-<div></div>
-{% endif %}
-</div>
-{% endcomment %}
-<h2><a href="{{ software.get_absolute_url }}">{{ software.title }}</a> {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}{% endif %}</h2>
-{% if software.summary %}<blockquote><p>{{ software.summary }}</p></blockquote>{% endif %}
-{% comment %}{% render_tag_links_detail software %}{% endcomment %}
-{% empty %}
-<li><em>No software is available with this tag.</em></li>
-{% endfor %}
-</ul>
-{% endif %}
+    {{ block.super }}
+    {% if software_list %}
+        <ul class="unstyled">
+            {% for software in software_list %}
+            <li>
+            {% comment %}
+            <div class="sw-tbl-cell">
+            {% if software.app_icon %}
+            <a href="{{ software.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ software.app_icon }}" alt="{{ software.title }} icon" /></a>
+            {% else %}
+            <div></div>
+            {% endif %}
+            </div>
+            {% endcomment %}
+            <h2><a href="{{ software.get_absolute_url }}">{{ software.title }}</a> {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}{% endif %}</h2>
+            {% if software.summary %}<blockquote><p>{{ software.summary }}</p></blockquote>{% endif %}
+            {% comment %}{% render_tag_links_detail software %}{% endcomment %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No software is available with this tag.</p>
+    {% endif %}
 {# render_tag_links #}
 {% endblock %}
