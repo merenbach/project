@@ -56,11 +56,11 @@ urlpatterns = patterns('',
     url(r'^', include('zinnia.urls')),
 )
 
-urlpatterns += staticfiles_urlpatterns()
-
 urlpatterns += patterns('django.contrib.flatpages.views',
-        url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
-        )
+    url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
+)
+
+urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:
     urlpatterns = patterns('',
