@@ -2,7 +2,7 @@
 
 /* FORM ROWS */
 
-.form-row {
+/*.form-row {
     overflow: hidden;
     padding: 8px 12px;
     font-size: 11px;
@@ -16,11 +16,11 @@
 form .form-row p {
     padding-left: 0;
     font-size: 11px;
-}
+}*/
 
 /* FORM LABELS */
 
-form h4 {
+/*form h4 {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
@@ -35,11 +35,11 @@ label {
 .required label, label.required {
     font-weight: bold !important;
     color: #333 !important;
-}
+}*/
 
 /* RADIO BUTTONS */
 
-form ul.radiolist li {
+/*form ul.radiolist li {
     list-style-type: none;
 }
 
@@ -56,11 +56,11 @@ form ul.inline {
 form ul.inline li {
     float: left;
     padding-right: 7px;
-}
+}*/
 
 /* ALIGNED FIELDSETS */
 
-.aligned label {
+/*.aligned label {
     display: block;
     padding: 3px 10px 0 0;
     float: left;
@@ -109,11 +109,11 @@ form .aligned p.help {
 fieldset .field-box {
     float: left;
     margin-right: 20px;
-}
+}*/
 
 /* WIDE FIELDSETS */
 
-.wide label {
+/*.wide label {
     width: 15em !important;
 }
 
@@ -127,7 +127,7 @@ form .wide p.help {
 
 .colM fieldset.wide .vLargeTextField, .colM fieldset.wide .vXMLLargeTextField {
     width: 450px;
-}
+}*/
 
 /* COLLAPSED FIELDSETS */
 
@@ -158,12 +158,12 @@ fieldset.monospace textarea {
 
 /* SUBMIT ROW */
 
-.submit-row {
-    /*padding: 5px 7px;
+/*.submit-row {
+    padding: 5px 7px;
     text-align: right;
     background: white url(../img/nav-bg.gif) 0 100% repeat-x;
     border: 1px solid #ccc;
-    margin: 5px 0;*/
+    margin: 5px 0;
     overflow: hidden;
 }
 
@@ -186,7 +186,7 @@ body.popup .submit-row {
 .submit-row .deletelink {
     background: url(../img/icon_deletelink.gif) 0 50% no-repeat;
     padding-left: 14px;
-}
+}*/
 
 /* CUSTOM FORM FIELDS */
 

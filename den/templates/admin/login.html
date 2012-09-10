@@ -15,7 +15,6 @@
 {% block content %}
 {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
 <div class="alert alert-error">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
     {% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
 </div>
 {% endif %}
@@ -23,7 +22,6 @@
 {% if form.non_field_errors or form.this_is_the_login_form.errors %}
 {% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
 <div class="alert alert-error">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
     {{ error }}
 </div>
 {% endfor %}
@@ -34,8 +32,8 @@
   <div class="control-group {% if form.username.errors or not form.this_is_the_login_form.errors %}error{% endif %}">
     <label for="id_username" class="required control-label">{% trans 'Username:' %}</label>
     <div class="controls">
-        <div class="input-prepend">
-            <span class="add-on"><label for="id_username"><i class="icon-user"></i></label></span>{{ form.username }}
+        <div class="input-append">
+            {{ form.username }}<span class="add-on"><label for="id_username"><i class="icon-user"></i></label></span>
         </div>
         {% if not form.this_is_the_login_form.errors %}
         <ul class="help-inline unstyled">
@@ -47,8 +45,8 @@
   <div class="control-group {% if form.password.errors or not form.this_is_the_login_form.errors %}error{% endif %}">
     <label for="id_password" class="required control-label">{% trans 'Password:' %}</label>
     <div class="controls">
-        <div class="input-prepend">
-            <span class="add-on"><label for="id_password"><i class="icon-lock"></i></label></span>{{ form.password }}
+        <div class="input-append">
+            {{ form.password }}<span class="add-on"><label for="id_password"><i class="icon-lock"></i></label></span>
         </div>
         {% if not form.this_is_the_login_form.errors %}
         <ul class="help-inline unstyled">

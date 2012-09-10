@@ -128,10 +128,10 @@ dd {
     padding: 0;
 }*/
 
-fieldset {
+/*fieldset {
     margin: 0;
     padding: 0;
-}
+}*/
 
 blockquote {
     font-size: 11px;
@@ -415,7 +415,7 @@ table.orderable-initalized .order-cell, body>tr>td.order-cell {
 
 /* FORM DEFAULTS */
 
-input, textarea, select, .form-row p {
+/*input, textarea, select, .form-row p {
     margin: 2px 0;
     padding: 2px 3px;
     vertical-align: middle;
@@ -430,7 +430,7 @@ textarea {
 
 input[type=text], input[type=password], textarea, select, .vTextField {
     border: 1px solid #ccc;
-}
+}*/
 
 /* FORM BUTTONS */
 
