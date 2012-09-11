@@ -21,10 +21,14 @@ def make_crumbs(context, *args, **kwargs):
     if request is not None and len(args) > 0:
         if len(args) == 1:
             request.breadcrumbs(args[0], request.path_info)
-        else:
+        elif len(args) == 2:
             title = args[0]
             url = args[1]
-            request.breadcrumbs(title, reverse(url))
+            request.breadcrumbs(title, url)
+        elif len(args) > 2:
+            title = args[0]
+            url = args[1]
+            request.breadcrumbs(title, reverse(url, args=args[2:], kwargs=kwargs))
         # request.breadcrumbs(mark_safe(''.join(args)), request.path_info)
     return ''
 

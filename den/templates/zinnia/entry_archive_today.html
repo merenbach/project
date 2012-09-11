@@ -1,6 +1,11 @@
 {% extends "zinnia/entry_list.html" %}
-{% load i18n %}
+{% load i18n core_tags %}
 {% load url from future %}
+
+{% block breadcrumb %}
+    {% make_crumbs "Today" %}
+    {{ block.super }}
+{% endblock %}
 
 {% block meta-description %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 

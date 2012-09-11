@@ -1,6 +1,11 @@
 {% extends "zinnia/base.html" %}
-{% load i18n %}
+{% load i18n core_tags %}
 {% load url from future %}
+
+{% block breadcrumb %}
+    {% make_crumbs "Authors" %}
+    {{ block.super }}
+{% endblock %}
 
 {% block meta-description %}{% trans "Author list" %}{% endblock %}
 
