@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load flatpages markup %}
+{% load flatpages markup core_tags %}
 {% block title %}{{ flatpage.title }}{% endblock %}
 {% block content %}
-<article>
-{{ flatpage.content|markdown }}
-</article>
+    <article>
+    {{ flatpage.content|markdown }}
+    </article>
 {% endblock %}
 {% block breadcrumb %}
-{# hide breadcrumbs for now #}
+    {% make_crumbs flatpage.title %}
+    {{ block.super }}
 {% endblock %}

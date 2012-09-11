@@ -1,5 +1,6 @@
 from django import template
-#from django.contrib.auth import models as auth_models
+from django.core.urlresolvers import reverse
+# from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -11,6 +12,20 @@ def active(context, pattern):
         pattern = u'^{}$'.format(pattern)
         if re.search(pattern, request.path):
             return 'active'
+    return ''
+
+@register.simple_tag(takes_context=True)
+def make_crumbs(context, *args, **kwargs):
+    """ Make a first-level breadcrumb trail with the given title. """
+    request = context.get('request', None)
+    if request is not None and len(args) > 0:
+        if len(args) == 1:
+            request.breadcrumbs(args[0], request.path_info)
+        else:
+            title = args[0]
+            url = args[1]
+            request.breadcrumbs(title, reverse(url))
+        # request.breadcrumbs(mark_safe(''.join(args)), request.path_info)
     return ''
 
 # [am] added this on 2011-11-05

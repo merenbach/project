@@ -1,8 +1,10 @@
 {% extends "search/base.html" %}
-{% load pagination_tags highlight %}
+{% load core_tags pagination_tags highlight %}
 
 {% block breadcrumb %}
-{# leave blank for now #}
+    {% make_crumbs "Search" %}
+    {# make_crumbs "Search: &ldquo;" query "&rdquo;" #}
+    {{ block.super }}
 {% endblock %}
 
 {% block title %}Search{% endblock %}
