@@ -17,3 +17,6 @@ body {
 	word-wrap: break-word;
 }
 
+#footer {
+    padding-top: 1em;
+}
