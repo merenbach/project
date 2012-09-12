@@ -10,7 +10,7 @@
 
 {% block meta-description %}{% trans "Archives" %} {{ year }}{% endblock %}
 
-{% block title %}{{ block.super }} <small>{{ year }}</small>{% endblock %}
+{% block subtitle %} <small>{{ year }}</small>{% endblock %}
 
 {% block body-class %}{{ block.super }} archive date year year-{{ year }}{% endblock %}
 

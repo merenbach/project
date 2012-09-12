@@ -9,7 +9,7 @@
 
 {% block meta-description %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block title %}{{ block.super }} <small>{% trans "Today" %}</small>{% endblock %}
+{% block subtitle %} <small>{% trans "Today" %}</small>{% endblock %}
 {% comment %}{% block title %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}{% endcomment %}
 
 {% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }} today{% endblock %}

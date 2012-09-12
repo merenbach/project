@@ -16,7 +16,7 @@
 
 {% block meta-description %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block title %}{{ block.super }} <small>{{ day|date:"Y.m.d" }}</small>{% endblock %}
+{% block subtitle %} <small>{{ day|date:"Y.m.d" }}</small>{% endblock %}
 
 {% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }}{% endblock %}
 
