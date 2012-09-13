@@ -1,5 +1,6 @@
 {% extends "photologue/root.html" %}
 {% load url from future %}
+{% load i18n pagination_tags %}
 
 {% block title %}All Galleries{% endblock %}
 
@@ -26,11 +27,84 @@
     <p>No galleries were found.</p>
 {% endif %}
 
+{% comment %}
+<nav class="pagination">
+	<ul class="pager">
+		{% with previous_entry=object_list.previous_entry %}
+			{% if previous_entry %}
+				<li class="previous entry-previous">
+					<a href="{{ previous_entry.get_absolute_url }}">&larr; {% trans "Previous" %}</a>
+				</li>
+			{% else %}
+				<li class="previous disabled">
+					<a>&larr; {% trans "Previous" %}</a>
+				</li>
+			{% endif %}
+		{% endwith %}
+		{% with next_entry=object_list.next_entry %}
+			{% if next_entry %}
+				<li class="next entry_next">
+					<a href="{{ next_entry.get_absolute_url }}">{% trans "Next" %} &rarr;</a>
+				</li>
+			{% else %}
+				<li class="next disabled">
+					<a>{% trans "Next" %} &rarr;</a>
+				</li>
+			{% endif %}
+		{% endwith %}
+	</ul>
+</nav>
+{% endcomment %}
+
+
+{{ previous }}
 {% if is_paginated %}
-<p>{{ hits }} galleries total.</p>
-<div id="page_controls">
-    <p>{% if has_previous %}<a href="{% url 'pl-gallery-list' previous %}">Previous</a> | {% endif %} page {{ page }} of {{ pages }} {% if has_next %}| <a href="{% url 'pl-gallery-list' next %}">Next</a>{% endif %}</p>
-</div>
+{{ page_obj.current_url }}
+{% with previous_link_decorator="&laquo;" next_link_decorator="&raquo;" %}
+<nav class="pagination pagination-centered">
+	<ul>
+		{# Previous #}
+		{% if page_obj.has_previous or has_previous %}
+
+			<li><a href="{% url 'pl-gallery-list' page_obj.previous_page_number %}" title="Previous page">{{ previous_link_decorator|safe }}</a></li>
+			{#<li><a href="../{% firstof previous page_obj.previous_page_number %}/" title="Previous page">&laquo;</a></li>#}
+		{% else %}
+			<li class="disabled"><a href="#">{{ previous_link_decorator|safe }}</a></li>
+		{% endif %}
+
+		{# legacy list views (Django < 1.3) #}
+		{% if page_range %}
+			{% for linkpage in page_range %}
+				{% ifequal linkpage page %}
+					<li class="active"><a>{{ page }}</a></li>
+				{% else %}
+					<li><a href="{% url 'pl-gallery-list' linkpage %}">{{ linkpage }}</a></li>
+					{#<li><a href="../{{ linkpage }}">{{ linkpage }}</a></li>#}
+				{% endifequal %}
+			{% endfor %}
+		{% else %}
+			{# class based list views (Django > 1.3) #}
+			{% for linkpage in paginator.page_range %}
+				{% ifequal linkpage page_obj.number %}
+					<li class="active"><a>{{ linkpage }}</a></li>
+				{% else %}
+					<li><a href="{% url 'pl-gallery-list' linkpage %}">{{ linkpage }}</a></li>
+					{#<li><a href="../{{ linkpage }}">{{ linkpage }}</a></li>#}
+				{% endifequal %}
+			{% endfor %}
+		{% endif %}
+
+		{# Next #}
+		{% if page_obj.has_next or has_next %}
+			<li><a href="{% url 'pl-gallery-list' page_obj.next_page_number %}" title="Next page">{{ next_link_decorator|safe }}</a></li>
+			{#<li><a href="../{% firstof next page_obj.next_page_number %}/" title="Next page">&raquo;</a></li>#}
+		{% else %}
+			<li class="disabled"><a href="#">{{ next_link_decorator|safe }}</a></li>
+		{% endif %}
+	</ul>
+</nav>
+{% endwith %}
+	{# paginate #}
 {% endif %}
 
 {% endblock %}

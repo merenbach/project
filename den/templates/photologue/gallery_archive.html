@@ -1,8 +1,14 @@
 {% extends "photologue/root.html" %}
+{% load core_tags %}
 {% load url from future %}
 
 {% block title %}Latest Photo Galleries{% endblock %}
 
+{% block breadcrumb %}
+    {% url "pl-gallery-archive" as archive_url %}
+    {% make_crumbs "Latest Photo Galleries" archive_url %}
+    {{ block.super }}
+{% endblock %}
 {% block content %}
 
 {% comment %}<h1>Latest Photo Galleries</h1>{% endcomment %}

@@ -1,6 +1,14 @@
 {% extends "photologue/root.html" %}
-{% load markup %}
+{% load markup core_tags %}
 {% load url from future %}
+
+{% block breadcrumb %}
+    {% url "pl-gallery-archive" as archive_url %}
+    {% url "pl-gallery-detail" as gallery_url %}
+    {% make_crumbs "Galleries" archive_url %}
+    {% make_crumbs object.title gallery_url %}
+    {{ block.super }}
+{% endblock %}
 
 {% block title %}{{ object.title }}{% endblock %}
 {% block subtitle %} <small>{{ object.date_added|date:"Y.m.d" }}</small>{% endblock %}
