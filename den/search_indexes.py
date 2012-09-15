@@ -60,7 +60,7 @@ class EntryIndex(indexes.SearchIndex, indexes.Indexable):
 class GalleryIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     title = indexes.CharField(model_attr='title')
-    # caption = indexes.CharField(model_attr='caption')
+    # description = indexes.CharField(model_attr='caption')
     url = indexes.CharField(model_attr='get_absolute_url')
     pub_date = indexes.DateTimeField(model_attr='date_added')
 

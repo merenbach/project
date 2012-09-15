@@ -1,3 +1,4 @@
 {% load markup %}
+{{ object.title }}
 {{ object.content|markdown }}
 {{ object.tags|safe }}
