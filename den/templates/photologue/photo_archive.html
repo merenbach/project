@@ -26,6 +26,7 @@
 {% else %}
 <p>No photos were found.</p>
 {% endif %}
-<p><a class="btn" href="{% url 'pl-photo-list' 1 %}">View all photographs</a></p>
+
+<p><a href="{% url 'pl-photo-list' 1 %}">View all photographs</a></p>
 
 {% endblock %}

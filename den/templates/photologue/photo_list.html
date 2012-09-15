@@ -27,7 +27,7 @@
 <p>No photos were found.</p>
 {% endif %}
 
-{# {% if is_paginated %} #}
+{% if is_paginated %}
     <ul class="pager">
         {% if page_obj.has_previous %}
             <li class="previous">
@@ -51,6 +51,6 @@
             </li>    
         {% endif %}
     </ul>
-{# {% endif %} #}
+{% endif %}
 
 {% endblock %}

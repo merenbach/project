@@ -247,9 +247,9 @@ XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 # Pagination
 # http://packages.python.org/linaro-django-pagination/usage.html#how-to-use-linaro-django-pagination
 PAGINATION_INVALID_PAGE_RAISES_404 = True
-PAGINATION_PREVIOUS_LINK_DECORATOR = '&laquo;'
-PAGINATION_NEXT_LINK_DECORATOR = '&raquo;'
-PAGINATION_CLEAN_URL = True
+# PAGINATION_PREVIOUS_LINK_DECORATOR = '&laquo;'
+# PAGINATION_NEXT_LINK_DECORATOR = '&raquo;'
+PAGINATION_CLEAN_URL = False
 
 # Override zinnia.xmlrpc with our own
 # (If this stops working, try moving to top of file)
