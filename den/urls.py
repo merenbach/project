@@ -39,7 +39,6 @@ urlpatterns = patterns('',
     (r'^contact/', include('contact.urls')),
     (r'^ciphers/', include('ciphers.urls')),
     (r'^software/', include('software.urls')),
-    (r'^photologue/', include('photologue_urls')),
     # (r'^search/', include('haystack.urls')),
     url(r'^search/', search_view_factory(
             view_class=SearchView,
@@ -53,7 +52,8 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^comments/', include('django.contrib.comments.urls')),
-    url(r'^', include('zinnia.urls')),
+    (r'^', include('zinnia.urls')),
+    (r'^', include('photologue_urls')),
 )
 
 urlpatterns += patterns('django.contrib.flatpages.views',

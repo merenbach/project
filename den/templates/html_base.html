@@ -68,10 +68,12 @@
     				<div class="nav-collapse">
     					<ul class="nav">
                             {% url about as about_url %}
+                            {# {% url pl-gallery-archive as gallery_url %} #}
                             {% url software as software_url %}
                             {% url ciphers as ciphers_url %}
     						{% url contact as contact_url %}
                             <li class="{% active about_url %}"><a href="{{ about_url }}">About</a></li>
+                            {# <li class="{% active gallery_url %}"><a href="{{ gallery_url }}">Gallery</a></li> #}
                             <li class="{% active software_url %}"><a href="{{ software_url }}">Software</a></li>
                             <li class="{% active ciphers_url %}"><a href="{{ ciphers_url }}">Ciphers</a></li>
     						<li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
@@ -81,17 +83,18 @@
     					</form>
     					<ul class="nav pull-right">
     						<li class="dropdown">
-    							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    							<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
     								Links
     								<b class="caret"></b>
     							</a>
     							<ul class="dropdown-menu">
-    								<li><a target="_blank" href="https://www.djangoproject.com/">Django</a></li>
+    								<li><a target="_blank" href="https://www.djangoproject.com/" title="Django Project">Django</a></li>
+                                    <li><a target="_blank" href="http://twitter.github.com/bootstrap/" title="Twitter Bootstrap">Twitter Bootstrap</a></li>
     								<li class="divider"></li>
-    								<li><a target="_blank" href="http://www.aclu.org/">American Civil Liberties Union</a></li>
-    								<li><a target="_blank" href="http://www.democrats.org/">Democratic National Committee</a></li>
-    								<li><a target="_blank" href="http://ffrf.org/">Freedom From Religion Foundation</a></li>
-    								<li><a target="_blank" href="http://www.plannedparenthood.org/">Planned Parenthood</a></li>
+    								<li><a target="_blank" href="http://www.aclu.org/" title="American Civil Liberties Union">American Civil Liberties Union</a></li>
+    								<li><a target="_blank" href="http://www.democrats.org/" title="Democratic National Committee">Democratic National Committee</a></li>
+    								<li><a target="_blank" href="http://ffrf.org/" title="Freedom From Religion Foundation">Freedom From Religion Foundation</a></li>
+    								<li><a target="_blank" href="http://www.plannedparenthood.org/" title="Planned Parenthood">Planned Parenthood</a></li>
     							</ul>
     						</li>
     					</ul>
