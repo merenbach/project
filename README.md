@@ -1,5 +1,8 @@
 # README for Project
 
+## Configuration for MarsEdit
+Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as blogging system for use of tags.
+
 ## TODO
 - Remove outdated/unused CSS (sticky, normalize, handheld, antiscreen (?))
 
