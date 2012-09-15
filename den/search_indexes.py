@@ -37,7 +37,6 @@ class EntryIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self):
         """Used when the entire index for model is updated."""
-	from zinnia.managers import PUBLISHED
         return self.get_model().published.all()
 
 #class ArticleIndex(indexes.SearchIndex, indexes.Indexable):
@@ -57,3 +56,33 @@ class EntryIndex(indexes.SearchIndex, indexes.Indexable):
 #        """Used when the entire index for model is updated."""
 #        return self.get_model().objects.live().all()
 #
+
+class GalleryIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
+    # caption = indexes.CharField(model_attr='caption')
+    url = indexes.CharField(model_attr='get_absolute_url')
+    pub_date = indexes.DateTimeField(model_attr='date_added')
+
+    def get_model(self):
+        from photologue.models import Gallery
+        return Gallery
+
+    def index_queryset(self):
+        """Used when the entire index for model is updated."""
+        return self.get_model().objects.filter(is_public=True).all()
+
+class PhotoIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
+    # caption = indexes.CharField(model_attr='caption')
+    url = indexes.CharField(model_attr='get_absolute_url')
+    pub_date = indexes.DateTimeField(model_attr='date_added')
+
+    def get_model(self):
+        from photologue.models import Photo
+        return Photo
+
+    def index_queryset(self):
+        """Used when the entire index for model is updated."""
+        return self.get_model().objects.filter(is_public=True).all()
