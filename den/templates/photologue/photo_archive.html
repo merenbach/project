@@ -1,7 +1,15 @@
 {% extends "photologue/root.html" %}
 {% load url from future %}
+{% load core_tags %}
 
-{% block title %}Latest Photos{% endblock %}
+{% block title %}Photos{% endblock %}
+{% block subtitle %} <small>Latest</small>{% endblock %}
+
+{% block breadcrumb %}
+    {% url "pl-photo-archive" as archive_url %}
+    {% make_crumbs "Photos" archive_url %}
+    {{ block.super }}
+{% endblock %}
 
 {% block content %}
 
@@ -18,6 +26,6 @@
 {% else %}
 <p>No photos were found.</p>
 {% endif %}
-<p><a href="{% url 'pl-photo-list' 1 %}">View all photographs</a></p>
+<p><a class="btn" href="{% url 'pl-photo-list' 1 %}">View all photographs</a></p>
 
 {% endblock %}

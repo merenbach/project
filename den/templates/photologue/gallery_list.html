@@ -1,7 +1,15 @@
 {% extends "photologue/root.html" %}
 {% load url from future %}
+{% load i18n core_tags %}
 
-{% block title %}All Galleries{% endblock %}
+{% block title %}Galleries{% endblock %}
+{% block subtitle %} <small>Archive</small>{% endblock %}
+
+{% block breadcrumb %}
+    {% url "pl-gallery-archive" as archive_url %}
+    {% make_crumbs "Galleries" archive_url %}
+    {{ block.super }}
+{% endblock %}
 
 {% block content %}
 
@@ -26,11 +34,60 @@
     <p>No galleries were found.</p>
 {% endif %}
 
-{% if is_paginated %}
-<p>{{ hits }} galleries total.</p>
-<div id="page_controls">
-    <p>{% if has_previous %}<a href="{% url 'pl-gallery-list' previous %}">Previous</a> | {% endif %} page {{ page }} of {{ pages }} {% if has_next %}| <a href="{% url 'pl-gallery-list' next %}">Next</a>{% endif %}</p>
-</div>
-{% endif %}
+{% comment %}
+<nav class="pagination">
+	<ul class="pager">
+		{% with previous_entry=object_list.previous_entry %}
+			{% if previous_entry %}
+				<li class="previous entry-previous">
+					<a href="{{ previous_entry.get_absolute_url }}">&larr; {% trans "Previous" %}</a>
+				</li>
+			{% else %}
+				<li class="previous disabled">
+					<a>&larr; {% trans "Previous" %}</a>
+				</li>
+			{% endif %}
+		{% endwith %}
+		{% with next_entry=object_list.next_entry %}
+			{% if next_entry %}
+				<li class="next entry_next">
+					<a href="{{ next_entry.get_absolute_url }}">{% trans "Next" %} &rarr;</a>
+				</li>
+			{% else %}
+				<li class="next disabled">
+					<a>{% trans "Next" %} &rarr;</a>
+				</li>
+			{% endif %}
+		{% endwith %}
+	</ul>
+</nav>
+{% endcomment %}
+
+
+{# {% if is_paginated %} #}
+    <ul class="pager">
+        {% if page_obj.has_previous %}
+            <li class="previous">
+                <a href="{% url 'pl-gallery-list' page_obj.previous_page_number %}">&larr; Previous</a>
+            </li>
+        {% else %}
+            <li class="previous disabled">
+                <a href="javascript:void(0);">&larr; Previous</a>
+            </li>
+        {% endif %}
+    
+        <li><span>{{ page_obj.number }} / {{ paginator.num_pages }}</span></li>
+    
+        {% if page_obj.has_next %}
+            <li class="next">
+                <a href="{% url 'pl-gallery-list' page_obj.next_page_number %}">Next &rarr;</a>
+            </li>
+        {% else %}
+            <li class="next disabled">
+                <a href="javascript:void(0);">Next &rarr;</a>
+            </li>    
+        {% endif %}
+    </ul>
+{# {% endif %} #}
 
 {% endblock %}

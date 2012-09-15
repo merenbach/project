@@ -2,25 +2,25 @@
 <nav class="pagination pagination-centered">
 <ul>
     {% if page_obj.has_previous %}
-    <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}">&laquo;</a></li>
+	    <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}">{{ previous_link_decorator|safe }}</a></li>
     {% else %}
-    <li class="disabled"><a href="#">&laquo;</a></li>
+	    <li class="disabled"><a href="#">{{ previous_link_decorator|safe }}</a></li>
     {% endif %}
     {% for page in pages %}
-    {% if page %}
-    {% ifequal page page_obj.number %}
-    <li class="active"><a>{{ page }}</a></li>
-    {% else %}
-    <li><a href="?page={{ page }}{{ getvars }}">{{ page }}</a></li>
-    {% endifequal %}
-    {% else %}
-    <li class="disabled"><a href="#">&hellip;</a></li>
-    {% endif %}
+	    {% if page %}
+		    {% ifequal page page_obj.number %}
+			    <li class="active"><a>{{ page }}</a></li>
+		    {% else %}
+			    <li><a href="?page={{ page }}{{ getvars }}">{{ page }}</a></li>
+		    {% endifequal %}
+	    {% else %}
+		    <li class="disabled"><a href="#">&hellip;</a></li>
+	    {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-    <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}">&raquo;</a></li>
+	    <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}">{{ next_link_decorator|safe }}</a></li>
     {% else %}
-    <li class="disabled"><a href="#">&raquo;</a></li>
+	    <li class="disabled"><a href="#">{{ next_link_decorator|safe }}</a></li>
     {% endif %}
 </ul>
 </nav>

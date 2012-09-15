@@ -1,8 +1,16 @@
 {% extends "photologue/root.html" %}
 
-{% load photologue_tags %}
+{% load photologue_tags core_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
+{% block subtitle %} <small>{{ object.date_added|date:"Y.m.d" }}</small>{% endblock %}
+
+{% block breadcrumb %}
+    {% url pl-photo-archive as archive_url %}
+    {% make_crumbs "Photos" archive_url %}
+    {% make_crumbs object.title %}
+    {{ block.super }}
+{% endblock %}
 
 {% block content %}
 

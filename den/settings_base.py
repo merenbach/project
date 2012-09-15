@@ -86,7 +86,7 @@ MIDDLEWARE_CLASSES = (
     #'pagination.middleware.PaginationMiddleware',
     'linaro_django_pagination.middleware.PaginationMiddleware',
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
-    'breadcrumbs.middleware.FlatpageFallbackMiddleware',
+    #'breadcrumbs.middleware.FlatpageFallbackMiddleware',
     'maintenance.middleware.MaintenanceMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
@@ -244,11 +244,18 @@ ZINNIA_WYSIWYG = False
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
 
+# Pagination
+# http://packages.python.org/linaro-django-pagination/usage.html#how-to-use-linaro-django-pagination
+PAGINATION_INVALID_PAGE_RAISES_404 = True
+PAGINATION_PREVIOUS_LINK_DECORATOR = '&laquo;'
+PAGINATION_NEXT_LINK_DECORATOR = '&raquo;'
+PAGINATION_CLEAN_URL = True
+
 # Override zinnia.xmlrpc with our own
 # (If this stops working, try moving to top of file)
 import zinnia_xmlrpc
 sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
 
 # Override photologue.urls with our own.
-#import photologue_urls
-#sys.modules['photologue.urls'] = photologue_urls
+# import photologue_urls
+# sys.modules['photologue.urls'] = photologue_urls
