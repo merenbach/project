@@ -16,20 +16,19 @@ dajaxice_autodiscover()
 from haystack.forms import SearchForm
 from haystack.views import SearchView
 from haystack.views import search_view_factory
-# from haystack.query import SearchQuerySet
-# from haystack.query import SQ
 
 # Sitemaps
 from django.contrib.sitemaps import FlatPageSitemap
 from software.sitemaps import SoftwareSitemap
 from zinnia.sitemaps import EntrySitemap
+# from photologue.sitemaps import PhotologueSitemap
+
 sitemaps = {
     'pages': FlatPageSitemap,
     'zinnia': EntrySitemap,
     'software': SoftwareSitemap,
+    # 'photologue': PhotologueSitemap,
 }
-
-handler500 = 'views.server_error'
 
 # Examples:
 # url(r'^$', 'project.views.home', name='home'),
@@ -64,10 +63,9 @@ urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG:
     urlpatterns = patterns('',
-        #(r'^500/$', 'django.views.defaults.server_error'),
-        (r'^403/$', 'django.views.defaults.permission_denied'),
+        (r'^500/$', 'django.views.defaults.server_error'),
         (r'^404/$', 'django.views.defaults.page_not_found'),
-        (r'^500/$', handler500),  # use our custom view
+        (r'^403/$', 'django.views.defaults.permission_denied'),
         #(r'^503/$', 'views.maintenance.something'),  # use our custom view
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
