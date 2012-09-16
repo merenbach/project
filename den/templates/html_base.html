@@ -68,12 +68,12 @@
     				<div class="nav-collapse">
     					<ul class="nav">
                             {% url about as about_url %}
-                            {# {% url pl-gallery-archive as gallery_url %} #}
+                            {% url pl-gallery-archive as gallery_url %}
                             {% url software as software_url %}
                             {% url ciphers as ciphers_url %}
     						{% url contact as contact_url %}
                             <li class="{% active about_url %}"><a href="{{ about_url }}">About</a></li>
-                            {# <li class="{% active gallery_url %}"><a href="{{ gallery_url }}">Gallery</a></li> #}
+                            <li class="{% active gallery_url %}"><a href="{{ gallery_url }}">Gallery</a></li>
                             <li class="{% active software_url %}"><a href="{{ software_url }}">Software</a></li>
                             <li class="{% active ciphers_url %}"><a href="{{ ciphers_url }}">Ciphers</a></li>
     						<li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
