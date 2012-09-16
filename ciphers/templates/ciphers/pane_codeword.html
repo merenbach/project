@@ -1,0 +1,16 @@
+<section class="pane" id="codeword_pane">
+	<p>One of the easiest monoalphabetic substitution ciphers to implement&#8212;save for, possibly, the Caesar shift and the Atbash cipher&#8212;the codeword creates a ciphertext alphabet from a keyword followed by the plaintext alphabet minus the keyword's letters.</p>
+	<fieldset>
+		<legend>Parameters</legend>
+		{% include "ciphers/snippet_source.html" %}
+		{% include "ciphers/snippet_keyword.html" %}
+		{% include "ciphers/snippet_options.html" %}
+		{% include "ciphers/snippet_chunk.html" %}
+        {% include "ciphers/snippet_operation.html" %}
+	</fieldset>
+	<fieldset>
+		<legend>Output</legend>
+        {% include "ciphers/snippet_target.html" %}
+        {% include "ciphers/snippet_alphabets.html" %}
+	</fieldset>
+</section>

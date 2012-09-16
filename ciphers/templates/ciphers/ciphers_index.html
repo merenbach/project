@@ -2,6 +2,7 @@
 {% load sekizai_tags compress dajaxice_templatetags static %}
 
 {% block title %}Ciphers{% endblock %}
+{% block subtitle %} <small>Alpha</small>{% endblock %}
 
 {% block extra_js %}
 {{ block.super }}
@@ -10,164 +11,158 @@
 {% dajaxice_js_import %}
 <script type="text/javascript" charset="utf-8" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
 <script type="text/javascript">
+    
+    (function($) {
+        var $field_source     = $('.field-source');
+        var $field_target     = $('.field-target');
+        var $field_lowercase  = $('.field-lowercase');
+        var $field_filter     = $('.field-filter');
+        var $field_chunk      = $('.field-chunk');
+        var $field_target     = $('.field-target');
+        var $field_multiplier = $('.field-multiplier');
+        var $field_additive   = $('.field-additive');
+        var $field_shift      = $('.field-shift');
+        var $field_keyword    = $('.field-keyword');
+        var $field_passphrase = $('.field-passphrase');
+        var $field_primer     = $('.field-primer');
+        var $field_digits     = $('.field-digits');
+        // var $radio_operation  = $('input:radio[name=operation]:checked');
+        var $radio_autoclave  = $('input:radio[name=autoclave]');
 
-function transcodeAffine() {
-	var message = $('#af_source').val();
-	var multiplier = $('#af_multiplier').val();
-	var additive = $('#af_additive').val();
-	var filter = $('#af_filter').is(':checked') ? true : false;
-	var lower = $('#af_lower').is(':checked') ? true : false;
-	var chunk = parseInt($('#af_chunk').val());
-	var encode = ($('input:radio[name=af_operation]:checked').val() == 'encode') ? true : false;
+        function transcode_message($pane, transcode_callback) {
+        	var message = $pane.find($field_source).val();
+            if (typeof(message) === 'string' && message !== '') {
+                var message_args = {};
+                message_args.message = message;
+            	message_args.should_filter = $pane.find($field_filter).is(':checked') ? true : false;
+            	message_args.lower = $pane.find($field_lowercase).is(':checked') ? true : false;
+            	message_args.chunk = parseInt($pane.find($field_chunk).val());
+                
+                try {
+                     message_args.multiplier = $pane.find($field_multiplier).val();
+                } finally {}
+                
+                try {
+                    message_args.additive = $pane.find($field_additive).val();
+                } finally {}
+                
+                try {
+                	message_args.shift = $pane.find($field_shift).val();
+                } finally {}
+                
+                try {
+                	message_args.keyword = $pane.find($field_keyword).val();
+                } finally {}
+                
+                try {
+                    message_args.passphrase = $pane.find($field_passphrase).val();
+                } finally{}
+                
+                try {
+                    message_args.primer = $pane.find($field_primer).val();
+                } finally{}
+                
+                try {
+                    var $field = $pane.find($field_digits);
+                    if ($field.length) {
+                        message_args.use_digits = $field.is(':checked') ? true : false;
+                    }
+                } finally{}
+                
+                // try {
+                //     var $field = $pane.find($radio_operation);
+                //     if ($field.length) {
+                //         message_args.operation = ($field.val() === 'encode') ? true : false;
+                //     }
+                // } finally{}
+                
+                try {
+                    var $field = $pane.find($radio_autoclave).filter(':checked');
+                    if ($field.length) {
+                        message_args.autoclave = ($field.val() === 'text') ? true : false;
+                    }
+                } finally{}
 
-	if (message != '') {
-		$('#af_target').val('Processing...');
-		Dajaxice.ciphers.transcode_affine(Dajax.process, {
-			'message': message,
-			'multiplier': multiplier,
-			'additive': additive,
-			'lower': lower,
-			'should_filter': filter,
-			'chunk': chunk,
-			'encode': encode
-		});
-	}
-}
+        		$pane.find($field_target).val('');
+                // $pane.find($field_target).val('Processing...');
+        		transcode_callback(Dajax.process, message_args);
+            }
+        }
 
-function transcodeAtbash() {
-	var message = $('#at_source').val();
-	var filter = $('#at_filter').is(':checked') ? true : false;
-	var lower = $('#at_lower').is(':checked') ? true : false;
-	var chunk = parseInt($('#at_chunk').val());
+        function encode_affine() {
+            var $pane = $('#affine_pane');
+            transcode_message($pane, Dajaxice.ciphers.encode_affine);
+        }
+        
+        function decode_affine() {
+            var $pane = $('#affine_pane');
+            transcode_message($pane, Dajaxice.ciphers.decode_affine);
+        }
 
+        function transcode_atbash() {
+            var $pane = $('#atbash_pane');
+            transcode_message($pane, Dajaxice.ciphers.transcode_atbash);
+        }
 
-	if (message != '') {
-		$('#at_target').val('Processing...');
-		Dajaxice.ciphers.transcode_atbash(Dajax.process, {
-			'message': message,
-			'lower': lower,
-			'should_filter': filter,
-			'chunk': chunk
-		});
-	}
-}
+        function transcode_beaufort() {
+            var $pane = $('#beaufort_pane');
+            transcode_message($pane, Dajaxice.ciphers.transcode_beaufort);
+        }
 
-function transcodeBeaufort() {
-	var message = $('#bf_source').val();
-	var passphrase = $('#bf_passphrase').val();
-	var primer = parseInt($('#bf_primer').val());
-	var alphakey = $('#bf_alphakey').val();
-	var digits = $('#bf_digits').is(':checked') ? true : false;
-	var filter = $('#bf_filter').is(':checked') ? true : false;
-	var lower = $('#bf_lower').is(':checked') ? true : false;
-	var chunk = parseInt($('#bf_chunk').val());
+        function encode_caesar() {
+            var $pane = $('#caesar_pane');
+            transcode_message($pane, Dajaxice.ciphers.encode_caesar);
+        }
+        
+        function decode_caesar() {
+            var $pane = $('#caesar_pane');
+            transcode_message($pane, Dajaxice.ciphers.decode_caesar);
+        }
 
-	if (message != '') {
-		$('#bf_target').val('Processing...');
-		Dajaxice.ciphers.transcode_beaufort(Dajax.process, {
-			'message': message,
-			'passphrase': passphrase,
-			'keyword': alphakey,
-			'primer': primer,
-			'use_digits': digits,
-			'lower': lower,
-			'should_filter': filter,
-			'chunk': chunk
-		});
-	}
-}
+        function encode_codeword() {
+            var $pane = $('#codeword_pane');
+            transcode_message($pane, Dajaxice.ciphers.encode_codeword);
+        }
+        
+        function decode_codeword() {
+            var $pane = $('#codeword_pane');
+            transcode_message($pane, Dajaxice.ciphers.decode_codeword);
+        }
 
-function transcodeCaesar() {
-	var message = $('#cr_source').val();
-	var shift = $('#cr_shift').val();
-	var filter = $('#cr_filter').is(':checked') ? true : false;
-	var lower = $('#cr_lower').is(':checked') ? true : false;
-	var chunk = parseInt($('#cr_chunk').val());
-	var encode = ($('input:radio[name=cr_operation]:checked').val() == 'encode') ? true : false;
+        function encode_vigenere() {
+        	var $pane = $('#vigenere_pane');
+            transcode_message($pane, Dajaxice.ciphers.encode_vigenere);
+        }
 
-	if (message != '') {
-		$('#cr_target').val('Processing...');
-		Dajaxice.ciphers.transcode_caesar(Dajax.process, {
-			'message': message,
-			'shift': shift,
-			'lower': lower,
-			'should_filter': filter,
-			'chunk': chunk,
-			'encode': encode
-		});
-	}
-}
+        function decode_vigenere() {
+        	var $pane = $('#vigenere_pane');
+            transcode_message($pane, Dajaxice.ciphers.decode_vigenere);
+        }
 
-function transcodeCodeword() {
-	var message = $('#cw_source').val();
-	var keyword = $('#cw_keyword').val();
-	var filter = $('#cw_filter').is(':checked') ? true : false;
-	var lower = $('#cw_lower').is(':checked') ? true : false;
-	var chunk = parseInt($('#cw_chunk').val());
-	var encode = ($('input:radio[name=cw_operation]:checked').val() == 'encode') ? true : false;
+        $(document).ready(function() {
+            $('.pane').hide();
 
-	if (message != '') {
-		$('#cw_target').val('Processing...');
-		Dajaxice.ciphers.transcode_codeword(Dajax.process, {
-			'message': message,
-			'keyword': keyword,
-			'lower': lower,
-			'should_filter': filter,
-			'chunk': chunk,
-			'encode': encode
-		});
-	}
-}
+            $('#scheme').change(function() {
+            	el_id = $(this).val();
+            	$('.pane').hide();
+            	$('#' + el_id + '_pane').show();
+            });
 
-function transcodeVigenere() {
-	var message = $('#vi_source').val();
-	var passphrase = $('#vi_passphrase').val();
-	var primer = parseInt($('#vi_primer').val());
-	var alphakey = $('#vi_alphakey').val();
-	var autoclave = ($('input:radio[name=vi_autoclave]:checked').val() == 'text') ? true : false;
-	var digits = $('#vi_digits').is(':checked') ? true : false;
-	var filter = $('#vi_filter').is(':checked') ? true : false;
-	var lower = $('#vi_lower').is(':checked') ? true : false;
-	var chunk = parseInt($('#vi_chunk').val());
-	var encode = ($('input:radio[name=vi_operation]:checked').val() == 'encode') ? true : false;
+        	$('#affine_pane .button-encode').click(encode_affine);
+        	$('#affine_pane .button-decode').click(decode_affine);
+        	$('#atbash_pane .button-transcode').click(transcode_atbash);
+        	$('#caesar_pane .button-encode').click(encode_caesar);
+        	$('#caesar_pane .button-decode').click(decode_caesar);
+        	$('#beaufort_pane .button-transcode').click(transcode_beaufort);
+        	$('#codeword_pane .button-encode').click(encode_codeword);
+        	$('#codeword_pane .button-decode').click(decode_codeword);
+        	$('#vigenere_pane .button-encode').click(encode_vigenere);
+        	$('#vigenere_pane .button-decode').click(decode_vigenere);
 
-	if (message != '') {
-		$('#vi_target').val('Processing...');
-		Dajaxice.ciphers.transcode_vigenere(Dajax.process, {
-			'message': message,
-			'passphrase': passphrase,
-			'autoclave': autoclave,
-			'keyword': alphakey,
-			'primer': primer,
-			'use_digits': digits,
-			'lower': lower,
-			'should_filter': filter,
-			'chunk': chunk,
-			'encode': encode
-		});
-	}
-}
-
-$('#scheme').change(function() {
-	el_id = $(this).val();
-	$('.pane').hide();
-	$('#' + el_id + '_pane').show();
-});
-
-$(document).ready(function() {
-	$('.pane').hide();
-
-	$('#affine_pane button').click(transcodeAffine);
-	$('#atbash_pane button').click(transcodeAtbash);
-	$('#caesar_pane button').click(transcodeCaesar);
-	$('#beaufort_pane button').click(transcodeBeaufort);
-	$('#codeword_pane button').click(transcodeCodeword);
-	$('#vigenere_pane button').click(transcodeVigenere);
-
-	$('#intro_pane').show();
-	window.onbeforeunload = function() {
-	};
-});
+        	$('#intro_pane').show();
+        	window.onbeforeunload = function() {};
+        });
+    })(jQuery);
 
 </script>
 {% endcompress %}
@@ -218,473 +213,12 @@ $(document).ready(function() {
 				To begin, please select a scheme from the menu.
 			</p>
 		</section>
-		<section class="pane" id="affine_pane">
-			<p>The affine cipher, a monoalphabetic substitution cipher, makes use of an intriguing multiplier and additive to generate letters based upon a simple formula (which varies based upon the multiplier and additive).  This also represents its downfall, for if an attacker finds two letters, the whole formula can be discerned.</p>
-			<fieldset>
-				<legend>Parameters</legend>
-				<div class="control-group">
-					<label class="control-label">Source Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="af_source" rows="4" cols="20"></textarea>
-						<span class="help-inline">The text to transcode</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Multiplier</label>
-					<div class="controls">
-						<input type="number" id="af_multiplier" value="1" required>
-						<span class="help-inline">The multiplier with which to transcode the text</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Additive</label>
-					<div class="controls">
-						<input type="number" id="af_additive" value="0" required>
-						<span class="help-inline">The additive with which to transcode the text</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Options</span>
-					</legend>
-					<div class="control-group">
-						<div class="controls">
-							<label class="checkbox inline"><input id="af_filter" type="checkbox">Filter Text</label>
-							<label class="checkbox inline"><input id="af_lower" type="checkbox">Convert to Lowercase</label>
-							<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-						</div>
-					</div>
-				</fieldset>
-				<div class="control-group">
-					<label class="control-label" for="af_chunk">Chunk Size</label>
-					<div class="controls">
-						<input type="number" id="af_chunk" value="0">
-						<span class="help-inline">The chunk size for the output</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Operation</span>
-					</legend>
-					<div class="control-group">
-						<div class="controls">
-							<label class="radio inline"><input name="af_operation" type="radio" value="encode" checked>Encode</label>
-							<label class="radio inline"><input name="af_operation" type="radio" value="decode">Decode</label>
-							<p class="help-block">Should the program encode or decode the text?</p>
-						</div>
-					</div>
-				</fieldset>
-				<div class="form-actions">
-					<button class="btn" type="button">Transcode</button>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Output</legend>
-				<div class="control-group">
-					<label class="control-label">Target Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="af_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<span class="help-inline">The result of the transcoding process</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Clear Alphabet</label>
-					<div class="controls">
-						<input type="text" id="af_plaintext" value="" readonly="readonly">
-						<span class="help-inline">The standard alphabet, in canonical order</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Code Alphabet</label>
-					<div class="controls">
-						<input type="text" id="af_ciphertext" value="" readonly="readonly">
-						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
-					</div>
-				</div>
-			</fieldset>
-		</section>
-		<section class="pane" id="atbash_pane">
-			<p>The Atbash cipher, with old Hebrew roots, reverses here the plaintext alphabet under itself to create the ciphertext alphabet.  A becomes Z, B becomes Y, C becomes X, and M becomes N.  This represents a fairly simple monoalphabetic substitution cipher.</p>
-			<fieldset>
-				<legend>Parameters</legend>
-				<div class="control-group">
-					<label class="control-label">Source Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="at_source" rows="4" cols="20"></textarea>
-						<span class="help-inline">The text to transcode</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<fieldset>
-						<legend>
-							<span>Options</span>
-						</legend>
-						<div class="controls">
-							<label class="checkbox inline"><input id="at_filter" type="checkbox">Filter Text</label>
-							<label class="checkbox inline"><input id="at_lower" type="checkbox">Convert to Lowercase</label>
-							<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-						</div>
-					</fieldset>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Chunk Size</label>
-					<div class="controls">
-						<input type="number" id="at_chunk" value="0">
-						<span class="help-inline">The chunk size for the output</span>
-					</div>
-				</div>
-				<div class="form-actions">
-					<button class="btn" type="button">Transcode</button>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Output</legend>
-				<div class="control-group">
-					<label class="control-label">Target Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="at_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<span class="help-inline">The result of the transcoding process</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Clear Alphabet</label>
-					<div class="controls">
-						<input type="text" id="at_plaintext" value="" readonly="readonly">
-						<span class="help-inline">The standard alphabet, in canonical order</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Code Alphabet</label>
-					<div class="controls">
-						<input type="text" id="at_ciphertext" value="" readonly="readonly">
-						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
-					</div>
-				</div>
-			</fieldset>
-		</section>
-		<section class="pane" id="beaufort_pane">
-			{% comment %}
-			<p>Description goes here.</p>
-			{% endcomment %}
-			<fieldset>
-				<legend>Parameters</legend>
-				<div class="control-group">
-					<label class="control-label">Source Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="bf_source" rows="4" cols="20"></textarea>
-						<span class="help-inline">The text to transcode</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Passphrase</label>
-					<div class="controls">
-						<textarea class="input-large" id="bf_passphrase" rows="4" cols="20"></textarea>
-						<span class="help-inline">The passphrase with which to transcode the text</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Primer Index</label>
-					<div class="controls">
-						<input type="number" min="0" value="0" id="bf_primer">
-						<span class="help-inline">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Alphabet Key</label>
-					<div class="controls">
-						<input type="text" id="bf_alphakey">
-						<span class="help-inline">The keyword with which to generate the alphabetic tableaux</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Transcoding</span>
-					</legend>
-					<div class="controls">
-						<label class="checkbox inline"><input id="bf_digits" type="checkbox">Allow Digits</label>
-						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend>
-						<span>Options</span>
-					</legend>
-					<div class="controls">
-						<label class="checkbox inline"><input id="bf_filter" type="checkbox">Filter Text</label>
-						<label class="checkbox inline"><input id="bf_lower" type="checkbox">Convert to Lowercase</label>
-						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-					</div>
-				</fieldset>
-				<div class="control-group">
-					<label class="control-label">Chunk Size</label>
-					<div class="controls">
-						<input type="number" id="bf_chunk" value="0">
-						<span class="help-inline">The chunk size for the output</span>
-					</div>
-				</div>
-				<div class="form-actions">
-					<button class="btn" type="button">Transcode</button>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Output</legend>
-				<div class="control-group">
-					<label class="control-label">Target Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="bf_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<span class="help-inline">The result of the transcoding process</span>
-					</div>
-				</div>
-			</fieldset>
-		</section>
-		<section class="pane" id="caesar_pane">
-			<p>Ciphertext letters in this monoalphabetic substitution cipher represent their plaintext counterparts shifted by some number of letters.  Julius Caesar allegedly employed this monoalphabetic substitution cipher, with a shift of three letters, for military purposes.</p>
-			<fieldset>
-				<legend>Parameters</legend>
-				<div class="control-group">
-					<label class="control-label">Source Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="cr_source" rows="4" cols="20"></textarea>
-						<span class="help-inline">The text to transcode</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Offset</label>
-					<div class="controls">
-						<input type="number" min="0" max="25" value="3" id="cr_shift" required>
-						<span class="help-inline">The offset by which to shift the ciphertext alphabet</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Options</span>
-					</legend>
-					<div class="controls">
-						<label class="checkbox inline"><input id="cr_filter" type="checkbox">Filter Text</label>
-						<label class="checkbox inline"><input id="cr_lower" type="checkbox">Convert to Lowercase</label>
-						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-					</div>
-				</fieldset>
-				<div class="control-group">
-					<label class="control-label">Chunk Size</label>
-					<div class="controls">
-						<input type="number" id="cr_chunk" value="0">
-						<span class="help-inline">The chunk size for the output</span>
-					</div>
-				</div>
-				<div>
-					<fieldset>
-						<legend>
-							<span>Operation</span>
-						</legend>
-						<div class="controls">
-							<label class="radio inline"><input name="cr_operation" type="radio" value="encode" checked>Encode</label>
-							<label class="radio inline"><input name="cr_operation" type="radio" value="decode">Decode</label>
-							<p class="help-block">Should the program encode or decode the text?</p>
-						</div>
-					</fieldset>
-				</div>
-				<div class="form-actions">
-					<button class="btn" type="button">Transcode</button>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Output</legend>
-				<div class="control-group">
-					<label class="control-label">Target Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="cr_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<span class="help-inline">The result of the transcoding process</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Clear Alphabet</label>
-					<div class="controls">
-						<input type="text" id="cr_plaintext" value="" readonly="readonly">
-						<span class="help-inline">The standard alphabet, in canonical order</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Code Alphabet</label>
-					<div class="controls">
-						<input type="text" id="cr_ciphertext" value="" readonly="readonly">
-						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
-					</div>
-				</div>
-			</fieldset>
-		</section>
-		<section class="pane" id="codeword_pane">
-			<p>One of the easiest monoalphabetic substitution ciphers to implement&#8212;save for, possibly, the Caesar shift and the Atbash cipher&#8212;the codeword creates a ciphertext alphabet from a keyword followed by the plaintext alphabet minus the keyword's letters.</p>
-			<fieldset>
-				<legend>Parameters</legend>
-				<div class="control-group">
-					<label class="control-label">Source Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="cw_source" rows="4" cols="20"></textarea>
-						<span class="help-inline">The text to transcode</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Keyword</label>
-					<div class="controls">
-						<input type="text" id="cw_keyword" required>
-						<span class="help-inline">The keyword with which to transcode the text</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Options</span>
-					</legend>
-					<div class="controls">
-						<label class="checkbox inline">
-							<input id="cw_filter" type="checkbox">
-							Filter Text
-						</label>
-						<label class="checkbox inline">
-							<input id="cw_lower" type="checkbox">
-							Convert to Lowercase
-						</label>
-						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-					</div>
-				</fieldset>
-				<div class="control-group">
-					<label class="control-label">Chunk Size</label>
-					<div class="controls">
-						<input type="number" id="cw_chunk" value="0">
-						<span class="help-inline">The chunk size for the output</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Operation</span>
-					</legend>
-					<div class="controls">
-						<label class="radio inline"><input name="cw_operation" type="radio" value="encode" checked>Encode</label>
-						<label class="radio inline"><input name="cw_operation" type="radio" value="decode">Decode</label>
-						<p class="help-block">Should the program encode or decode the text?</p>
-					</div>
-				</fieldset>
-				<div class="form-actions">
-					<button class="btn" type="button">Transcode</button>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Output</legend>
-				<div class="control-group">
-					<label class="control-label">Target Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="cw_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<span class="help-inline">The result of the transcoding process</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Clear Alphabet</label>
-					<div class="controls">
-						<input type="text" id="cw_plaintext" value="" readonly="readonly">
-						<span class="help-inline">The standard alphabet, in canonical order</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Code Alphabet</label>
-					<div class="controls">
-						<input type="text" id="cw_ciphertext" value="" readonly="readonly">
-						<span class="help-inline">The ciphertext alphabet, used to encode the text</span>
-					</div>
-				</div>
-			</fieldset>
-		</section>
-		<section class="pane" id="vigenere_pane">
-			<p>One of the most popular of the aging ciphers, the Vigen&#232;re&#8212;a polyalphabetic substitution cipher that encrypts and decrypts using a tabula recta&#8212;has over the years endured much scrutiny and, perhaps, abuse.  One can implement the cipher fairly easily on a sheet of paper, and some computer software can make transcoding large messages with it practically instantaneous.  Those encoding messages, however, frequently use passphrases shorter than the message itself, which renders the message vulnerable to attacks, such as frequency analysis.  Reusing a passphrase and, for that matter, using a passphrase with native words at all, can present pitfalls.  To secure the encryption, a long string of pure gibberish, used once (for both encoding and decoding), would present, theoretically, a fairly difficult challenge (to say the least) to any interceptors.</p>
-			<fieldset>
-				<legend>Parameters</legend>
-				<div class="control-group">
-					<label class="control-label">Source Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="vi_source" rows="4" cols="20"></textarea>
-						<span class="help-inline">The text to transcode</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Passphrase</label>
-					<div class="controls">
-						<textarea class="input-large" id="vi_passphrase" rows="4" cols="20"></textarea>
-						<span class="help-inline">The passphrase with which to transcode the text</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Primer Index</label>
-					<div class="controls">
-						<input type="number" min="0" value="0" id="vi_primer">
-						<span class="help-inline">The index of a letter in the alphabet, with which program will offset the alphabetic tableaux</span>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Alphabet Key</label>
-					<div class="controls">
-						<input type="text" id="vi_alphakey">
-						<span class="help-inline">The keyword with which to generate the alphabetic tableaux</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Transcoding</span>
-					</legend>
-					<div class="controls">
-						<label class="checkbox inline"><input id="vi_digits" type="checkbox">Allow Digits</label>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend>
-						<span>Autoclave</span>
-					</legend>
-					<div class="controls">
-						<label class="radio inline"><input name="vi_autoclave" type="radio" value="key" checked>Key Autokey</label>
-						<label class="radio inline"><input name="vi_autoclave" type="radio" value="text">Text Autokey</label>
-						<span class="help-inline">Key autokey (the default) repeats the characters in the key, up to the message length.  Text autokey appends the plaintext of the message to the key, which can prove more secure when the original key is shorter than the message.</span>
-					</div>
-				</fieldset>
-				<fieldset>
-					<legend>
-						<span>Options</span>
-					</legend>
-					<div class="controls">
-						<label class="checkbox inline"><input id="vi_filter" type="checkbox">Filter Text</label>
-						<label class="checkbox inline"><input id="vi_lower" type="checkbox">Convert to Lowercase</label>
-						<p class="help-block">Should the program filter out punctuation and spaces?  Should any transcoded text be rendered in lowercase?</p>
-					</div>
-				</fieldset>
-				<div class="control-group">
-					<label class="control-label">Chunk Size</label>
-					<div class="controls">
-						<input type="number" id="vi_chunk" value="0">
-						<span class="help-inline">The chunk size for the output</span>
-					</div>
-				</div>
-				<fieldset>
-					<legend>
-						<span>Operation</span>
-					</legend>
-					<div class="controls">
-						<label class="radio inline"><input name="vi_operation" type="radio" value="encode" checked>Encode</label>
-						<label class="radio inline"><input name="vi_operation" type="radio" value="decode">Decode</label>
-						<p class="help-block">Should the program encode or decode the text?</p>
-					</div>
-				</fieldset>
-				<div class="form-actions">
-					<button class="btn" type="button">Transcode</button>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Output</legend>
-				<div class="control-group">
-					<label class="control-label">Target Text</label>
-					<div class="controls">
-						<textarea class="input-large" id="vi_target" rows="4" cols="20" readonly="readonly"></textarea>
-						<span class="help-inline">The result of the transcoding process</span>
-					</div>
-				</div>
-			</fieldset>
-		</section>
+		{% include "ciphers/pane_affine.html" %}
+		{% include "ciphers/pane_atbash.html" %}
+		{% include "ciphers/pane_beaufort.html" %}
+		{% include "ciphers/pane_caesar.html" %}
+		{% include "ciphers/pane_codeword.html" %}
+		{% include "ciphers/pane_vigenere.html" %}
 	</form>
 </article>
 {% endblock %}

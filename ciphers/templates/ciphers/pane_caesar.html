@@ -1,0 +1,16 @@
+<section class="pane" id="caesar_pane">
+	<p>Ciphertext letters in this monoalphabetic substitution cipher represent their plaintext counterparts shifted by some number of letters.  Julius Caesar allegedly employed this monoalphabetic substitution cipher, with a shift of three letters, for military purposes.</p>
+	<fieldset>
+		<legend>Parameters</legend>
+		{% include "ciphers/snippet_source.html" %}
+		{% include "ciphers/snippet_shift.html" %}
+		{% include "ciphers/snippet_options.html" %}
+		{% include "ciphers/snippet_chunk.html" %}
+        {% include "ciphers/snippet_operation.html" %}
+	</fieldset>
+	<fieldset>
+		<legend>Output</legend>
+        {% include "ciphers/snippet_target.html" %}
+        {% include "ciphers/snippet_alphabets.html" %}
+	</fieldset>
+</section>

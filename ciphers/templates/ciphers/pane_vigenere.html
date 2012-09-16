@@ -1,0 +1,19 @@
+<section class="pane" id="vigenere_pane">
+	<p>One of the most popular of the aging ciphers, the Vigen&#232;re&#8212;a polyalphabetic substitution cipher that encrypts and decrypts using a tabula recta&#8212;has over the years endured much scrutiny and, perhaps, abuse.  One can implement the cipher fairly easily on a sheet of paper, and some computer software can make transcoding large messages with it practically instantaneous.  Those encoding messages, however, frequently use passphrases shorter than the message itself, which renders the message vulnerable to attacks, such as frequency analysis.  Reusing a passphrase and, for that matter, using a passphrase with native words at all, can present pitfalls.  To secure the encryption, a long string of pure gibberish, used once (for both encoding and decoding), would present, theoretically, a fairly difficult challenge (to say the least) to any interceptors.</p>
+	<fieldset>
+		<legend>Parameters</legend>
+		{% include "ciphers/snippet_source.html" %}
+		{% include "ciphers/snippet_passphrase.html" %}
+		{% include "ciphers/snippet_primer.html" %}
+        {% include "ciphers/snippet_autoclave.html" %}
+		{% include "ciphers/snippet_keyword.html" %}
+		{% include "ciphers/snippet_digits.html" %}
+        {% include "ciphers/snippet_chunk.html" %}
+        {% include "ciphers/snippet_options.html" %}
+        {% include "ciphers/snippet_operation.html" %}
+	</fieldset>
+	<fieldset>
+		<legend>Output</legend>
+		{% include "ciphers/snippet_target.html" %}
+	</fieldset>
+</section>
