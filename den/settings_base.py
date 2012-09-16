@@ -196,16 +196,15 @@ BREADCRUMBS_AUTO_HOME = True
 #BREADCRUMBS_HOME_TITLE = 'Home'
 
 # Django Compressor
-COMPRESS_PRECOMPILERS = (
-    # ('text/coffeescript', 'coffee --compile --stdio'),
-    # ('text/less', 'lessc {infile} {outfile}'),
-    # ('text/x-sass', 'sass {infile} {outfile}'),
-    # ('text/x-scss', 'sass --scss {infile} {outfile}'),
-)
+# COMPRESS_PRECOMPILERS = (
+#     ('text/coffeescript', 'coffee --compile --stdio'),
+#     ('text/less', 'lessc {infile} {outfile}'),
+#     ('text/x-sass', 'sass {infile} {outfile}'),
+#     ('text/x-scss', 'sass --scss {infile} {outfile}'),
+# )
 
-# COMPRESS_OFFLINE = True
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = False
+# COMPRESS_ENABLED = False
+# COMPRESS_OFFLINE = False
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 # Haystack
