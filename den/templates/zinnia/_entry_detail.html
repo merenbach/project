@@ -56,6 +56,16 @@
 {% else %}
 	<blockquote class="entry-content">
 		<p>{{ object_content|safe|striptags }}</p>
+		{% tags_for_object object as tag_list %}
+		{% if tag_list %}
+			<p>
+		        {% for tag in tag_list %}
+		        <a href="{% url 'zinnia_tag_detail' tag %}"
+		           title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
+		           rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+			   {% endfor %}
+			</p>
+		{% endif %}
 	</blockquote>
 {% endif %}
 {% comment %}
