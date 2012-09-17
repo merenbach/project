@@ -1,10 +1,6 @@
 from haystack import indexes
 from django.contrib.flatpages.models import FlatPage
 from zinnia.models import Entry
-#from articles.models import Article
-#from django.conf import settings
-#from django.contrib.sites.models import Site
-#from den.indexes import SiteSearchIndex
 
 class FlatPageIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
@@ -72,17 +68,17 @@ class GalleryIndex(indexes.SearchIndex, indexes.Indexable):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.filter(is_public=True).all()
 
-class PhotoIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, use_template=True)
-    title = indexes.CharField(model_attr='title')
-    # caption = indexes.CharField(model_attr='caption')
-    url = indexes.CharField(model_attr='get_absolute_url')
-    pub_date = indexes.DateTimeField(model_attr='date_added')
-
-    def get_model(self):
-        from photologue.models import Photo
-        return Photo
-
-    def index_queryset(self):
-        """Used when the entire index for model is updated."""
-        return self.get_model().objects.filter(is_public=True).all()
+#class PhotoIndex(indexes.SearchIndex, indexes.Indexable):
+#    text = indexes.CharField(document=True, use_template=True)
+#    title = indexes.CharField(model_attr='title')
+#    # caption = indexes.CharField(model_attr='caption')
+#    url = indexes.CharField(model_attr='get_absolute_url')
+#    pub_date = indexes.DateTimeField(model_attr='date_added')
+#
+#    def get_model(self):
+#        from photologue.models import Photo
+#        return Photo
+#
+#    def index_queryset(self):
+#        """Used when the entire index for model is updated."""
+#        return self.get_model().objects.filter(is_public=True).all()
