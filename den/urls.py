@@ -17,17 +17,24 @@ from haystack.forms import SearchForm
 from haystack.views import SearchView
 from haystack.views import search_view_factory
 
+# Photologue overrides
+import sys, photologue_urls, photologue_sitemaps
+sys.modules['photologue.urls'] = photologue_urls
+sys.modules['photologue.sitemaps'] = photologue_sitemaps
+
 # Sitemaps
+
 from django.contrib.sitemaps import FlatPageSitemap
 from software.sitemaps import SoftwareSitemap
 from zinnia.sitemaps import EntrySitemap
-# from photologue.sitemaps import PhotologueSitemap
+from photologue.sitemaps import photologue_gallery, photologue_photo
 
 sitemaps = {
     'pages': FlatPageSitemap,
     'zinnia': EntrySitemap,
     'software': SoftwareSitemap,
-    # 'photologue': PhotologueSitemap,
+    'photologue_gallery': photologue_gallery,
+    'photologue_photo': photologue_photo,
 }
 
 # Examples:
@@ -52,7 +59,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^comments/', include('django.contrib.comments.urls')),
     (r'^', include('zinnia.urls')),
-    (r'^', include('photologue_urls')),
+    (r'^', include('photologue.urls')),
 )
 
 urlpatterns += patterns('django.contrib.flatpages.views',

@@ -254,7 +254,3 @@ PAGINATION_CLEAN_URL = False
 # (If this stops working, try moving to top of file)
 import zinnia_xmlrpc
 sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
-
-# Override photologue.urls with our own.
-# import photologue_urls
-# sys.modules['photologue.urls'] = photologue_urls
