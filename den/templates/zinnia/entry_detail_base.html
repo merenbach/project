@@ -11,22 +11,22 @@
 {% block link %}
   {{ block.super }}
   {% with previous_entry=object.previous_entry %}{% if previous_entry %}
-  <link rel="prev" title="{{ previous_entry.title }}" href="{{ previous_entry.get_absolute_url }}" />
+  <link rel="prev" title="{{ previous_entry.title }}" href="{{ previous_entry.get_absolute_url }}">
   {% endif %}{% endwith %}
   {% with next_entry=object.next_entry %}{% if next_entry %}
-  <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}" />
+  <link rel="next" title="{{ next_entry.title }}" href="{{ next_entry.get_absolute_url }}">
   {% endif %}{% endwith %}
-  <link rel="shortlink" href="{{ object.short_url }}" />
-  <link rel="canonical" href="{{ object.get_absolute_url }}" />
+  <link rel="shortlink" href="{{ object.short_url }}">
+  <link rel="canonical" href="{{ object.get_absolute_url }}">
   {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of discussions on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_discussion_feed' year month day object.slug %}" />
+        href="{% url 'zinnia_entry_discussion_feed' year month day object.slug %}">
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of comments on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_comment_feed' year month day object.slug %}" />
+        href="{% url 'zinnia_entry_comment_feed' year month day object.slug %}">
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of pingbacks on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_pingback_feed' year month day object.slug %}" />
+        href="{% url 'zinnia_entry_pingback_feed' year month day object.slug %}">
   <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of trackbacks on" %} '{{ object.title }}'"
-        href="{% url 'zinnia_entry_trackback_feed' year month day object.slug %}" />
+        href="{% url 'zinnia_entry_trackback_feed' year month day object.slug %}">
   {% endwith %}
 {% endblock %}
 
@@ -94,7 +94,7 @@
     {% for comment in comment_list %}
     <li id="comment_{{ comment.pk }}" class="comment vcard {% cycle box1,box2 %}{% if comment.user in object.authors.all %} post-author{% endif %}">
       <img src="{% get_gravatar comment.email 60 "G" %}"
-           class="gravatar photo" alt="{{ comment.user_name }}"/>
+           class="gravatar photo" alt="{{ comment.user_name }}">
       <p class="comment-info">
 	{% if comment.url %}
 	<a href="{{ comment.url }}" rel="external nofollow"

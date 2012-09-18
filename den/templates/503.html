@@ -43,7 +43,7 @@
             {% for message in messages %}
             <div class="message-box">
                 <span class="message">{{ message.message|safe }}</span>
-                <br />
+                <br>
                 {% if message.end_time %}
                 <em>Service window begins {{ message.start_time|date:"F j, Y  H:i" }} and ends {{ message.end_time|date:"F j, Y  H:i" }}.</em>
                 {% else %}

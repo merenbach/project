@@ -8,7 +8,7 @@
 
 {% block link %}
   {{ block.super }}
-  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url 'zinnia_entry_search_feed' %}?pattern={{ pattern }}" />
+  <link rel="alternate" type="application/rss+xml" title="{% trans "RSS Feed of search result of" %} '{{ pattern }}'" href="{% url 'zinnia_entry_search_feed' %}?pattern={{ pattern }}">
 {% endblock %}
 
 {% block body-class %}{{ block.super }} search {% if object_list %}search-results{% else %}search-no-results{% endif %}{% endblock %}
@@ -41,10 +41,10 @@
 <div class="search">
   <form method="get" id="main_searchform" action="{% url 'zinnia_entry_search' %}">
     <p>
-      <input type="text" value="{{ pattern }}" name="pattern" id="main_searchbox" />
-      <input type="submit" class="submitbutton" value="OK" />
+      <input type="text" value="{{ pattern }}" name="pattern" id="main_searchbox">
+      <input type="submit" class="submitbutton" value="OK">
       <a title="{% trans 'You can use - to exclude words or phrases, &quot;double quotes&quot; for exact phrases and the AND/OR boolean operators combined with parenthesis for complex searchs.' %}">
-        <img src="{{ STATIC_URL }}zinnia/img/help.png" alt="?" width="14" height="14" />
+        <img src="{{ STATIC_URL }}zinnia/img/help.png" alt="?" width="14" height="14">
       </a>
     </p>
   </form>
