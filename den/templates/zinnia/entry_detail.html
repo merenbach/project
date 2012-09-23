@@ -47,4 +47,10 @@
 {% block entry-comments %}{% endblock %}
 {% block entry-pingbacks %}{% endblock %}
 {% block entry-trackbacks %}{% endblock %}
-{% block entry-comments-form %}{% disqus_show_comments %}{% endblock %}
+{% block entry-comments-form %}
+	{% if object.comments_are_open %}
+		{% disqus_show_comments %}
+	{% else %}
+		<p class="muted">{% trans "Comments are closed." %}</p>
+	{% endif %}
+{% endblock %}
