@@ -102,11 +102,15 @@ def post_structure(entry, site):
             'dateCreated': DateTime(entry.creation_date.isoformat()),
             'postid': entry.pk,
             'userid': author.username,
+            # [am] Custom extension
+            'post_status': entry.get_status_display(),
+            'mt_basename': entry.slug,
             # Useful Movable Type Extensions
             'mt_excerpt': entry.excerpt,
             'mt_allow_comments': int(entry.comment_enabled),
             'mt_allow_pings': int(entry.pingback_enabled),
-            'mt_keywords': entry.tags,
+            'mt_tags': entry.tags,
+            #'mt_keywords': entry.tags,
             # Useful Wordpress Extensions
             'wp_author': author.username,
             'wp_author_id': author.pk,
@@ -224,7 +228,8 @@ def new_post(blog_id, username, password, post, publish):
                   'comment_enabled': post.get('mt_allow_comments', 1) == 1,
                   'pingback_enabled': post.get('mt_allow_pings', 1) == 1,
                   'featured': post.get('sticky', 0) == 1,
-                  'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
+                  'tags': 'mt_tags' in post and post['mt_tags'] or '',
+                  #'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
                   'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
                       post['title']),
                   'password': post.get('wp_password', '')}
@@ -273,7 +278,8 @@ def edit_post(post_id, username, password, post, publish):
     entry.comment_enabled = post.get('mt_allow_comments', 1) == 1
     entry.pingback_enabled = post.get('mt_allow_pings', 1) == 1
     entry.featured = post.get('sticky', 0) == 1
-    entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
+    entry.tags = 'mt_tags' in post and post['mt_tags'] or ''
+    #entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
     entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
         post['title'])
     if user.has_perm('zinnia.can_change_status'):
