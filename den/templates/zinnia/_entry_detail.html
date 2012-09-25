@@ -55,7 +55,7 @@
     </div>
 {% else %}
 	<blockquote class="entry-content">
-		<p>{{ object_content|safe|striptags }}</p>
+		<p>{{ object.excerpt|safe|striptags }}</p>
 		{% tags_for_object object as tag_list %}
 		{% if tag_list %}
 			<p>

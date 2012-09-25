@@ -230,8 +230,10 @@ def new_post(blog_id, username, password, post, publish):
                   'featured': post.get('sticky', 0) == 1,
                   'tags': 'mt_tags' in post and post['mt_tags'] or '',
                   #'tags': 'mt_keywords' in post and post['mt_keywords'] or '',
-                  'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
+                  'slug': 'mt_basename' in post and post['mt_basename'] or slugify(
                       post['title']),
+                  # 'slug': 'wp_slug' in post and post['wp_slug'] or slugify(
+                  #     post['title']),
                   'password': post.get('wp_password', '')}
     if user.has_perm('zinnia.can_change_status'):
         entry_dict['status'] = publish and PUBLISHED or DRAFT
@@ -280,8 +282,10 @@ def edit_post(post_id, username, password, post, publish):
     entry.featured = post.get('sticky', 0) == 1
     entry.tags = 'mt_tags' in post and post['mt_tags'] or ''
     #entry.tags = 'mt_keywords' in post and post['mt_keywords'] or ''
-    entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
+    entry.slug = 'mt_basename' in post and post['mt_basename'] or slugify(
         post['title'])
+    # entry.slug = 'wp_slug' in post and post['wp_slug'] or slugify(
+    #     post['title'])
     if user.has_perm('zinnia.can_change_status'):
         entry.status = publish and PUBLISHED or DRAFT
     entry.password = post.get('wp_password', '')
