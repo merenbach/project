@@ -51,6 +51,6 @@
 	{% if object.comments_are_open %}
 		{% disqus_show_comments %}
 	{% else %}
-		<p class="muted">{% trans "Comments are closed." %}</p>
+		<p class="muted">{% trans "Comments are disabled." %}</p>
 	{% endif %}
 {% endblock %}
