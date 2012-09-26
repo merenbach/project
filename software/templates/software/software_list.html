@@ -20,7 +20,7 @@
             </div>
             {% endcomment %}
             <h2><a href="{{ software.get_absolute_url }}">{{ software.title }}</a> {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}</small>{% endif %}</h2>
-            {% if software.summary %}<blockquote><p>{{ software.summary }}</p></blockquote>{% endif %}
+            {% if software.summary %}<p>{{ software.summary }}</p>{% endif %}
             {% comment %}{% render_tag_links_detail software %}{% endcomment %}
             {% endfor %}
         </ul>
