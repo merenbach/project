@@ -33,9 +33,9 @@ class ContactForm(forms.Form):
 
     # required_css_class = ''
     error_css_class = 'error'
-    subject = forms.CharField(max_length=100, widget=forms.TextInput())
-    message = forms.CharField(widget=forms.Textarea())
-    sender = forms.EmailField(widget=forms.TextInput())
+    subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'input-large'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'input-large'}))
+    sender = forms.EmailField(widget=forms.TextInput(attrs={'class': 'input-large'}))
     # cc_myself = forms.BooleanField(required=False)
     
     # For Bootstrap

@@ -15,9 +15,9 @@
 			<div class="control-group {% if field.errors %}{{ form.error_css_class }}{% endif %}">
                 {{ field.label_tag }}
 				<div class="controls">
-					<div class="input-prepend">
-                        <span class="add-on"><label for="id_{{ field.name }}"><i class="{% for key, value in form.field_icons.items %}{% if field.name == key %}{{ value }}{% endif %}{% endfor %}"></i></label></span>{{ field }}
-                    </div>
+					{# <div class="input-prepend"> #}
+                        {% comment %}<span class="add-on"><label for="id_{{ field.name }}"><i class="{% for key, value in form.field_icons.items %}{% if field.name == key %}{{ value }}{% endif %}{% endfor %}"></i></label></span>{% endcomment %}{{ field }}
+                    {# </div> #}
                     {{ field.errors }}
 				</div>
 			</div>
