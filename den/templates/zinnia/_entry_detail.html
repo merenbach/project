@@ -82,18 +82,18 @@
   </div>
 
 {% if not continue_reading %}
-  <div class="clearfix entry-footer">
-    <nav class="pull-right entry-tags">
-      {% comment %}<strong>{% trans "Tags" %}</strong> :{% endcomment %}
-      {% tags_for_object object as tag_list %}
-      {% for tag in tag_list %}
-      <a href="{% url 'zinnia_tag_detail' tag %}"
-         title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
-         rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}
-      {% empty %}
-{% comment %}      <span>{% trans "No tags" %}</span> {% endcomment %}
-      {% endfor %}
-    </nav>
+  <div class="entry-footer">
+    <p class="entry-tags">
+	      {% comment %}<strong>{% trans "Tags" %}</strong> :{% endcomment %}
+	      {% tags_for_object object as tag_list %}
+	      {% for tag in tag_list %}
+		      <a href="{% url 'zinnia_tag_detail' tag %}"
+		         title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
+		         rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+	      {% empty %}
+		      <span class="muted">{% trans "untagged" %}</span> 
+	      {% endfor %}
+    </p>
     <p class="muted"><small>Fin</small></p>
 {% comment %}
     <p class="entry-shorturl">
