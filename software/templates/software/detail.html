@@ -25,7 +25,7 @@
         {% endif %}
     </div>
     {% render_tag_links_detail software %}
-    <p class="muted"><em>Fin</em></p>
+    <p class="muted"><small>Fin</small></p>
     <div class="btn-group downloads">
         {% if software.app_file %}
         <a class="btn btn-primary" href="{{ software.get_app_file_url }}"><i class="icon-download-alt icon-white"></i> Download Application ({{ software.get_app_file_size|filesizeformat }})</a>
