@@ -1,17 +1,27 @@
 {% extends "zinnia/entry_detail_base.html" %}
-{% load i18n disqus_tags core_tags %}
+{% load i18n disqus_tags core_tags tagging_tags %}
+
+
+{% block page_header %}
+	{{ block.super }}
+	{% if object.excerpt %}
+		<p class="lead">
+			{{ object.excerpt }}
+		</p>
+	{% endif %}
+{% endblock %}
 
 {% block breadcrumb %}
-    {% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
-        {% url zinnia_entry_archive_year year as year_url %}
-        {% url zinnia_entry_archive_month year month as month_url %}
-        {% url zinnia_entry_archive_day year month day as day_url %}
-        {% make_crumbs year year_url %}
-        {% make_crumbs month month_url %}
-        {% make_crumbs day day_url %}
-        {% make_crumbs entry.title %}
-    {% endwith %}
-    {{ block.super }}
+	{% with year=object.creation_date|date:"Y" month=object.creation_date|date:"m" day=object.creation_date|date:"d" %}
+		{% url zinnia_entry_archive_year year as year_url %}
+		{% url zinnia_entry_archive_month year month as month_url %}
+		{% url zinnia_entry_archive_day year month day as day_url %}
+		{% make_crumbs year year_url %}
+		{% make_crumbs month month_url %}
+		{% make_crumbs day day_url %}
+		{% make_crumbs entry.title %}
+	{% endwith %}
+	{{ block.super }}
 {% endblock %}
 
 {% block subtitle %} <small>{{ object.creation_date|date:"Y.m.d" }}</small>{% endblock %}

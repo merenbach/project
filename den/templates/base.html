@@ -1,9 +1,11 @@
 {% extends "html_base.html" %}
 {% block base_content %}
-    <header class="page-header">
-    	<h1>{% block title %}{% endblock %}{% block subtitle %}{% endblock %}</h1>
-    </header>
-    <section id="content_inner">
-    	{% block content %}{% endblock %}
-    </section>
+	<header class="page-header">
+		{% block page_header %}
+			<h1>{% block title %}{% endblock %}{% block subtitle %}{% endblock %}</h1>
+		{% endblock %}
+	</header>
+	<section id="content_inner">
+		{% block content %}{% endblock %}
+	</section>
 {% endblock %}
