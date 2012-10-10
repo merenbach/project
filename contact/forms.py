@@ -12,7 +12,7 @@ decorate_bound_field()
 
 #def as_ul(self):
 #    if not self: return u''
-#    return u''.join([u'<li class="error label label-important">{}</li>'.format(e) for e in self])
+#    return u''.join([u'<li class="error label label-important">{0}</li>'.format(e) for e in self])
 #    #return u'<div class="errorlist">%s</div>' % ''.join([u'<div class="error">%s</div>' % e for e in self])
 
 class InlineErrorList(ErrorList):
@@ -21,8 +21,8 @@ class InlineErrorList(ErrorList):
 
     def as_ul(self):
         if not self: return u''
-        errors_list = [u'<li>{}</li>'.format(e) for e in self]
-        return mark_safe(u'<ul class="unstyled help-inline">{}</ul>'.format(''.join(errors_list)))
+        errors_list = [u'<li>{0}</li>'.format(e) for e in self]
+        return mark_safe(u'<ul class="unstyled help-inline">{0}</ul>'.format(''.join(errors_list)))
 
 class ContactForm(forms.Form):
     def __init__(self, *args, **kwargs):

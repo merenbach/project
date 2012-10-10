@@ -9,7 +9,7 @@ def active(context, pattern):
     request = context.get('request', None)
     if request is not None:
         import re
-        pattern = u'^{}$'.format(pattern)
+        pattern = u'^{0}$'.format(pattern)
         if re.search(pattern, request.path):
             return 'active'
     return ''
