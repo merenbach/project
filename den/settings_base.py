@@ -206,6 +206,8 @@ BREADCRUMBS_AUTO_HOME = True
 # COMPRESS_ENABLED = False
 # COMPRESS_OFFLINE = False
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+#COMPRESS_PARSER = 'compressor.parser.Html5LibParser'
+#COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 
 # Haystack
 HAYSTACK_CONNECTIONS = {
