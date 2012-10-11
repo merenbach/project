@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load sekizai_tags compress dajaxice_templatetags static %}
+{% load url from future %}
 
 {% block title %}Ciphers{% endblock %}
 {% block subtitle %} <small>Alpha</small>{% endblock %}
@@ -176,7 +177,7 @@
 
 	<p>That said, this particular encryption tool differs from many others in one important respect: it uses AJAX to perform the encryption and decryption server-side.  This isn't "safer" by any stretch (quite the opposite, perhaps), but it lets me make the code (written in Python, server-side) more maintainable without changing much in terms of browser integration.</p>
 
-	<form class="form-horizontal" method="GET" action="{% url ciphers %}">{% csrf_token %}
+	<form class="form-horizontal" method="GET" action="{% url 'ciphers' %}">{% csrf_token %}
 		<noscript>
 			<p>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</p>
 		</noscript>

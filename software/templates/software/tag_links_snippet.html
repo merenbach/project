@@ -1,11 +1,12 @@
 {% load software_tags tagging_tags sekizai_tags %}
+{% load url from future %}
 
 {% if tags %}
 <h1>See software tagged&hellip;</h1>
 <div class="roundbox">
     <ul class="tag-list clearfix">
         {% for tag in tags %}
-        <li><a href="{% url software_tag_detail tag=tag %}">{{ tag }}</a></li>
+        <li><a href="{% url 'software_tag_detail' tag=tag %}">{{ tag }}</a></li>
         {% empty %}
         <li>untagged</li>
         {% endfor %}

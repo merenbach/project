@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load sekizai_tags compress static %}
+{% load url from future %}
 
 {% block title %}Contact{% endblock %}
 
@@ -10,7 +11,7 @@
 		I am always happy to hear from visitors.  Please feel free to use the below form to get in touch with me.  I try to respond to messages, <em>c&aelig;teris paribus</em>, within 24&ndash;48 hours.
 		{% endblock %}
 	</p>
-	<form class="form-horizontal contact-form" action="/contact/" method="post">{% csrf_token %}
+	<form class="form-horizontal contact-form" action="{% url 'contact' %}" method="post">{% csrf_token %}
 		{% for field in form %}
 			<div class="control-group {% if field.errors %}{{ form.error_css_class }}{% endif %}">
                 {{ field.label_tag }}
