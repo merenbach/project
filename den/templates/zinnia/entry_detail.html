@@ -2,8 +2,7 @@
 {% load i18n disqus_tags core_tags tagging_tags %}
 {% load url from future %}
 
-{% block page_header %}
-	{{ block.super }}
+{% block lead %}
 	{% if object.excerpt %}
 		<p class="lead">
 			{{ object.excerpt }}
