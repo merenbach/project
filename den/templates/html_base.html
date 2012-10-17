@@ -31,6 +31,9 @@
 			<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
 			<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
 		<![endif]-->
+		<script defer type="text/javascript" charset="utf-8" src="{% static "js/jquery.scrollto.min.js" %}"></script>
+		<script defer type="text/javascript" charset="utf-8" src="{% static "js/jquery.history.js" %}"></script>
+		<script defer type="text/javascript" charset="utf-8" src="{% static "js/ajaxify-html5.js" %}"></script>
 	{% endcompress %}
 {% endaddtoblock %}
 <html lang="{{ LANGUAGE_CODE }}">
@@ -102,18 +105,18 @@
 		</nav>
 		{% endblock %}
 		<div class="container">
-			{% block breadcrumb %}
-				{% if request.breadcrumbs.all %}
-				<nav>
-					<ul class="breadcrumb">
-						{% for breadcrumb in request.breadcrumbs %}
-						{% if not forloop.last %}<li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span class="divider">/</span></li>{% else %}<li class="active">{{ breadcrumb.name }}</li>{% endif %}
-						{% endfor %}
-					</ul>
-				</nav>
-				{% endif %}
-			{% endblock %}
 			<section id="content">
+				{% block breadcrumb %}
+					{% if request.breadcrumbs.all %}
+					<nav>
+						<ul class="breadcrumb">
+							{% for breadcrumb in request.breadcrumbs %}
+							{% if not forloop.last %}<li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span class="divider">/</span></li>{% else %}<li class="active">{{ breadcrumb.name }}</li>{% endif %}
+							{% endfor %}
+						</ul>
+					</nav>
+					{% endif %}
+				{% endblock %}
 				{% block base_content %}{% endblock %}
 			</section>
 			<footer id="footer">
