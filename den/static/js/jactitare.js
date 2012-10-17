@@ -71,13 +71,22 @@
             // uri = uri.substring(uri.indexOf(domain) + domain.length);
             // console.log("NEW URI = " + uri);
             console.log("IS INITED; ispopstate = " + isPopState);
-			$.get(uri + '?requestType=xhr', function(data) {
-				var $parsed = $(data);
+			$.get(uri + '?requestType=xhr', function(text) {
+                console.log(text);
+                // var title = text.match("<title>(.*?)</title>")[0];
+				var $parsed = $(text);
                 var title = $parsed.filter('title').text();
                 console.log("title = " + title);
                 document.title = title;
-				// $('.navbar-inner .nav').first().replaceWith($parsed.find('.navbar-inner .nav').first());
+                $('.navbar-inner .nav').first().replaceWith($parsed.find('.navbar-inner .nav').first());
 				// $('.navbar-search .search-query').replaceWith($parsed.find('.navbar-search .search-query'));
+                // var $navbar = $('#navbar');
+                // $navbar.filter('.active').first().removeClass('active');
+                
+                // var $newNavbar = $parsed.find('#navbar');
+                // var newActive = $newNavbar.find('.active');
+                // $navbar.filter()
+                $('#breadcrumbs').replaceWith($parsed.find('#breadcrumbs'));
                 $('#content').replaceWith($parsed.find('#content'));
 			});
             
