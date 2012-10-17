@@ -1,25 +1,22 @@
-
+/**
+ * HTML5 + AJAX navigation for merenbach.com
+ */
 
 (function($) {
 	"use strict";
 
 	var isInited = false;
-    // var domain = 'www.merenbach.dev'
 
-	function isStateSupported() {
-		return window.history;
+	function _isWindowHistorySupported() {
+		return window.hasOwnProperty('history');
 	}
 
 	function isPushStateSupported() {
-		return (isStateSupported() && window.history.pushState);
+		return (_isWindowHistorySupported() && window.history.pushState);
 	}
 
 	function isReplaceStateSupported() {
-		return (isStateSupported() && window.history.replaceState);
-	}
-
-	function isPopStateSupported() {
-		return (isStateSupported() && window.history.popState);
+		return (_isWindowHistorySupported() && window.history.replaceState);
 	}
 
     /**
@@ -35,29 +32,19 @@
      * @param uri
      *        the new uri to push.
      */
-	function pushUriState(uri) {
-		var href = window.location.href;
+	function pushUriState(uri, title) {
+		var oldUri = window.location.href;
+        var oldTitle = document.title;
 		if (isPushStateSupported() && isReplaceStateSupported()) {
-			var stateObj = {uri: href, title: document.title};
-			if (isInited === true) {
-                console.log("pushing state " + stateObj + " for uri " + uri);
-				window.history.pushState(stateObj, '', uri);
-			} else {
-                console.log("replacing state " + stateObj + " for uri " + uri);
-				window.history.replaceState(stateObj, '', uri);
-			}
-			// var stateChangeMethod = (isInited === true) ? window.history.pushState : window.history.replaceState;
-			// stateChangeMethod({uri : window.location.href} /* current state object */, null /* title */, uri /* new display uri */);
+			var stateObj = {uri: oldUri, title: oldTitle};
+            // args to method: current state object, title (ignored), and (new) display uri
+            if (isInited === true) {
+                window.history.pushState(stateObj, '', uri);
+            } else {
+                window.history.replaceState(stateObj, '', uri);
+            }
 		}
 	}
-
-	function internalLinkClicked(e) {
-		console.log("internal link clicked");
-		e.preventDefault();
-		var href = $(this).prop('href');
-		loadPaneRequest(href, false);
-	};
-
 
 	/**
 	 * @param state
@@ -65,19 +52,14 @@
 	 * @param isPopState
 	 *        `true` if we are popping state, `false` otherwise.
 	 */
-	var loadPaneRequest = function(uri, isPopState, title) {
-        console.log("URI=" + uri);
-        if (isInited === true/* && uri.indexOf(domain) !== -1*/) {
-            // uri = uri.substring(uri.indexOf(domain) + domain.length);
-            // console.log("NEW URI = " + uri);
-            console.log("IS INITED; ispopstate = " + isPopState);
+	var ajaxLoadAssets = function(uri, isPopState) {
+        if (isInited === true) {
 			$.get(uri + '?requestType=xhr', function(text) {
-                console.log(text);
                 // var title = text.match("<title>(.*?)</title>")[0];
 				var $parsed = $(text);
                 var title = $parsed.filter('title').text();
-                console.log("title = " + title);
-                document.title = title;
+                console.log("new title = " + title);
+
                 $('.navbar-inner .nav').first().replaceWith($parsed.find('.navbar-inner .nav').first());
 				// $('.navbar-search .search-query').replaceWith($parsed.find('.navbar-search .search-query'));
                 // var $navbar = $('#navbar');
@@ -88,33 +70,33 @@
                 // $navbar.filter()
                 $('#breadcrumbs').replaceWith($parsed.find('#breadcrumbs'));
                 $('#content').replaceWith($parsed.find('#content'));
+                
+    			if (isPopState !== true) {
+    				pushUriState(uri, title);
+                    document.title = title;
+    			}
 			});
             
-			if (isPopState !== true) {
-				pushUriState(uri);
-			} else if (title) {
-                document.title = title;
-			}
 		} else {
-			pushUriState(uri);
+			pushUriState(uri, document.title);
 		}
 	};
 
-
-	// handle back button presses, the event.state object should have been
-	// populated in refresh_panes() using the pushState
-	function thisPopStateEvent(e) {
+	// Bind the pop state event to handle the back button
+	$(window).bind('popstate', function(e) {
         var ev = e.originalEvent;
 		if (isInited === true && ev.hasOwnProperty('state') && ev.state !== null) {
-			loadPaneRequest(ev.state.uri, true, ev.state.title);
+            ajaxLoadAssets(ev.state.uri, true/*, ev.state.title*/);
 		}
-	}
+	});
+    
+    // Rewrite all internal links
+	$('a[href^="/"]').live('click', function(e) {
+		e.preventDefault();
+		ajaxLoadAssets($(this).prop('href'), false);
+	});
 
-
-	$(window).bind('popstate', thisPopStateEvent);
-	$('a[href^="/"]').live('click', internalLinkClicked);
-
-    loadPaneRequest(window.location.href);
+    ajaxLoadAssets(window.location.href);
 	isInited = true;
     // pushUriState('http://www.merenbach.dev/asd');
 
