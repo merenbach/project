@@ -243,7 +243,16 @@ DAJAXICE_NOTIFY_EXCEPTIONS = True
 ZINNIA_MARKUP_LANGUAGE = 'markdown'
 ZINNIA_WYSIWYG = False
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
+    ('zinnia.xmlrpc.metaweblog.get_category_list',
+     'mt.getCategoryList'),
+    ('zinnia.xmlrpc.metaweblog.new_category',
+     'mt.newCategory'),
+    ('zinnia.xmlrpc.metaweblog.get_post_categories',
+     'mt.getPostCategories'),
+    ('zinnia.xmlrpc.metaweblog.set_post_categories',
+     'mt.setPostCategories'),
+]
 
 # Pagination
 # http://packages.python.org/linaro-django-pagination/usage.html#how-to-use-linaro-django-pagination

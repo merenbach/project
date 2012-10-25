@@ -23,6 +23,17 @@ from zinnia.settings import UPLOAD_TO
 from zinnia.managers import DRAFT, PUBLISHED
 from django_xmlrpc.decorators import xmlrpc_func
 
+# [TODO]
+#
+# - Simply extend existing categories
+# - Make setting/editing/adding categories work
+
+# [am]
+import logging
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+# [/am]
+
 # http://docs.nucleuscms.org/blog/12#errorcodes
 LOGIN_ERROR = 801
 PERMISSION_DENIED = 803
@@ -174,20 +185,36 @@ def get_recent_posts(blog_id, username, password, number):
     => post structure[]"""
     user = authenticate(username, password)
     site = Site.objects.get_current()
+    logger.error("Get recent posts for blog id {}, un {}, pw {}, num {}".format(blog_id, username, password, number))
     return [post_structure(entry, site) \
             for entry in Entry.objects.filter(authors=user)[:number]]
 
+# [am] added for Movable Type
+@xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
+def get_category_list(blog_id, username, password):
+    """mt.getCategoryList(blog_id, username, password)
+    => category structure[]"""
+    logger.error("Get category list for blog id {}, un {}, pw {}".format(blog_id, username, password))
+    return get_categories(blog_id, username, password)
 
+# [am] blog_id, limit=None, offset=0, 
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
 def get_categories(blog_id, username, password):
     """metaWeblog.getCategories(blog_id, username, password)
     => category structure[]"""
+    logger.error("Get categories for blog id {}, un {}, pw {}".format(blog_id, username, password))
     authenticate(username, password)
     site = Site.objects.get_current()
     return [category_structure(category, site) \
             for category in Category.objects.all()]
 
-
+# [am] added for Movable Type
+@xmlrpc_func(returns='string', args=['string', 'string', 'string', 'struct'])
+def add_category(blog_id, username, password, category_struct):
+    """mt.addCategory(blog_id, username, password, category)
+    => category_id"""
+    return new_category(blog_id, username, password, category_struct)
+    
 @xmlrpc_func(returns='string', args=['string', 'string', 'string', 'struct'])
 def new_category(blog_id, username, password, category_struct):
     """wp.newCategory(blog_id, username, password, category)
@@ -254,6 +281,30 @@ def new_post(blog_id, username, password, post, publish):
 
     return entry.pk
 
+# [am] custom, in-progress
+@xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
+def get_post_categories(post_id, username, password):
+    """mt.getPostCategories(post_id, username, password)
+    => struct[]"""
+    user = authenticate(username, password)
+    entry = Entry.objects.get(id=post_id, authors=user)
+    return [cat.title for cat in entry.categories.all()]
+    
+# [am] custom, in-progress
+@xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'struct[]'])
+def set_post_categories(post_id, username, password, categories):
+    """mt.setPostCategories(post_id, username, password, categories)
+    => boolean"""
+    user = authenticate(username, password)
+    entry = Entry.objects.get(id=post_id, authors=user)
+    try:
+        entry.categories.clear()
+        entry.categories.add(*[Category.objects.get_or_create(
+            title=cat, slug=slugify(cat))[0]
+                           for cat in post['categories']])
+        return True
+    except Exception as e:
+        return False
 
 @xmlrpc_func(returns='boolean', args=['string', 'string', 'string',
                                       'struct', 'boolean'])
@@ -301,7 +352,7 @@ def edit_post(post_id, username, password, post, publish):
         entry.categories.clear()
         entry.categories.add(*[Category.objects.get_or_create(
             title=cat, slug=slugify(cat))[0]
-                               for cat in post['categories']])
+                               for cat in categories])
     return True
 
 
