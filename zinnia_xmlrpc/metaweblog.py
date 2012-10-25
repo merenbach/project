@@ -185,7 +185,6 @@ def get_recent_posts(blog_id, username, password, number):
     => post structure[]"""
     user = authenticate(username, password)
     site = Site.objects.get_current()
-    logger.error("Get recent posts for blog id {}, un {}, pw {}, num {}".format(blog_id, username, password, number))
     return [post_structure(entry, site) \
             for entry in Entry.objects.filter(authors=user)[:number]]
 
@@ -194,7 +193,6 @@ def get_recent_posts(blog_id, username, password, number):
 def get_category_list(blog_id, username, password):
     """mt.getCategoryList(blog_id, username, password)
     => category structure[]"""
-    logger.error("Get category list for blog id {}, un {}, pw {}".format(blog_id, username, password))
     return get_categories(blog_id, username, password)
 
 # [am] blog_id, limit=None, offset=0, 
@@ -202,7 +200,6 @@ def get_category_list(blog_id, username, password):
 def get_categories(blog_id, username, password):
     """metaWeblog.getCategories(blog_id, username, password)
     => category structure[]"""
-    logger.error("Get categories for blog id {}, un {}, pw {}".format(blog_id, username, password))
     authenticate(username, password)
     site = Site.objects.get_current()
     return [category_structure(category, site) \
@@ -300,8 +297,8 @@ def set_post_categories(post_id, username, password, categories):
     try:
         entry.categories.clear()
         entry.categories.add(*[Category.objects.get_or_create(
-            title=cat, slug=slugify(cat))[0]
-                           for cat in post['categories']])
+            title=cat['categoryName'], slug=slugify(cat['categoryName']))[0]
+                           for cat in categories])
         return True
     except Exception as e:
         return False
