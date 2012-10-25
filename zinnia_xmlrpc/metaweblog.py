@@ -25,8 +25,9 @@ from django_xmlrpc.decorators import xmlrpc_func
 
 # [TODO]
 #
-# - Simply extend existing categories
-# - Make setting/editing/adding categories work
+# - Simply extend existing metaweblog API and rebrand as "mt.py"
+# - Make adding *entirely new* categories work
+# - Markdown text filter?
 
 # [am]
 import logging
