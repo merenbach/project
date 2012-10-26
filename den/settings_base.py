@@ -242,16 +242,25 @@ DAJAXICE_NOTIFY_EXCEPTIONS = True
 # Zinnia
 ZINNIA_MARKUP_LANGUAGE = 'markdown'
 ZINNIA_WYSIWYG = False
+
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
     ('zinnia.xmlrpc.metaweblog.get_category_list',
      'mt.getCategoryList'),
     ('zinnia.xmlrpc.metaweblog.new_category',
      'mt.newCategory'),
-    ('zinnia.xmlrpc.metaweblog.get_post_categories',
+    ('den.xmlrpc.mt.get_post_categories',
      'mt.getPostCategories'),
-    ('zinnia.xmlrpc.metaweblog.set_post_categories',
+    ('den.xmlrpc.mt.set_post_categories',
      'mt.setPostCategories'),
+    ('den.xmlrpc.mt.new_post',
+     'mt.newPost'),
+    ('den.xmlrpc.mt.edit_post',
+     'mt.editPost'),
+    ('den.xmlrpc.mt.get_post',
+     'mt.getPost'),
+    ('den.xmlrpc.mt.get_recent_posts',
+     'mt.getRecentPosts'),
 ]
 
 # Pagination
@@ -263,5 +272,5 @@ PAGINATION_CLEAN_URL = False
 
 # Override zinnia.xmlrpc with our own
 # (If this stops working, try moving to top of file)
-import zinnia_xmlrpc
-sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
+#import zinnia_xmlrpc
+#sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
