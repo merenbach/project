@@ -245,10 +245,10 @@ ZINNIA_WYSIWYG = False
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
-    ('zinnia.xmlrpc.metaweblog.get_category_list',
+    # ('zinnia.xmlrpc.metaweblog.new_category',
+    #  'mt.newCategory'),
+    ('zinnia.xmlrpc.metaweblog.get_categories',
      'mt.getCategoryList'),
-    ('zinnia.xmlrpc.metaweblog.new_category',
-     'mt.newCategory'),
     ('den.xmlrpc.mt.get_post_categories',
      'mt.getPostCategories'),
     ('den.xmlrpc.mt.set_post_categories',
