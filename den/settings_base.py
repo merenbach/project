@@ -245,8 +245,8 @@ ZINNIA_WYSIWYG = False
 
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
 XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
-    # ('zinnia.xmlrpc.metaweblog.new_category',
-    #  'mt.newCategory'),
+    ('zinnia.xmlrpc.metaweblog.new_category',
+     'mt.addCategory'),
     ('zinnia.xmlrpc.metaweblog.get_categories',
      'mt.getCategoryList'),
     ('den.xmlrpc.mt.get_post_categories',
@@ -254,13 +254,13 @@ XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
     ('den.xmlrpc.mt.set_post_categories',
      'mt.setPostCategories'),
     ('den.xmlrpc.mt.new_post',
-     'mt.newPost'),
+     'metaWeblog.newPost'),
     ('den.xmlrpc.mt.edit_post',
-     'mt.editPost'),
+     'metaWeblog.editPost'),
     ('den.xmlrpc.mt.get_post',
-     'mt.getPost'),
+     'metaWeblog.getPost'),
     ('den.xmlrpc.mt.get_recent_posts',
-     'mt.getRecentPosts'),
+     'metaWeblog.getRecentPosts'),
 ]
 
 # Pagination
@@ -269,8 +269,3 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 # PAGINATION_PREVIOUS_LINK_DECORATOR = '&laquo;'
 # PAGINATION_NEXT_LINK_DECORATOR = '&raquo;'
 PAGINATION_CLEAN_URL = False
-
-# Override zinnia.xmlrpc with our own
-# (If this stops working, try moving to top of file)
-#import zinnia_xmlrpc
-#sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc

@@ -32,9 +32,9 @@ from zinnia.xmlrpc import metaweblog
 # - Markdown text filter?
 
 # [am] 
-# import logging
-# logging.basicConfig()
-# logger = logging.getLogger(__name__)
+import logging
+logging.basicConfig()
+logger = logging.getLogger(__name__)
 # # [/am]
 
 # Some slight modifications
@@ -53,8 +53,9 @@ def post_structure(entry, site):
 # Copied nearly verbatim from metaweblog.py
 @xmlrpc_func(returns='struct', args=['string', 'string', 'string'])
 def get_post(post_id, username, password):
-    """mt.getPost(post_id, username, password)
+    """metaWeblog.getPost(post_id, username, password)
     => post structure"""
+    logger.error("GETPOST")
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return post_structure(Entry.objects.get(id=post_id, authors=user), site)
@@ -63,8 +64,9 @@ def get_post(post_id, username, password):
 @xmlrpc_func(returns='struct[]',
              args=['string', 'string', 'string', 'integer'])
 def get_recent_posts(blog_id, username, password, number):
-    """mt.getRecentPosts(blog_id, username, password, number)
+    """metaWeblog.getRecentPosts(blog_id, username, password, number)
     => post structure[]"""
+    logger.error("GETRECENTPOSTS")
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return [post_structure(entry, site) \
@@ -74,7 +76,7 @@ def get_recent_posts(blog_id, username, password, number):
 @xmlrpc_func(returns='string', args=['string', 'string', 'string',
                                      'struct', 'boolean'])
 def new_post(blog_id, username, password, post, publish):
-    """mt.newPost(blog_id, username, password, post, publish)
+    """metaWeblog.newPost(blog_id, username, password, post, publish)
     => post_id"""
     if 'mt_tags' in post:
         # Use the MovableType attribute of choice
@@ -104,6 +106,7 @@ def new_post(blog_id, username, password, post, publish):
 def get_post_categories(post_id, username, password):
     """mt.getPostCategories(post_id, username, password)
     => struct[]"""
+    logger.error("GET CATEGORIES")
     user = metaweblog.authenticate(username, password)
     entry = Entry.objects.get(id=post_id, authors=user)
     return [cat.title for cat in entry.categories.all()]
@@ -113,6 +116,7 @@ def get_post_categories(post_id, username, password):
 def set_post_categories(post_id, username, password, categories):
     """mt.setPostCategories(post_id, username, password, categories)
     => boolean"""
+    logger.error("SET CATEGORIES: " + categories)
     user = metaweblog.authenticate(username, password)
     entry = Entry.objects.get(id=post_id, authors=user)
     try:
@@ -128,7 +132,7 @@ def set_post_categories(post_id, username, password, categories):
 @xmlrpc_func(returns='boolean', args=['string', 'string', 'string',
                                       'struct', 'boolean'])
 def edit_post(post_id, username, password, post, publish):
-    """mt.editPost(post_id, username, password, post, publish)
+    """metaWeblog.editPost(post_id, username, password, post, publish)
     => boolean"""
     if 'mt_tags' in post:
         # Use the MovableType attribute of choice
