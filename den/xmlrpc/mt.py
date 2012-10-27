@@ -41,13 +41,23 @@ logger = logging.getLogger(__name__)
 def post_structure(entry, site):
     """A post structure with extensions"""
     s = metaweblog.post_structure(entry, site)
+    
+    # Replace HTML description with the raw goods (TM)
+    # Support Markdown: Burn a Rich Text Editor today!
+    if 'description' in s:
+        s['description'] = unicode(entry.content)
+        
+    # Add a markdown slug
+    if 'wp_slug' in s:
+        s['mt_basename'] = s['wp_slug']
+    
+    # Use mt_tags instead of mt_keywords
+    if 'mt_keywords' in s:
+        s['mt_tags'] = s['mt_keywords']
+        
     s.update({
         # [am] Custom extension
-        'description': unicode(entry.content),
         'post_status': entry.get_status_display(),
-        'mt_basename': entry.slug,
-        'mt_tags': entry.tags,
-        #'mt_keywords': entry.tags,
     })
     return s
 
