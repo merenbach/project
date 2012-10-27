@@ -25,17 +25,39 @@ from django_xmlrpc.decorators import xmlrpc_func
 
 from zinnia.xmlrpc import metaweblog
 
-# [TODO]
+## TODO
 #
-# - Simply extend existing metaweblog API and rebrand as "mt.py"
-# - Make adding *entirely new* categories work
-# - Markdown text filter?
+# - Can we make wp.addCategory work with MovableType?
+# - Would text filters make our Markdown more flexible?
 
 # [am] 
 import logging
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 # # [/am]
+
+def localize_date(dt):
+    """
+    Localize (or perhaps "serverize") a date.
+    This is needed when settings.USE_TZ is on
+    in order for posts to be properly set to
+    have the correct creation date.
+    
+    [TODO]: Is this simply nullifying our use
+    of USE_TZ?
+    """
+    import dateutil.parser
+    try:
+        creation_date = dateutil.parser.parse(
+            post['dateCreated'].value,
+            ignoretz=True
+        )
+        if settings.USE_TZ:
+            creation_date = timezone.make_aware(
+                creation_date, timezone.utc)
+        return DateTime(creation_date.isoformat())
+    except:
+        return dt
 
 # Some slight modifications
 def post_structure(entry, site):
@@ -54,10 +76,11 @@ def post_structure(entry, site):
     # Use mt_tags instead of mt_keywords
     if 'mt_keywords' in s:
         s['mt_tags'] = s['mt_keywords']
-        
+    creation_date = timezone.make_naive(entry.creation_date, timezone.get_default_timezone()).isoformat()
     s.update({
         # [am] Custom extension
         'post_status': entry.get_status_display(),
+        'dateCreated': DateTime(creation_date),
     })
     return s
 
@@ -101,15 +124,9 @@ def new_post(blog_id, username, password, post, publish):
     if 'mt_allow_pings' in post:
         # Convert to integer type
         post['mt_allow_pings'] = int(post['mt_allow_pings'])
-    # user = metaweblog.authenticate(username, password, 'zinnia.add_entry')
-    # if post.get('dateCreated'):
-    #     creation_date = datetime.strptime(
-    #         post['dateCreated'].value[:18], '%Y-%m-%dT%H:%M:%S')
-    #     if settings.USE_TZ:
-    #         creation_date = timezone.make_aware(
-    #             creation_date, timezone.utc)
-    # else:
-    #     creation_date = timezone.now()
+    if 'dateCreated' in post:
+        # Correct possible date format alignment issues
+        post['dateCreated'] = localize_date(post['dateCreated'])
     return metaweblog.new_post(blog_id, username, password, post, publish)
 
 # [am] custom, in-progress
@@ -156,11 +173,8 @@ def edit_post(post_id, username, password, post, publish):
         post['mt_allow_comments'] = int(post['mt_allow_comments'])
     if 'mt_allow_pings' in post:
         # Convert to integer type
-        post['mt_allow_pings'] = int(post['mt_allow_pings'])
-    # if post.get('dateCreated'):
-    #     creation_date = datetime.strptime(
-    #         post['dateCreated'].value[:18], '%Y-%m-%dT%H:%M:%S')
-    #     if settings.USE_TZ:
-    #         creation_date = timezone.make_aware(
-    #             creation_date, timezone.utc)
+        post['mt_allow_pings'] = int(post['mt_allow_pings'])    
+    if 'dateCreated' in post:
+        # Correct possible date format alignment issues
+        post['dateCreated'] = localize_date(post['dateCreated'])
     return metaweblog.edit_post(post_id, username, password, post, publish)

@@ -46,7 +46,7 @@ USE_I18N = False
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False
+USE_TZ = True
 
 # Additional locations of static files
 STATICFILES_DIRS = (
