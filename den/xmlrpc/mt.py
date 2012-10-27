@@ -43,6 +43,7 @@ def post_structure(entry, site):
     s = metaweblog.post_structure(entry, site)
     s.update({
         # [am] Custom extension
+        'description': unicode(entry.content),
         'post_status': entry.get_status_display(),
         'mt_basename': entry.slug,
         'mt_tags': entry.tags,
