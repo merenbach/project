@@ -187,7 +187,6 @@ def get_post_categories(post_id, username, password):
 def set_post_categories(post_id, username, password, categories):
     """mt.setPostCategories(post_id, username, password, categories)
     => boolean"""
-    logger.error("SET CATEGORIES: " + categories)
     user = metaweblog.authenticate(username, password)
     entry = Entry.objects.get(id=post_id, authors=user)
     try:
@@ -197,4 +196,5 @@ def set_post_categories(post_id, username, password, categories):
                            for cat in categories])
         return True
     except Exception as e:
+        logger.error(e)
         return False
