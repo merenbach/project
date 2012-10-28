@@ -33,9 +33,8 @@ logger = logging.getLogger(__name__)
 #
 # - Can we make wp.addCategory work with MovableType?
 # - Would text filters make our Markdown more flexible?
-# - Make exception checks more specific (?)
+# - Make exception checks more exception-specific (?)
 # - Ensure logging is as optimized as it ought to be
-# - Ensure that getting/setting categories works consistently
 
 def make_xmlrpc_datetime_aware(dt):
     """
@@ -118,6 +117,9 @@ def finesse_fields_to_return(struct):
     # Use mt_tags instead of mt_keywords
     if 'mt_keywords' in struct:
         struct['mt_tags'] = struct['mt_keywords']
+    # Remove categories (we use the MT API instead)
+    # if 'categories' in struct:
+    #     del struct['categories']
     # Make the datetime naive for clients.  This may
     # have some undesired ramifications, so the
     # implications of these should be investigated.
@@ -173,16 +175,18 @@ def edit_post(post_id, username, password, post, publish):
     => boolean"""
     return metaweblog.edit_post(post_id, username, password, finesse_fields_to_commit(post), publish)
 
-# [am] custom, in-progress
+# Get categories
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
 def get_post_categories(post_id, username, password):
     """mt.getPostCategories(post_id, username, password)
     => struct[]"""
     user = metaweblog.authenticate(username, password)
+    site = Site.objects.get_current()
     entry = Entry.objects.get(id=post_id, authors=user)
-    return [cat.title for cat in entry.categories.all()]
+    return [metaweblog.category_structure(category, site) \
+        for category in entry.categories.all()]
     
-# [am] custom, in-progress
+# Set categories
 @xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'struct[]'])
 def set_post_categories(post_id, username, password, categories):
     """mt.setPostCategories(post_id, username, password, categories)
