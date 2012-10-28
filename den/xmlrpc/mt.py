@@ -155,7 +155,7 @@ def get_recent_posts(blog_id, username, password, number):
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return [post_structure(entry, site) \
-            for entry in Entry.objects.filter(authors=user)[:number]]
+            for entry in Entry.objects.filter(authors=user, sites__id=blog_id)[:number]]
 
 # Modified for MovableType
 @xmlrpc_func(returns='string', args=['string', 'string', 'string',
