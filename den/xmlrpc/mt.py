@@ -33,9 +33,9 @@ logger = logging.getLogger(__name__)
 #
 # - Can we make wp.addCategory work with MovableType?
 # - Would text filters make our Markdown more flexible?
-# - Make exception checks more specific
+# - Make exception checks more specific (?)
 # - Ensure logging is as optimized as it ought to be
-# - Make setting of categories work (!!!)
+# - Ensure that getting/setting categories works consistently
 
 def make_xmlrpc_datetime_aware(dt):
     """
