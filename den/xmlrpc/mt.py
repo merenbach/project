@@ -142,7 +142,6 @@ def post_structure(entry, site):
 def get_post(post_id, username, password):
     """metaWeblog.getPost(post_id, username, password)
     => post structure"""
-    logger.error("GETPOST")
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return post_structure(Entry.objects.get(id=post_id, authors=user), site)
@@ -153,7 +152,6 @@ def get_post(post_id, username, password):
 def get_recent_posts(blog_id, username, password, number):
     """metaWeblog.getRecentPosts(blog_id, username, password, number)
     => post structure[]"""
-    logger.error("GETRECENTPOSTS")
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return [post_structure(entry, site) \
