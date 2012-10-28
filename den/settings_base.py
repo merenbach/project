@@ -46,7 +46,7 @@ USE_I18N = False
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False
+USE_TZ = True
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -242,8 +242,26 @@ DAJAXICE_NOTIFY_EXCEPTIONS = True
 # Zinnia
 ZINNIA_MARKUP_LANGUAGE = 'markdown'
 ZINNIA_WYSIWYG = False
+
 from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS
+XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
+    ('zinnia.xmlrpc.metaweblog.new_category',
+     'mt.addCategory'),
+    ('zinnia.xmlrpc.metaweblog.get_categories',
+     'mt.getCategoryList'),
+    ('den.xmlrpc.mt.get_post_categories',
+     'mt.getPostCategories'),
+    ('den.xmlrpc.mt.set_post_categories',
+     'mt.setPostCategories'),
+    ('den.xmlrpc.mt.new_post',
+     'metaWeblog.newPost'),
+    ('den.xmlrpc.mt.edit_post',
+     'metaWeblog.editPost'),
+    ('den.xmlrpc.mt.get_post',
+     'metaWeblog.getPost'),
+    ('den.xmlrpc.mt.get_recent_posts',
+     'metaWeblog.getRecentPosts'),
+]
 
 # Pagination
 # http://packages.python.org/linaro-django-pagination/usage.html#how-to-use-linaro-django-pagination
@@ -251,8 +269,3 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 # PAGINATION_PREVIOUS_LINK_DECORATOR = '&laquo;'
 # PAGINATION_NEXT_LINK_DECORATOR = '&raquo;'
 PAGINATION_CLEAN_URL = False
-
-# Override zinnia.xmlrpc with our own
-# (If this stops working, try moving to top of file)
-import zinnia_xmlrpc
-sys.modules['zinnia.xmlrpc'] = zinnia_xmlrpc
