@@ -87,7 +87,7 @@ MIDDLEWARE_CLASSES = (
     'linaro_django_pagination.middleware.PaginationMiddleware',
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
     #'breadcrumbs.middleware.FlatpageFallbackMiddleware',
-    'maintenance.middleware.MaintenanceMiddleware',
+    # 'maintenance.middleware.MaintenanceMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
@@ -148,7 +148,7 @@ INSTALLED_APPS = (
     'haystack',
     'whoosh',
     'den', # custom additions and utilities
-    'maintenance',
+    # 'maintenance',
     'breadcrumbs',
     'django_xmlrpc',
     'photologue',
@@ -189,7 +189,7 @@ LOGGING = {
 }
 
 # Maintenance (currently having no effect)
-MAINTENANCE_DISABLE_FOR_SUPERUSER = True
+# MAINTENANCE_DISABLE_FOR_SUPERUSER = True
 
 # Breadcrumbs
 BREADCRUMBS_AUTO_HOME = True
@@ -269,3 +269,8 @@ PAGINATION_INVALID_PAGE_RAISES_404 = True
 # PAGINATION_PREVIOUS_LINK_DECORATOR = '&laquo;'
 # PAGINATION_NEXT_LINK_DECORATOR = '&raquo;'
 PAGINATION_CLEAN_URL = False
+
+# import warnings
+# warnings.filterwarnings(
+#         'error', r"DateTimeField received a naive datetime",
+#         RuntimeWarning, r'django\.db\.models\.fields')
