@@ -1,0 +1,18 @@
+body {
+    color: black;
+    background-color: white;
+
+    font-size: 12pt;
+    padding-top: 0;
+}
+
+body > nav {
+    display: none;
+}
+
+a {
+    color: #666;
+    background: transparent;
+    font-weight: bold;
+    text-decoration: none;
+}
