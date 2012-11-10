@@ -1,5 +1,11 @@
 # Django settings for project project.
 
+# Datetime fix
+# http://stackoverflow.com/questions/2427240/thread-safe-equivalent-to-pythons-time-strptime
+from datetime import datetime
+datetime.strptime("1986-07-01", "%Y-%m-%d")
+#datetime.datetime(1986, 7, 1, 0, 0)
+
 import os
 import sys
 
@@ -157,6 +163,7 @@ INSTALLED_APPS = (
     'software',
     'ciphers',
     'analytical',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
