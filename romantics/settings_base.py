@@ -120,11 +120,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.sites',
+    #'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     #'django.contrib.admin',
@@ -132,11 +132,11 @@ INSTALLED_APPS = (
     #'django.contrib.admindocs',
     'django.contrib.sitemaps',
     'django.contrib.markup',
-    'django.contrib.flatpages',
+    #'django.contrib.flatpages',
     'django.contrib.humanize',
-    'django.contrib.syndication',
-    'django.contrib.comments',
-    'south',
+    #'django.contrib.syndication',
+    #'django.contrib.comments',
+    #'south',
     'appconf',
     'sekizai',
     'pytz',
