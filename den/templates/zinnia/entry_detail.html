@@ -5,7 +5,7 @@
 {% block lead %}
 	{% if object.excerpt %}
 		<p class="lead">
-			{{ object.excerpt }}
+			{{ object.excerpt|safe|striptags }}
 		</p>
 	{% endif %}
 {% endblock %}
