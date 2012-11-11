@@ -1,0 +1,8 @@
+{% extends "flatpages/default.html" %}
+{% load static %}
+{% block content %}
+	<div class="story clearfix">
+		<img class="austen pull-left" src="{% static "img/austen-crop-small.png" %}" alt="Austen">
+		{{ block.super }}
+	</div>
+{% endblock %}

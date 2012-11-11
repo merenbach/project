@@ -7,8 +7,8 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Uncomment the next two lines to enable the admin:
-#from django.contrib import admin
-#admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 # Sitemaps
 
@@ -34,14 +34,14 @@ urlpatterns = patterns('',
     #url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
     (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-    #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    #url(r'^admin/', include(admin.site.urls)),
-    (r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+    #(r'^$', TemplateView.as_view(template_name='index.html')),
 )
 
-#urlpatterns += patterns('django.contrib.flatpages.views',
-#    url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
-#)
+urlpatterns += patterns('django.contrib.flatpages.views',
+    url(r'^$', 'flatpage', {'url': '/'}, name='home'),
+)
 
 urlpatterns += staticfiles_urlpatterns()
 

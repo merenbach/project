@@ -38,7 +38,7 @@ TIME_ZONE = 'America/Los_Angeles'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
-SITE_ID = 4
+SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -83,7 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'pagination.middleware.PaginationMiddleware',
@@ -120,23 +120,23 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         )
 
 INSTALLED_APPS = (
-    #'django.contrib.auth',
-    #'django.contrib.contenttypes',
-    #'django.contrib.sessions',
-    #'django.contrib.sites',
-    #'django.contrib.messages',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    #'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    #'django.contrib.admindocs',
+    'django.contrib.admindocs',
     'django.contrib.sitemaps',
     'django.contrib.markup',
-    #'django.contrib.flatpages',
+    'django.contrib.flatpages',
     'django.contrib.humanize',
-    #'django.contrib.syndication',
-    #'django.contrib.comments',
-    #'south',
+    'django.contrib.syndication',
+    'django.contrib.comments',
+    'south',
     'appconf',
     'sekizai',
     'pytz',
@@ -151,7 +151,7 @@ INSTALLED_APPS = (
     #'haystack',
     #'whoosh',
     'romantics', # custom additions and utilities
-    # 'maintenance',
+    #'maintenance',
     #'breadcrumbs',
     #'django_xmlrpc',
     #'photologue',
