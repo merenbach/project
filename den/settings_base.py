@@ -163,7 +163,7 @@ INSTALLED_APPS = (
     'software',
     'ciphers',
     'analytical',
-    'django_extensions',
+    #'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
