@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 
-from django.views.generic.simple import direct_to_template
+from django.views.generic import TemplateView
 
 # import site specific urls
 from django.conf import settings
@@ -36,7 +36,7 @@ urlpatterns = patterns('',
     (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     #url(r'^admin/', include(admin.site.urls)),
-    (r'^$', direct_to_template, {'template': 'index.html'}),
+    (r'^$', TemplateView.as_view(template_name='index.html')),
 )
 
 #urlpatterns += patterns('django.contrib.flatpages.views',
