@@ -147,7 +147,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'zinnia',
-    'disqus',
+    #'disqus',
     'contact',
     #'pagination',              # pagination (replaced)
     'linaro_django_pagination', # pagination
