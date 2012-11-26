@@ -1,7 +1,8 @@
 body {
-	color: #333;
+	/* color scheme: Color Index 2, p. 158 (or 151) */
+	color: rgb(127, 95, 66);
+	background-color: rgb(196, 154, 126);
 	/*background-color: #eaeaea;*/
-	background-color: #fafafa;
 	/*background-color: #eee;*/
 	padding-top: 40px;
 }
