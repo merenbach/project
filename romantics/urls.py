@@ -41,6 +41,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('django.contrib.flatpages.views',
     url(r'^$', 'flatpage', {'url': '/'}, name='home'),
+    url(r'^ball/$', 'flatpage', {'url': '/ball/'}, name='ball'),
 )
 
 urlpatterns += staticfiles_urlpatterns()
