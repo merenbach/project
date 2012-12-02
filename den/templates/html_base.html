@@ -3,10 +3,10 @@
 {% load url from future %}
 {% addtoblock "css" %}
 	{% compress css %}
-		<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/bootstrap.min.css" %}">
-		<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/screen.css" %}">
-		<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/bootstrap-responsive.min.css" %}">
-		<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="{% static "css/print.css" %}">
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap-responsive.min.css" %}">
+		<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 	{% endcompress %}
 	<!--[if IE]>
 		{% compress css %}
