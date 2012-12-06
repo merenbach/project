@@ -108,23 +108,27 @@
 		</nav>
 		{% endblock %}
 		<div class="container">
-			{% block breadcrumb %}
-				{% if request.breadcrumbs.all %}
-					<nav>
-						<ul class="breadcrumb">
-							{% for breadcrumb in request.breadcrumbs %}
-							{% if not forloop.last %}<li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span class="divider">/</span></li>{% else %}<li class="active">{{ breadcrumb.name }}</li>{% endif %}
-							{% endfor %}
-						</ul>
-					</nav>
-				{% endif %}
-			{% endblock %}
-			<section id="content">
-				{% block base_content %}{% endblock %}
-			</section>
-			<footer id="footer">
-				<p class="muted"><small>Copyright &copy; 2011 &ndash; {% now "Y" %} Andrew Merenbach</small></p>
-			</footer>
+			<div class="row">
+				<div class="span8 offset2">
+					{% block breadcrumb %}
+						{% if request.breadcrumbs.all %}
+							<nav>
+								<ul class="breadcrumb">
+									{% for breadcrumb in request.breadcrumbs %}
+									{% if not forloop.last %}<li><a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span class="divider">/</span></li>{% else %}<li class="active">{{ breadcrumb.name }}</li>{% endif %}
+									{% endfor %}
+								</ul>
+							</nav>
+						{% endif %}
+					{% endblock %}
+					<section id="content">
+						{% block base_content %}{% endblock %}
+					</section>
+					<footer id="footer">
+						<p class="muted"><small>Copyright &copy; 2011 &ndash; {% now "Y" %} Andrew Merenbach</small></p>
+					</footer>
+				</div>
+	`		</div>
 		</div>
 		{% if not user.is_authenticated %}
 		<!-- Piwik --> 
