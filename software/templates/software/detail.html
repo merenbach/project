@@ -1,9 +1,17 @@
 {% extends "software/root.html" %}
-{% load markup %}
-{% load software_tags %}
+{% load markup software_tags %}
 
 {% block title %}{{ software.title }}{% endblock %}
 {% block subtitle %} {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}</small>{% endif %}{% endblock %}
+
+{% block lead %}
+    {% if object.summary %}
+        <p class="lead">
+            {{ object.summary|safe|striptags }}
+            {% render_tag_links_detail object %}
+        </p>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {% comment %}
@@ -24,7 +32,6 @@
         <em>No description has been entered.</em>
         {% endif %}
     </div>
-    {% render_tag_links_detail software %}
     <p class="muted"><small>Fin</small></p>
     <div class="btn-group downloads">
         {% if software.app_file %}

@@ -1,14 +1,12 @@
-{% load software_tags tagging_tags sekizai_tags %}
+{% load i18n tagging_tags %}
 {% load url from future %}
 
 {% if tags %}
-<nav class="pull-right">
-    {% for tag in tags %}
-	<a href="{% url 'software_tag_detail' tag=tag %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
-    {% comment %}
-{% empty %}
-    <li>none</li>
-{% endcomment %}
-    {% endfor %}
-</nav>
+	<small>
+		{% for tag in tags %}
+		<a class="muted" href="{% url 'software_tag_detail' tag=tag %}"
+		   title="{% blocktrans %}Show all software tagged {{ tag }}{% endblocktrans %}"
+		   rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}
+	   {% endfor %}
+	</small>
 {% endif %}
