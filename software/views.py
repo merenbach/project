@@ -22,7 +22,7 @@ class SoftwareDetailView(DetailView):
         except KeyError:
             raise http404
         if slug is not None:
-            request.breadcrumbs(('Software', reverse('software')), (self.queryset.all()[0].title, reverse('software_detail', kwargs={'slug': slug})))
+            request.breadcrumbs([('Software', reverse('software')), (self.queryset.all()[0].title, reverse('software_detail', kwargs={'slug': slug}))])
         return super(SoftwareDetailView, self).dispatch(request, *args, **kwargs)
 
 class SoftwareTagView(ListView):
@@ -35,7 +35,7 @@ class SoftwareTagView(ListView):
             self.tag = kwargs.pop('tag')
         except KeyError:
             raise http404
-        request.breadcrumbs(('Software', reverse('software')), ('Tagged "' + self.tag + '"', reverse('software_tag_detail', kwargs={'tag': self.tag})))
+        request.breadcrumbs([('Software', reverse('software')), ('Tagged "' + self.tag + '"', reverse('software_tag_detail', kwargs={'tag': self.tag}))])
         return super(SoftwareTagView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):

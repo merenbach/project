@@ -63,7 +63,7 @@ class ContactThanksView(TemplateView):
     template_name = 'contact/thanks.html'
     
     def dispatch(self, request, *args, **kwargs):
-        request.breadcrumbs(('Contact', reverse('contact')), ('Thanks', reverse('contact-thanks')))
+        request.breadcrumbs([('Contact', reverse('contact')), ('Thanks', reverse('contact-thanks'))])
         return super(ContactThanksView, self).dispatch(request, *args, **kwargs)
 
 """
