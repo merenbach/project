@@ -1,5 +1,9 @@
 # README for Project
 
+## Django compressor
+
+We make use of a module from the dev branch.  This should be removed once it is integrated into the core.
+
 ## Configuration for MarsEdit
 Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as blogging system for use of tags.
 

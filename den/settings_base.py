@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'sekizai',
     'pytz',
     'compressor',
+    'compressor_contrib.sekizai', # custom until integrated into compressor master
     'tagging',
     'mptt',
     'zinnia',
