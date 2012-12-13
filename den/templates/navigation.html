@@ -19,11 +19,13 @@
 					{% url 'software' as software_url %}
 					{% url 'ciphers' as ciphers_url %}
 					{% url 'contact' as contact_url %}
+					{% url 'privacy' as privacy_url %}
 					<li class="{% active about_url %}"><a href="{{ about_url }}">About</a></li>
 					<li class="{% active gallery_url %}"><a href="{{ gallery_url }}">Gallery</a></li>
 					<li class="{% active software_url %}"><a href="{{ software_url }}">Software</a></li>
 					<li class="{% active ciphers_url %}"><a href="{{ ciphers_url }}">Ciphers</a></li>
 					<li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
+					<li class="{% active privacy_url %}"><a href="{{ privacy_url }}">Privacy</a></li>
 				</ul>
 				<form class="navbar-search pull-left" method="GET" action="{% url 'haystack_search' %}">
 					<input type="search" class="search-query" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
