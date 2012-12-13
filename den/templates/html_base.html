@@ -1,25 +1,5 @@
 <!DOCTYPE html>
 {% load sekizai_tags compress static analytical %}
-{% addtoblock "css" %}
-	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap.min.css" %}">
-	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap-responsive.min.css" %}">
-	<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
-	<!--[if IE]>
-		<style type="text/css">
-			.clearfix {
-				zoom: 1;     /* triggers hasLayout */
-			}  /* Only IE can see inside the conditional comment
-			and read this CSS rule. Don't ever use a normal HTML
-			comment inside the CC or it will close prematurely. */
-		</style>
-	<![endif]-->
-	<!--[if !IE 7]>
-		<style type="text/css">
-			#wrap {display:table;height:100%;}
-		</style>
-	<![endif]-->
-{% endaddtoblock %}
 <html lang="{{ LANGUAGE_CODE }}">
 	<head>
 		<meta charset="utf-8">
@@ -32,9 +12,29 @@
 		<meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
 		<meta name="description" content="{% block meta-description %}{% endblock %}">
 		{% block link %}{% endblock %}
-		{% block extrahead %}{% endblock %}
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
-		{% block css %}{% endblock %}
+		{% block css %}
+			{% addtoblock "css" %}
+				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap.min.css" %}">
+				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
+				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap-responsive.min.css" %}">
+				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+				<!--[if IE]>
+					<style type="text/css">
+						.clearfix {
+							zoom: 1;     /* triggers hasLayout */
+						}  /* Only IE can see inside the conditional comment
+						and read this CSS rule. Don't ever use a normal HTML
+						comment inside the CC or it will close prematurely. */
+					</style>
+				<![endif]-->
+				<!--[if !IE 7]>
+					<style type="text/css">
+						#wrap {display:table;height:100%;}
+					</style>
+				<![endif]-->
+			{% endaddtoblock %}
+		{% endblock %}
 		{% analytical_head_bottom %}
 	</head>
 	<body>
