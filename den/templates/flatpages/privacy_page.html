@@ -1,0 +1,26 @@
+{% extends "flatpages/default.html" %}
+{% load static %}
+{# load sekizai_tags #}
+{% block content %}
+	{{ block.super }}
+	{#<iframe frameborder="no" src="https://piwik.merenbach.com/index.php?module=CoreAdminHome&action=optOut&language=en"></iframe>#}
+	{% comment %}
+	{# This doesn't work once the Piwik form is submitted #}
+	<div id="opt_out"></div>
+	{% addtoblock "js" %}
+		<script type="text/javascript">
+			(function($) {
+				$(document).ready(function() {
+					$('#opt_out').load('https://piwik.merenbach.com/index.php?module=CoreAdminHome&action=optOut&language=en',
+						function(response, status, xhr) {
+							if (status === 'error') {
+								$('#opt_out').text('Could not load opt-out pane.');
+								$('#opt_out').addClass('text-error');
+							}
+					});
+				});
+			})(jQuery);
+		</script>
+	{% endaddtoblock %}
+	{% endcomment %}
+{% endblock %}
