@@ -3,8 +3,8 @@
 {% load url from future %}
 
 {% block breadcrumb %}
-    {% url "zinnia_entry_archive_year" month|date:"Y" as year_url %}
-    {% url "zinnia_entry_archive_month" month|date:"Y" month|date:"m" as month_url %}
+    {% url 'zinnia_entry_archive_year' month|date:"Y" as year_url %}
+    {% url 'zinnia_entry_archive_month' month|date:"Y" month|date:"m" as month_url %}
     {% make_crumbs month|date:"Y" year_url %}
     {% make_crumbs month|date:"m" month_url %}
     {{ block.super }}

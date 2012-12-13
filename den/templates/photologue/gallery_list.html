@@ -6,7 +6,7 @@
 {% block subtitle %} <small>Archive</small>{% endblock %}
 
 {% block breadcrumb %}
-    {% url "pl-gallery-archive" as archive_url %}
+    {% url 'pl-gallery-archive' as archive_url %}
     {% make_crumbs "Galleries" archive_url %}
     {{ block.super }}
 {% endblock %}

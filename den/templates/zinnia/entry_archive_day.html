@@ -4,9 +4,9 @@
 
 {% block breadcrumb %}
     {% with year=day|date:"Y" month=day|date:"m" day_of_month=day|date:"d" %}
-        {% url "zinnia_entry_archive_year" year as year_url %}
-        {% url "zinnia_entry_archive_month" year month as month_url %}
-        {# {% url "zinnia_entry_archive_day" year month day_of_month as day_url %} #}
+        {% url 'zinnia_entry_archive_year' year as year_url %}
+        {% url 'zinnia_entry_archive_month' year month as month_url %}
+        {# {% url 'zinnia_entry_archive_day' year month day_of_month as day_url %} #}
         {% make_crumbs year year_url %}
         {% make_crumbs month month_url %}
         {% make_crumbs day_of_month %}

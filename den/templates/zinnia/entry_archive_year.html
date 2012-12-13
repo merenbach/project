@@ -3,7 +3,7 @@
 {% load url from future %}
 
 {% block breadcrumb %}
-    {% url "zinnia_entry_archive_year" year as year_url %}
+    {% url 'zinnia_entry_archive_year' year as year_url %}
     {% make_crumbs year year_url %}
     {{ block.super }}
 {% endblock %}

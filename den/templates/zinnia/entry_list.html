@@ -4,12 +4,12 @@
 
 {% block breadcrumb %}
     {% if tag %}
-        {% url "zinnia_tag_list" as tag_list_url %}
+        {% url 'zinnia_tag_list' as tag_list_url %}
         {% make_crumbs "Tags" tag_list_url %}
         {% make_crumbs tag %}
     {% endif %}
     {% if author %}
-        {% url "zinnia_author_list" as author_list_url %}
+        {% url 'zinnia_author_list' as author_list_url %}
         {% make_crumbs "Authors" author_list_url %}
         {% make_crumbs author %}
     {% endif %}
