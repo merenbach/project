@@ -1,6 +1,8 @@
 {% extends "flatpages/default.html" %}
 {% load static %}
 {% block content %}
-	<img src="{% static "img/me.jpg" %}" alt="Andrew" class="pull-left img-polaroid about-img">
-	{{ block.super }}
+	<div class="row-fluid">
+		<img src="{% static "img/me.jpg" %}" alt="Andrew" class="img-polaroid span4 hidden-phone">
+		<div class="span8">{{ block.super }}</div>
+	</div>
 {% endblock %}
