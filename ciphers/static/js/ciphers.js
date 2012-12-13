@@ -128,6 +128,7 @@
 
 	$(document).ready(function() {
 		$('.pane').hide();
+		$('#cipher_input_panes').show();
 
 		$('#scheme').change(function() {
 			var el_id = $(this).val();

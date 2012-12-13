@@ -5,6 +5,12 @@
 {% block title %}Ciphers{% endblock %}
 {% block subtitle %} <small>Alpha</small>{% endblock %}
 
+{% block css %}
+	{{ block.super }}
+	{% addtoblock "css" %}
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/ciphers.css" %}">
+	{% endaddtoblock %}
+{% endblock %}
 {% block js %}
 	{{ block.super }}
 	{% addtoblock "js" %}
@@ -27,7 +33,7 @@
 			<p>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</p>
 		</noscript>
 		<section>
-			<fieldset style="margin-bottom: 10px;">
+			<fieldset>
 				<div class="control-group">
 					<label class="control-label" for="scheme">Cipher Scheme</label>
 					<div class="controls">
@@ -59,12 +65,14 @@
 				To begin, please select a scheme from the menu.
 			</p>
 		</section>
-		{% include "ciphers/pane_affine.html" %}
-		{% include "ciphers/pane_atbash.html" %}
-		{% include "ciphers/pane_beaufort.html" %}
-		{% include "ciphers/pane_caesar.html" %}
-		{% include "ciphers/pane_codeword.html" %}
-		{% include "ciphers/pane_vigenere.html" %}
+		<div id="cipher_input_panes">
+			{% include "ciphers/pane_affine.html" %}
+			{% include "ciphers/pane_atbash.html" %}
+			{% include "ciphers/pane_beaufort.html" %}
+			{% include "ciphers/pane_caesar.html" %}
+			{% include "ciphers/pane_codeword.html" %}
+			{% include "ciphers/pane_vigenere.html" %}
+		</div>
 	</form>
 </article>
 {% endblock %}
