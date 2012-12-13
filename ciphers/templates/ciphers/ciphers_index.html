@@ -5,16 +5,17 @@
 {% block title %}Ciphers{% endblock %}
 {% block subtitle %} <small>Alpha</small>{% endblock %}
 
+{% block js %}
+	{{ block.super }}
+	{% addtoblock "js" %}
+		{% dajaxice_js_import %}
+		<script type="text/javascript" charset="utf-8" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+		<script type="text/javascript" charset="utf-8" src="{% static "js/ciphers.js" %}"></script>
+	{% endaddtoblock %}
+{% endblock %}
+
 {% block content %}
 {{ block.super }}
-
-{% addtoblock "js" %}
-{% compress js %}
-{% dajaxice_js_import %}
-<script type="text/javascript" charset="utf-8" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
-<script type="text/javascript" charset="utf-8" src="{% static "js/ciphers.js" %}"></script>
-{% endcompress %}
-{% endaddtoblock %}
 
 <article>
 	<p>This page represents an ever-evolving (and ever-incomplete) attempt at making a multifunctional text encryption and decryption tool.  There are plenty like this (and better than this) elsewhere on the Internet, so if you seek style and flair, you might wish to reconsider before directing others to this specific page.</p>

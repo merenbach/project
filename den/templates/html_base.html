@@ -20,14 +20,6 @@
 		</style>
 	<![endif]-->
 {% endaddtoblock %}
-{% addtoblock "js" %}
-	<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.3.min.js" %}"></script>
-	<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
-	<!--[if lt IE 9]>
-			<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
-			<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
-	<![endif]-->
-{% endaddtoblock %}
 <html lang="{{ LANGUAGE_CODE }}">
 	<head>
 		<meta charset="utf-8">
@@ -42,6 +34,7 @@
 		{% block link %}{% endblock %}
 		{% block extrahead %}{% endblock %}
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
+		{% block css %}{% endblock %}
 		{% analytical_head_bottom %}
 	</head>
 	<body>
@@ -87,6 +80,16 @@
 		<!-- End Piwik Tracking Code -->
 		{% endif %}
 		{% render_block "js" postprocessor "compressor_contrib.sekizai.compress" %}
+		{% block js %}
+			{% addtoblock "js" %}
+				<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.3.min.js" %}"></script>
+				<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
+				<!--[if lt IE 9]>
+						<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
+						<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
+				<![endif]-->
+			{% endaddtoblock %}
+		{% endblock %}
 		{% analytical_body_bottom %}
 	</body>
 </html>
