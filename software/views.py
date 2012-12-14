@@ -13,6 +13,7 @@ class SoftwareIndexView(ListView):
         return super(SoftwareIndexView, self).dispatch(request, *args, **kwargs)
 
 class SoftwareDetailView(DetailView):
+    model = Software
     template_name = 'software/detail.html'
     queryset = Software.objects.filter(is_published=True).order_by('title')
 
@@ -22,7 +23,7 @@ class SoftwareDetailView(DetailView):
         except KeyError:
             raise http404
         if slug is not None:
-            request.breadcrumbs([('Software', reverse('software')), (self.queryset.all()[0].title, reverse('software_detail', kwargs={'slug': slug}))])
+            request.breadcrumbs([('Software', reverse('software')), (self.get_queryset().filter(slug=kwargs['slug'])[0].title, reverse('software_detail', kwargs={'slug': slug}))])
         return super(SoftwareDetailView, self).dispatch(request, *args, **kwargs)
 
 class SoftwareTagView(ListView):
