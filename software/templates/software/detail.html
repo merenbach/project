@@ -2,7 +2,7 @@
 {% load markup software_tags %}
 
 {% block title %}{{ software.title }}{% endblock %}
-{% block subtitle %} {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small>{{ software.pub_date|date:"Y.m.d" }}</small>{% endif %}{% endblock %}
+{% block subtitle %} {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small><abbr title="{{ software.pub_date|date:"c" }}">{{ software.pub_date|date:"Y.m.d" }}</abbr></small>{% endif %}{% endblock %}
 
 {% block lead %}
     {% if object.summary %}
