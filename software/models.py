@@ -5,8 +5,6 @@ from django.template.defaultfilters import slugify
 import datetime
 from django.conf import settings
 
-from urlparse import urljoin
-
 from tagging.fields import TagField
 from tagging.models import Tag
 
@@ -67,22 +65,6 @@ class Software(models.Model):
         if not self.pub_date:
             self.pub_date = datetime.datetime.today()
         super(Software, self).save(*args, **kwargs)
-
-    def get_file_url(self, filepath):
-        relpath = os.path.relpath(filepath, settings.MEDIA_ROOT)
-        return urljoin(settings.MEDIA_URL, relpath)
-    def get_file_size(self, filepath):
-        return os.path.getsize(filepath)
-
-    def get_app_file_url(self):
-        return self.get_file_url(self.app_file)
-    def get_app_file_size(self):
-        return self.get_file_size(self.app_file)
-
-    def get_src_file_url(self):
-        return self.get_file_url(self.src_file)
-    def get_src_file_size(self):
-        return self.get_file_size(self.src_file)
 
     @permalink
     def get_absolute_url(self):
