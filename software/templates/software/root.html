@@ -1,8 +1,1 @@
 {% extends "base.html" %}
-{% load sekizai_tags compress static %}
-{% block css %}
-	{{ block.super }}
-	{% addtoblock "css" %}
-		<link rel="stylesheet" type="text/css" href="{% static "css/software.css" %}">
-	{% endaddtoblock %}
-{% endblock %}

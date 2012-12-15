@@ -19,6 +19,8 @@
 				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
 				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap-responsive.min.css" %}">
 				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+			{% endaddtoblock %}
+			{% compress css %}
 				<!--[if IE]>
 					<style type="text/css">
 						.clearfix {
@@ -33,7 +35,7 @@
 						#wrap {display:table;height:100%;}
 					</style>
 				<![endif]-->
-			{% endaddtoblock %}
+			{% endcompress %}
 		{% endblock %}
 		{% analytical_head_bottom %}
 	</head>
@@ -84,11 +86,13 @@
 			{% addtoblock "js" %}
 				<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.3.min.js" %}"></script>
 				<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
-				<!--[if lt IE 9]>
-						<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
-						<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
-				<![endif]-->
 			{% endaddtoblock %}
+			{% compress js %}
+				<!--[if lt IE 9]>
+					<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
+					<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
+				<![endif]-->
+			{% endcompress %}
 		{% endblock %}
 		{% analytical_body_bottom %}
 	</body>
