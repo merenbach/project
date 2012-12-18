@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from software.models import Software
 from django.http import Http404
@@ -23,7 +24,8 @@ class SoftwareDetailView(DetailView):
         except KeyError:
             raise http404
         if slug is not None:
-            request.breadcrumbs([('Software', reverse('software')), (self.get_queryset().filter(slug=kwargs['slug'])[0].title, reverse('software_detail', kwargs={'slug': slug}))])
+            sw = get_object_or_404(self.get_queryset(), slug=slug)
+            request.breadcrumbs([('Software', reverse('software')), (sw.title, reverse('software_detail', kwargs=kwargs))])
         return super(SoftwareDetailView, self).dispatch(request, *args, **kwargs)
 
 class SoftwareTagView(ListView):
