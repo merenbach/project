@@ -33,17 +33,44 @@
         {% endif %}
     </div>
     {% with software.app_file|swfile as app_exists and software.src_file|swfile as src_exists %}
-        {% if app_exists or src_exists %}
-            <div class="row-fluid">
-                <div class="btn-group btn-group-vertical offset2 span8">
-                    {% if app_exists %}
-                        <a class="btn btn-primary" href="{{ software.app_file|swlink }}"><i class="icon-download-alt icon-white"></i> Download Application <small>({{ software.app_file|swsize|filesizeformat }})</small></a>
-                    {% endif %}
-                    {% if src_exists %}
-                        <a class="btn" href="{{ software.src_file|swlink }}"><i class="icon-file"></i> Download Source Code <small>({{ software.src_file|swsize|filesizeformat }})</small></a>
-                    {% endif %}
-                </div>
-            </div>
+        {% if debug or app_exists or src_exists %}
+            <h2>Downloads</h2>
+            <ul class="unstyled">
+                {% if debug and software.app_file %}
+                    {# Show a dummy "Application" download button #}
+                    <li>
+                        <a href="#">Application</a>
+                        <small class="muted">
+                        	{{ 724|filesizeformat }}
+                        </small>
+                    </li>
+                {% endif %}
+                {% if debug and software.src_file %}
+                    {# Show a dummy "Source code" download button #}
+                    <li>
+                        <a href="#">Source code</a>
+                        <small class="muted">
+                        	{{ 724|filesizeformat }}
+                        </small>
+                    </li>
+                {% endif %}
+                {% if app_exists %}
+                    <li>
+                        <a href="{{ software.app_file|swlink }}">Application</a>
+                        <small class="muted">
+                        	{{ software.app_file|swsize|filesizeformat }}
+                        </small>
+                    </li>
+                {% endif %}
+                {% if src_exists %}
+                    <li>
+                        <a href="{{ software.src_file|swlink }}">Source code</a>
+                        <small class="muted">
+                        	{{ software.src_file|swsize|filesizeformat }}
+                        </small>
+                    </li>
+                {% endif %}
+            </ul>
         {% endif %}
     {% endwith %}
 {% endblock %}
