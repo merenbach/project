@@ -15,11 +15,10 @@
 
 {% block content %}
 
-{% comment %}<h1>{{ object.title }}</h1>{% endcomment %}
 <div class="gallery-photo">
-    <a href="{{ object.image.url }}"><img class="img-polaroid" src="{{ object.get_display_url }}" alt="{{ object.title }}"></a>
     {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
-</div>
+	<img src="{{ object.image.url }}" alt="{{ object.title }}">
+</div><!-- /gallery-photo -->
 {% comment %}
 {% if object.public_galleries %}
 <h2>This photo is found in the following galleries:</h2>
