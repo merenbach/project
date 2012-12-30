@@ -17,7 +17,12 @@ decorate_bound_field()
 
 class InlineErrorList(ErrorList):
     def __unicode__(self):
-        return self.as_ul()
+        return self.as_spans()
+
+    def as_spans(self):
+        if not self: return u''
+        errors_list = [u'<small class="help-inline pull-right">{0}</small>'.format(e) for e in self]
+        return mark_safe(u' '.join(errors_list))
 
     def as_ul(self):
         if not self: return u''
@@ -33,14 +38,7 @@ class ContactForm(forms.Form):
 
     # required_css_class = ''
     error_css_class = 'error'
-    subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'input-large'}))
-    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'input-large'}))
-    sender = forms.EmailField(widget=forms.TextInput(attrs={'class': 'input-large'}))
+    subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'span8'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'span8'}))
+    sender = forms.EmailField(widget=forms.TextInput(attrs={'class': 'span8'}))
     # cc_myself = forms.BooleanField(required=False)
-    
-    # For Bootstrap
-    field_icons = {
-        'subject': 'icon-tag',
-        'message': 'icon-pencil',
-        'sender': 'icon-envelope',
-    }
