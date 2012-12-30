@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static compress analytical %}
+{% load staticfiles compress analytical %}
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -7,10 +7,10 @@
 	{% analytical_head_top %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% compress css %}
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/bootstrap.css" %}"></style>
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/bootstrap-responsive.css" %}"></style>
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/screen.css" %}"></style>
-	<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="{% static "css/print.css" %}"></style>
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/bootstrap.css" %}">
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/bootstrap-responsive.css" %}">
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="{% static "css/screen.css" %}">
+	<link rel="stylesheet" type="text/css" charset="utf-8" media="print" href="{% static "css/print.css" %}">
 	{% endcompress %}
 	<!--[if lt IE 9]>
 		{% compress js %}
@@ -36,18 +36,6 @@
 			<p class="muted">Copyright &copy; 2011&ndash;2012 Team Tata</p>
 		</footer>
 	</div>
-	<!-- Piwik --> 
-	<script type="text/javascript">
-		var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.merenbach.com/" : "http://piwik.merenbach.com/");
-		document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-	</script><script type="text/javascript">
-	try {
-		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 4);
-		piwikTracker.trackPageView();
-		piwikTracker.enableLinkTracking();
-	} catch( err ) {}
-	</script><noscript><p><img src="http://piwik.merenbach.com/piwik.php?idsite=4" style="border:0" alt=""></p></noscript>
-	<!-- End Piwik Tracking Code -->
 	{% analytical_body_bottom %}
 </body>
 </html>
