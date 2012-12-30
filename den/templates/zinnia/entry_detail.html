@@ -63,11 +63,13 @@
 	</ul>
 </nav>
 {% endblock %}
-{% block entry-comments %}{% endblock %}
+{% block entry-comments-form %}{% endblock %}
 {% block entry-pingbacks %}{% endblock %}
 {% block entry-trackbacks %}{% endblock %}
-{% block entry-comments-form %}
-	{% if object.comments_are_open %}
+{% block entry-comments %}
+<section id="comments">
+	<h2>{% trans "Comments" %}</h2>
+	{% if object.comments_are_open and not debug %}
 		<div id="disqus_thread"></div>
 		<script type="text/javascript">
 			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -85,4 +87,5 @@
 	{% else %}
 		<p class="muted">{% trans "Comments are disabled." %}</p>
 	{% endif %}
+</section>
 {% endblock %}
