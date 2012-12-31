@@ -164,6 +164,7 @@ INSTALLED_APPS = (
     'software',
     'ciphers',
     'analytical',
+    'common', # my common extensions
     'django_extensions',
 )
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load sekizai_tags compress staticfiles analytical %}
+{% load sekizai_tags staticfiles analytical %}
 <html lang="{{ LANGUAGE_CODE }}">
 	<head>
 		<meta charset="utf-8">
@@ -15,28 +15,12 @@
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
 		{% block css %}
 			{% addtoblock "css" %}
-				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap.css" %}">
 				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/bootstrap-responsive.css" %}">
 				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 			{% endaddtoblock %}
-			{% compress css %}
-				<!--[if IE]>
-					<style type="text/css">
-						.clearfix {
-							zoom: 1;     /* triggers hasLayout */
-						}  /* Only IE can see inside the conditional comment
-						and read this CSS rule. Don't ever use a normal HTML
-						comment inside the CC or it will close prematurely. */
-					</style>
-				<![endif]-->
-				<!--[if !IE 7]>
-					<style type="text/css">
-						#wrap {display:table;height:100%;}
-					</style>
-				<![endif]-->
-			{% endcompress %}
 		{% endblock %}
+		{% include "common/html5shiv.html" %}
+		{% include "common/bootstrap.html" %}
 		{% analytical_head_bottom %}
 	</head>
 	<body>
@@ -70,18 +54,7 @@
 			</div>
 		</div>
 		{% render_block "js" postprocessor "compressor_contrib.sekizai.compress" %}
-		{% block js %}
-			{% addtoblock "js" %}
-				<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.3.js" %}"></script>
-				<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.js" %}"></script>
-			{% endaddtoblock %}
-			{% compress js %}
-				<!--[if lt IE 9]>
-					<script type="text/javascript" src="{% static "js/html5shiv.js" %}"></script>
-					<script type="text/javascript" src="{% static "js/html5shiv-printshiv.js" %}"></script>
-				<![endif]-->
-			{% endcompress %}
-		{% endblock %}
+		{% block js %}{% endblock %}
 		{% analytical_body_bottom %}
 	</body>
 </html>
