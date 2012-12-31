@@ -4,6 +4,16 @@
 
 We make use of a module from the dev branch.  This should be removed once it is integrated into the core.
 
+- For Compressor to work, www-data user must have write access to the cache directory.
+- The easiest way is to create this directory manually and make www-data the owner (although we could technically make www-data the group and root the owner, that might be more of a security hole)
+- <http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_STORAGE>
+
+## Memcached
+
+- Please ensure that the memcached path is set correctly in settings.py.
+- This may (or may not) be `unix:/var/run/memcached/memcached.pid` on CentOS
+- This appears to actually be `unix:/var/run/memcached.pid` on Debian, something that I failed to discover for about a month.
+
 ## Configuration for MarsEdit
 Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as blogging system for use of tags.
 
