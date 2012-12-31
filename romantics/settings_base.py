@@ -155,10 +155,7 @@ INSTALLED_APPS = (
     #'breadcrumbs',
     #'django_xmlrpc',
     #'photologue',
-    #'dajaxice',
-    #'dajax',
-    #'software',
-    #'ciphers',
+    'common', # my common extensions
     'analytical',
 )
 

@@ -9,9 +9,6 @@ datetime.strptime("1986-07-01", "%Y-%m-%d")
 import os
 import sys
 
-# Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'den.wsgi.application'
-
 # get the settings path
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 PROJECT_PATH = os.path.abspath(PROJECT_ROOT)
