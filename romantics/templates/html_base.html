@@ -7,6 +7,7 @@
 		{% analytical_head_top %}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
+		{% include "common/bootstrap.html" %}
 		{% block css %}
 			{% addtoblock "css" %}
 				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
@@ -14,7 +15,6 @@
 			{% endaddtoblock %}
 		{% endblock %}
 		{% include "common/html5shiv.html" %}
-		{% include "common/bootstrap.html" %}
 		{% analytical_head_bottom %}
 	</head>
 	<body>
