@@ -1,15 +1,18 @@
-body {
+html body {
 	color: #333;
 	/*background-color: #eaeaea;*/
 	background-color: #fafafa;
 	/*background-color: #eee;*/
+}
+
+body {
 	padding-top: 40px;
 }
 
-#footer {
+html #footer {
 	text-align: center;
 }
 
-#content blockquote {
+html blockquote {
 	word-wrap: break-word;
 }

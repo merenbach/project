@@ -13,13 +13,13 @@
 		<meta name="description" content="{% block meta-description %}{% endblock %}">
 		{% block link %}{% endblock %}
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
-		{% include "common/bootstrap.html" %}
 		{% block css %}
 			{% addtoblock "css" %}
 				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
 				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 			{% endaddtoblock %}
 		{% endblock %}
+		{% include "common/bootstrap.html" %}
 		{% include "common/html5shiv.html" %}
 		{% analytical_head_bottom %}
 	</head>
