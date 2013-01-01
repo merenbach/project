@@ -5,12 +5,10 @@
 
 #footer {
     padding-top: 1em;
-}
-#footer p {
 	text-align: center;
 }
 
-body {
+html body {
 	font-family: 'Palatino', 'Times', serif;
 	color: #333;
 	background-color: #fafafa;

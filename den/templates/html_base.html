@@ -17,10 +17,10 @@
 			{% addtoblock "css" %}
 				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
 				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+				{% include "common/css/bootstrap.html" %}
 			{% endaddtoblock %}
 		{% endblock %}
-		{% include "common/bootstrap.html" %}
-		{% include "common/html5shiv.html" %}
+		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
 	</head>
 	<body>
@@ -54,7 +54,12 @@
 			</div>
 		</div>
 		{% render_block "js" postprocessor "compressor_contrib.sekizai.compress" %}
-		{% block js %}{% endblock %}
+		{% block js %}
+			{% addtoblock "js" %}
+				{% include "common/js/jquery.html" %}
+				{% include "common/js/bootstrap.html" %}
+			{% endaddtoblock %}
+		{% endblock %}
 		{% analytical_body_bottom %}
 	</body>
 </html>

@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.syndication',
     'django.contrib.comments',
+    'common', # my common extensions
     'south',
     'appconf',
     'sekizai',
@@ -155,7 +156,6 @@ INSTALLED_APPS = (
     #'breadcrumbs',
     #'django_xmlrpc',
     #'photologue',
-    'common', # my common extensions
     'analytical',
 )
 

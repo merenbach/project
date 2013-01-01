@@ -1,4 +1,4 @@
-body {
+html body {
 	/* color scheme: Color Index 2, p. 158 (or 151) */
 	color: rgb(127, 95, 66);
 	background-color: rgb(196, 154, 126);
@@ -7,8 +7,9 @@ body {
 	padding-top: 40px;
 }
 
-#footer p {
+#footer {
 	text-align: center;
+    padding-top: 1em;
 }
 
 .about-img {
@@ -18,8 +19,4 @@ body {
 
 #content blockquote {
 	word-wrap: break-word;
-}
-
-#footer {
-    padding-top: 1em;
 }

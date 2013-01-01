@@ -9,10 +9,10 @@ body {
 	padding-top: 40px;
 }
 
-html #footer {
+#footer {
 	text-align: center;
 }
 
-html blockquote {
+blockquote {
 	word-wrap: break-word;
 }

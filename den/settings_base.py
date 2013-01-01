@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.syndication',
     'django.contrib.comments',
+    'common', # my common extensions
     'south',
     'appconf',
     'sekizai',
@@ -161,7 +162,6 @@ INSTALLED_APPS = (
     'software',
     'ciphers',
     'analytical',
-    'common', # my common extensions
     'django_extensions',
 )
 
