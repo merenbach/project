@@ -95,6 +95,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
+# Cache only anonymouse requests
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+# Cache each page for 5 minutes (default)
+# CACHE_MIDDLEWARE_SECONDS = 600
+# Set a caching key prefix to avoid collisions
+CACHE_MIDDLEWARE_KEY_PREFIX = 'tata'
+
 ROOT_URLCONF = 'tata.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
