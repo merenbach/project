@@ -84,7 +84,7 @@ SERVER_EMAIL = 'noreply@merenbach.com'
 #        'default': {
 #            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
 #            'LOCATION': '127.0.0.1:11211',
-#            #'LOCATION': 'unix:/var/run/memcached/memcached.pid',
+#            #'LOCATION': 'unix:/tmp/memcached.sock',
 #            }
 #        }
 

@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'sekizai',
     'pytz',
     'compressor',
+    'compressor_contrib.sekizai', # custom until integrated into compressor master
     #'tagging',
     #'mptt',
     #'zinnia',
@@ -158,6 +159,8 @@ INSTALLED_APPS = (
     #'django_xmlrpc',
     #'photologue',
     'analytical',
+    'memcache_status',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
