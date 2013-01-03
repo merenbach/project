@@ -30,7 +30,7 @@ class ContactView(FormView):
                 #    recipients.append(sender)
                 headers = {
                     'Reply-To': sender,
-                    'X-Spam-Flag': 'Yes' if self.akismet_check(self.request, message, sender) else 'No',
+                    # 'X-Spam-Flag': 'Yes' if self.akismet_check(self.request, message, sender) else 'No',
                 }
                 from django.core.mail import send_mail
                 email = EmailMessage(subject, message, sender, recipients, headers=headers)
