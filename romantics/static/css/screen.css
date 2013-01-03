@@ -9,10 +9,10 @@ html body {
 	background-color: #fafafa;
 }
 
-#content_inner {
+/*#content_inner {
 	font-size: 140%;
 	line-height: 140%;
-}
+}*/
 
 #content_inner article {
 	text-align: justify;
