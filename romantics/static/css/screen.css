@@ -3,11 +3,6 @@
 	word-wrap: break-word;
 }
 
-#footer {
-    padding-top: 1em;
-	text-align: center;
-}
-
 html body {
 	font-family: 'Palatino', 'Times', serif;
 	color: #333;
@@ -19,12 +14,11 @@ html body {
 	line-height: 140%;
 }
 
-.story {
-	padding-top: 1em;
+#content_inner article {
 	text-align: justify;
 }
 
-.story p:first-child:first-letter {
+.book-page p:first-child:first-letter {
 	float: left;
 	font-size: 420%;
 	color: #903;
