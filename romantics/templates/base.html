@@ -4,21 +4,7 @@
 {% block base_content %}
 	<header class="page-header">
 		{% block page_header %}
-			{% url 'home' as home_url %}
-			{% url 'ball' as ball_url %}
-			<ul class="nav nav-pills pull-right">
-				<li class="{% active home_url %}">
-					<a href="{{ home_url }}">Our Story</a>
-				</li>
-				<li class="{% active ball_url %}">
-					<a href="{{ ball_url }}">The Ball</a>
-				</li>
-				<li class="disabled"><a href="javascript:void(0);">Registry</a></li>
-				{% comment %}
-				<li><a href="#">Bio</a></li>
-				<li><a href="#">Contact</a></li>
-				{% endcomment %}
-			</ul>
+			{% include "navigation.html" %}
 			<h1>{% block title %}{% endblock %}{% block subtitle %}{% endblock %}</h1>
 		{% endblock %}
 	</header>

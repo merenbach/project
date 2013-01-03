@@ -1,0 +1,18 @@
+{# This partial fills in the navigation bar #}
+{% load core_tags %}
+{% load url from future %}
+{% url 'home' as home_url %}
+{% url 'ball' as ball_url %}
+{% url 'contact' as contact_url %}
+<ul class="nav nav-pills pull-right">
+	<li class="{% active home_url %}">
+		<a href="{{ home_url }}">Our Story</a>
+	</li>
+	<li class="{% active ball_url %}">
+		<a href="{{ ball_url }}">The Ball</a>
+	</li>
+	<li class="disabled"><a href="javascript:void(0);">Registry</a></li>
+	<li class="{% active contact_url %}">
+		<a href="{{ contact_url }}">Contact</a>
+	</li>
+</ul>
