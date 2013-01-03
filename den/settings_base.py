@@ -172,6 +172,7 @@ INSTALLED_APPS = (
     'analytical',
     'memcache_status',
     'django_extensions',
+    'widget_tweaks', # modify form widgets
 )
 
 # A sample logging configuration. The only tangible logging

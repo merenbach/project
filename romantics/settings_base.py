@@ -155,7 +155,7 @@ INSTALLED_APPS = (
     #'mptt',
     #'zinnia',
     #'disqus',
-    #'contact',
+    'contact',
     ##'pagination',              # pagination (replaced)
     #'linaro_django_pagination', # pagination
     #'haystack',
@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     'analytical',
     'memcache_status',
     'django_extensions',
+    'widget_tweaks', # modify form widgets
 )
 
 # A sample logging configuration. The only tangible logging
@@ -241,7 +242,7 @@ COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 #DJANGO_STATIC_FILE_PROXY = 'den.cdn.cdn_origin_pull_file_proxy'
 
 # Contact form
-#CONTACT_RECIPIENTS = ('andrew@merenbach.com',)
+CONTACT_RECIPIENTS = ('andrew@merenbach.com', 'commonreader@gmail.com',)
 
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
