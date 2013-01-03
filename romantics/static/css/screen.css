@@ -35,13 +35,6 @@ html body {
 	font-family: Georgia;
 }
 
-.austen {
-	display: block;
-	margin: 0 1em 0.5em 0;
-	border: none;
-	box-shadow: none!important;
-}
-
 h1 {
 	/*text-align: center;*/
 	font-variant: small-caps;
