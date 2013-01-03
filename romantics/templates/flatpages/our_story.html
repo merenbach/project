@@ -1,8 +1,8 @@
 {% extends "flatpages/default.html" %}
 {% load staticfiles %}
 {% block content %}
-	<div class="story clearfix">
-		<img class="pull-left span2" src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen">
+	<img class="pull-left span2" src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen">
+	<div class="book-page">
 		{{ block.super }}
-	</div>
+	</div><!-- /.book-page -->
 {% endblock %}

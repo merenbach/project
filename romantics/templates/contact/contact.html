@@ -8,15 +8,15 @@
     {% if form %}
 	<p>
 		{% block contact_message %}
-		I am always happy to hear from visitors.  Please feel free to use the below form to get in touch with me.  I try to respond to messages, <em>c&aelig;teris paribus</em>, within 24&ndash;48 hours.
+		Please call!
 		{% endblock %}
 	</p>
-	<form class="contact-form" action="{% url 'contact' %}" method="post">{% csrf_token %}
+	<form action="{% url 'contact' %}" method="post">{% csrf_token %}
 		{% for field in form %}
 			<div class="control-group {% if field.errors %}{{ form.error_css_class }}{% endif %}">
                 {{ field.errors }} {{ field.label_tag }}
 				<div class="controls">
-                    {{ field|add_class:"span8" }}
+                    {{ field|add_class:"span6" }}
 				</div>
 			</div>
 		{% endfor %}

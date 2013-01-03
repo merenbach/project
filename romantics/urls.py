@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     #    ),
     #    name='haystack_search'
     #),
+    (r'^contact/', include('contact.urls')),
     #url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
     (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

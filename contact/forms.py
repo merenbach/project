@@ -38,7 +38,7 @@ class ContactForm(forms.Form):
 
     # required_css_class = ''
     error_css_class = 'error'
-    subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'span8'}))
-    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'span8'}))
-    sender = forms.EmailField(widget=forms.TextInput(attrs={'class': 'span8'}))
+    subject = forms.CharField(max_length=100, widget=forms.TextInput())
+    message = forms.CharField(widget=forms.Textarea())
+    sender = forms.EmailField(widget=forms.TextInput())
     # cc_myself = forms.BooleanField(required=False)
