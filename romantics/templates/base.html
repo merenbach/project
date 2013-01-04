@@ -1,6 +1,20 @@
 {% extends "common/base.html" %}
-
+{% load sekizai_tags staticfiles %}
+{% block css %}
+	{{ block.super }}
+	{% addtoblock "css" %}
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
+		<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+	{% endaddtoblock %}
+	{# This is not compressable #}
+	<link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Vollkorn:400italic,700italic,400,700">
+{% endblock %}
 {% block page_header %}
 	{% include "navigation.html" %}
 	{{ block.super }}
+{% endblock %}
+{% block footer_content %}
+	<p>
+		Copyright &copy; 2012 <a class="muted" href="http://www.lizcheney.com">Elizabeth Cheney</a> and <a class="muted" href="http://www.merenbach.com">Andrew Merenbach</a>
+	</p>
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "html_base.html" %}
+{% block base_content %}
+	<header class="page-header">
+		{% block page_header %}
+			<h1>{% block title %}{% endblock %} {% block subtitle %}{% endblock %}</h1>
+		{% endblock %}
+	</header>
+	{% block lead %}{% endblock %}
+	{% block content_wrapper %}
+		<section id="content">
+			{% block content %}{% endblock %}
+		</section>
+	{% endblock %}
+{% endblock %}

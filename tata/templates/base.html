@@ -1,1 +1,14 @@
 {% extends "common/base.html" %}
+{% load sekizai_tags staticfiles %}
+{% block css %}
+	{{ block.super }}
+	{% addtoblock "css" %}
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
+		<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+	{% endaddtoblock %}
+{% endblock %}
+{% block footer_content %}
+	<p class="muted">
+		Copyright &copy; 2011&ndash;2012 Team Tata
+	</p>
+{% endblock %}

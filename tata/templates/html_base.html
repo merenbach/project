@@ -9,8 +9,6 @@
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
 		{% block css %}
 			{% addtoblock "css" %}
-				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 				{% include "common/css/bootstrap.html" %}			
 			{% endaddtoblock %}
 		{% endblock %}
@@ -21,14 +19,12 @@
 		{% analytical_body_top %}
 		<div class="container">
 			<div class="row">
-				{% block base_content %}
-					<section id="base_content" class="span6 offset3">
-						{% block base_content %}{% endblock %}
-					</section>
-					<footer id="footer">
-						<p class="muted">Copyright &copy; 2011&ndash;2012 Team Tata</p>
-					</footer>
-				{% endblock %}
+				<section id="base_content" class="span6 offset3">
+					{% block base_content %}{% endblock %}
+				</section>
+				<footer id="footer">
+					{% block footer_content %}{% endblock %}
+				</footer>
 			</div>
 		</div>
 		{% render_block "js" postprocessor "compressor_contrib.sekizai.compress" %}

@@ -9,12 +9,8 @@
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
 		{% block css %}
 			{% addtoblock "css" %}
-				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 				{% include "common/css/bootstrap.html" %}
 			{% endaddtoblock %}
-			{# This is not compressable #}
-			<link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Vollkorn:400italic,700italic,400,700">
 		{% endblock %}
 		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
@@ -28,7 +24,7 @@
 						{% block base_content %}{% endblock %}
 					</section>
 					<footer id="footer">
-						<p>Copyright &copy; 2012 <a class="muted" href="http://www.lizcheney.com">Elizabeth Cheney</a> and <a class="muted" href="http://www.merenbach.com">Andrew Merenbach</a></p>
+						{% block footer_content %}{% endblock %}
 					</footer>
 				</div>
 			</div>

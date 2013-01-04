@@ -15,8 +15,6 @@
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
 		{% block css %}
 			{% addtoblock "css" %}
-				<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 				{% include "common/css/bootstrap.html" %}
 			{% endaddtoblock %}
 		{% endblock %}
@@ -46,9 +44,7 @@
 						{% block base_content %}{% endblock %}
 					</section>
 					<footer id="footer">
-						<p class="muted">
-							<small>Copyright &copy; 2011 &ndash; {% now "Y" %} Andrew Merenbach</small>
-						</p>
+						{% block footer_content %}{% endblock %}
 					</footer>
 				</div>
 			</div>
