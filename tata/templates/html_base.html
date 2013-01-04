@@ -3,7 +3,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>{% block title %}{% endblock %} | The Tata</title>
+		<title>{% block title %}{% endblock %} | {{ site.name }}</title>
 		{% analytical_head_top %}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
