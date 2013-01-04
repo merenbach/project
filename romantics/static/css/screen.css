@@ -1,20 +1,16 @@
+/* Custom styling for The Romantics */
 
 #content blockquote {
 	word-wrap: break-word;
 }
 
 html body {
-	font-family: 'Palatino', 'Times', serif;
+	font-family: 'Vollkorn', 'Palatino', 'Times', serif;
 	color: #333;
 	background-color: #fafafa;
 }
 
-/*#content_inner {
-	font-size: 140%;
-	line-height: 140%;
-}*/
-
-#content_inner article {
+html article {
 	text-align: justify;
 }
 
@@ -29,28 +25,7 @@ html body {
 	font-family: Georgia;
 }
 
-h1 {
-	/*text-align: center;*/
-	font-variant: small-caps;
-}
-
 #footer {
-	color: #ccc;
 	text-align: center;
-	/*font-size: 75%;*/
 	font-variant: small-caps;
-}
-
-#footer a {
-	color: #ccc;
-	text-decoration: none;
-}
-
-#footer a:hover {
-	color: #888;
-	text-decoration: underline;
-}
-
-#footer a:active {
-	color: #333;
 }

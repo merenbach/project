@@ -13,6 +13,8 @@
 				<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 				{% include "common/css/bootstrap.html" %}
 			{% endaddtoblock %}
+			{# This is not compressable #}
+			<link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Vollkorn:400italic,700italic,400,700">
 		{% endblock %}
 		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
@@ -26,7 +28,7 @@
 						{% block base_content %}{% endblock %}
 					</section>
 					<footer id="footer">
-						<p class="muted">Copyright &copy; 2012 <a href="http://www.lizcheney.com">Elizabeth Cheney</a> and <a href="http://www.merenbach.com">Andrew Merenbach</a></p>
+						<p>Copyright &copy; 2012 <a class="muted" href="http://www.lizcheney.com">Elizabeth Cheney</a> and <a class="muted" href="http://www.merenbach.com">Andrew Merenbach</a></p>
 					</footer>
 				</div>
 			</div>
