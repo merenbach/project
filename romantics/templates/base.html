@@ -1,15 +1,6 @@
-{% extends "html_base.html" %}
-{% load url from future %}
-{% load core_tags %}
-{% block base_content %}
-	<header class="page-header">
-		{% block page_header %}
-			{% include "navigation.html" %}
-			<h1>{% block title %}{% endblock %}{% block subtitle %}{% endblock %}</h1>
-		{% endblock %}
-	</header>
-	{% block lead %}{% endblock %}
-	<section id="content_inner">
-		{% block content %}{% endblock %}
-	</section>
+{% extends "common/base.html" %}
+
+{% block page_header %}
+	{% include "navigation.html" %}
+	{{ block.super }}
 {% endblock %}
