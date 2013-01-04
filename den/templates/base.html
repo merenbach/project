@@ -1,14 +1,50 @@
 {% extends "common/base.html" %}
 {% load sekizai_tags staticfiles %}
-{% block css %}
+{% block widths %}span8 offset2{% endblock %}
+{% block extrahead %}
 	{{ block.super }}
+	<link rel="icon" type="image/png" href="/favicon.ico">
+	<link rel="shortcut icon" type="image/png" href="/favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Andrew Merenbach">
+	<meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
+	<meta name="description" content="{% block meta-description %}{% endblock %}">
+	{% block link %}{% endblock %}
+{% endblock extrahead %}
+{% block css %}
 	{% addtoblock "css" %}
 		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
 		<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 	{% endaddtoblock %}
-{% endblock %}
+	{{ block.super }}
+{% endblock css %}
+{% block navigation_content %}
+	{% include "navigation.html" %}
+{% endblock navigation_content %}
+{% block header_content %}
+	{% block breadcrumb %}
+		{% if request.breadcrumbs.all %}
+			<nav>
+				<ul class="breadcrumb">
+					{% for breadcrumb in request.breadcrumbs %}
+						{% if not forloop.last %}
+							<li>
+								<a href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a> <span class="divider">/</span>
+							</li>
+						{% else %}
+							<li class="active">
+								{{ breadcrumb.name }}
+							</li><!-- /.active -->
+						{% endif %}
+					{% endfor %}
+				</ul><!-- /.breadcrumb -->
+			</nav>
+		{% endif %}
+	{% endblock breadcrumb %}
+	{{ block.super }}
+{% endblock header_content %}
 {% block footer_content %}
 	<p class="muted">
 		<small>Copyright &copy; 2011 &ndash; {% now "Y" %} Andrew Merenbach</small>
-	</p>
-{% endblock %}
+	</p><!-- /.muted -->
+{% endblock footer_content %}

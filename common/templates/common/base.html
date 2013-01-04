@@ -1,14 +1,22 @@
-{% extends "html_base.html" %}
-{% block base_content %}
-	<header class="page-header">
+{% extends "common/html_base.html" %}
+{% block widths %}{# 12 = span + 2*offset #}{% endblock %}
+{% block extrahead %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+{% block navigation_content %}{% endblock %}
+{% block header_content %}
+	<div class="page-header">
 		{% block page_header %}
 			<h1>{% block title %}{% endblock %} {% block subtitle %}{% endblock %}</h1>
-		{% endblock %}
-	</header>
+		{% endblock page_header %}
+	</div><!-- /.page-header -->
+{% endblock %}
+{% block base_content %}
 	{% block lead %}{% endblock %}
 	{% block content_wrapper %}
 		<section id="content">
 			{% block content %}{% endblock %}
-		</section>
-	{% endblock %}
-{% endblock %}
+		</section><!-- /.content -->
+	{% endblock content_wrapper %}
+{% endblock base_content %}
+{% block footer_content %}{% endblock %}
