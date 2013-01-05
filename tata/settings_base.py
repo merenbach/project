@@ -95,7 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
-# Cache only anonymouse requests
+# Cache only anonymous requests
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 # Cache each page for 5 minutes (default)
 # CACHE_MIDDLEWARE_SECONDS = 600
