@@ -88,3 +88,15 @@ SERVER_EMAIL = 'noreply@merenbach.com'
 #            }
 #        }
 
+# Haystack
+HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+            #'PATH': os.path.join(PROJECT_ROOT, 'whoosh_index'),
+            'PATH': os.path.join(MEDIA_ROOT, 'whoosh_index'),
+            # 'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+            'TIMEOUT': 60 * 5,
+            'INCLUDE_SPELLING': True,
+            'BATCH_SIZE': 100,
+            },
+        }

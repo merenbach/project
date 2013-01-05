@@ -226,17 +226,18 @@ COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 #COMPRESS_PARSER = 'compressor.parser.Html5LibParser'
 #COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 
-# Haystack
-HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-            'PATH': os.path.join(PROJECT_ROOT, 'whoosh_index'),
-            # 'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
-            'TIMEOUT': 60 * 5,
-            'INCLUDE_SPELLING': True,
-            'BATCH_SIZE': 100,
-            },
-        }
+## Haystack
+#HAYSTACK_CONNECTIONS = {
+#        'default': {
+#            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+#            'PATH': os.path.join(PROJECT_ROOT, 'whoosh_index'),
+#            'PATH': os.path.join(PROJECT_ROOT, 'whoosh_index'),
+#            # 'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+#            'TIMEOUT': 60 * 5,
+#            'INCLUDE_SPELLING': True,
+#            'BATCH_SIZE': 100,
+#            },
+#        }
 
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 #HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
