@@ -1,22 +1,46 @@
 {% extends "common/html_base.html" %}
-{% block widths %}{# 12 = span + 2*offset #}{% endblock %}
 {% block extrahead %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
-{% block navigation_content %}{% endblock %}
-{% block header_content %}
-	<div class="page-header">
-		{% block page_header %}
-			<h1>{% block title %}{% endblock %} {% block subtitle %}{% endblock %}</h1>
-		{% endblock page_header %}
-	</div><!-- /.page-header -->
-{% endblock %}
-{% block base_content %}
-	{% block lead %}{% endblock %}
-	{% block content_wrapper %}
-		<section id="content">
-			{% block content %}{% endblock %}
-		</section><!-- /.content -->
-	{% endblock content_wrapper %}
-{% endblock base_content %}
-{% block footer_content %}{% endblock %}
+{% block body_content %}
+	{% block navigation_wrapper %}
+		<nav id="navigation">
+			{% block navigation_content %}{% endblock %}
+		</nav><!-- /#navigation -->
+	{% endblock navigation_wrapper %}
+	<div class="container">
+		<div class="row">
+			<div class="{% block widths %}{# 12 = span + 2*offset #}{% endblock %}">
+				{% block header_wrapper %}
+					<header id="header">
+						{% block header_content %}
+							<div class="page-header">
+								{% block page_header %}
+									<h1>{% block title %}{% endblock %} {% block subtitle %}{% endblock %}</h1>
+								{% endblock page_header %}
+							</div><!-- /.page-header -->
+						{% endblock %}
+					</header><!-- /#header -->
+				{% endblock header_wrapper %}
+				{% block base_wrapper %}
+					<section id="base">
+						{% block base_content %}
+							{% block lead %}{% endblock %}
+							{% block content_wrapper %}
+								<section id="content">
+									{% block content %}{% endblock %}
+								</section><!-- /.content -->
+							{% endblock content_wrapper %}
+						{% endblock %}
+					</section><!-- /#base -->
+				{% endblock base_wrapper %}
+				{% block footer_wrapper %}
+					<footer id="footer">
+						{% block footer_content %}{% endblock %}
+					</footer><!-- /#footer -->
+				{% endblock footer_wrapper %}
+			</div>
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+	{% include "common/bootstrap.html" %}
+{% endblock body_content %}

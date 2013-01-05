@@ -7,49 +7,15 @@
 		{% analytical_head_top %}
 		{% block extrahead %}{% endblock %}
 		{% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
-		{% block css %}
-			{% addtoblock "css" %}
-				{% include "common/css/bootstrap.html" %}
-			{% endaddtoblock %}
-		{% endblock css %}
+		{% block css %}{% endblock %}
 		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
 	</head>
 	<body>
 		{% analytical_body_top %}
-		{% block navigation_wrapper %}
-			<nav id="navigation">
-				{% block navigation_content %}{% endblock %}
-			</nav><!-- /#navigation -->
-		{% endblock navigation_wrapper %}
-		<div class="container">
-			<div class="row">
-				<div class="{% block widths %}{% endblock %}">
-					{% block header_wrapper %}
-						<header id="header">
-							{% block header_content %}{% endblock %}
-						</header><!-- /#header -->
-					{% endblock header_wrapper %}
-					{% block base_wrapper %}
-						<section id="base">
-							{% block base_content %}{% endblock %}
-						</section><!-- /#base -->
-					{% endblock base_wrapper %}
-					{% block footer_wrapper %}
-						<footer id="footer">
-							{% block footer_content %}{% endblock %}
-						</footer><!-- /#footer -->
-					{% endblock footer_wrapper %}
-				</div>
-			</div><!-- /.row -->
-		</div><!-- /.container -->
+		{% block body_content %}{% endblock %}
 		{% render_block "js" postprocessor "compressor_contrib.sekizai.compress" %}
-		{% block js %}
-			{% addtoblock "js" %}
-				{% include "common/js/jquery.html" %}
-				{% include "common/js/bootstrap.html" %}
-			{% endaddtoblock %}
-		{% endblock js %}
+		{% block js %}{% endblock %}
 		{% analytical_body_bottom %}
 	</body>
 </html>
