@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Internal server error</title>
-		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
-		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-responsive.min.css" %}">
-		<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.8.3.min.js" %}"></script>
-		<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.min.js" %}"></script>
-	</head>
-	<body>
-		<div class="container">
-			<header class="page-header">
-				<h1>Internal server error <small>500</small></h1>
-			</header>
-			<p class="lead">What manner of mischief is this?  I daresay that you may have torn a page!  Don&rsquo;t worry&mdash;I have fetched for a local bookbinder who has <em>quite</em> the knack for these things.</p>
-		</div>
-	</body>
-</html>
+{% extends "common/500.html" %}
+{% block lead_content %}
+	What manner of mischief is this?  I daresay that you may have torn a page!  Don&rsquo;t worry&mdash;I have fetched for a local bookbinder who has <em>quite</em> the knack for these things.
+{% endblock lead_content %}
