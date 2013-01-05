@@ -1,0 +1,23 @@
+﻿/* TEAM */
+	Punster: Andrew Merenbach
+	Twitter: @merenbach
+	From:Los Angeles, California, US
+
+	Thinker: Elizabeth Cheney
+	Twitter: @elizacheney
+	From:Los Angeles, California, US
+
+/* THANKS */
+
+	Stylesheets: Twitter Bootstrap
+	Twitter: @twbootstrap
+
+	JavaScript: jQuery
+	Twitter: @jquery
+
+
+/* SITE */
+	Last update:2013-01-04
+	Language:English
+	Doctype:HTML5
+	IDE: Sublime Text 2, MacVim, Vim

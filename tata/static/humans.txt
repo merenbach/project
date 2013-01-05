@@ -1,0 +1,13 @@
+﻿/* TEAM */
+	Queen Bee: Tata
+	Twitter: @iHeartTata
+
+/* THANKS */
+
+	Hosting: Some other people
+
+
+/* SITE */
+	Last update:2013-01-04
+	Language:English
+	Doctype:HTML5
