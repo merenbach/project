@@ -1,28 +1,5 @@
-<!DOCTYPE html>
-{% load compress %}
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Internal server error</title>
-		{% compress css %}{% include "common/css/bootstrap.html" %}{% endcompress %}
-		{% include "common/js/html5shiv.html" %}
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="span8 offset2">
-					<header class="page-header">
-						<h1>Internal server error <small>500</small></h1>
-					</header><!-- /.page-header -->
-					<p class="lead">
-						{% block lead_content %}
-							An unexpected error occurred.  An administrator has been notified automatically via e-mail.
-						{% endblock lead_content %}
-					</p><!-- /.lead -->
-				</div><!-- /.span4.offset4 -->
-			</div><!-- /.row -->
-		</div><!-- /.container -->
-		{% compress js %}{% include "common/js/jquery.html" %}
-		{% include "common/js/bootstrap.html" %}{% endcompress %}
-	</body>
-</html>
+{% extends "common/error_base.html" %}
+
+{% block error_message %}Internal server error{% endblock %}
+{% block error_code %}500{% endblock %}
+{% block error_detail %}An unexpected error occurred.  An administrator has been notified automatically via e-mail.{% endblock %}
