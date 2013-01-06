@@ -79,6 +79,9 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'noreply@merenbach.com'
 SERVER_EMAIL = 'noreply@merenbach.com'
 
+#if DEBUG:
+#    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # caching
 #CACHES = {
 #        'default': {

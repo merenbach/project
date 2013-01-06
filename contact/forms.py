@@ -30,15 +30,16 @@ class InlineErrorList(ErrorList):
         return mark_safe(u'<ul class="unstyled help-inline">{0}</ul>'.format(''.join(errors_list)))
 
 class ContactForm(forms.Form):
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField(widget=forms.Textarea)
+    sender = forms.EmailField()
+    # cc_myself = forms.BooleanField(required=False, label='Send me a copy')
+
+    # required_css_class = ''
+    error_css_class = 'error'
+    
     def __init__(self, *args, **kwargs):
        kwargs_new = {'error_class': InlineErrorList}
        if kwargs is not None:
            kwargs_new.update(kwargs)
        super(ContactForm, self).__init__(*args, **kwargs_new)
-
-    # required_css_class = ''
-    error_css_class = 'error'
-    subject = forms.CharField(max_length=100, widget=forms.TextInput())
-    message = forms.CharField(widget=forms.Textarea())
-    sender = forms.EmailField(widget=forms.TextInput())
-    # cc_myself = forms.BooleanField(required=False)

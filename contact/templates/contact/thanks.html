@@ -1,9 +1,11 @@
 {% extends "contact/contact.html" %}
-
-{% block subtitle %}<small>Thanks!</small>{% endblock %}
+{% load markup %}
 
 {% block content %}
+	<div class="muted">
+		{{ message|markdown }}
+	</div>
 	<p class="text-success">
-		Thank you for your message.
-	</p><!-- /.text-success
+		{{ success }}
+	</p><!-- /.text-success -->
 {% endblock %}

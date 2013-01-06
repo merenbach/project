@@ -1,4 +1,4 @@
-from django.utils.html import escape
+#from django.utils.html import escape
 
 def add_control_label_tag(f):
     """ Adds the Bootstrap 'control-label' CSS class to field labels. """

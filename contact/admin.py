@@ -1,21 +1,10 @@
-##from polls.models import Choice
-#from contact.models import ContactFormModel
-#from django.contrib import admin
-#
-##class ChoiceInline(admin.TabularInline):
-##	model = Choice
-##	extra = 3
-#
-#class ContactFormAdmin(admin.ModelAdmin):
-#    fieldsets = [
-#            (None, {'fields':    ['get_message', 'post_message', 'sites']}),
-#            ]
-#    list_display = ('sites',)
-#    list_filter = ['pub_date']
-#    search_fields = ['title', 'summary', 'description']
-#    date_hierarchy = 'pub_date'
-#
-#admin.site.register(ContactFormModel, ContactFormAdmin)
-#
-##admin.site.register(Poll)
-##admin.site.register(Choice)
+from django.contrib import admin
+from contact.models import ContactPage, ContactRecipient
+
+
+class ContactFormAdmin(admin.ModelAdmin):
+    """ Show the original column (the string representation) along with names """
+    list_display = ('__unicode__', 'recipient_names')
+
+admin.site.register(ContactPage, ContactFormAdmin)
+admin.site.register(ContactRecipient)
