@@ -2,7 +2,6 @@ from maintenance.models import MaintenanceMessage
 from django.utils import timezone
 from django.conf import settings
 from django.core import urlresolvers
-from django.core.cache import cache
 from django.db.models import Q
 from maintenance.views import MaintenanceView
 from django.middleware.common import CommonMiddleware
@@ -38,22 +37,7 @@ class MaintenanceMiddleware(CommonMiddleware):
             if 'django.contrib.admin' in view.__module__ or  'django.views.static' in view.__module__:
                 return None
 
-        if getattr(settings, 'MAINTENANCE_CACHE_MESSAGES', False):
-            print("CACHE IS ENABLED.  TRYING TO RETRIEVE FROM CACHE")
-            messages = cache.get('maintenance_messages')
-        else:
-            """ This will otherwise be undefined """
-            print("CACHE IS DISABLED")
-            messages = None
-        
-        if not messages:
-            print("LOOKING UP!! NO CACHED COPY, OR CACHING IS DISABLED")
-            messages = MaintenanceMessage.objects.filter(sites__id=get_current_site(request).id)\
-                .filter(start_time__lt=timezone.now())\
-                .filter(\
-                Q(end_time__gte=timezone.now()) | Q(end_time__isnull=True) )
-            cache.set('maintenance_messages', messages, getattr(settings, 'MAINTENANCE_CACHE_SECONDS', 3600))
-        
+        messages = self.get_site_messages(get_current_site(request))
         if messages.count() > 0:
             return MaintenanceView.as_view()(request, messages=messages)
         else:
@@ -71,7 +55,6 @@ class MaintenanceMiddleware(CommonMiddleware):
         configurable in `settings.py`, but the setting is completely optional.
         """
         disable_for_staff = getattr(settings, 'MAINTENANCE_DISABLE_FOR_STAFF', False)
-
         # Allow access if the user doing the request is logged in and a
         # superuser or (if allowed) a staff member.
         if hasattr(request, 'user'):
@@ -80,3 +63,19 @@ class MaintenanceMiddleware(CommonMiddleware):
             elif request.user.is_staff and disable_for_staff:
                 return True
         return False
+
+    def get_site_messages(self, site):
+        """ Retrieve messages for the current site, updating the cache as necessary """
+        from django.core.cache import cache
+        if getattr(settings, 'MAINTENANCE_CACHE_MESSAGES', False):
+            messages = cache.get('maintenance_messages')
+        else:
+            """ This will otherwise be undefined """
+            messages = None
+        if not messages:
+            messages = MaintenanceMessage.objects.filter(sites__id=site.id)\
+                .filter(start_time__lt=timezone.now())\
+                .filter(\
+                Q(end_time__gte=timezone.now()) | Q(end_time__isnull=True) )
+            cache.set('maintenance_messages', messages, getattr(settings, 'MAINTENANCE_CACHE_SECONDS', 3600))
+        return messages

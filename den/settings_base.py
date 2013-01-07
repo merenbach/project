@@ -79,6 +79,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -206,7 +207,12 @@ LOGGING = {
 }
 
 # Maintenance
-MAINTENANCE_CACHE_MESSAGES = True
+## Caching on a multi-site install with differing key prefixes
+## (what one would expect) makes it hard to clear caches and
+## turn off maintenance mode for sites other than the one whose
+## interface is being accessed to change the message.  A separate
+## cache backend would help, but might be overkill.
+# MAINTENANCE_CACHE_MESSAGES = True
 # MAINTENANCE_DISABLE_FOR_STAFF = True
 
 # Breadcrumbs
