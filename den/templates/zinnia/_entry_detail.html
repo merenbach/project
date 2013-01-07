@@ -1,6 +1,6 @@
 {% load tagging_tags i18n %}
 {% load url from future %}
-<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}">
+<div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}{% if not continue_reading %} well well-small{% endif %}">
 	<div class="entry-header">
 		{% if continue_reading %}
 			<h2 class="entry-title">
@@ -55,9 +55,7 @@
 			{% endif %}
 		{% endcomment %}
 		{% if not continue_reading %}
-			<p class="muted">
-				<small>Fin</small>
-			</p>
+			<small class="muted">Fin</small>
 		{% endif %}
 	</div>
 </div>
