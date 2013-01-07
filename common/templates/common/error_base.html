@@ -3,7 +3,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Internal server error</title>
+		<title>{% block title %}{% endblock %}</title>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		{% compress css %}{% include "common/css/bootstrap.html" %}{% endcompress %}
 		{% include "common/js/html5shiv.html" %}
@@ -16,10 +16,9 @@
 						<h1>{% block error_message %}{% endblock %} <small>{% block error_code %}{% endblock %}</small></h1>
 					</header><!-- /.page-header -->
 					<p class="lead">
-						{% block error_detail %}
-							An unexpected error occurred.  An administrator has been notified automatically via e-mail.
-						{% endblock error_detail %}
+						{% block error_detail %}{% endblock %}
 					</p><!-- /.lead -->
+					{% block error_extra %}{# Override to add regular-sized text #}{% endblock %}
 				</div><!-- /.span4.offset4 -->
 			</div><!-- /.row -->
 		</div><!-- /.container -->

@@ -1,0 +1,22 @@
+{% extends "common/error_base.html" %}
+{% load markup %}
+{% block error_message %}{% block title %}Temporarily unavailable{% endblock %}{% endblock %}
+{% block error_code %}503{% endblock %}
+{% block error_detail %}This application is currently undergoing scheduled maintenance.{% endblock %}
+{% block error_extra %}
+    {% if maintenance_messages %}
+        <h2>Status</h2>
+        {% for message in maintenance_messages %}
+            <div class="well">
+                {{ message.message|markdown }}
+                <span class="muted">
+                    Service window starts <abbr class="text-info" title="{{ message.start_time|date:"c" }}">{{ message.start_time|date:"Y-m-d H:i" }}</abbr>
+                    {% if message.end_time %}
+                        and ends <abbr class="text-info" title="{{ message.end_time|date:"c" }}">{{ message.end_time|date:"Y-m-d H:i" }}</abbr>
+                    {% endif %}
+                    (Pacific Time).
+                </span><!-- /.muted -->
+            </div><!-- /.well -->
+        {% endfor %}
+    {% endif %}
+{% endblock error_extra %}

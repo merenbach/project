@@ -31,7 +31,7 @@ div{
 <div>
 <h1>Down</h1>
 <p>The application is currently undergoing scheduled maintenance. Please see the messages below for more information:</p>
-{% for message in messages %}
+{% for message in maintenance_messages %}
     <div class="message">{{ message.message }}<br />
     Service window is between {{ message.start_time|date:"F j, Y  h:i a" }}
         {% if message.end_time %}
