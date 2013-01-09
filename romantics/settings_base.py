@@ -93,6 +93,7 @@ MIDDLEWARE_CLASSES = (
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
     #'breadcrumbs.middleware.FlatpageFallbackMiddleware',
     'maintenance.middleware.MaintenanceMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
