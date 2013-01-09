@@ -15,13 +15,14 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="http://fonts.googleapis.com/css?family=Vollkorn:400italic,700italic,400,700">
 	{{ block.super }}
 {% endblock css %}
-{% block navigation_content %}{# Replace navbar #}{% endblock %}
-{% block page_header %}
+{% block navigation_content %}
 	{% include "navigation.html" %}
+{% endblock navigation_content %}
+{# {% block page_header %}
 	{{ block.super }}
-{% endblock page_header %}
+{% endblock page_header %} #}
 {% block footer_content %}
-	<p>
-		Copyright &copy; 2012 <a class="muted" href="http://www.lizcheney.com">Elizabeth Cheney</a> and <a class="muted" href="http://www.merenbach.com">Andrew Merenbach</a>
+	<p class="muted">
+		Copyright &copy; 2012 <a class="text-info" href="http://www.lizcheney.com">Elizabeth Cheney</a> and <a class="text-info" href="http://www.merenbach.com">Andrew Merenbach</a>
 	</p>
 {% endblock footer_content %}

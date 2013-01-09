@@ -4,15 +4,52 @@
 {% url 'home' as home_url %}
 {% url 'ball' as ball_url %}
 {% url 'contact' as contact_url %}
-<ul class="nav nav-pills">
-	<li class="{% active home_url %}">
-		<a href="{{ home_url }}">Our Story</a>
-	</li>
-	<li class="{% active ball_url %}">
-		<a href="{{ ball_url }}">The Ball</a>
-	</li>
-	<li class="disabled"><a href="javascript:void(0);">Registry</a></li>
-	<li class="{% active contact_url %}">
-		<a href="{{ contact_url }}">Contact</a>
-	</li>
-</ul><!-- /.nav.nav-pills -->
+{% comment %}
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2">
+{% endcomment %}
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a><!-- /.btn.btn-navbar -->
+
+						{% comment %}
+					    <a class="brand" href="{{ home_url }}">The Romantics</a>
+						{% endcomment %}
+						<ul class="nav">
+							<li class="{% active home_url %}">
+								<a href="{{ home_url }}">Our Story</a>
+							</li>
+							<li class="{% active ball_url %}">
+								<a href="{{ ball_url }}">The Ball</a>
+							</li>
+							<li class="{% active contact_url %}">
+								<a href="{{ contact_url }}">Contact</a>
+							</li>
+						</ul>
+						<div class="nav-collapse collapse">
+							<ul class="nav pull-right">
+								{% comment %}
+								<li class="{% active home_url %}">
+									<a href="{{ home_url }}">Our Story</a>
+								</li>
+								<li class="{% active ball_url %}">
+									<a href="{{ ball_url }}">The Ball</a>
+								</li>
+								{% endcomment %}
+								<li class="disabled"><a href="javascript:void(0);">Registry</a></li>
+							</ul><!-- /.nav -->
+						</div><!-- /.nav-collapse.collapse -->	
+					</div><!-- /.container -->
+				</div><!-- /.nav-inner -->
+			</div><!-- /.navbar.navbar-fixed-top -->
+{% comment %}
+ 		</div><!-- /.span6.offset3 -->
+	</div><!-- /.row -->
+</div><!-- /.container -->
+{% endcomment %}
