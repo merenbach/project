@@ -17,7 +17,7 @@ MANAGE_CMD='env PYTHONPATH={0} {1} {2}'.format(PYTHON_PATH, PYTHON_EXEC, MANAGE_
 
 def collect(settings=None):
     if settings is not None:
-        cmd = '{0} collectstatic --noinput --settings={1}.settings'.format(MANAGE_CMD, settings)
+        cmd = 'sudo -u www-data {0} collectstatic --noinput --settings={1}.settings'.format(MANAGE_CMD, settings)
         print('[+] Running the following command:')
         print('# {0}'.format(cmd))
         local(cmd)
@@ -26,7 +26,7 @@ def collect(settings=None):
 
 def rebuild_index(settings=None):
     if settings is not None:
-        cmd = 'echo y | {0} rebuild_index --settings={1}.settings'.format(MANAGE_CMD, settings)
+        cmd = 'echo y | sudo -u www-data {0} rebuild_index --settings={1}.settings'.format(MANAGE_CMD, settings)
         print('[+] Running the following command:')
         print('# {0}'.format(cmd))
         local(cmd)
@@ -35,7 +35,7 @@ def rebuild_index(settings=None):
 
 def update_index(settings=None):
     if settings is not None:
-        cmd = '{0} update_index --settings={1}.settings'.format(MANAGE_CMD, settings)
+        cmd = 'sudo -u www-data {0} update_index --settings={1}.settings'.format(MANAGE_CMD, settings)
         print('[+] Running the following command:')
         print('# {0}'.format(cmd))
         local(cmd)
