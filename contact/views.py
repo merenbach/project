@@ -97,6 +97,11 @@ class ContactThanksView(TemplateView):
     template_name = 'contact/thanks.html'
     
     def dispatch(self, request, *args, **kwargs):
+        try:
+            """ Verify that an entry for this site exists """
+            page = ContactPage.objects.get(site__id__exact=get_current_site(request).id)
+        except ContactPage.DoesNotExist:
+            raise Http404
         request.breadcrumbs([('Contact', reverse('contact')), ('Thanks', reverse('contact-thanks'))])
         return super(ContactThanksView, self).dispatch(request, *args, **kwargs)
 
