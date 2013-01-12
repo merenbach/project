@@ -6,19 +6,37 @@
 
 {% block content %}
     {% if form %}
-		{{ message|markdown }}
+		{{ contact_page.message_text|markdown }}
 		<form action="{% url 'contact' %}" method="post">{% csrf_token %}
 			<div class="row-fluid">
-				{% for field in form %}
-					<div class="control-group {% if field.errors %}{{ form.error_css_class }}{% endif %}">
-		                {{ field.errors }} {{ field.label_tag }}
-						<div class="controls">
-							{# A little Bootstrap hacking here: hoping for an elastic class in the future #}
-							{{ field|add_class:"span12" }}
-						</div><!-- /.controls -->
-					</div><!-- /.control-group{% if field.errors %}.{{ form.error_css_class }}{% endif %} -->
-				{% endfor %}
-			</div>
+				<div class="control-group{% if form.subject.errors %} {{ form.error_css_class }}{% endif %}">
+	                {{ form.subject.errors }} {{ form.subject.label_tag }}
+					<div class="controls">
+						{{ form.subject|add_class:"span12" }}
+					</div><!-- /.controls -->
+				</div><!-- /.control-group -->
+				<div class="control-group{% if form.message.errors %} {{ form.error_css_class }}{% endif %}">
+	                {{ form.message.errors }} {{ form.message.label_tag }}
+					<div class="controls">
+						{{ form.message|add_class:"span12" }}
+					</div><!-- /.controls -->
+				</div><!-- /.control-group -->
+				<div class="control-group{% if form.sender.errors %} {{ form.error_css_class }}{% endif %}">
+	                {{ form.sender.errors }} {{ form.sender.label_tag }}
+					<div class="controls">
+						{{ form.sender|add_class:"span12" }}
+					</div><!-- /.controls -->
+				</div><!-- /.control-group -->
+				<div class="control-group{% if form.cc_myself.errors %} {{ form.error_css_class }}{% endif %}">
+					<div class="controls">
+		                <label class="checkbox">
+		                	{{ form.cc_myself }}
+							<abbr class="initialism" title="Carbon-copy">CC</abbr> yourself?
+							{{ form.cc_myself.errors }}
+						</label><!-- /.checkbox -->
+					</div><!-- /.controls -->
+				</div><!-- /.control-group -->
+			</div><!-- /.row-fluid -->
 			<div class="control-group">
 				<div class="controls">
 					{% block submit_button %}
@@ -29,10 +47,10 @@
         </form><!-- /.contact-form -->
     {% else %}
     	<div class="muted">
-			{{ message|markdown }}
-		</div>
-    	<p class="text-error">
-    		Something went wrong.  Please try again later.
-    	</p><!-- /.text-error -->
+			{{ contact_page.message_text|markdown }}
+		</div><!-- /.muted -->
+    	<div class="text-error">
+    		{{ contact_page.failure_text|markdown }}
+    	</div><!-- /.text-error -->
     {% endif %}
 {% endblock content %}

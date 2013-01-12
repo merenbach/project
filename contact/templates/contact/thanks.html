@@ -3,9 +3,9 @@
 
 {% block content %}
 	<div class="muted">
-		{{ message|markdown }}
-	</div>
-	<p class="text-success">
-		{{ success }}
-	</p><!-- /.text-success -->
+		{{ contact_page.message_text|markdown }}
+	</div><!-- /.muted -->
+	<div class="text-success">
+		{{ contact_page.success_text|markdown }}
+	</div><!-- /.text-success -->
 {% endblock %}
