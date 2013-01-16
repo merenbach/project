@@ -6,6 +6,8 @@ from django.db.models import Q
 from maintenance.views import MaintenanceView
 from django.middleware.common import CommonMiddleware
 from django.contrib.sites.models import get_current_site
+from maintenance import urls
+from django.core.urlresolvers import reverse, NoReverseMatch
 
 # from django.conf.urls import defaults
 
@@ -30,6 +32,11 @@ class MaintenanceMiddleware(CommonMiddleware):
             # Allow privileged users (superusers and possibly staff) through
             return None
         else:
+            try:
+                if request.path == reverse('maintenance-heartbeat'):
+                    return None
+            except NoReverseMatch:
+                pass
             try:
                 view, args, kwargs = urlresolvers.resolve(request.path)
             except Exception:
