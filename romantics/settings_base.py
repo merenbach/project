@@ -165,6 +165,7 @@ INSTALLED_APPS = (
     #'whoosh',
     'romantics', # custom additions and utilities
     'maintenance',
+    'maintenance.heartbeat',
     #'breadcrumbs',
     #'django_xmlrpc',
     #'photologue',

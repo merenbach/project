@@ -10,12 +10,7 @@
     And some class based views.
 """
 
-from django.contrib.sites.models import get_current_site
-from django.db.models import Q
-from django.http import HttpResponse
-from django.utils import timezone
-from django.views.generic import View, TemplateView
-from maintenance.models import MaintenanceMessage
+from django.views.generic import TemplateView
 
 class MaintenanceView(TemplateView):
     """
@@ -42,20 +37,3 @@ class MaintenanceView(TemplateView):
         if messages is not None:
             context['maintenance_messages'] = messages
         return context
-
-class HeartbeatView(View):
-    """
-    Heartbeat
-    """
-    def dispatch(self, request, *args, **kwargs):
-        """ Return the view with a 503 status code """
-        if not self.has_messages(request):
-            return HttpResponse('OK')
-        else:
-            return HttpResponse('Service Unavailable', status=503)
-
-    def has_messages(self, request):
-        return MaintenanceMessage.objects.filter(sites__id=get_current_site(request).id)\
-            .filter(start_time__lt=timezone.now())\
-            .filter(\
-                Q(end_time__gte=timezone.now()) | Q(end_time__isnull=True) ).count() > 0
