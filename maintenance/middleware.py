@@ -1,18 +1,9 @@
-from maintenance.models import MaintenanceMessage
-from django.utils import timezone
 from django.conf import settings
 from django.core import urlresolvers
-from django.db.models import Q
+from maintenance.utils import get_current_site_messages
 from maintenance.views import MaintenanceView
 from django.middleware.common import CommonMiddleware
-from django.contrib.sites.models import get_current_site
-from maintenance import urls
 from django.core.urlresolvers import reverse, NoReverseMatch
-
-# from django.conf.urls import defaults
-
-# defaults.handler503 = 'maintenance.views.MaintenanceView.as_view'
-# defaults.__all__.append('handler503')
 
 """
 Possible settings and their defaults:
@@ -44,7 +35,7 @@ class MaintenanceMiddleware(CommonMiddleware):
             if 'django.contrib.admin' in view.__module__ or  'django.views.static' in view.__module__:
                 return None
 
-        messages = self.get_site_messages(get_current_site(request))
+        messages = get_current_site_messages(request)
         if messages.count() > 0:
             return MaintenanceView.as_view()(request, messages=messages)
         else:
@@ -71,18 +62,4 @@ class MaintenanceMiddleware(CommonMiddleware):
                 return True
         return False
 
-    def get_site_messages(self, site):
-        """ Retrieve messages for the current site, updating the cache as necessary """
-        from django.core.cache import cache
-        if getattr(settings, 'MAINTENANCE_CACHE_MESSAGES', False):
-            messages = cache.get('maintenance_messages')
-        else:
-            """ This will otherwise be undefined """
-            messages = None
-        if not messages:
-            messages = MaintenanceMessage.objects.filter(sites__id=site.id)\
-                .filter(start_time__lt=timezone.now())\
-                .filter(\
-                Q(end_time__gte=timezone.now()) | Q(end_time__isnull=True) )
-            cache.set('maintenance_messages', messages, getattr(settings, 'MAINTENANCE_CACHE_SECONDS', 3600))
-        return messages
+ 
