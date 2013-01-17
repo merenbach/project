@@ -36,7 +36,6 @@ urlpatterns = patterns('',
     (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    (r'^', include('maintenance.urls')),
 )
 
 urlpatterns += patterns('django.contrib.flatpages.views',

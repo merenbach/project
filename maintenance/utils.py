@@ -41,6 +41,6 @@ def is_privileged_request(request):
     if hasattr(request, 'user'):
         if request.user.is_superuser:
             return True
-        elif request.user.is_staff and disable_for_staff:
+        elif request.user.is_staff and not disable_for_staff:
             return True
     return False

@@ -59,7 +59,7 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^comments/', include('django.contrib.comments.urls')),
-    (r'^', include('maintenance.urls')),
+    (r'^', include('maintenance.heartbeat.urls')),
     (r'^', include('zinnia.urls')),
     (r'^', include('photologue.urls')),
 )
