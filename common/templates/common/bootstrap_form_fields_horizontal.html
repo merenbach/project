@@ -1,0 +1,34 @@
+{% load core_tags %}
+{% if form %}
+	{% for field in form %}
+		{% if not field.is_hidden %}
+			<div class="control-group{% if field.errors %} error{% endif %}">
+				{% if not field|is_checkbox %}
+		            <label class="control-label" for="{{ field.auto_id }}">
+		            	{{ field.label }}
+		            </label><!-- /.control-label -->
+					<div class="controls">
+						{{ field }}
+						{% if field.errors %}
+							<span class="help-inline">
+								{# field.errors.as_text #}
+								{% for error in field.errors %}
+									{{ error }}
+								{% endfor %}
+							</span>
+						{% endif %}
+					</div><!-- /.controls -->
+				{% else %}
+					<div class="controls">
+		                <label class="checkbox">
+		                	{{ field }}
+							{{ field.label }}
+						</label><!-- /.checkbox -->
+					</div><!-- /.controls -->
+				{% endif %}
+			</div><!-- /.control-group -->
+		{% else %}
+			{{ field }}
+		{% endif %}
+	{% endfor %}
+{% endif %}

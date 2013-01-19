@@ -32,6 +32,12 @@ def make_crumbs(context, *args, **kwargs):
         # request.breadcrumbs(mark_safe(''.join(args)), request.path_info)
     return ''
 
+@register.filter(name='is_checkbox')
+def is_checkbox(field):
+    """ From http://stackoverflow.com/questions/3927018/django-how-to-check-if-field-widget-is-checkbox-in-the-template """
+    from django.forms import CheckboxInput
+    return field.field.widget.__class__.__name__ == CheckboxInput().__class__.__name__
+
 # [am] added this on 2011-11-05
 #@register.inclusion_tag('cmsplugin_blog/tag_links_detail_snippet.html', takes_context=True)
 #def render_tag_links_detail(context, obj):

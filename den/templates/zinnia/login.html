@@ -7,28 +7,18 @@
 
 {% block content %}
 <div>
-	{% if form.errors %}
-		<p class="error">
-			{% trans "Your username and password didn't match. Please try again." %}
-		</p>
-	{% endif %}
-	<p>
-		{% trans "You need to be connected to view this entry." %}
+	{% for error in form.non_field_errors %}
+		<div class="alert alert-error">
+			 <button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{ error }}
+		</div>
+	{% endfor %}
+	<p class="{% if not form.non_field_errors %}text-info{% else %}muted{% endif %}">
+		{% trans "You need to log in to view this entry." %}
 	</p>
 
 	<form class="form-horizontal" method="post" action=".">{% csrf_token %}
-		<div class="control-group">
-			<label class="control-label" for="{{ form.username.auto_id }}">{{ form.username.label }}</label>
-			<div class="controls">
-				{{ form.username }}
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="{{ form.password.auto_id }}">{{ form.password.label }}</label>
-			<div class="controls">
-				{{ form.password }}
-			</div>
-		</div>
+		{% include "common/bootstrap_form_fields_horizontal.html" %}
 		<div class="control-group">
 			<div class="controls">
 				<input type="hidden" name="next" value=".">
