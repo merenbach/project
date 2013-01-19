@@ -1,9 +1,14 @@
 {% extends "zinnia/base.html" %}
-{% load i18n %}
+{% load i18n core_tags %}
 
 {% block title %}{% trans "Login required" %}{% endblock %}
 
 {% block body-class %}login-required{% endblock %}
+
+{% block breadcrumb %}
+    {% make_crumbs "Login required" %}
+    {{ block.super }}
+{% endblock %}
 
 {% block content %}
 <div>
@@ -14,7 +19,7 @@
 		</div>
 	{% endfor %}
 	<p class="{% if not form.non_field_errors %}text-info{% else %}muted{% endif %}">
-		{% trans "You need to log in to view this entry." %}
+		{% trans "You must log in to view this entry." %}
 	</p>
 
 	<form class="form-horizontal" method="post" action=".">{% csrf_token %}
