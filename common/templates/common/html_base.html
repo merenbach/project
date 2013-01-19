@@ -11,7 +11,7 @@
 		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
 	</head>
-	<body>
+	<body class="{% block body-class %}{% endblock %}">
 		{% analytical_body_top %}
 		{% block body_content %}{% endblock %}
 		{% render_block "js" postprocessor "compressor_contrib.sekizai.compress" %}
