@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load markup widget_tweaks %}
+{% load markup %}
 {% load url from future %}
 
 {% block title %}Contact{% endblock %}
@@ -8,35 +8,7 @@
     {% if form %}
 		{{ contact_page.message_text|markdown }}
 		<form action="{% url 'contact' %}" method="post">{% csrf_token %}
-			<div class="row-fluid">
-				<div class="control-group{% if form.subject.errors %} {{ form.error_css_class }}{% endif %}">
-	                {{ form.subject.errors }} {{ form.subject.label_tag }}
-					<div class="controls">
-						{{ form.subject|add_class:"span12" }}
-					</div><!-- /.controls -->
-				</div><!-- /.control-group -->
-				<div class="control-group{% if form.message.errors %} {{ form.error_css_class }}{% endif %}">
-	                {{ form.message.errors }} {{ form.message.label_tag }}
-					<div class="controls">
-						{{ form.message|add_class:"span12" }}
-					</div><!-- /.controls -->
-				</div><!-- /.control-group -->
-				<div class="control-group{% if form.sender.errors %} {{ form.error_css_class }}{% endif %}">
-	                {{ form.sender.errors }} {{ form.sender.label_tag }}
-					<div class="controls">
-						{{ form.sender|add_class:"span12" }}
-					</div><!-- /.controls -->
-				</div><!-- /.control-group -->
-				<div class="control-group{% if form.cc_myself.errors %} {{ form.error_css_class }}{% endif %}">
-					<div class="controls">
-		                <label class="checkbox">
-		                	{{ form.cc_myself }}
-							<abbr class="initialism" title="Carbon-copy">CC</abbr> yourself?
-							{{ form.cc_myself.errors }}
-						</label><!-- /.checkbox -->
-					</div><!-- /.controls -->
-				</div><!-- /.control-group -->
-			</div><!-- /.row-fluid -->
+			{% include "common/bootstrap_form_fields_wide.html" %}
 			<div class="control-group">
 				<div class="controls">
 					{% block submit_button %}
