@@ -43,6 +43,8 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 
 INSTALLED_APPS += (
     'liz', # custom additions and utilities
+    'maintenance.heartbeat',
+    'contact',
     'tagging',
     'mptt',
     'zinnia',

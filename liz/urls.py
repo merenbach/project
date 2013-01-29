@@ -13,9 +13,11 @@ admin.autodiscover()
 # Sitemaps
 
 from django.contrib.sitemaps import FlatPageSitemap
+from zinnia.sitemaps import EntrySitemap
 
 sitemaps = {
     'pages': FlatPageSitemap,
+    'blog': EntrySitemap,
 }
 
 # Examples:
@@ -32,15 +34,18 @@ urlpatterns = patterns('',
     #    name='haystack_search'
     #),
     #url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
+    (r'^contact/', include('contact.urls')),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
     (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     #(r'^$', TemplateView.as_view(template_name='index.html')),
+    (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^', include('zinnia.urls')),
 )
 
 urlpatterns += patterns('django.contrib.flatpages.views',
-    url(r'^$', 'flatpage', {'url': '/'}, name='home'),
+    url(r'^bio/$', 'flatpage', {'url': '/bio/'}, name='bio'),
     #url(r'^about/$', 'flatpage', {'url': '/about/'}, name='about'),
 )
 
