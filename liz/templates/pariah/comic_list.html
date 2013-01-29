@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+<ul>
+{% for comic in comics %}
+    <li><a href="{{ comic.get_absolute_url }}">{{ comic.title }}</a></li>
+{% endfor %}
+</ul>

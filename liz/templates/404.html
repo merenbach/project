@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+  <li>{% trans "Error 404" %}</li>
+</ul>
+{% endblock %}
+
+{% block title %}{% trans "Page not found" %}{% endblock %}
+{% block subtitle %} <small>404</small>{% endblock %}
+{% block lead %}<p class="lead">{% trans "Sorry, but the requested page could not be found." %}</p>{% endblock %}

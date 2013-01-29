@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+  <li>{% trans "Error 403" %}</li>
+</ul>
+{% endblock %}
+
+{% block title %}{% trans "Forbidden" %}{% endblock %}
+{% block subtitle %} <small>403</small>{% endblock %}
+{% block lead %}<p class="lead">{% trans "Sorry, but you don&rsquo;t have the permission to access this resource." %}</p>{% endblock %}
