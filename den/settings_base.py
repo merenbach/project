@@ -6,35 +6,7 @@ try:
 except:
     raise SystemExit("Error reading common settings!")
 
-import os
-import sys
-
-# get the settings path
-PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
-PROJECT_PATH = os.path.abspath(PROJECT_ROOT)
-
-if PROJECT_PATH not in sys.path:
-    sys.path.insert(0, PROJECT_PATH)
-
-# add to default paths
-#paths = (
-#   PROJECT_PATH,
-#        #os.path.realpath(os.path.dirname(PROJECT_PATH)),
-#        )
-#
-#for path in paths:
-#    if path not in sys_path:
-#        sys_path.insert(0, path)
-
 SITE_ID = 1
-
-# Additional locations of static files
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, 'static'),
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -70,13 +42,6 @@ ROOT_URLCONF = 'den.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'den.wsgi.application'
-
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, 'templates'),
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'zinnia.context_processors.version',    # optional

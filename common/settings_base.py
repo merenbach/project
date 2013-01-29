@@ -6,6 +6,32 @@ from datetime import datetime
 datetime.strptime("1986-07-01", "%Y-%m-%d")
 #datetime.datetime(1986, 7, 1, 0, 0)
 
+
+import os
+import sys
+
+# get the settings path
+PROJECT_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(__file__)))
+PROJECT_PATH = os.path.abspath(PROJECT_ROOT)
+
+if PROJECT_PATH not in sys.path:
+    sys.path.insert(0, PROJECT_PATH)
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'static'),
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'templates'),
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
 PREPEND_WWW = True
 
 # Local time zone for this installation. Choices can be found here:
