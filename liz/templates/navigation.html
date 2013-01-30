@@ -1,0 +1,53 @@
+{# This partial fills in the navigation bar #}
+{% load core_tags %}
+{% load url from future %}
+{% url 'home' as home_url %}
+{% url 'bio' as bio_url %}
+{% url 'contact' as contact_url %}
+{% comment %}
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2">
+{% endcomment %}
+			<div class="navbar navbar-static-top">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a><!-- /.btn.btn-navbar -->
+
+					    <a class="brand" href="{{ home_url }}">{{ site.name }}</a>
+						<div class="nav-collapse collapse">
+							<ul class="nav">
+								<li class="{% active home_url %}">
+									<a href="{{ home_url }}">Our Story</a>
+								</li>
+								<li class="{% active bio_url %}">
+									<a href="{{ bio_url }}">The Ball</a>
+								</li>
+								<li class="{% active contact_url %}">
+									<a href="{{ contact_url }}">Contact</a>
+								</li>
+							</ul>
+							<ul class="nav pull-right">
+								{% comment %}
+								<li class="{% active home_url %}">
+									<a href="{{ home_url }}">Our Story</a>
+								</li>
+								<li class="{% active ball_url %}">
+									<a href="{{ ball_url }}">The Ball</a>
+								</li>
+								{% endcomment %}
+								<li class="disabled"><a href="javascript:void(0);">Registry</a></li>
+							</ul><!-- /.nav -->
+						</div><!-- /.nav-collapse.collapse -->	
+					</div><!-- /.container -->
+				</div><!-- /.nav-inner -->
+			</div><!-- /.navbar.navbar-fixed-top -->
+{% comment %}
+ 		</div><!-- /.span6.offset3 -->
+	</div><!-- /.row -->
+</div><!-- /.container -->
+{% endcomment %}
