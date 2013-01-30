@@ -8,17 +8,15 @@
 {% block content %}
 {% comment %}<h2>{% trans "Sitemap" %}</h2>{% endcomment %}
 
+{% if categories %}
 <div class="entriesbycategories">
-  <h3>{% trans "Entries per categories" %}</h3>
+  <h3>{% trans "Entries by category" %}</h3>
   {% for category in categories %}
   <h4>{{ category }}</h4>
   <ul>
     {% for entry in category.entries_published.all %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      {% with comment_count=entry.comments.count %}
-      - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
-      {% endwith %}
     </li>
     {% empty %}
     <li>
@@ -28,6 +26,7 @@
   </ul>
   {% endfor %}
 </div>
+{% endif %}
 
 <div class="allentries">
   <h3>{% trans "All entries" %}</h3>
@@ -35,10 +34,7 @@
     {% for entry in entries %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      - {{ entry.creation_date|date:"SHORT_DATE_FORMAT" }}
-      {% with comment_count=entry.comments.count %}
-      - {{ comment_count }} {% trans "comment" %}{{ comment_count|pluralize }}
-      {% endwith %}
+      <small class="muted">{{ entry.creation_date|date:"Y.m.d" }}</small>
     </li>
     {% empty %}
     <li>
