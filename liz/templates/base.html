@@ -5,6 +5,7 @@
 	{{ block.super }}
 	<link rel="icon" type="image/png" href="/favicon.ico">
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico">
+    {% block link %}{% endblock %}
 {% endblock extrahead %}
 {% block css %}
 	{% addtoblock "css" %}
