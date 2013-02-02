@@ -1,11 +1,15 @@
-<ul class="breadcrumbs">
-  {% for crumb in breadcrumbs %}
-  <li>
-    {% if crumb.url %}
-    <a href="{{ crumb.url }}" title="{{ crumb.name }}">{{ crumb.name }}</a>
-    {% else %}
-    {{ crumb.name }}
-    {% endif %}
-  </li>
-  {% endfor %}
+<ul class="breadcrumb">
+	<li><i class="icon-home divider"></i></li>
+    {% for crumb in breadcrumbs %}
+        {% if crumb.url %}
+            <li>
+                <a href="{{ crumb.url }}" title="{{ crumb.name }}">{{ crumb.name }}</a>
+                {% if not forloop.last %}<span class="divider">/</span>{% endif %}
+            </li>
+        {% else %}
+            <li class="active">
+                {{ crumb.name }}
+            </li>
+        {% endif %}
+    {% endfor %}
 </ul>
