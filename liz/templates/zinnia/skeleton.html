@@ -35,10 +35,8 @@
   </head>
   <body class="zinnia default blue right-sidebar {% block body-class %}{% endblock %}">
     {% endcomment %}
-    {% block base_content %}
-    <div class="container-fluid">
-    <div class="row-fluid">
-      <div id="header" class="span12">
+    {% block header_content %}
+     <div id="header" class="span12">
         <h1>
           <a href="{% url 'zinnia_entry_archive_index' %}" title="Zinnia's Blog" rel="home">
             Zinnia's Blog
@@ -49,31 +47,17 @@
         </blockquote>
         {% block breadcrumbs %}{% endblock %}
       </div>
+      {{ block.super }}
+      {% endblock header_content %}
+    {% block base_content %}
+    <div class="container-fluid">
+    <div class="row-fluid">
+     
     </div>
       <div class="row-fluid">
       {% block slider %}{% endblock %}
       <div id="content" class="hfeed span9">
-        {% block content %}
-        <div class="links">
-          <h3>{% trans "Useful links" %}</h3>
-          <ul>
-            <li>
-              <a href="{% url 'zinnia_entry_archive_index' %}" title="{% trans "Blog index" %}">
-                {% trans "Blog index" %}
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'zinnia_sitemap' %}" title="{% trans "Sitemap" %}">
-                {% trans "Sitemap" %}
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="search">
-          <h3>{% trans "Search" %}</h3>
-          {% include "zinnia/tags/search_form.html" %}
-        </div>
-        {% endblock %}
+{% block content %}{% endblock %}
       </div>
       <div id="sidebar" class="span3">
         <div id="widget-welcome" class="widget">
