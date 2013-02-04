@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from rsvp.utils import create_token
 
@@ -11,7 +12,10 @@ class Person(models.Model):
     is_on_inner_envelope = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return u'{0} <{1}>'.format(self.name, self.email)
+        if self.email:
+            return u'{0} <{1}>'.format(self.name, self.email)
+        else:
+            return u'{0}'.format(self.name)
 
 class Party(models.Model):
     """ Represent a party """
@@ -31,12 +35,16 @@ class Party(models.Model):
     members = models.ManyToManyField(Person, blank=True, null=True, help_text='Members of a party.')
     token = models.CharField(max_length=64, blank=False, editable=False, default=create_token)
     creation_date = models.DateField(auto_now_add=True)
+    last_modified = models.DateField(auto_now=True, verbose_name='Last updated')
     is_invited = models.BooleanField(verbose_name='Was invited?')
-    is_responded = models.BooleanField(verbose_name='Has RSVPed?')
+    is_confirmed = models.BooleanField(verbose_name='Has confirmed?')
     alignment = models.CharField(max_length=1, choices=ALIGNMENT_CHOICES, default=NEITHER)
 
     class Meta:
         verbose_name_plural = 'parties'
+
+    def get_absolute_url(self):
+        return reverse('respondez', args=[self.token])
 
     @property
     def has_rsvped(self):
