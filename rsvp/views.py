@@ -24,17 +24,17 @@ class RespondezView(TemplateView):
         subject = '{0} has just RSVPed for your wedding'.format(party.name)
         message = '{0} included the following message: {1}'.format(party.name, party.message)
         # Echo to sender separately to avoid divulging email addresses
-        from django.core.mail import send_mail, mail_managers
-        mail_managers(subject, message)
 
-    def confirm_rsvp(self):
+    def confirm_rsvp(self, party):
+        from django.core.mail import mail_managers
+        message = render_to_string('rsvp/notify.html', {'party': party})
+        mail_managers("Wedding RSVP notification", message)
+
+    def confirm_rsvp(self, party):
         from django.core.mail import send_mail
-        message = render_to_string('rsvp/confirm.html',
-            {
-                'title': 'Maintenance Mode',
-                'messages': messages
-            }, context_instance=RequestContext(request))
-        send_mail(subject, message, None, [settings])
-
-
-
+        if party.is_attending:
+            rsvp_template_name = 'rsvp/confirm.html'
+        else:
+            rsvp_template_name = 'rsvp/confirm_no.html'
+        message = render_to_string(rsvp_template_name, {'party': party})
+        send_mail('Wedding RSVP confirmation', message, None, [invitee.email for invitee in party.members if invitee.email])
