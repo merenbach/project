@@ -26,6 +26,12 @@ class RespondezView(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+        attendee_ids = form.cleaned_data['attendees']
+        for person in self.party.members:
+            if person.pk in attendee_ids:
+                person.is_attending = True
+            else:
+                person.is_attending = False
         form.confirm(self.party)
         form.notify(self.party)
         return super(RespondezView, self).form_valid(form)

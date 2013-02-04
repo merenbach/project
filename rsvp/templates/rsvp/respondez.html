@@ -5,5 +5,29 @@
 {% block title %}RSVP{% endblock %}
 
 {% block content %}
-{{ party }}
+	{{ form.as_p }}
+	{% for member in party.members.all %}
+		- {{ member.name }}
+	{% endfor %}
+
+    {% if form %}
+		<p>Thank you for visiting!  If you&rsquo;re here, you must be part of the super-secret milita known as our wedding invitees.  Please choose wisely.</p>
+		<form action="{% url 'respondez-thanks' party.token %}" method="post">{% csrf_token %}
+			{% include "common/bootstrap_form_fields_wide.html" %}
+			<div class="control-group">
+				<div class="controls">
+					{% block submit_button %}
+						<button type="submit" class="btn btn-inverse">Confirm</button>
+					{% endblock submit_button %}
+				</div><!-- /.controls -->
+			</div><!-- /.control-group -->
+        </form><!-- /.contact-form -->
+    {% else %}
+    	<div class="muted">
+			{{ contact_page.message_text|markdown }}
+		</div><!-- /.muted -->
+    	<div class="text-error">
+    		{{ contact_page.failure_text|markdown }}
+    	</div><!-- /.text-error -->
+    {% endif %}
 {% endblock content %}
