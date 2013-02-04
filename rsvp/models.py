@@ -15,18 +15,43 @@ class Person(models.Model):
 
 class Party(models.Model):
     """ Represent a party """
+
+    NEITHER = 'N'
+    BRIDE = 'B'
+    GROOM = 'G'
+    MUTUAL = 'M'
+    ALIGNMENT_CHOICES = (
+        (NEITHER, 'None'),
+        (BRIDE, 'Bride'),
+        (GROOM, 'Groom'),
+        (MUTUAL, 'Mutual'),
+    )
+
     name = models.CharField(max_length=100, blank=False)
     members = models.ManyToManyField(Person, blank=True, null=True, help_text='Members of a party.')
     token = models.CharField(max_length=64, blank=False, editable=False, default=create_token)
     creation_date = models.DateField(auto_now_add=True)
+    is_invited = models.BooleanField(verbose_name='Was invited?')
+    is_responded = models.BooleanField(verbose_name='Has RSVPed?')
+    alignment = models.CharField(max_length=1, choices=ALIGNMENT_CHOICES, default=NEITHER)
 
     class Meta:
         verbose_name_plural = 'parties'
 
     @property
-    def headcount(self):
-    	""" Return a headcount for the party """
-    	return members.filter_by(is_attending=True).count()
+    def has_rsvped(self):
+       """ Return a headcount for the party """
+       return self.members.filter(is_attending=True).count()
+
+    @property
+    def attending(self):
+       """ Return a headcount for the party """
+       return self.members.filter(is_attending=True).count()
+
+    @property
+    def invitees(self):
+        """ Return a theoretical headcount for the party """
+        return self.members.count()
 
     def __unicode__(self):
         return u'{0}'.format(self.name)
