@@ -41,6 +41,7 @@ INSTALLED_APPS += (
     'romantics', # custom additions and utilities
     'maintenance.heartbeat',
     'contact',
+    'rsvp',
 )
 
 # Haystack
