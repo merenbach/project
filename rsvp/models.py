@@ -7,7 +7,7 @@ from rsvp.utils import create_token
 class Person(models.Model):
     """ Represent an invitee """
     name = models.CharField(max_length=100, blank=False)
-    email = models.EmailField(max_length=254, blank=True, unique=True)
+    email = models.EmailField(max_length=254, blank=True)
     is_attending = models.BooleanField()
     is_on_inner_envelope = models.BooleanField(default=True)
 

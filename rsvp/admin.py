@@ -15,6 +15,10 @@ class PartyAdmin(admin.ModelAdmin):
     list_display = ('name', 'alignment', 'token', 'is_invited', 'invitees', 'is_confirmed', 'attending', 'last_modified')
     actions = [make_invited, make_uninvited]
 
-admin.site.register(models.Person)
+class PersonAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'is_attending', 'is_on_inner_envelope')
+    actions = [make_invited, make_uninvited]
+
+admin.site.register(models.Person, PersonAdmin)
 admin.site.register(models.Party, PartyAdmin)
 admin.site.register(models.RSVP)

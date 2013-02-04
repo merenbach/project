@@ -1,12 +1,15 @@
-from django import forms
+from django.forms import ModelForm, CheckboxSelectMultiple
 from django.forms.util import ErrorList
 from django.utils.safestring import mark_safe
+from rsvp.models import Party
 
-class RespondezForm(forms.Form):
-    subject = forms.CharField(max_length=100)
-    message = forms.CharField(widget=forms.Textarea)
-    sender = forms.EmailField()
-    cc_myself = forms.BooleanField(required=False, label='CC yourself?')
+class RespondezForm(ModelForm):
+    class Meta:
+        model = Party
+        fields = ('members',)
+        widgets = {
+            'members': CheckboxSelectMultiple(),
+        }
     
     def notify(self, party):
         """ Notify site managers about the RSVP """
