@@ -12,13 +12,14 @@ def make_uninvited(modeladmin, request, queryset):
 make_uninvited.short_description = "Mark selected parties as uninvited"
 
 class PartyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'alignment', 'token', 'is_invited', 'invitees', 'is_confirmed', 'attending', 'last_modified')
+    list_display = ('name', 'alignment', 'is_invited', 'size', 'is_confirmed', 'headcount', 'last_modified')
     actions = [make_invited, make_uninvited]
 
-class PersonAdmin(admin.ModelAdmin):
+class PartyMemberAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'is_attending', 'is_on_inner_envelope')
     actions = [make_invited, make_uninvited]
 
-admin.site.register(models.Person, PersonAdmin)
+admin.site.register(models.PartyMember, PartyMemberAdmin)
 admin.site.register(models.Party, PartyAdmin)
-admin.site.register(models.RSVP)
+admin.site.register(models.ResponseCard)
+admin.site.register(models.Invitation)

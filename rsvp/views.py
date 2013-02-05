@@ -3,23 +3,25 @@ from django.http import Http404
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from rsvp.models import Party
+from rsvp.models import Invitation, ResponseCard, Party
 from rsvp.forms import RespondezForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-class RespondezView(FormView):
+
+class InvitationView(TemplateView):
     template_name = 'rsvp/respondez.html'
-    form_class = RespondezForm
-    success_url = reverse_lazy('respondez-thanks')
+    # form_class = RespondezForm
+    # success_url = reverse_lazy('respondez-thanks')
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            self.party = Party.objects.get(token__exact=kwargs.get('token', None))
-        except Party.DoesNotExist:
+            self.party = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
+        except Invitation.DoesNotExist:
             raise Http404
-        return super(RespondezView, self).dispatch(request, *args, **kwargs)
+        return super(InvitationView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(RespondezView, self).get_context_data(**kwargs)
+        context = super(InvitationView, self).get_context_data(**kwargs)
         context['party'] = self.party
         return context
 
@@ -27,27 +29,31 @@ class RespondezView(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         # attendee_ids = form.cleaned_data['attendees']
-        for person in self.party.members:
-            if person.pk in attendee_ids:
-                person.is_attending = True
-            else:
-                person.is_attending = False
-        form.confirm(self.party)
-        form.notify(self.party)
-        return super(RespondezView, self).form_valid(form)
+        #for person in self.party.members:
+        #    if person.pk in attendee_ids:
+        #        person.is_attending = True
+        #    else:
+        #        person.is_attending = False
+        #form.confirm(self.party)
+        #form.notify(self.party)
+        return super(InvitationView, self).form_valid(form)
 
-class RespondezThanksView(TemplateView):
+
+class ResponseCardView(UpdateView):
+    model = ResponseCard
+
+class ResponseCardThanksView(TemplateView):
     template_name = 'rsvp/thanks.html'
     
     def dispatch(self, request, *args, **kwargs):
         try:
             """ Verify that an entry for this site exists """
-            self.party = Party.objects.get(token__exact=kwargs.get('token', None))
-        except Party.DoesNotExist:
+            self.party = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
+        except Invitation.DoesNotExist:
             raise Http404
-        return super(RespondezThanksView, self).dispatch(request, *args, **kwargs)
+        return super(ResponseCardThanksView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(RespondezThanksView, self).get_context_data(**kwargs)
+        context = super(ResponseCardThanksView, self).get_context_data(**kwargs)
         context['party'] = self.party
         return context

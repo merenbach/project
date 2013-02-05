@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from rsvp.utils import create_token
 
-class Person(models.Model):
+class PartyMember(models.Model):
     """ Represent an invitee """
     name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(max_length=254, blank=True)
@@ -32,8 +32,7 @@ class Party(models.Model):
     )
 
     name = models.CharField(max_length=100, blank=False)
-    members = models.ManyToManyField(Person, blank=True, null=True, help_text='Members of a party.')
-    token = models.CharField(max_length=64, blank=False, editable=False, default=create_token)
+    members = models.ManyToManyField(PartyMember, blank=True, null=True, help_text='Members of a party.')
     creation_date = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True, verbose_name='Last updated')
     is_invited = models.BooleanField(verbose_name='Was invited?')
@@ -43,34 +42,42 @@ class Party(models.Model):
     class Meta:
         verbose_name_plural = 'parties'
 
-    def get_absolute_url(self):
-        return reverse('respondez', args=[self.token])
-
     @property
-    def has_rsvped(self):
+    def headcount(self):
        """ Return a headcount for the party """
        return self.members.filter(is_attending=True).count()
 
     @property
-    def attending(self):
-       """ Return a headcount for the party """
-       return self.members.filter(is_attending=True).count()
-
-    @property
-    def invitees(self):
-        """ Return a theoretical headcount for the party """
+    def size(self):
+        """ Return a size of the party """
         return self.members.count()
+
+    def emails(self):
+        """ Return a list of emails (if any) for members of this party """
+        return [member.email for member in self.members if member.email]
 
     def __unicode__(self):
         return u'{0}'.format(self.name)
 
-class RSVP(models.Model):
-    """ Represent an invitee """
-    site = models.ForeignKey(Site, default=Site.objects.get_current)
-    party = models.ForeignKey(Party, unique=True)
+class ResponseCard(models.Model):
+    """ Represent an response card """
     message = models.TextField(blank=True, help_text='An optional message for the happy couple.')
-    rsvp_date = models.DateField(auto_now=True)
+    last_updated = models.DateField(auto_now=True)
 
     def __unicode__(self):
-        return u'RSVP for {0}'.format(self.party.name)
+        return u'<Response card {0}>'.format(self.pk)
+
+class Invitation(models.Model):
+    """ Represent an invitation """
+    site = models.ForeignKey(Site, default=Site.objects.get_current)
+    party = models.ForeignKey(Party, unique=True)
+    response = models.ForeignKey(ResponseCard, unique=True)
+    is_viewed = models.BooleanField()
+    slug = models.SlugField(max_length=64, blank=False, editable=False, default=create_token)
+
+    def get_absolute_url(self):
+        return reverse('respondez', kwargs={'slug': self.slug})
+
+    def __unicode__(self):
+        return u'<Invitation {0}>'.format(self.pk)
 

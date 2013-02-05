@@ -10,12 +10,16 @@ class RespondezForm(ModelForm):
         widgets = {
             'members': CheckboxSelectMultiple(),
         }
+    def get_queryset(self):
+        return self.get_model()
     
     def notify(self, party):
         """ Notify site managers about the RSVP """
-        from django.core.mail import mail_managers
+        from django.core.mail import EmailMessage
+        subject = 'Wedding RSVP notification'
         message = render_to_string('rsvp/notify.html', {'party': party})
-        mail_managers("Wedding RSVP notification", message)
+        email = EmailMessage(subject, message, from_email, recipient_list)
+        email.send()
 
     def confirm(self, party):
         """ Confirm RSVP with invitees """
@@ -25,4 +29,4 @@ class RespondezForm(ModelForm):
         else:
             rsvp_template_name = 'rsvp/confirm_no.html'
         message = render_to_string(rsvp_template_name, {'party': party})
-        send_mail('Wedding RSVP confirmation', message, None, [invitee.email for invitee in party.members if invitee.email])
+        send_mail('Wedding RSVP confirmation', message, None, party.member_emails())
