@@ -11,7 +11,7 @@
 
     {% if form %}
 		<p>Thank you for visiting!  If you&rsquo;re here, you must be part of the super-secret milita known as our wedding invitees.  Please choose wisely.</p>
-		<form action="{% url 'respondez' party.slug %}" method="post">{% csrf_token %}
+		<form action="{% url 'rsvp-invitation' party.slug %}" method="post">{% csrf_token %}
 
 		{% for field in form %}
 			{% if not field.is_hidden %}

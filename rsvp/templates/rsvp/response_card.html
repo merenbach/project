@@ -1,11 +1,11 @@
 {% load markup core_tags widget_tweaks %}
-
+{% load url from future %}
 <h2>Come celebrate with us!</h2>
 <p>Kindly respond by April 4th, 2013.</p>
 
  {% if form %}
 		<p>Thank you for visiting!  If you&rsquo;re here, you must be part of the super-secret milita known as our wedding invitees.  Please choose wisely.</p>
-		<form action="{% url 'respondez' party.slug %}" method="post">{% csrf_token %}
+		<form action="{% url 'rsvp-invitation' slug=slug %}" method="post">{% csrf_token %}
 
 		{% for field in form %}
 			{% if not field.is_hidden %}
@@ -20,7 +20,7 @@
 			            	{{ field.label }}
 			            </label><!-- /.control-label -->
 						<div class="controls">
-							{{ field|add_class:"span12" }}
+							{{ field }}
 						</div><!-- /.controls -->
 					{% else %}
 			            <div class="controls">

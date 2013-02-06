@@ -79,7 +79,7 @@ class Invitation(models.Model):
     #last_viewed = models.DateField(null=True)
 
     def get_absolute_url(self):
-        return reverse('respondez', kwargs={'slug': self.slug})
+        return reverse('rsvp-invitation', kwargs={'slug': self.slug})
 
     def __unicode__(self):
         return u'{0}'.format(self.party)
