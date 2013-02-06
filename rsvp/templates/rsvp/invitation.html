@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup core_tags widget_tweaks %}
 {% load url from future %}
 
 {% block title %}RSVP{% endblock %}
@@ -16,55 +15,5 @@
 		{% endfor %}
 	</ul>
 
-    {% if form %}
-		<p>Thank you for visiting!  If you&rsquo;re here, you must be part of the super-secret milita known as our wedding invitees.  Please choose wisely.</p>
-		<form action="{% url 'respondez' party.slug %}" method="post">{% csrf_token %}
-
-		{% for field in form %}
-			{% if not field.is_hidden %}
-				<div class="control-group{% if field.errors %} {{ form.error_css_class }}{% endif %}">
-					{% if not field|is_checkbox %}
-						{% for error in field.errors %}
-							<small class="help-inline pull-right">
-								{{ error }}
-							</small><!-- /.help-inline.pull-right -->
-						{% endfor %}
-						<label class="control-label" for="{{ field.auto_id }}">
-			            	{{ field.label }}
-			            </label><!-- /.control-label -->
-						<div class="controls">
-							{{ field|add_class:"span12" }}
-						</div><!-- /.controls -->
-					{% else %}
-			            <div class="controls">
-			                <label class="checkbox">
-			                	{{ field }}
-								{{ field.label }}
-							</label><!-- /.checkbox -->
-						</div><!-- /.controls -->
-					{% endif %}
-				</div><!-- /.control-group -->
-			{% else %}
-				{{ field }}
-			{% endif %}
-		{% endfor %}
-
-
-
-			<div class="control-group">
-				<div class="controls">
-					{% block submit_button %}
-						<button type="submit" class="btn btn-inverse">Confirm</button>
-					{% endblock submit_button %}
-				</div><!-- /.controls -->
-			</div><!-- /.control-group -->
-        </form><!-- /.contact-form -->
-    {% else %}
-    	<div class="muted">
-			{{ contact_page.message_text|markdown }}
-		</div><!-- /.muted -->
-    	<div class="text-error">
-    		{{ contact_page.failure_text|markdown }}
-    	</div><!-- /.text-error -->
-    {% endif %}
+	{% include "rsvp/response_card.html" %}
 {% endblock content %}

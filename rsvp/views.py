@@ -16,6 +16,9 @@ class InvitationView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
+            if not self.invitation.is_viewed:
+                self.invitation.is_viewed = True
+                self.invitation.save()
         except Invitation.DoesNotExist:
             raise Http404
         return super(InvitationView, self).dispatch(request, *args, **kwargs)
