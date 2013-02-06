@@ -8,8 +8,8 @@ class PartyMember(models.Model):
     """ Represent an invitee """
     name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(max_length=254, blank=True)
+    is_party_leader = models.BooleanField(default=True)
     is_attending = models.BooleanField()
-    is_on_inner_envelope = models.BooleanField(default=True)
 
     def __unicode__(self):
         if self.email:
@@ -53,31 +53,34 @@ class Party(models.Model):
         return self.members.count()
 
     def emails(self):
-        """ Return a list of emails (if any) for members of this party """
-        return [member.email for member in self.members if member.email]
+        """ Return a list of unique emails (if any) for leaders of this party """
+        return list(set([member.email for member in self.members if member.is_party_leader and member.email]))
 
     def __unicode__(self):
         return u'{0}'.format(self.name)
 
-class ResponseCard(models.Model):
-    """ Represent an response card """
-    message = models.TextField(blank=True, help_text='An optional message for the happy couple.')
-    last_updated = models.DateField(auto_now=True)
-
-    def __unicode__(self):
-        return u'<Response card {0}>'.format(self.pk)
+#class ResponseCard(models.Model):
+#    """ Represent an response card """
+#    message = models.TextField(blank=True, help_text='An optional message for the happy couple.')
+#    last_updated = models.DateField(auto_now=True)
+#
+#    def __unicode__(self):
+#        return u'<Response card {0}>'.format(self.pk)
 
 class Invitation(models.Model):
     """ Represent an invitation """
-    site = models.ForeignKey(Site, default=Site.objects.get_current)
     party = models.ForeignKey(Party, unique=True)
-    response = models.ForeignKey(ResponseCard, unique=True)
+    site = models.ForeignKey(Site, default=Site.objects.get_current)
+    # response = models.ForeignKey(ResponseCard, unique=True)
     is_viewed = models.BooleanField()
     slug = models.SlugField(max_length=64, blank=False, editable=False, default=create_token)
+    response_message = models.TextField(blank=True, help_text='An optional message for the happy couple.')
+    last_updated = models.DateField(auto_now=True)
+    #last_viewed = models.DateField(null=True)
 
     def get_absolute_url(self):
         return reverse('respondez', kwargs={'slug': self.slug})
 
     def __unicode__(self):
-        return u'<Invitation {0}>'.format(self.pk)
+        return u'{0}'.format(self.party)
 

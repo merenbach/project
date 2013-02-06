@@ -3,7 +3,7 @@ from django.http import Http404
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from rsvp.models import Invitation, ResponseCard, Party
+from rsvp.models import Invitation, Party
 from rsvp.forms import RespondezForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -39,8 +39,8 @@ class InvitationView(TemplateView):
         return super(InvitationView, self).form_valid(form)
 
 
-class ResponseCardView(UpdateView):
-    model = ResponseCard
+#class ResponseCardView(UpdateView):
+#    model = ResponseCard
 
 class ResponseCardThanksView(TemplateView):
     template_name = 'rsvp/thanks.html'
