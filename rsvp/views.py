@@ -9,20 +9,20 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 class InvitationView(TemplateView):
-    template_name = 'rsvp/respondez.html'
+    template_name = 'rsvp/invitation.html'
     # form_class = RespondezForm
     # success_url = reverse_lazy('respondez-thanks')
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            self.party = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
+            self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
         except Invitation.DoesNotExist:
             raise Http404
         return super(InvitationView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(InvitationView, self).get_context_data(**kwargs)
-        context['party'] = self.party
+        context['party'] = self.invitation.party
         return context
 
     def form_valid(self, form):
