@@ -14,18 +14,18 @@ mark_uninvited.short_description = "Mark selected parties as uninvited"
 def mark_attending(modeladmin, request, queryset):
     """ Change attributes of selected party members """
     queryset.update(is_attending=True)
-mark_attending.short_description = "Mark selected party members as invited"
+mark_attending.short_description = "Mark selected party members as attending"
 
 def mark_nonattending(modeladmin, request, queryset):
     """ Change attributes of selected party members """
     queryset.update(is_attending=False)
-mark_nonattending.short_description = "Mark selected party members as uninvited"
+mark_nonattending.short_description = "Mark selected party members as nonattending"
 
 class PartyAdmin(admin.ModelAdmin):
     list_display = ('name', 'alignment', 'is_invited', 'size', 'is_confirmed', 'headcount', 'last_modified')
     actions = [mark_invited, mark_uninvited]
 
-class PartyMemberAdmin(admin.ModelAdmin):
+class InviteeAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('name', 'email', 'is_party_leader')}),
         ('Response card', {'fields' : ('is_attending',)}),
@@ -40,6 +40,6 @@ class InvitationAdmin(admin.ModelAdmin):
     )
     list_display = ('party', 'slug', 'is_viewed')
 
-admin.site.register(models.PartyMember, PartyMemberAdmin)
+admin.site.register(models.Invitee, InviteeAdmin)
 admin.site.register(models.Party, PartyAdmin)
 admin.site.register(models.Invitation, InvitationAdmin)

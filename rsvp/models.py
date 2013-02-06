@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 from rsvp.utils import create_token
 
-class PartyMember(models.Model):
+class Invitee(models.Model):
     """ Represent an invitee """
     name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(max_length=254, blank=True)
@@ -32,7 +32,7 @@ class Party(models.Model):
     )
 
     name = models.CharField(max_length=100, blank=False)
-    members = models.ManyToManyField(PartyMember, blank=True, null=True, help_text='Members of a party.')
+    members = models.ManyToManyField(Invitee, blank=True, null=True, help_text='Members of a party.')
     creation_date = models.DateField(auto_now_add=True)
     last_modified = models.DateField(auto_now=True, verbose_name='Last updated')
     is_invited = models.BooleanField(verbose_name='Was invited?')

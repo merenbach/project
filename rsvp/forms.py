@@ -30,7 +30,7 @@ from rsvp.models import Party
 #        return mark_safe(u'\n'.join(output))
 
 class ResponseCardForm(forms.Form):
-    invitees = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+    invitees = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple)
     message = forms.CharField(required=False, widget=forms.Textarea)
     cc_myself = forms.BooleanField(required=False, label='Send yourself a confirmation?')
     

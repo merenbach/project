@@ -3,7 +3,7 @@ from django.http import Http404
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from rsvp.models import Invitation, Party, PartyMember
+from rsvp.models import Invitation, Party, Invitee
 from rsvp.forms import ResponseCardForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
