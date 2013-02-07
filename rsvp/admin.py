@@ -36,7 +36,8 @@ class InviteeAdmin(admin.ModelAdmin):
 class InvitationAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('party', 'site')}),
-        ('Response card', {'fields' : ('is_viewed', 'response_message')}),
+        ('Invitation', {'fields' : ('is_viewed',)}),
+        ('Response card', {'fields' : ('response_message',)}),
     )
     list_display = ('party', 'slug', 'is_viewed')
 

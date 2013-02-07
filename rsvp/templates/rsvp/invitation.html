@@ -8,12 +8,29 @@
 		<p>To be fond of dancing was a certain step towards falling in love</p>
 		<small>Jane Austen, <cite class="title"><em>Pride and Prejudice</em></cite></small>
 	</blockquote>
+	<p>
+		request the pleasure of your company at the celebration of their marriage
+		<br>
+		at
+		<br>
+		eleven o&rsquo;clock
+		the morning of
+		<br>
+		Saturday, May 11th
+	</p>
+	<p>
+		The Culver Hotel
+		<br>
+		9400 Culver Boulevard
+		<br>
+		Culver City  90232
+	</p>
+	<p>Reception to follow</p>
 	<h3>This party is called &ldquo;{{ party.name }}.&rdquo; Members include:</h3>
 	<ul>
 		{% for member in party.members.all %}
 			<li>{{ member.name }}</li>
 		{% endfor %}
 	</ul>
-
-	{% include "rsvp/response_card.html" %}
+	<a href="{% url 'rsvp-response-card' slug=slug %}">Click!</a>
 {% endblock content %}

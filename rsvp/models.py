@@ -47,6 +47,10 @@ class Party(models.Model):
        """ Return a headcount for the party """
        return self.members.filter(is_attending=True).count()
 
+    def entourage(self):
+       """ Return a headcount for the party """
+       return self.members.filter(is_attending=True).all()
+
     @property
     def size(self):
         """ Return a size of the party """
@@ -54,7 +58,7 @@ class Party(models.Model):
 
     def emails(self):
         """ Return a list of unique emails (if any) for leaders of this party """
-        return list(set([member.email for member in self.members if member.is_party_leader and member.email]))
+        return list(set([member.email for member in self.members.all() if member.is_party_leader and member.email]))
 
     def __unicode__(self):
         return u'{0}'.format(self.name)

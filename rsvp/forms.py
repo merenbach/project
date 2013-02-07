@@ -3,6 +3,7 @@ from django.forms import ModelForm, CheckboxSelectMultiple
 from django.forms.util import ErrorList
 from django.utils.safestring import mark_safe
 from rsvp.models import Party
+from django.template.loader import render_to_string
 
 #class MyCheckboxSelectMultiple(CheckboxSelectMultiple):
 #    def render(self, name, value, ulattrs=None, attrs=None, choices=()):
@@ -69,12 +70,15 @@ class ResponseCardForm(forms.Form):
         email = EmailMessage(subject, message, from_email, recipient_list)
         email.send()
 
-    def confirm(self, party):
+    def confirm(self, invitation):
         """ Confirm RSVP with invitees """
         from django.core.mail import send_mail
-        if party.is_attending:
+        party = invitation.party
+        if party.headcount > 0:
             rsvp_template_name = 'rsvp/confirm.html'
         else:
             rsvp_template_name = 'rsvp/confirm_no.html'
-        message = render_to_string(rsvp_template_name, {'party': party})
-        send_mail('Wedding RSVP confirmation', message, None, party.member_emails())
+        message = render_to_string(rsvp_template_name, {
+            'invitation': invitation,
+            })
+        send_mail('Wedding RSVP confirmation', message, None, party.emails())
