@@ -2,6 +2,8 @@
 {% load url from future %}
 
 {% block content %}
-	{{ formal_name }}
-	<a href="{% url 'rsvp-invitation' slug=token %}">Open</a>
+	<div class="box">
+		<p class="lead">{{ formal_name }}</p>
+		<p class="info"><a href="{% url 'rsvp-invitation' slug=token %}">Open</a></p>
+	</div>
 {% endblock content %}
