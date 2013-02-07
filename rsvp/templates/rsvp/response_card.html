@@ -47,33 +47,33 @@
 								{% endwith %}
 							{% endif %}
 						</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label muted" for="{{ form.message.auto_id }}">
-						<span><em>{{ form.message.label }}</em></span>
-					</label>
-		            <div class="controls">
-						{{ form.message|add_class:"span12" }}
 					</div>
-				</div>
-				<div class="control-group">
-		            <div class="controls">
-						<label class="checkbox">
-							{{ form.cc_myself }}
-							{{ form.cc_myself.label }}
+					<div class="control-group">
+						<label class="control-label muted" for="{{ form.message.auto_id }}">
+							<span><em>{{ form.message.label }}</em></span>
 						</label>
+			            <div class="controls">
+							{{ form.message|add_class:"span12" }}
+						</div>
+					</div>
+					<div class="control-group">
+			            <div class="controls">
+							<label class="checkbox">
+								{{ form.cc_myself }}
+								{{ form.cc_myself.label }}
+							</label>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					{% block submit_button %}
-						<button type="submit" class="btn btn-inverse span10 offset1">Confirm</button>
-					{% endblock submit_button %}
-				</div><!-- /.controls -->
-			</div><!-- /.control-group -->
-		</div>
-        </form><!-- /.contact-form -->
+				<div class="control-group">
+					<div class="controls">
+						{% block submit_button %}
+							<button type="submit" class="btn btn-inverse span10 offset1">Confirm</button>
+						{% endblock submit_button %}
+					</div><!-- /.controls -->
+				</div><!-- /.control-group -->
+			</div><!-- .row-fluid -->
+        </form>
     {% else %}
     	<div class="text-error">
     		Please accept our apologies, but a server error has occurred.  Fear not, for Andrew shall be beaten about the head mercilessly for his shoddy workmanship.
