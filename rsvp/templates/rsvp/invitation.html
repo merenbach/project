@@ -1,23 +1,8 @@
-{% extends "base.html" %}
+{% extends "rsvp/rsvp_base.html" %}
 {% load staticfiles sekizai_tags %}
 {% load url from future %}
 
-{% block title %}Invitation{% endblock %}
-
-{% block css %}
-	{{ block.super }}
-	{% addtoblock "css" %}
-		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/rsvp.css" %}">
-	{% endaddtoblock %}
-{% endblock %}
-
 {% block content %}
-	<h3>This party is called &ldquo;{{ party.name }}.&rdquo; Members include:</h3>
-	<ul>
-		{% for member in party.members.all %}
-			<li>{{ member.name }}</li>
-		{% endfor %}
-	</ul>
 	<div class="box">
 		<div class="row-fluid">
 	   		<img src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen" class="pull-left span2">

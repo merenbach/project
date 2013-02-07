@@ -1,16 +1,6 @@
-{% extends "base.html" %}
+{% extends "rsvp/rsvp_base.html" %}
 {% load markup core_tags widget_tweaks staticfiles sekizai_tags %}
 {% load url from future %}
-
-{% block title %}Invitation{% endblock %}
-{% block subtitle %} <small>Response card</small>{% endblock %}
-
-{% block css %}
-	{{ block.super }}
-	{% addtoblock "css" %}
-		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/rsvp.css" %}">
-	{% endaddtoblock %}
-{% endblock %}
 
 {% block content %}
 <div class="box">

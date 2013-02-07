@@ -7,6 +7,23 @@ from rsvp.models import Invitation, Party, Invitee
 from rsvp.forms import ResponseCardForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+
+class EnvelopeView(TemplateView):
+    template_name = 'rsvp/envelope.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
+        except Invitation.DoesNotExist:
+            raise Http404
+        return super(EnvelopeView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(EnvelopeView, self).get_context_data(**kwargs)
+        context['token'] = self.invitation.slug
+        context['formal_name'] = self.invitation.formal_name
+        return context
+
 class InvitationView(TemplateView):
     template_name = 'rsvp/invitation.html'
 

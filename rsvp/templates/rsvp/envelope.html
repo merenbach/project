@@ -1,0 +1,7 @@
+{% extends "rsvp/rsvp_base.html" %}
+{% load url from future %}
+
+{% block content %}
+	{{ formal_name }}
+	<a href="{% url 'rsvp-invitation' slug=token %}">Open</a>
+{% endblock content %}

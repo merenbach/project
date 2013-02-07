@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load staticfiles sekizai_tags %}
+{% load url from future %}
+
+{% block title %}Invitation{% endblock %}
+{% block header_wrapper %}{% endblock %}
+
+{% block css %}
+	{{ block.super }}
+	{% addtoblock "css" %}
+		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/rsvp.css" %}">
+	{% endaddtoblock %}
+{% endblock %}
