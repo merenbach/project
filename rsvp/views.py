@@ -12,7 +12,7 @@ class InvitationView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
+            self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
             if not self.invitation.is_viewed:
                 self.invitation.is_viewed = True
                 self.invitation.save()
@@ -38,7 +38,7 @@ class ResponseCardView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
+            self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
         except Invitation.DoesNotExist:
             raise Http404
         return super(ResponseCardView, self).dispatch(request, *args, **kwargs)
@@ -63,7 +63,7 @@ class ResponseCardView(FormView):
                 m.is_attending = False
             m.save()
 
-        message = form.cleaned_data.get('message', None)
+        message = form.cleaned_data.get('message')
         if message:
             self.invitation.response_message = message
             self.invitation.save()

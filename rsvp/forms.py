@@ -41,7 +41,6 @@ class ResponseCardForm(forms.Form):
         if members is not None:
             self.fields['invitees'].choices = [(member.pk, member.name) for member in members]
 
-
     #def send_email(self, recipient_list):
     #    # send email using the self.cleaned_data dictionary
     #    subject = self.cleaned_data['subject']
