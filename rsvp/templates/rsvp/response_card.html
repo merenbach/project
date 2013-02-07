@@ -6,6 +6,7 @@
 {% block subtitle %} <small>Response card</small>{% endblock %}
 
 {% block content %}
+<div class="box">
 	<h2>Come celebrate with us!</h2>
 	<p>Kindly respond by April 4th, 2013.</p>
 
@@ -51,11 +52,9 @@
 			</div><!-- /.control-group -->
         </form><!-- /.contact-form -->
     {% else %}
-    	<div class="muted">
-			{{ contact_page.message_text|markdown }}
-		</div><!-- /.muted -->
     	<div class="text-error">
-    		{{ contact_page.failure_text|markdown }}
+    		Please accept our apologies, but a server error has occurred.  Fear not, for Andrew shall be beaten about the head mercilessly for his shoddy workmanship.
     	</div><!-- /.text-error -->
     {% endif %}
+</div>
 {% endblock content %}
