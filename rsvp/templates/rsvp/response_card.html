@@ -49,14 +49,16 @@
 							{{ form.message|add_class:"span12" }}
 						</div>
 					</div>
-					<div class="control-group">
-			            <div class="controls">
-							<label class="checkbox">
-								{{ form.cc_myself }}
-								{{ form.cc_myself.label }}
-							</label>
+					{% if form.primary_invitees.field.choices %}
+						<div class="control-group">
+				            <div class="controls">
+								<label class="checkbox">
+									{{ form.cc_myself }}
+									{{ form.cc_myself.label }}
+								</label>
+							</div>
 						</div>
-					</div>
+					{% endif %}
 				</div>
 				<div class="control-group">
 					<div class="controls">
