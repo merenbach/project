@@ -17,9 +17,9 @@
 	   	<div class="box span12">
 	   		<img src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen" class="pull-left span2">
 	   		<blockquote>
-				<p>To be fond of dancing was a certain step towards falling in love</p>
+				<p>&ldquo;To be fond of dancing was a certain step towards falling in love&rdquo;</p>
 				<small>Jane Austen, <cite class="title"><em>Pride and Prejudice</em></cite></small>
-				
+
 			</blockquote>
 			
 	   		<p>
@@ -28,19 +28,23 @@
 				at
 				<br>
 				eleven o&rsquo;clock
+				<br>
 				the morning of
 				<br>
 				Saturday, May 11th
 			</p>
-	   		<p>
-		   		The Culver Hotel
-				<br>
-				9400 Culver Boulevard
-				<br>
-				Culver City  90232
-			</p>
-			<p>Reception to follow</p>
-	    	<a href="{% url 'rsvp-response-card' slug=slug %}">Respond here</a>
+			<div class="vcard">
+				<p class="fn"><a class="url" href="http://www.culverhotel.com">The Culver Hotel</a><p>
+				<p class="adr">
+					<span class="street-address">9400 Culver Boulevard</span><br>
+					<span class="locality">Culver City</span><br>
+					<span class="region">California</span><br>
+					<span class="postal-code">90232</span><br>
+					<span class="country-name hidden">United States</span><br>
+				</p>
+			</div>
+			<p><em>Reception to follow</em></p>
+	    	<div><a href="{% url 'rsvp-response-card' slug=slug %}">Respond here</a></div>
 		</div>
 	</div>
 
