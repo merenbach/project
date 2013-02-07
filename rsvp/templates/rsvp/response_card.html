@@ -7,74 +7,65 @@
 
 {% block content %}
 <div class="box">
-	<p class="lead">Come celebrate with us!</p>
-	<p>Kindly respond by April 4<sup>th</sup>, 2013.</p>
-
 	 {% if form and form.primary_invitees %}
-			<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
-
-			<div class="control-group{% if field.errors %} {{ form.error_css_class }}{% endif %}">
-				<div class="controls">
-					<p class="muted"><em>You</em></p>
-					{% with form.primary_invitees as wrapper %}
-						{% for choice in wrapper.field.choices %}
-							<label class="checkbox">
-								<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
-								{{ choice.1 }}
-							</label>
-						{% endfor %}
-					{% endwith %}
-					{% if form.secondary_invitees %}
-						<p class="muted"><em>Your entourage</em></p>
-						{% with form.secondary_invitees as wrapper %}
-							{% for choice in wrapper.field.choices %}
-								<label class="checkbox">
-									<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
-									{{ choice.1 }}
-								</label>
-							{% endfor %}
-						{% endwith %}
-					{% endif %}
+		<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
+			<div class="row-fluid">
+				<div class="span10 offset1">
+					<p class="lead">Come celebrate with us!</p>
+					<p>Kindly respond by April 4<sup>th</sup>, 2013.</p>
+					<div class="control-group">
+						<div class="controls">
+							<p class="muted"><em>You</em></p>
+							{% with form.primary_invitees as wrapper %}
+								{% for choice in wrapper.field.choices %}
+									<label class="checkbox">
+										<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
+										{{ choice.1 }}
+									</label>
+								{% endfor %}
+							{% endwith %}
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls">
+							<p class="muted"><em>Your entourage</em></p>
+							{% if form.secondary_invitees %}
+								{% with form.secondary_invitees as wrapper %}
+									{% for choice in wrapper.field.choices %}
+										<label class="checkbox">
+											<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
+											{{ choice.1 }}
+										</label>
+									{% endfor %}
+								{% endwith %}
+							{% endif %}
+						</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label muted" for="{{ form.message.auto_id }}">
+						<span><em>{{ form.message.label }}</em></span>
+					</label>
+		            <div class="controls">
+						{{ form.message|add_class:"span12" }}
+					</div>
+				</div>
+				<div class="control-group">
+		            <div class="controls">
+						<label class="checkbox">
+							{{ form.cc_myself }}
+							{{ form.cc_myself.label }}
+						</label>
+					</div>
 				</div>
 			</div>
-{% comment %}
-			{% for field in form %}
-				{% if not field.is_hidden %}
-					<div class="control-group{% if field.errors %} {{ form.error_css_class }}{% endif %}">
-						{% if not field|is_checkbox %}
-							{% for error in field.errors %}
-								<small class="help-inline pull-right">
-									{{ error }}
-								</small><!-- /.help-inline.pull-right -->
-							{% endfor %}
-							<label class="control-label muted" for="{{ field.auto_id }}">
-				            	<em>{{ field.label }}</em>
-				            </label><!-- /.control-label -->
-							<div class="controls">
-								{{ field }}
-							</div><!-- /.controls -->
-						{% else %}
-				            <div class="controls">
-				                <label class="checkbox">
-				                	{{ field }}
-									{{ field.label }}
-								</label><!-- /.checkbox -->
-							</div><!-- /.controls -->
-						{% endif %}
-					</div><!-- /.control-group -->
-				{% else %}
-					{{ field }}
-				{% endif %}
-			{% endfor %}
-			{% endcomment %}
-
 			<div class="control-group">
 				<div class="controls">
 					{% block submit_button %}
-						<button type="submit" class="btn btn-inverse">Confirm</button>
+						<button type="submit" class="btn btn-inverse span10 offset1">Confirm</button>
 					{% endblock submit_button %}
 				</div><!-- /.controls -->
 			</div><!-- /.control-group -->
+		</div>
         </form><!-- /.contact-form -->
     {% else %}
     	<div class="text-error">

@@ -58,7 +58,6 @@ class ResponseCardView(FormView):
         # attending_pks = []
 
         # Get the pks of the attendees
-        print(str(form.cleaned_data))
         primary_attendees = [int(i) for i in form.cleaned_data.get('primary_invitees', [])]
         secondary_attendees = [int(i) for i in form.cleaned_data.get('secondary_invitees', [])]
 
@@ -68,7 +67,7 @@ class ResponseCardView(FormView):
 
         primary_members = [m for m in members if m.pk in primary_attendees]
         secondary_members = [m for m in members if m.pk in secondary_attendees]
-        print(str(primary_attendees))
+
         for m in primary_members:
             m.is_attending = True
 
@@ -84,7 +83,7 @@ class ResponseCardView(FormView):
             self.invitation.response_message = message
             self.invitation.save()
 
-        if form.cleaned_data['cc_myself']:
+        if form.cleaned_data.get('cc_myself', False):
             form.confirm(self.invitation)
 
         # This method is called when valid form data has been POSTed.
