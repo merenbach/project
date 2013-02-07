@@ -1,5 +1,4 @@
-{% load url from future %}
-Dear {{ invitation.party.name }},
+{% load url from future %}Dear {{ invitation.party.name }},
 
 Thank you for your response!  We look forward to dining, dancing, and celebrating with you.
 
@@ -9,7 +8,7 @@ We have the following people down as attending:
 
 If you need to change your RSVP in the future, please feel free to do so at the following URL:
 
-<https://www.theromantics.net{% url 'rsvp-response-card' slug=invitation.slug %}>
+{{ domain }}{% url 'rsvp-response-card' slug=invitation.slug %}
 
 Sincerely,
 	Liz and Andrew

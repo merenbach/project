@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
-from django.http import Http404
+from django.http import Http404, HttpRequest
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
@@ -84,7 +84,7 @@ class ResponseCardView(FormView):
             self.invitation.save()
 
         if form.cleaned_data.get('cc_myself', False):
-            form.confirm(self.invitation)
+            form.confirm(self.invitation, self.request.build_absolute_uri())
 
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.

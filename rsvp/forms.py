@@ -74,7 +74,7 @@ class ResponseCardForm(forms.Form):
         email = EmailMessage(subject, message, from_email, recipient_list)
         email.send()
 
-    def confirm(self, invitation):
+    def confirm(self, invitation, domain):
         """ Confirm RSVP with invitees """
         from django.core.mail import send_mail
         party = invitation.party
@@ -84,5 +84,6 @@ class ResponseCardForm(forms.Form):
             rsvp_template_name = 'rsvp/confirm_no.html'
         message = render_to_string(rsvp_template_name, {
             'invitation': invitation,
+            'domain': domain,
             })
         send_mail('Wedding RSVP confirmation', message, None, party.emails())
