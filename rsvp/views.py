@@ -14,6 +14,10 @@ class EnvelopeView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
+            # if self.invitation.is_viewed:
+            #     from django.shortcuts import redirect
+            #     from django.core.urlresolvers import reverse
+            #     return redirect(reverse('rsvp-invitation', kwargs=kwargs), permanent=False)
         except Invitation.DoesNotExist:
             raise Http404
         return super(EnvelopeView, self).dispatch(request, *args, **kwargs)
