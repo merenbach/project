@@ -76,6 +76,7 @@ class Party(models.Model):
 
 class Invitation(models.Model):
     """ Represent an invitation """
+    formal_name = models.CharField(max_length=100, blank=False)
     party = models.ForeignKey(Party, unique=True)
     site = models.ForeignKey(Site, default=Site.objects.get_current)
     # response = models.ForeignKey(ResponseCard, unique=True)
@@ -89,5 +90,5 @@ class Invitation(models.Model):
         return reverse('rsvp-invitation', kwargs={'slug': self.slug})
 
     def __unicode__(self):
-        return u'{0}'.format(self.party)
+        return u'{0}'.format(self.formal_name)
 

@@ -35,11 +35,12 @@ class InviteeAdmin(admin.ModelAdmin):
 
 class InvitationAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('party', 'site')}),
+        (None, {'fields': ('party', 'formal_name', 'site')}),
         ('Invitation', {'fields' : ('is_viewed',)}),
         ('Response card', {'fields' : ('response_message',)}),
     )
-    list_display = ('party', 'slug', 'is_viewed')
+    list_display = ('party', 'formal_name', 'slug', 'is_viewed')
+    # prepopulated_fields = {'formal_name': ('party',)}
 
 admin.site.register(models.Invitee, InviteeAdmin)
 admin.site.register(models.Party, PartyAdmin)

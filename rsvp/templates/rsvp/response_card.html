@@ -18,8 +18,9 @@
 		<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
 			<div class="row-fluid">
 				<div class="span10 offset1">
+			   		<img src="{% static "img/JaneAustenSilhouette.svg" %}" alt="Jane Austen" class="pull-left span2">
 					<p class="lead">Come celebrate with us!</p>
-					<p>Kindly respond by April 4<sup>th</sup>, 2013.</p>
+					<p class="info">Kindly respond by April 4<sup>th</sup>, 2013.</p>
 					<div class="control-group">
 						<div class="controls">
 							<p class="muted"><em>You</em></p>
