@@ -33,7 +33,11 @@ class ResponseCardView(FormView):
 
     def get_form_kwargs(self):
         k = super(ResponseCardView, self).get_form_kwargs()
-        k.update({"members": self.invitation.party.members.all()})
+        extra_dict = {
+            "primary_invitees": self.invitation.party.members.filter(is_party_leader=True).all(),
+            "secondary_invitees": self.invitation.party.members.filter(is_party_leader=False).all(),
+        }
+        k.update(extra_dict)
         return k
 
     def dispatch(self, request, *args, **kwargs):
@@ -52,15 +56,27 @@ class ResponseCardView(FormView):
     def form_valid(self, form):
         members = self.invitation.party.members.all()
         # attending_pks = []
-        invitees = [int(i) for i in form.cleaned_data['invitees']]
-        # if invitees:
-        #     attending_pks = [i for i in invitees]
-        
+
+        # Get the pks of the attendees
+        print(str(form.cleaned_data))
+        primary_attendees = [int(i) for i in form.cleaned_data.get('primary_invitees', [])]
+        secondary_attendees = [int(i) for i in form.cleaned_data.get('secondary_invitees', [])]
+
         for m in members:
-            if m.pk in invitees:
+            m.is_attending = False
+            # Don't save yet
+
+        primary_members = [m for m in members if m.pk in primary_attendees]
+        secondary_members = [m for m in members if m.pk in secondary_attendees]
+        print(str(primary_attendees))
+        for m in primary_members:
+            m.is_attending = True
+
+        if len(primary_members) > 0:
+            for m in secondary_members:
                 m.is_attending = True
-            else:
-                m.is_attending = False
+
+        for m in members:
             m.save()
 
         message = form.cleaned_data.get('message')

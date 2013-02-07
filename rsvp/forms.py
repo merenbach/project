@@ -31,15 +31,20 @@ from django.template.loader import render_to_string
 #        return mark_safe(u'\n'.join(output))
 
 class ResponseCardForm(forms.Form):
-    invitees = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple)
-    message = forms.CharField(required=False, widget=forms.Textarea)
+    primary_invitees = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, label='You')
+    secondary_invitees = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, label='Your entourage')
+    message = forms.CharField(required=False, widget=forms.Textarea, label='An optional message')
     cc_myself = forms.BooleanField(required=False, label='Send yourself a confirmation?')
     
     def __init__(self, *args, **kwargs):
-        members = kwargs.pop('members', None)
+        self.primary_invitees = kwargs.pop('primary_invitees', None)
+        self.secondary_invitees = kwargs.pop('secondary_invitees', None)
         super(ResponseCardForm, self).__init__(*args, **kwargs)
-        if members is not None:
-            self.fields['invitees'].choices = [(member.pk, member.name) for member in members]
+        self.members = self.primary_invitees
+        if self.primary_invitees is not None:
+            self.fields['primary_invitees'].choices = [(member.pk, member.name) for member in self.primary_invitees]
+        if self.secondary_invitees is not None:
+            self.fields['secondary_invitees'].choices = [(member.pk, member.name) for member in self.secondary_invitees]
 
     #def send_email(self, recipient_list):
     #    # send email using the self.cleaned_data dictionary

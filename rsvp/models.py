@@ -11,6 +11,9 @@ class Invitee(models.Model):
     is_party_leader = models.BooleanField(default=True)
     is_attending = models.BooleanField()
 
+    class Meta:
+        ordering = ['name']
+
     def __unicode__(self):
         if self.email:
             return u'{0} <{1}>'.format(self.name, self.email)
