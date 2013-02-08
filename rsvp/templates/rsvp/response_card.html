@@ -8,13 +8,13 @@
 		<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
 			<div class="row-fluid">
 				<div class="span10 offset1">
-			   		<img src="{% static "img/JaneAustenSilhouette.svg" %}" alt="Jane Austen" class="pull-left span2">
+			   		<img src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen" class="pull-right span3 hidden-phone">
 					<p class="lead">Come celebrate with us!</p>
 					<p class="info">Kindly respond by April 4<sup>th</sup>, 2013.</p>
 					{% if form.primary_invitees.field.choices %}
 						<div class="control-group">
 							<div class="controls">
-								<p class="muted"><em>Please mark as attending</em></p>
+								<p class="text-info"><em>Please mark as attending</em></p>
 								{% with form.primary_invitees as wrapper %}
 									{% for choice in wrapper.field.choices %}
 										<label class="checkbox">
@@ -37,7 +37,7 @@
 						</div>
 					{% endif %}
 					<div class="control-group">
-						<label class="control-label muted" for="{{ form.message.auto_id }}">
+						<label class="control-label text-info" for="{{ form.message.auto_id }}">
 							<span><em>{{ form.message.label }}</em></span>
 						</label>
 			            <div class="controls">
