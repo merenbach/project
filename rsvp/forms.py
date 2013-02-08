@@ -66,13 +66,15 @@ class ResponseCardForm(forms.Form):
     #def get_queryset(self):
     #    return self.get_model()
     
-    def notify(self, party):
+    def notify(self, invitation):
         """ Notify site managers about the RSVP """
-        from django.core.mail import EmailMessage
+        # from django.core.mail import EmailMessage
+        from django.core.mail import mail_managers
         subject = 'Wedding RSVP notification'
-        message = render_to_string('rsvp/notify.html', {'party': party})
-        email = EmailMessage(subject, message, from_email, recipient_list)
-        email.send()
+        message = render_to_string('rsvp/notify.html', {'invitation': invitation})
+        mail_managers(subject, message)
+        # email = EmailMessage(subject, message, from_email, recipient_list)
+        # email.send()
 
     def confirm(self, invitation, domain):
         """ Confirm RSVP with invitees """
@@ -86,4 +88,4 @@ class ResponseCardForm(forms.Form):
             'invitation': invitation,
             'domain': domain,
             })
-        send_mail('Wedding RSVP confirmation', message, None, party.emails())
+        send_mail('Wedding RSVP confirmation', message, 'rsvp@theromantics.net', party.emails())

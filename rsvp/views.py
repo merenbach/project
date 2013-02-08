@@ -107,6 +107,8 @@ class ResponseCardView(FormView):
         if form.cleaned_data.get('cc_myself', False):
             form.confirm(self.invitation, self.request.build_absolute_uri())
 
+        form.notify(self.invitation)
+
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         # attendee_ids = form.cleaned_data['attendees']

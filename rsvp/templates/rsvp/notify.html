@@ -2,18 +2,16 @@ Hi Liz and Andrew,
 
 You have just received an RSVP confirmation to your wedding from:
 
-{{ party.name }}
+{{ invitation.party.name }}
 
 Available emails for this party:
 
-{% for email in party.member_emails %}
-- {{ email }}
-{% empty %}
-[None provided]
+{% for email in invitation.party.emails %}- {{ email }}
+{% empty %}- [None provided]
 {% endfor %}
 
-{% if party.note %}The following note was submitted:
+{% if invitation.response_message %}The following note was submitted:
 
-{{ party.note }}
+> {{ invitation.response_message }}
 
 {% endif %}
