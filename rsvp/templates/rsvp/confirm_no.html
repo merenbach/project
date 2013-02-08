@@ -1,0 +1,12 @@
+{% load url from future %}Dear {{ invitation.party.name }},
+
+Thank you for your response.  We are sorry that you will not be able to attend.
+
+If you wish to change your RSVP in the future, please feel free to do so at the following URL:
+
+{{ domain }}{% url 'rsvp-response-card' slug=invitation.slug %}
+
+Sincerely,
+	Liz and Andrew
+
+{% include "rsvp/disclaimer.html" %}

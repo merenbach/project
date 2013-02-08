@@ -1,0 +1,74 @@
+{% extends "rsvp/rsvp_base.html" %}
+{% load markup core_tags widget_tweaks staticfiles sekizai_tags %}
+{% load url from future %}
+
+{% block content %}
+<div class="box">
+	 {% if form %}
+		<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
+			<div class="row-fluid">
+				<div class="span10 offset1">
+			   		<img src="{% static "img/JaneAustenSilhouette.svg" %}" alt="Jane Austen" class="pull-left span2">
+					<p class="lead">Come celebrate with us!</p>
+					<p class="info">Kindly respond by April 4<sup>th</sup>, 2013.</p>
+					{% if form.primary_invitees.field.choices %}
+						<div class="control-group">
+							<div class="controls">
+								<p class="muted"><em>Please mark as attending</em></p>
+								{% with form.primary_invitees as wrapper %}
+									{% for choice in wrapper.field.choices %}
+										<label class="checkbox">
+											<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
+											{{ choice.1 }}
+										</label>
+									{% endfor %}
+								{% endwith %}
+								{% if form.secondary_invitees.field.choices %}
+									{% with form.secondary_invitees as wrapper %}
+										{% for choice in wrapper.field.choices %}
+											<label class="checkbox">
+												<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
+												{{ choice.1 }}
+											</label>
+										{% endfor %}
+									{% endwith %}
+								{% endif %}
+							</div>
+						</div>
+					{% endif %}
+					<div class="control-group">
+						<label class="control-label muted" for="{{ form.message.auto_id }}">
+							<span><em>{{ form.message.label }}</em></span>
+						</label>
+			            <div class="controls">
+							{{ form.message|add_class:"span12" }}
+						</div>
+					</div>
+					{% if form.primary_invitees.field.choices %}
+						<div class="control-group">
+				            <div class="controls">
+								<label class="checkbox">
+									{{ form.cc_myself|attr:"checked" }}
+									{{ form.cc_myself.label }}
+								</label>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						{% block submit_button %}
+							<button type="submit" class="btn btn-inverse span10 offset1">Confirm</button>
+						{% endblock submit_button %}
+					</div><!-- /.controls -->
+				</div><!-- /.control-group -->
+			</div><!-- .row-fluid -->
+        </form>
+    {% else %}
+    	<div class="text-error">
+    		Please accept our apologies, but a server error has occurred.  Fear not, for Andrew shall be beaten about the head mercilessly for his shoddy workmanship.
+    	</div><!-- /.text-error -->
+    {% endif %}
+
+</div>
+{% endblock content %}
