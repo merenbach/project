@@ -8,9 +8,12 @@
 		<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
 			<div class="row-fluid">
 				<div class="span10 offset1">
-			   		<img src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen" class="pull-right span3 hidden-phone">
-					<p class="lead">Come celebrate with us!</p>
-					<p class="info">Kindly respond by April 4<sup>th</sup>, 2013.</p>
+			   		<header class="clearfix">
+				   		<img src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen" class="pull-left span2 hidden-phone">
+						<p class="lead">Come celebrate with us!</p>
+						<p class="info">Kindly respond by April 4<sup>th</sup>, 2013.</p>
+					</header>
+					<br>
 					{% if form.primary_invitees.field.choices %}
 						<div class="control-group">
 							<div class="controls">
