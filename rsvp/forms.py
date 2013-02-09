@@ -2,20 +2,28 @@ from django import forms
 from django.template.loader import render_to_string
 
 class ResponseCardForm(forms.Form):
-    primary_invitees = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, label='You')
-    secondary_invitees = forms.MultipleChoiceField(required=False, widget=forms.CheckboxSelectMultiple, label='Your entourage')
+    primary_invitees = forms.MultipleChoiceField(required=False)
+    secondary_invitees = forms.MultipleChoiceField(required=False)
     message = forms.CharField(required=False, widget=forms.Textarea, label='An optional message')
     cc_myself = forms.BooleanField(required=False, label='Send yourself a confirmation?')
     
     def __init__(self, *args, **kwargs):
-        self.primary_invitees = kwargs.pop('primary_invitees', None)
-        self.secondary_invitees = kwargs.pop('secondary_invitees', None)
+        primary_invitees = kwargs.pop('primary_invitees', None)
+        secondary_invitees = kwargs.pop('secondary_invitees', None)
         super(ResponseCardForm, self).__init__(*args, **kwargs)
-        if self.primary_invitees is not None:
-            self.fields['primary_invitees'].choices = [(member.pk, member.name) for member in self.primary_invitees]
-            if self.secondary_invitees is not None:
-                self.fields['secondary_invitees'].choices = [(member.pk, member.name) for member in self.secondary_invitees]
-    
+        if self._set_choice_defaults('primary_invitees', primary_invitees):
+            self._set_choice_defaults('secondary_invitees', secondary_invitees)
+
+    def _set_choice_defaults(self, field_name, field_data):
+        """ Set the default values on a checkbox-related field based on some data """
+        if field_name and field_data:
+            field = self.fields.get(field_name)
+            if field:
+                field.choices = ((member.pk, member.name) for member in field_data)
+                field.initial = (member.pk for member in field_data if member.is_attending)
+                return True
+        return False
+
     def notify(self, invitation):
         """ Notify site managers about the RSVP """
         # from django.core.mail import EmailMessage

@@ -18,24 +18,8 @@
 						<div class="control-group">
 							<div class="controls">
 								<p class="text-info"><em>Please mark as attending</em></p>
-								{% with form.primary_invitees as wrapper %}
-									{% for choice in wrapper.field.choices %}
-										<label class="checkbox">
-											<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
-											{{ choice.1 }}
-										</label>
-									{% endfor %}
-								{% endwith %}
-								{% if form.secondary_invitees.field.choices %}
-									{% with form.secondary_invitees as wrapper %}
-										{% for choice in wrapper.field.choices %}
-											<label class="checkbox">
-												<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}">
-												{{ choice.1 }}
-											</label>
-										{% endfor %}
-									{% endwith %}
-								{% endif %}
+								{% include "rsvp/checkbox_snippet.html" with wrapper=form.primary_invitees %}
+								{% include "rsvp/checkbox_snippet.html" with wrapper=form.secondary_invitees %}
 							</div>
 						</div>
 					{% endif %}

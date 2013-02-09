@@ -1,0 +1,8 @@
+{% if wrapper.field.choices %}
+	{% for choice in wrapper.field.choices %}
+		<label class="checkbox">
+			<input type="checkbox" name="{{ wrapper.name }}" id="{{ wrapper.auto_id }}_{{ forloop.counter0 }}" value="{{ choice.0 }}" {% if choice.0 in wrapper.field.initial %}checked="checked"{% endif %}>
+			{{ choice.1 }}
+		</label>
+	{% endfor %}
+{% endif %}
