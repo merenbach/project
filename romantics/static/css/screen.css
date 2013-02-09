@@ -5,9 +5,9 @@
 }
 
 html body {
+	color: #333;
+	background-color: #cc9493;
 	font-family: 'Vollkorn', 'Palatino', 'Times', serif;
-	/*color: #333;*/
-	/*background-color: #cc9493;*/
 }
 
 html article {
