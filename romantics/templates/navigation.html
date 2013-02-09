@@ -4,6 +4,7 @@
 {% url 'home' as home_url %}
 {% url 'ball' as ball_url %}
 {% url 'contact' as contact_url %}
+{% url 'registry' as registry_url %}
 {% comment %}
 <div class="container">
 	<div class="row">
@@ -40,7 +41,7 @@
 									<a href="{{ ball_url }}">The Ball</a>
 								</li>
 								{% endcomment %}
-								<li class="disabled"><a href="javascript:void(0);">Registry</a></li>
+								<li class="{% active registry_url %}"><a href="{{ registry_url }}">Registry</a></li>
 							</ul><!-- /.nav -->
 						</div><!-- /.nav-collapse.collapse -->	
 					</div><!-- /.container -->
