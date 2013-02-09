@@ -27,7 +27,7 @@
 					<li class="{% active contact_url %}"><a href="{{ contact_url }}">Contact</a></li>
 				</ul><!-- /.nav -->
 				<form class="navbar-search pull-left" method="GET" action="{% url 'haystack_search' %}">
-					<input type="search" class="search-query" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
+					<input type="search" class="search-query input-medium" placeholder="Search" name="q" value="{{ query|default_if_none:"" }}">
 				</form><!-- /.navbar-search.pull-left -->
 				<ul class="nav pull-right">
 					<li class="{% active privacy_url %}"><a href="{{ privacy_url }}">Privacy</a></li>

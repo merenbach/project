@@ -68,6 +68,15 @@ INSTALLED_APPS += (
     'ciphers',
 )
 
+# Additional locations of static files
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'den', 'static'),
+) + STATICFILES_DIRS
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'den', 'templates'),
+) + TEMPLATE_DIRS
+
 # Breadcrumbs
 BREADCRUMBS_AUTO_HOME = True
 #BREADCRUMBS_HOME_TITLE = 'Home'
