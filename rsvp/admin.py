@@ -1,6 +1,16 @@
 from django.contrib import admin
 from rsvp import models
 
+def mark_viewed(modeladmin, request, queryset):
+    """ Change attributes of selected parties """
+    queryset.update(is_viewed=True)
+mark_viewed.short_description = "Mark selected invitations as viewed"
+
+def mark_unviewed(modeladmin, request, queryset):
+    """ Change attributes of selected parties """
+    queryset.update(is_viewed=False)
+mark_unviewed.short_description = "Mark selected invitations as unviewed"
+
 def mark_invited(modeladmin, request, queryset):
     """ Change attributes of selected parties """
     queryset.update(is_invited=True)
@@ -23,7 +33,7 @@ mark_nonattending.short_description = "Mark selected party members as nonattendi
 
 class PartyAdmin(admin.ModelAdmin):
     list_display = ('name', 'alignment', 'is_invited', 'size', 'is_confirmed', 'headcount', 'last_modified')
-    actions = [mark_invited, mark_uninvited]
+    actions = (mark_invited, mark_uninvited)
 
 class InviteeAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -31,7 +41,7 @@ class InviteeAdmin(admin.ModelAdmin):
         ('Response card', {'fields' : ('is_attending',)}),
     )
     list_display = ('name', 'email', 'is_attending', 'is_party_leader')
-    actions = [mark_attending, mark_nonattending]
+    actions = (mark_attending, mark_nonattending)
 
 class InvitationAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -40,6 +50,7 @@ class InvitationAdmin(admin.ModelAdmin):
         ('Response card', {'fields' : ('response_message',)}),
     )
     list_display = ('party', 'formal_name', 'slug', 'is_viewed')
+    actions = (mark_viewed, mark_unviewed)
     # prepopulated_fields = {'formal_name': ('party',)}
 
 admin.site.register(models.Invitee, InviteeAdmin)
