@@ -34,6 +34,9 @@ class Party(models.Model):
         (MUTUAL, 'Mutual'),
     )
 
+    class Meta:
+        ordering = ['name']
+
     name = models.CharField(max_length=100, blank=False)
     members = models.ManyToManyField(Invitee, blank=True, null=True, help_text='Members of a party.')
     creation_date = models.DateField(auto_now_add=True)
@@ -85,6 +88,9 @@ class Invitation(models.Model):
     response_message = models.TextField(blank=True, help_text='An optional message for the happy couple.')
     last_updated = models.DateField(auto_now=True)
     #last_viewed = models.DateField(null=True)
+
+    class Meta:
+        ordering = ['formal_name']
 
     def get_absolute_url(self):
         return reverse('rsvp-invitation', kwargs={'slug': self.slug})
