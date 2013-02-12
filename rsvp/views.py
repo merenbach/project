@@ -1,9 +1,18 @@
-from django.core.urlresolvers import reverse_lazy
-from django.http import Http404
-from django.views.generic import TemplateView
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.http import Http404, HttpResponseRedirect
+from django.views.generic import View, TemplateView
 from django.views.generic.edit import FormView
 from rsvp.forms import ResponseCardForm
 from rsvp.models import Invitation
+
+class CookieView(View):
+    def dispatch(self, request, *args, **kwargs):
+        # super(CookieView, self).dispatch(request, *args, **kwargs)
+        token = request.session.get('token')
+        if token:
+            return HttpResponseRedirect(reverse('rsvp-envelope', kwargs={'slug': token}))
+        else:
+            raise Http404
 
 class EnvelopeView(TemplateView):
     template_name = 'rsvp/envelope.html'
@@ -11,6 +20,7 @@ class EnvelopeView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
+            request.session.update({'token': self.invitation.slug})
             # if self.invitation.is_viewed:
             #     from django.shortcuts import redirect
             #     from django.core.urlresolvers import reverse
@@ -31,6 +41,7 @@ class InvitationView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
+            request.session.update({'token': self.invitation.slug})
             if not self.invitation.is_viewed:
                 self.invitation.is_viewed = True
                 self.invitation.save()
@@ -61,6 +72,7 @@ class ResponseCardView(FormView):
     def dispatch(self, request, *args, **kwargs):
         try:
             self.invitation = Invitation.objects.get(slug__exact=kwargs.get('slug'))
+            request.session.update({'token': self.invitation.slug})
         except Invitation.DoesNotExist:
             raise Http404
         return super(ResponseCardView, self).dispatch(request, *args, **kwargs)
@@ -123,12 +135,11 @@ class ResponseCardThanksView(TemplateView):
     template_name = 'rsvp/thanks.html'
     
     def dispatch(self, request, *args, **kwargs):
-        #try:
-        #    """ Verify that an entry for this site exists """
-        #    self.party = Invitation.objects.get(slug__exact=kwargs.get('slug', None))
-        #except Invitation.DoesNotExist:
-        #    raise Http404
-        return super(ResponseCardThanksView, self).dispatch(request, *args, **kwargs)
+        token = request.session.get('token')
+        if token:
+            return super(ResponseCardThanksView, self).dispatch(request, *args, **kwargs)
+        else:
+            raise Http404
 
     #def get_context_data(self, **kwargs):
     #    context = super(ResponseCardThanksView, self).get_context_data(**kwargs)

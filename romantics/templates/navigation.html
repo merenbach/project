@@ -31,17 +31,22 @@
 								<li class="{% active contact_url %}">
 									<a href="{{ contact_url }}">Contact</a>
 								</li>
+								{% if request.session.token %}
+									<li class="text-info">
+										<a class="text-info" href="{% url 'rsvp-cookie' %}">
+											<em>RSVP</em>
+										</a>
+									</li>
+								{% endif %}
 							</ul>
 							<ul class="nav pull-right">
-								{% comment %}
-								<li class="{% active home_url %}">
-									<a href="{{ home_url }}">Our Story</a>
+								<li class="{% active registry_url %}">
+									<a href="{{ registry_url }}">
+										<small>
+											Registry
+										</small>
+									</a>
 								</li>
-								<li class="{% active ball_url %}">
-									<a href="{{ ball_url }}">The Ball</a>
-								</li>
-								{% endcomment %}
-								<li class="{% active registry_url %}"><a href="{{ registry_url }}">Registry</a></li>
 							</ul><!-- /.nav -->
 						</div><!-- /.nav-collapse.collapse -->	
 					</div><!-- /.container -->
