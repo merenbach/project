@@ -93,7 +93,7 @@ class Invitation(models.Model):
         ordering = ['formal_name']
 
     def get_absolute_url(self):
-        return reverse('rsvp-invitation', kwargs={'slug': self.slug})
+        return reverse('rsvp-envelope', kwargs={'slug': self.slug})
 
     def __unicode__(self):
         return u'{0}'.format(self.formal_name)
