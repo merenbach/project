@@ -36,6 +36,7 @@ class Party(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name_plural = 'parties'
 
     name = models.CharField(max_length=100, blank=False)
     members = models.ManyToManyField(Invitee, blank=True, null=True, help_text='Members of a party.')
@@ -44,9 +45,6 @@ class Party(models.Model):
     is_invited = models.BooleanField(verbose_name='Was invited?')
     is_confirmed = models.BooleanField(verbose_name='Has confirmed?')
     alignment = models.CharField(max_length=1, choices=ALIGNMENT_CHOICES, default=NEITHER)
-
-    class Meta:
-        verbose_name_plural = 'parties'
 
     @property
     def headcount(self):
