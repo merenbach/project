@@ -58,3 +58,27 @@ Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as bl
 
 - Make sure we're using *only* the CSS files that we need
 - Make sure that CSS files are included in the right order
+
+
+## Bootstrap customizations
+
+### Scaffolding
+
+	@bodyBackground = #fafafa
+	@textColor = #333
+
+### Typography
+
+    @baseFontSize = 18px (14 + 4)
+    @baseLineHeight = 24px (20 + 4)
+    @paddingLarge = 15px 23px (+4 +4)
+    @paddingSmall = 6px 14px (+4 +4)
+    @paddingMini = 5px 10px (+4 +4)
+    @baseBorderRadius = 6px (4px + 4/2)
+    @baseBorderRadius = 8px (6px + 4/2)
+    @baseBorderRadiusSmall = 5px (3px + 4/2)
+
+### Navbar
+
+    @navbarHeight = 48px (40 + 2*4)
+
