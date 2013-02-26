@@ -15,12 +15,15 @@ We make use of a module from the dev branch.  This should be removed once it is 
 - This appears to actually be `unix:/var/run/memcached.pid` on Debian, something that I failed to discover for about a month.
 
 ## Configuration for MarsEdit
+
 Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as blogging system for use of tags.
 
 ## TODO
+
 - Remove outdated/unused CSS (sticky, normalize, handheld, antiscreen (?))
 
 ## Dependencies
+
 - pip install django-maintenance
     - We are using [this version](https://github.com/steingrd/django-maintenance)
     - We were using [this version](https://github.com/thinkjson/django-maintenance)
@@ -45,11 +48,13 @@ Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as bl
 - linaro-django-pagination==2.0.2
 
 ## Older Dependencies
+
 - pip install django-google-analytics
     - We are using [this version](http://pydoc.net/django_google_analytics/latest/)
     - This version is different from the one that we had been using
     - It differs from [this version](http://code.google.com/p/django-google-analytics/)
 
 ## TODO
+
 - Make sure we're using *only* the CSS files that we need
 - Make sure that CSS files are included in the right order
