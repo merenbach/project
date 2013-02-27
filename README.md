@@ -58,7 +58,8 @@ Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as bl
 
 - Make sure we're using *only* the CSS files that we need
 - Make sure that CSS files are included in the right order
-
+- Add some additional ciphers (e.g., Chaocipher)
+- Generate cipher forms using Django forms framework
 
 ## Bootstrap customizations
 

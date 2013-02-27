@@ -21,60 +21,48 @@
 {% endblock %}
 
 {% block content %}
-{{ block.super }}
+	{{ block.super }}
 
-<article>
-	<p>This page represents an ever-evolving (and ever-incomplete) attempt at making a multifunctional text encryption and decryption tool.  There are plenty like this (and better than this) elsewhere on the Internet, so if you seek style and flair, you might wish to reconsider before directing others to this specific page.</p>
-
-	<p>That said, this particular encryption tool differs from many others in one important respect: it uses AJAX to perform the encryption and decryption server-side.  This isn't "safer" by any stretch (quite the opposite, perhaps), but it lets me make the code (written in Python, server-side) more maintainable without changing much in terms of browser integration.</p>
-
-	<form class="form-horizontal" method="GET" action="{% url 'ciphers' %}">{% csrf_token %}
+	<article>
+		<p class="lead">Old-fashioned meets newfangled</p>
 		<noscript>
 			<p>This application requires JavaScript.  Please enable JavaScript in your browser preferences to proceed.</p>
 		</noscript>
-		<section>
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label" for="scheme">Cipher Scheme</label>
-					<div class="controls">
-						<select id="scheme">
-							<option value="intro">Introduction</option>
-							<option value="affine">Affine</option>
-							<option value="atbash">Atbash</option>
-							<option value="beaufort">Beaufort</option>
-							<!--<option value="beaufortautokey">Beaufort Autoclave (custom)</option>-->
-							<option value="caesar">Caesar</option>
-							<option value="codeword">Codeword</option>
-							<!--<option value="gronsfeld">x Gronsfeld</option>-->
-							<!--<option value="variant">x Variant Beaufort</option>-->
-							<option value="vigenere">Vigen&#232;re</option>
-						</select>
-						<span class="help-inline">The cipher scheme to use</span>
-					</div>
+	
+		<form class="form-horizontal" method="GET" action="{% url 'ciphers' %}">{% csrf_token %}
+			<ul class="nav nav-pills">
+				<li class="active"><a href="#home" data-toggle="pill">Home</a></li>
+				{# <li><a href="#affine" data-toggle="pill">Affine</a></li> #}
+				<li><a href="#atbash" data-toggle="pill">Atbash</a></li>
+				<li><a href="#beaufort" data-toggle="pill">Beaufort</a></li>
+				<li><a href="#caesar" data-toggle="pill">Caesar</a></li>
+				<li><a href="#codeword" data-toggle="pill">Codeword</a></li>
+				{% comment %}<li><a href="#gronsfeld" data-toggle="tab">Gronsfeld</a></li>{% endcomment %}
+				{% comment %}<li><a href="#variant" data-toggle="tab">Variant Beaufort</a></li>{% endcomment %}
+				<li><a href="#vigenere" data-toggle="pill">Vigen&#232;re</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade active in" id="home">
+					<p>
+						Welcome to my ever-evolving and ever-incomplete attempt at a text encryption and decryption tool.  There are plenty like this, not to mention better than this, elsewhere on the Internet.  Those who seek style and flair may wish to direct friends elsewhere.
+					</p>
+					<p>
+						This project represents a hobby of mine and little more.  Encryption and decryption will occur server-side (via AJAX), rather than client-side.  Please note that <strong>any data submitted with this form will be sent over the Internet</strong>.  This permits me to keep my Python code more maintainable.  It also means that information of a sensitive nature would be better encoded with a different tool.</p>
+					</p>
+					<p>
+						This tool, which I provide &ldquo;as-is,&rdquo; requires JavaScript.
+					</p>
 				</div>
-			</fieldset>
-		</section>
-		<section class="pane" id="intro_pane">
-			<p>
-				Welcome to Andrew Merenbach's cipher tool suite.  Encryption schemes provided include affine, Atbash, Beaufort, Caesar shift, codeword, <!--variant Beaufort (including an autoclave version),-->and Vigen&#232;re (including an autoclave option).
-			</p>
-			<p>
-				<strong>This tool requires JavaScript.</strong>  This page makes moderate use of CSS standards and HTML5; please ensure that your browser observes these requirements.
-			</p>
-			<p>
-				To begin, please select a scheme from the menu.
-			</p>
-		</section>
-		<div id="cipher_input_panes">
-			{% include "ciphers/pane_affine.html" %}
-			{% include "ciphers/pane_atbash.html" %}
-			{% include "ciphers/pane_beaufort.html" %}
-			{% include "ciphers/pane_caesar.html" %}
-			{% include "ciphers/pane_codeword.html" %}
-			{% include "ciphers/pane_vigenere.html" %}
-		</div>
-	</form>
-</article>
+				{# {% include "ciphers/pane_affine.html" %} #}
+				{% include "ciphers/pane_affine.html" %}
+				{% include "ciphers/pane_atbash.html" %}
+				{% include "ciphers/pane_beaufort.html" %}
+				{% include "ciphers/pane_caesar.html" %}
+				{% include "ciphers/pane_codeword.html" %}
+				{% include "ciphers/pane_vigenere.html" %}
+			</div>
+		</form>
+	</article>
 {% endblock %}
 
 {% comment %}

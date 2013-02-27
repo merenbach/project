@@ -15,10 +15,12 @@
 	// var $radio_operation  = $('input:radio[name=operation]:checked');
 	var $radio_autoclave  = $('input:radio[name=autoclave]');
 
-	function transcode_message($pane, transcode_callback) {
+	function transcode_message(pane_name, transcode_callback) {
+        var $pane = $(pane_name);
 		var message = $pane.find($field_source).val();
 		if (typeof(message) === 'string' && message !== '') {
 			var message_args = {};
+            message_args.container = pane_name;
 			message_args.message = message;
 			message_args.should_filter = $pane.find($field_filter).is(':checked') ? true : false;
 			message_args.lower = $pane.find($field_lowercase).is(':checked') ? true : false;
@@ -76,78 +78,37 @@
 		}
 	}
 
-	function encode_affine() {
-		var $pane = $('#affine_pane');
-		transcode_message($pane, Dajaxice.ciphers.encode_affine);
-	}
-	
-	function decode_affine() {
-		var $pane = $('#affine_pane');
-		transcode_message($pane, Dajaxice.ciphers.decode_affine);
-	}
-
-	function transcode_atbash() {
-		var $pane = $('#atbash_pane');
-		transcode_message($pane, Dajaxice.ciphers.transcode_atbash);
-	}
-
-	function transcode_beaufort() {
-		var $pane = $('#beaufort_pane');
-		transcode_message($pane, Dajaxice.ciphers.transcode_beaufort);
-	}
-
-	function encode_caesar() {
-		var $pane = $('#caesar_pane');
-		transcode_message($pane, Dajaxice.ciphers.encode_caesar);
-	}
-	
-	function decode_caesar() {
-		var $pane = $('#caesar_pane');
-		transcode_message($pane, Dajaxice.ciphers.decode_caesar);
-	}
-
-	function encode_codeword() {
-		var $pane = $('#codeword_pane');
-		transcode_message($pane, Dajaxice.ciphers.encode_codeword);
-	}
-	
-	function decode_codeword() {
-		var $pane = $('#codeword_pane');
-		transcode_message($pane, Dajaxice.ciphers.decode_codeword);
-	}
-
-	function encode_vigenere() {
-		var $pane = $('#vigenere_pane');
-		transcode_message($pane, Dajaxice.ciphers.encode_vigenere);
-	}
-
-	function decode_vigenere() {
-		var $pane = $('#vigenere_pane');
-		transcode_message($pane, Dajaxice.ciphers.decode_vigenere);
-	}
-
 	$(document).ready(function() {
-		$('.pane').hide();
-		$('#cipher_input_panes').show();
-
-		$('#scheme').change(function() {
-			var el_id = $(this).val();
-			$('.pane').hide();
-			$('#' + el_id + '_pane').show();
-		});
-
-		$('#affine_pane .button-encode').click(encode_affine);
-		$('#affine_pane .button-decode').click(decode_affine);
-		$('#atbash_pane .button-transcode').click(transcode_atbash);
-		$('#caesar_pane .button-encode').click(encode_caesar);
-		$('#caesar_pane .button-decode').click(decode_caesar);
-		$('#beaufort_pane .button-transcode').click(transcode_beaufort);
-		$('#codeword_pane .button-encode').click(encode_codeword);
-		$('#codeword_pane .button-decode').click(decode_codeword);
-		$('#vigenere_pane .button-encode').click(encode_vigenere);
-		$('#vigenere_pane .button-decode').click(decode_vigenere);
-
-		$('#intro_pane').show();
+		$('#affine .button-encode').on('click', function() {
+            transcode_message('#affine', Dajaxice.ciphers.encode_affine);
+        });
+		$('#affine .button-decode').on('click', function() {
+            transcode_message('#affine', Dajaxice.ciphers.decode_affine);
+        });
+		$('#atbash .button-transcode').on('click', function() {
+            transcode_message('#atbash', Dajaxice.ciphers.transcode_atbash);
+        });
+		$('#caesar .button-encode').on('click', function() {
+            transcode_message('#caesar', Dajaxice.ciphers.encode_caesar);
+        });
+		$('#caesar .button-decode').on('click', function() {
+            transcode_message('#caesar', Dajaxice.ciphers.decode_caesar);
+        });
+		$('#beaufort .button-transcode').on('click', function() {
+            transcode_message('#beaufort', Dajaxice.ciphers.transcode_beaufort);
+        });
+		$('#codeword .button-encode').on('click', function() {
+            transcode_message('#codeword', Dajaxice.ciphers.encode_codeword);
+        });
+		$('#codeword .button-decode').on('click', function() {
+            transcode_message('#codeword', Dajaxice.ciphers.decode_codeword);
+        });
+		$('#vigenere .button-encode').on('click', function() {
+            transcode_message('#vigenere', Dajaxice.ciphers.encode_vigenere);
+        });
+		$('#vigenere .button-decode').on('click', function() {
+            transcode_message('#vigenere', Dajaxice.ciphers.decode_vigenere);
+        });
 		window.onbeforeunload = function() {};
 	});
 })(jQuery, Dajax, Dajaxice, document, window);

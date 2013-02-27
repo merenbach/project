@@ -1,5 +1,16 @@
-<section class="pane" id="codeword_pane">
-	<p>One of the easiest monoalphabetic substitution ciphers to implement&#8212;save for, possibly, the Caesar shift and the Atbash cipher&#8212;the codeword creates a ciphertext alphabet from a keyword followed by the plaintext alphabet minus the keyword's letters.</p>
+<section class="tab-pane fade" id="codeword">
+	<p>The codeword (or keyword) cipher is one of the most common monoalphabetic substitution ciphers, along with the Caesar shift.  The ciphertext alphabet is created from the codeword (with duplicate letters removed) followed by any letters that the standard alphabet does <em>not</em> share with the codeword.</p>
+	<p>Example alphabets:</p>
+<pre>
+Codeword:   MONKEY
+Cleartext:  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Ciphertext: MONKEYABCDFGHIJLPQRSTUVWXZ
+</pre>
+<pre>
+Codeword:   KANGAROO
+Cleartext:  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Ciphertext: KANGROBCDEFHIJLMPQSTUVWXYZ
+</pre>
 	<fieldset>
 		<legend>Parameters</legend>
 		{% include "ciphers/snippet_source.html" %}
