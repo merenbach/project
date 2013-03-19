@@ -8,6 +8,13 @@ except:
 
 SITE_ID = 4
 
+ALLOWED_HOSTS = (
+    'www.lizcheney.com',
+    'www.lizcheney.dev',
+    'lizcheney.com',
+    'lizcheney.dev',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',

@@ -8,6 +8,13 @@ except:
 
 SITE_ID = 1
 
+ALLOWED_HOSTS = (
+    'www.merenbach.com',
+    'www.merenbach.dev',
+    'merenbach.com',
+    'merenbach.dev',
+)
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS += (

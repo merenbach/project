@@ -8,6 +8,13 @@ except:
 
 SITE_ID = 3
 
+ALLOWED_HOSTS = (
+    'www.thetata.net',
+    'www.thetata.dev',
+    'thetata.net',
+    'thetata.dev',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',

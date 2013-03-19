@@ -8,6 +8,13 @@ except:
 
 SITE_ID = 2
 
+ALLOWED_HOSTS = (
+    'www.theromantics.net',
+    'www.theromantics.dev',
+    'theromantics.net',
+    'theromantics.dev',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
