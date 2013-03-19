@@ -4,7 +4,7 @@
 
 {% block meta-description %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}
 
-{% block subtitle %} <small>{{ week|date:"Y.m.d" }} &ndash; {{ week_end_day|date:"Y.m.d" }}</small>{% endblock %}
+{% block subtitle %} <small>{{ week|date:"DATE_FORMAT" }} &ndash; {{ week_end_day|date:"DATE_FORMAT" }}</small>{% endblock %}
 {% comment %}{% block title %}{% blocktrans with year=week|date:"Y" week_number=week|date:"W"%}Archives week {{ week_number }} of {{ year }}{% endblocktrans %}{% endblock %}{% endcomment %}
 
 {% block body-class %}{{ block.super }} archive date week year-{{ week|date:"Y" }} month-{{ week|date:"m" }} week-{{ week|date:"W" }}{% endblock %}

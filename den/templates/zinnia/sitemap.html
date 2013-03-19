@@ -34,7 +34,7 @@
     {% for entry in entries %}
     <li>
       <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      <small class="muted">{{ entry.creation_date|date:"Y.m.d" }}</small>
+      <small class="muted">{{ entry.creation_date|date:"DATE_FORMAT" }}</small>
     </li>
     {% empty %}
     <li>

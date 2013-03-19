@@ -4,7 +4,7 @@
 	<div class="entry-header">
 		{% if continue_reading %}
 			<h2 class="entry-title">
-				<a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">{{ object.title }}</a> <small>{{ object.creation_date|date:"Y.m.d" }}</small>
+				<a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">{{ object.title }}</a> <small>{{ object.creation_date|date:"DATE_FORMAT" }}</small>
 			</h2>
 		{% endif %}
 	</div>
