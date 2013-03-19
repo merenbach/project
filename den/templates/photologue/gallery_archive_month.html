@@ -2,7 +2,7 @@
 {% load url from future %}
 
 {% block title %}Galleries{% endblock %}
-{% block subtitle %} <small>{{ month|date:"Y.m" }}</small>{% endblock %}
+{% block subtitle %} <small>{{ month|date:"YEAR_MONTH_FORMAT" }}</small>{% endblock %}
 
 {% block content %}
 
@@ -12,7 +12,7 @@
     {% for gallery in object_list %}
     <ul class="unstyled photo-gallery">
 	<li>
-		<h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a> <small>{{ gallery.date_added|date:"Y.m.d" }}</small></h2>
+		<h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.title }}</a> <small>{{ gallery.date_added|date:"DATE_FORMAT" }}</small></h2>
 		<ul class="thumbnails">
 			{% for photo in gallery.sample %}
 			<div class="span2 gallery-photo">

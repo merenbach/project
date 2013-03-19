@@ -4,7 +4,7 @@
 {% load photologue_tags core_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
-{% block subtitle %} <small>{{ object.date_added|date:"Y.m.d" }}</small>{% endblock %}
+{% block subtitle %} <small>{{ object.date_added|date:"DATE_FORMAT" }}</small>{% endblock %}
 
 {% block breadcrumb %}
     {% url 'pl-photo-archive' as archive_url %}
