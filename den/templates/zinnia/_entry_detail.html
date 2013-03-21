@@ -1,5 +1,4 @@
 {% load tagging_tags i18n %}
-{% load url from future %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}{% if not continue_reading %} well well-small{% endif %}">
 	<div class="entry-header">
 		{% if continue_reading %}

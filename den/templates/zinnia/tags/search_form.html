@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load url from future %}
 <form method="get" id="searchform" action="{% url 'zinnia_entry_search' %}">
   <p>
     <input type="text" value="{% trans "Keywords..." %}" name="pattern" id="searchbox" onfocus="this.value=''">
