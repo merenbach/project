@@ -19,7 +19,7 @@
     <link rel="pingback" href="/xmlrpc/" />
     <link rel="shortcut icon" href="{{ STATIC_URL }}zinnia/img/favicon.ico" />
     <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
-    {% render_block "css" postprocessor "compressor_contrib.sekizai.compress" %}
+    {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
     {% block css %}
       {% addtoblock "css" %}
         <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ STATIC_URL }}zinnia/css/screen.css" />

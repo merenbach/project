@@ -130,7 +130,6 @@ INSTALLED_APPS = (
     'pytz',
     'markdown_deux', # the built-in mechanism is deprecated
     'compressor',
-    'compressor_contrib.sekizai', # custom until integrated into compressor master
     'maintenance',
     #'maintenance.heartbeat',
     'analytical',
