@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'appconf',
     'sekizai',
     'pytz',
+    'markdown_deux', # the built-in mechanism is deprecated
     'compressor',
     'compressor_contrib.sekizai', # custom until integrated into compressor master
     'maintenance',
@@ -137,6 +138,16 @@ INSTALLED_APPS = (
     'django_extensions',
     'widget_tweaks', # modify form widgets
 )
+
+# Trying to emulate the legacy Markdown from Django
+MARKDOWN_DEUX_STYLES = {
+    "default": {
+        "extras": {
+            "code-friendly": None,
+        },
+        "safe_mode": False,
+    },
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
