@@ -1,5 +1,5 @@
 {% extends "software/root.html" %}
-{% load markup software_tags %}
+{% load markdown_deux_tags software_tags %}
 
 {% block title %}{{ software.title }}{% endblock %}
 {% block subtitle %} {% if software.version %}{{ software.version }}{% endif %} {% if software.pub_date %}<small><abbr title="{{ software.pub_date|date:"c" }}">{{ software.pub_date|date:"DATE_FORMAT" }}</abbr></small>{% endif %}{% endblock %}
