@@ -1,5 +1,21 @@
 # README for Project
 
+## Troubleshooting
+
+### Permissions
+
+Error rebuilding the Haystack index?  Maybe the `media` directory isn't owned by the server user (e.g., maybe it is owned by `root` instead of `www-data`).
+
+### Memcached
+
+- Please ensure that the memcached path is set correctly in settings.py.
+- This may (or may not) be `unix:/var/run/memcached/memcached.pid` on CentOS
+- This appears to actually be `unix:/var/run/memcached.pid` on Debian, something that I failed to discover for about a month.
+
+### Configuration for MarsEdit
+
+Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as blogging system for use of tags.
+
 ## Django compressor
 
 We make use of a module from the dev branch.  This should be removed once it is integrated into the core.
@@ -8,64 +24,21 @@ We make use of a module from the dev branch.  This should be removed once it is 
 - The easiest way is to create this directory manually and make www-data the owner (although we could technically make www-data the group and root the owner, that might be more of a security hole)
 - <http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_STORAGE>
 
-## Memcached
-
-- Please ensure that the memcached path is set correctly in settings.py.
-- This may (or may not) be `unix:/var/run/memcached/memcached.pid` on CentOS
-- This appears to actually be `unix:/var/run/memcached.pid` on Debian, something that I failed to discover for about a month.
-
-## Configuration for MarsEdit
-
-Use XML-RPC posting with aid of use MovableType *API*.  Select MovableType as blogging system for use of tags.
-
 ## TODO
 
 - Remove outdated/unused CSS (sticky, normalize, handheld, antiscreen (?))
 
 ## Dependencies
 
-### Installed from `pip`
+Please see `requirements.txt` for required dependencies.
 
-The following are unmodified.
-
-- django-blog-zinnia==0.12.3
-- django-compressor==1.3
-- django-dajax==0.9.2
-- django-dajaxice==0.5.4.1
-- django-markdown-deux==1.0.4
-- django-photologue==2.5
-- django-sekizai==0.7
-- django-xmlrpc==0.1.4
-- django-analytical==0.14.0
-
-### Others
-
-The following may or may not be modified.
+### Miscellaneous
 
 - pip install django-maintenance
     - We are using [this version](https://github.com/steingrd/django-maintenance)
     - We were using [this version](https://github.com/thinkjson/django-maintenance)
-
-Others (please make sure we need):
-
-- django-backup==1.0.1
-- django-analytical==0.5 (???)
-- django-breadcrumbs==1.1.1
-- django-disqus==0.4.1
-- django-haystack==1.2.7
-- django-maintenance==0.1
-- django-markdown==0.1.0
-- django-mollom==0.1.1
-- django-mptt==0.5.4
-- django-tagging==0.3.1
-- linaro-django-pagination==2.0.2
-
-## Older Dependencies
-
-- pip install django-google-analytics
-    - We are using [this version](http://pydoc.net/django_google_analytics/latest/)
-    - This version is different from the one that we had been using
-    - It differs from [this version](http://code.google.com/p/django-google-analytics/)
+- Our backup script is based upon
+	- django-backup==1.0.1
 
 ## TODO
 
