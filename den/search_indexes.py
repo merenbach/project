@@ -14,7 +14,7 @@ class FlatPageIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return FlatPage
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.all()
 
@@ -31,7 +31,7 @@ class EntryIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return Entry
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
         return self.get_model().published.all()
 
@@ -48,7 +48,7 @@ class EntryIndex(indexes.SearchIndex, indexes.Indexable):
 #    def get_model(self):
 #        return Article
 #
-#    def index_queryset(self):
+#    def index_queryset(self, using=None):
 #        """Used when the entire index for model is updated."""
 #        return self.get_model().objects.live().all()
 #
@@ -64,7 +64,7 @@ class GalleryIndex(indexes.SearchIndex, indexes.Indexable):
         from photologue.models import Gallery
         return Gallery
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.filter(is_public=True).all()
 
@@ -79,6 +79,6 @@ class GalleryIndex(indexes.SearchIndex, indexes.Indexable):
 #        from photologue.models import Photo
 #        return Photo
 #
-#    def index_queryset(self):
+#    def index_queryset(self, using=None):
 #        """Used when the entire index for model is updated."""
 #        return self.get_model().objects.filter(is_public=True).all()
