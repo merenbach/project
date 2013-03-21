@@ -2,13 +2,13 @@
 {% load i18n core_tags %}
 
 {% block breadcrumb %}
-    {% make_crumbs "Tags" %}
+    {% make_crumbs "Tag list" %}
     {{ block.super }}
 {% endblock %}
 
 {% block meta-description %}{% trans "Tag list" %}{% endblock %}
 
-{% block subtitle %} <small>{% trans "Tags" %}</small>{% endblock %}
+{% block title %}{% trans "Tag list" %}{% endblock %}
 
 {% block body-class %}tag-list{% endblock %}
 
