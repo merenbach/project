@@ -15,8 +15,11 @@ ALLOWED_HOSTS = (
     'merenbach.dev',
 )
 
-# Because NGINX proxies to Gunicorn
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+# We want to use SSL but NGINX proxies to Gunicorn
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -114,7 +117,7 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 
 # Dajax/DajaxIce
 DAJAXICE_MEDIA_PREFIX = 'dajaxice'
-DAJAXICE_DEBUG = False
+DAJAXICE_DEBUG = DEBUG
 DAJAXICE_NOTIFY_EXCEPTIONS = True
 #import logging
 #logging.basicConfig(level=logging.DEBUG)

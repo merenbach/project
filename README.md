@@ -46,6 +46,7 @@ Please see `requirements.txt` for required dependencies.
 - Make sure that CSS files are included in the right order
 - Add some additional ciphers (e.g., Chaocipher)
 - Generate cipher forms using Django forms framework
+- Can we benefit from setting TIME_FORMAT in settings?
 
 ## Bootstrap customizations
 

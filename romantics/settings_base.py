@@ -15,8 +15,11 @@ ALLOWED_HOSTS = (
     'theromantics.dev',
 )
 
-# Because NGINX proxies to Gunicorn
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+# We want to use SSL but NGINX proxies to Gunicorn
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',

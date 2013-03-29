@@ -1,5 +1,8 @@
 # Django settings for project project.
 
+# Get DEBUG settings
+from settings_local import *
+
 # Datetime fix
 # http://stackoverflow.com/questions/2427240/thread-safe-equivalent-to-pythons-time-strptime
 from datetime import datetime
