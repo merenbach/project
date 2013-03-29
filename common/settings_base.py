@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'compressor',
     'maintenance',
     #'maintenance.heartbeat',
+    'robots',
     'analytical',
     'memcache_status',
     'django_extensions',

@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     #    name='haystack_search'
     #),
     #url(r'^xmlrpc/$', 'django_xmlrpc.views.handle_xmlrpc'),
+    (r'^robots\.txt$', include('robots.urls')),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.index', {'sitemaps': sitemaps}),
     (r'^sitemap-(?P<section>.+)\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
