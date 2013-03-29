@@ -15,6 +15,9 @@ ALLOWED_HOSTS = (
     'theromantics.dev',
 )
 
+# Because NGINX proxies to Gunicorn
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',

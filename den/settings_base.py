@@ -15,6 +15,9 @@ ALLOWED_HOSTS = (
     'merenbach.dev',
 )
 
+# Because NGINX proxies to Gunicorn
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS += (
