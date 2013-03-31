@@ -1,53 +1,28 @@
 {% load i18n %}
-<ul class="paginator">
-  <li class="index">
-    {% blocktrans with current_page=page.number total_page=page.paginator.num_pages %}Page {{ current_page }} of {{ total_page }}{% endblocktrans %}
-  </li>
+<nav class="pagination pagination-centered">
+<ul>
 
   {% if page.has_previous %}
   <li class="page previous">
     <a href="?page={{ page.previous_page_number }}{{ GET_string }}"
        title="{% trans "More recent entries" %}">&laquo;</a>
   </li>
+  {% else %}
+  <li class="disabled">
+	  <span>&laquo;</span>
+  </li><!-- /.disabled -->
   {% endif %}
 
-  {% for page_number in begin %}
-  <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
-    {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
-    {% else %}
-    <a href="?page={{ page_number }}{{ GET_string }}"
-       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
-    {% endifequal%}
-  </li>
-  {% endfor %}
+  {% include "zinnia/tags/pagination_group.html" with group=begin %}
 
   {% if middle %}
-  <li class="ellipsis">&hellip;</li>
-  {% for page_number in middle %}
-  <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
-    {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
-    {% else %}
-    <a href="?page={{ page_number }}{{ GET_string }}"
-       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
-    {% endifequal%}
-  </li>
-  {% endfor %}
+  <li class="disabled"><span>&hellip;</span></li>
+  {% include "zinnia/tags/pagination_group.html" with group=middle %}
   {% endif %}
 
   {% if end %}
-  <li class="ellipsis">&hellip;</li>
-  {% for page_number in end %}
-  <li class="page {% ifequal page.number page_number %}current{% endifequal %}">
-    {% ifequal page.number page_number %}
-    <strong>{{ page_number }}</strong>
-    {% else %}
-    <a href="?page={{ page_number }}{{ GET_string }}"
-       title="{% trans "Entries page" %} {{ page_number }}">{{ page_number }}</a>
-    {% endifequal%}
-  </li>
-  {% endfor %}
+  <li class="disabled"><span>&hellip;</span></li>
+  {% include "zinnia/tags/pagination_group.html" with group=end %}
   {% endif %}
 
   {% if page.has_next %}
@@ -55,5 +30,10 @@
     <a href="?page={{ page.next_page_number }}{{ GET_string }}"
        title="{% trans "More old entries" %}">&raquo;</a>
   </li>
+  {% else %}
+  <li class="disabled">
+	  <span>&raquo;</span>
+  </li><!-- /.disabled -->
   {% endif %}
 </ul>
+</nav>
