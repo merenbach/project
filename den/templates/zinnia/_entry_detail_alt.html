@@ -85,17 +85,11 @@
       {% endfor %}
     </p>
     {% endblock %}
-    {% block entry-shorturl %}
-    <p class="entry-shorturl">
-      <strong>{% trans "Short url" %}</strong> :
-      <a href="{{ object.short_url }}"
-         title="{% blocktrans with object=object.title %}Short URL to {{ object }}{% endblocktrans %}"
-         rel="shortlink">
-        {{ object.short_url }}
-      </a>
-    </p>
-    {% endblock %}
   </div>
+{% endblock %}
+
+{% block entry-shorturl %}
+	{# This space intentionally left blank #}
 {% endblock %}
 
 {% block entry-comments %}
