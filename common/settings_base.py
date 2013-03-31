@@ -147,6 +147,7 @@ MARKDOWN_DEUX_STYLES = {
     "default": {
         "extras": {
             "code-friendly": None,
+            "smarty-pants": None,
         },
         "safe_mode": False,
     },
