@@ -17,24 +17,18 @@ from haystack.forms import SearchForm
 from haystack.views import SearchView
 from haystack.views import search_view_factory
 
-# Photologue overrides
-import sys, photologue_urls, photologue_sitemaps
-sys.modules['photologue.urls'] = photologue_urls
-sys.modules['photologue.sitemaps'] = photologue_sitemaps
-
 # Sitemaps
 
 from django.contrib.sitemaps import FlatPageSitemap
 from software.sitemaps import SoftwareSitemap
 from zinnia.sitemaps import EntrySitemap
-from photologue.sitemaps import photologue_gallery, photologue_photo
+from photologue.sitemaps import PhotologueSitemap
 
 sitemaps = {
     'pages': FlatPageSitemap,
     'blog': EntrySitemap,
     'software': SoftwareSitemap,
-    'galleries': photologue_gallery,
-    'photos': photologue_photo,
+    'photologue': PhotologueSitemap,
 }
 
 # Examples:
