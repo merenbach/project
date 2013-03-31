@@ -6,7 +6,7 @@
       {% for entry in entries %}
       <li class="slide slide-{{ forloop.counter }}">
         <a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}">
-          <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}">
+          <img src="{% if entry.image %}{{ entry.image.url }}{% endif %}" alt="{{ entry.title }}" />
         </a>
         <div class="slide-content">
           <h2>

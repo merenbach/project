@@ -1,29 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
-{% load i18n core_tags %}
-
-{% block breadcrumb %}
-    {% with year=day|date:"Y" month=day|date:"m" day_of_month=day|date:"d" %}
-        {% url 'zinnia_entry_archive_year' year as year_url %}
-        {% url 'zinnia_entry_archive_month' year month as month_url %}
-        {# {% url 'zinnia_entry_archive_day' year month day_of_month as day_url %} #}
-        {% make_crumbs year year_url %}
-        {% make_crumbs month month_url %}
-        {% make_crumbs day_of_month %}
-    {% endwith %}
-    {{ block.super }}
-{% endblock %}
+{% load i18n %}
 
 {% block meta-description %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block subtitle %} <small>{{ day|date:"DATE_FORMAT" }}</small>{% endblock %}
+{% block title %}{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }}{% endblock %}
+{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} week-{{ day|date:"W" }} day-{{ day|date:"d" }}{% endblock %}
 
-{% comment %}
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ day|date:"DATE_FORMAT" }}</h1>
 {% endblock %}
-{% endcomment %}
 
 {% block content-related %}
 {% if previous_day %}
@@ -57,5 +43,5 @@
     <a href="{% url 'zinnia_entry_archive_month' next_month|date:"Y" next_month|date:"m" %}" rel="archives">{{ next_month|date:"YEAR_MONTH_FORMAT" }}</a>
   </li>
   {% endif %}
-<ul>
+</ul>
 {% endblock %}

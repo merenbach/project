@@ -1,25 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
-{% load i18n core_tags %}
-
-{% block breadcrumb %}
-    {% url 'zinnia_entry_archive_year' month|date:"Y" as year_url %}
-    {% url 'zinnia_entry_archive_month' month|date:"Y" month|date:"m" as month_url %}
-    {% make_crumbs month|date:"Y" year_url %}
-    {% make_crumbs month|date:"m" month_url %}
-    {{ block.super }}
-{% endblock %}
+{% load i18n %}
 
 {% block meta-description %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
 
-{% block subtitle %} <small>{{ month|date:"YEAR_MONTH_FORMAT" }}</small>{% endblock %}
+{% block title %}{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}{% endblock %}
 
 {% block body-class %}{{ block.super }} archive date month year-{{ month|date:"Y" }} month-{{ month|date:"m" }}{% endblock %}
 
-{% comment %}
 {% block content-title %}
 <h1>{% trans "Archives" %} {{ month|date:"YEAR_MONTH_FORMAT" }}</h1>
 {% endblock %}
-{% endcomment %}
 
 {% block content-related %}
 <h2>{% trans "Daily archives" %}</h2>

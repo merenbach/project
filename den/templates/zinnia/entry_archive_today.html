@@ -1,23 +1,15 @@
 {% extends "zinnia/entry_list.html" %}
-{% load i18n core_tags %}
-
-{% block breadcrumb %}
-    {% make_crumbs "Today" %}
-    {{ block.super }}
-{% endblock %}
+{% load i18n %}
 
 {% block meta-description %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block subtitle %} <small>{% trans "Today" %}</small>{% endblock %}
-{% comment %}{% block title %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}{% endcomment %}
+{% block title %}{% trans "Today archives" %} {{ day|date:"DATE_FORMAT" }}{% endblock %}
 
-{% block body-class %}{{ block.super }} archive date day year-{{ day|date:"Y" }} month-{{ day|date:"m" }} day-{{ day|date:"d" }} today{% endblock %}
+{% block body-class %}{{ block.super }} archive date today year-{{ day|date:"Y" }} month-{{ day|date:"m" }} week-{{ day|date:"W" }} day-{{ day|date:"d" }}{% endblock %}
 
-{% comment %}
 {% block content-title %}
 <h1>{% trans "Today archives" %}</h1>
 {% endblock %}
-{% endcomment %}
 
 {% block content-related %}
 {% if previous_day %}
