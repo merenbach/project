@@ -42,33 +42,30 @@
 </p>
 {% endblock %}
 
-{% block entry-body %}
-  <div class="entry-body">
-    {% block entry-image %}
-    {% if object.image %}
-    <div class="entry-image">
-      <p>
-        {% if continue_reading %}
-        <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
-          {% endif %}
-          <img src="{{ object.image.url }}" alt="{{ object.title }}" class="left" />
-          {% if continue_reading %}
-        </a>
-        {% endif %}
-      </p>
-    </div>
+{% block entry-content %}
+	{% if continue_reading %}
+		{{ object.excerpt|markdown }}
+	{% else %}
+		<div class="entry-content">
+			{{ object.content|markdown }}
+	  	</div>
+	{% endif %}
+{% endblock %}
+
+{% block entry-image %}
+{% if object.image %}
+<div class="entry-image">
+  <p>
+    {% if continue_reading %}
+    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+      {% endif %}
+      <img src="{{ object.image.url }}" alt="{{ object.title }}" class="img-polaroid">
+      {% if continue_reading %}
+    </a>
     {% endif %}
-    {% endblock %}
-    {% block entry-content %}
-		{% if continue_reading %}
-			{{ object.excerpt|markdown }}
-		{% else %}
-			<div class="entry-content">
-				{{ object.content|markdown }}
-		  	</div>
-		{% endif %}
-    {% endblock %}
-  </div>
+  </p>
+</div>
+{% endif %}
 {% endblock %}
 
 {% block entry-footer %}
