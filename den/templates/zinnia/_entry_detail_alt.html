@@ -36,11 +36,6 @@
      rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}.{% endwith %}
 </p>
 {% endblock %}
-{% block entry-last-update %}
-<p class="entry-last-update">
-  {% trans "Last update on" %} <abbr class="updated" title="{{ object.last_update|date:"c" }}">{{ object.last_update|date:"DATE_FORMAT" }}</abbr>.
-</p>
-{% endblock %}
 
 {% block entry-content %}
 	{% if continue_reading %}
@@ -83,6 +78,10 @@
     </p>
     {% endblock %}
   </div>
+{% endblock %}
+
+{% block entry-last-update %}
+	{# This space intentionally left blank #}
 {% endblock %}
 
 {% block entry-shorturl %}
