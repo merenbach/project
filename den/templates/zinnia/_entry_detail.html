@@ -1,1 +1,11 @@
 {% extends "zinnia/_entry_detail_alt.html" %}
+{% block entry-content %}
+	{% if not continue_reading %}
+		<article class="well well-small">
+	{% endif %}
+			{{ block.super }}
+	{% if not continue_reading %}
+			<small class="muted">Fin</small>
+		</article>
+	{% endif %}
+{% endblock %}
