@@ -1,4 +1,4 @@
-{% load tagging_tags i18n %}
+{% load tagging_tags i18n markdown_deux_tags %}
 <div id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}{% if not continue_reading %} well well-small{% endif %}">
 	<div class="entry-header">
 		{% if continue_reading %}
@@ -29,7 +29,7 @@
 		</div>
 		{% else %}
 		<p>
-			{{ object.excerpt|safe|striptags }}
+			{{ object.excerpt|markdown|striptags }}
 			{% tags_for_object object as tag_list %}
 			{% if tag_list %}
 			<small>

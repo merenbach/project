@@ -1,10 +1,10 @@
 {% extends "zinnia/entry_detail_base.html" %}
-{% load i18n core_tags tagging_tags %}
+{% load i18n core_tags tagging_tags markdown_deux_tags %}
 
 {% block lead %}
 	{% if object.excerpt %}
 		<p class="lead">
-			{{ object.excerpt|safe|striptags }}
+			{{ object.excerpt|markdown|striptags }}
 			{% tags_for_object object as tag_list %}
 			{% if tag_list %}
 				<small>
