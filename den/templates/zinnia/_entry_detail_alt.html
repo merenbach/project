@@ -3,7 +3,10 @@
 
 {% block entry-title %}
 	{% if continue_reading %}
-		{{ block.super }}
+	    <h2>
+	      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">{{ object.title }}</a>
+		  <small>{{ object.creation_date|date:"DATE_FORMAT" }}</small>
+	    </h2>
 	{% else %}
 		<div class="lead">
 			{% if object.excerpt %}{{ object.excerpt|markdown }}{% endif %}
