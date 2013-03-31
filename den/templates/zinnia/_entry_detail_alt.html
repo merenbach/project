@@ -63,21 +63,21 @@
 {% endif %}
 {% endblock %}
 
-{% block entry-footer %}
-  <div class="entry-footer">
-    {% block entry-tags %}
-    <p class="entry-tags">
-      <strong>{% trans "Tags" %}</strong> :
-      {% for tag in object.tags_list %}
-      <a href="{% url 'zinnia_tag_detail' tag %}"
-         title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
-         rel="tag">{{ tag }}</a>
-      {% empty %}
-      <span>{% trans "No tags" %}</span>
-      {% endfor %}
-    </p>
-    {% endblock %}
-  </div>
+{% block entry-tags %}
+	{% if not continue_reading %}
+		<p>
+			{% if object.tags_list %}
+				<small class="muted">{% trans "Tagged" %}</small>
+				{% for tag in object.tags_list %}
+					<small><a class="text-info" href="{% url 'zinnia_tag_detail' tag %}"
+						title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
+						rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}</small>
+				{% endfor %}
+			{% else %}
+				<small class="muted">{% trans "Untagged" %}</small>
+			{% endif %}
+		</p>
+	{% endif %}
 {% endblock %}
 
 {% block entry-last-update %}
