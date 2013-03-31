@@ -13,16 +13,16 @@
   </li><!-- /.disabled -->
   {% endif %}
 
-  {% include "zinnia/tags/pagination_group.html" with group=begin %}
+  {% include "zinnia/tags/_pagination_group.html" with group=begin %}
 
   {% if middle %}
   <li class="disabled"><span>&hellip;</span></li>
-  {% include "zinnia/tags/pagination_group.html" with group=middle %}
+  {% include "zinnia/tags/_pagination_group.html" with group=middle %}
   {% endif %}
 
   {% if end %}
   <li class="disabled"><span>&hellip;</span></li>
-  {% include "zinnia/tags/pagination_group.html" with group=end %}
+  {% include "zinnia/tags/_pagination_group.html" with group=end %}
   {% endif %}
 
   {% if page.has_next %}
