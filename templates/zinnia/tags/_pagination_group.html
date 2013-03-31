@@ -1,4 +1,5 @@
 {% load i18n %}
+{# Custom reusable widget to cut down on duplicated code in Zinnia-provided `pagination.html` #}
 {% for page_number in group %}
 <li class="page {% ifequal page.number page_number %}active{% endifequal %}">
   {% ifequal page.number page_number %}
