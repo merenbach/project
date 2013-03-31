@@ -67,7 +67,7 @@ INSTALLED_APPS += (
     'tagging',
     'mptt',
     'zinnia',
-    #'disqus',
+    'disqus',
     #'pagination',              # pagination (replaced)
     'linaro_django_pagination', # pagination
     'haystack',

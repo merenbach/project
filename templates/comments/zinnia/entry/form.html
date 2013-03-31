@@ -1,0 +1,13 @@
+{% load disqus_tags i18n %}
+<section>
+  {% if debug %}
+	  {% set_disqus_developer 1 %}
+  {% endif %}
+  {% if object.comments_are_open %}
+	  {% disqus_show_comments %}
+  {% else %}
+    <p class="muted">
+      {% trans "Comments are disabled." %}
+    </p><!-- /.muted -->
+  {% endif %}
+</section>

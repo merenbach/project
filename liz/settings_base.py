@@ -55,6 +55,7 @@ INSTALLED_APPS += (
     'tagging',
     'mptt',
     'zinnia',
+    'disqus',
 )
 
 # Zinnia
