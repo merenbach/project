@@ -1,0 +1,43 @@
+{% load i18n %}
+<nav class="pagination pagination-centered">
+<ul>
+
+  {% if page.has_previous %}
+  <li>
+    <a href="?page={{ page.previous_page_number }}{{ GET_string }}"
+       title="{% trans "More recent entries" %}">&laquo;</a>
+  </li>
+  {% else %}
+  <li class="disabled">
+	  <span>&laquo;</span>
+  </li><!-- /.disabled -->
+  {% endif %}
+
+  {% include "zinnia/tags/_pagination_group.html" with group=begin %}
+
+  {% if middle %}
+  <li class="disabled">
+	  <span>&hellip;</span>
+  </li><!-- /.disabled -->
+  {% include "zinnia/tags/_pagination_group.html" with group=middle %}
+  {% endif %}
+
+  {% if end %}
+  <li class="disabled">
+	  <span>&hellip;</span>
+  </li><!-- /.disabled -->
+  {% include "zinnia/tags/_pagination_group.html" with group=end %}
+  {% endif %}
+
+  {% if page.has_next %}
+  <li>
+    <a href="?page={{ page.next_page_number }}{{ GET_string }}"
+       title="{% trans "More old entries" %}">&raquo;</a>
+  </li>
+  {% else %}
+  <li class="disabled">
+	  <span>&raquo;</span>
+  </li><!-- /.disabled -->
+  {% endif %}
+</ul>
+</nav><!-- /.pagination.pagination-centered -->

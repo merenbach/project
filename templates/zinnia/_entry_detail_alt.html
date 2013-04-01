@@ -1,0 +1,95 @@
+{% extends "zinnia/_entry_detail_base.html" %}
+{% load comments i18n markdown_deux_tags %}
+
+{% block entry-title %}
+	{% if continue_reading %}
+	    <h2>
+	      <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">{{ object.title }}</a>
+		  <small>{{ object.creation_date|date:"DATE_FORMAT" }}</small>
+	    </h2>
+	{% endif %}
+{% endblock %}
+
+{% block entry-info %}
+<p class="muted"><small>
+  {% with authors=object.authors.all %}
+  {% if authors|length %}
+  {% trans "Penned by" %}
+  {% for author in authors %}
+  <span class="vcard author">
+    <a href="{{ author.get_absolute_url }}" class="fn url{% if not author.get_full_name %} nickname{% endif %}" rel="author"
+       title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}">{{ author }}</a></span>{% if not forloop.last %}, {% endif %}.
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  {% with categories=object.categories.all %}
+  {% if categories|length %}
+  {% trans "Filed under" %}
+  {% for category in categories %}
+  <a href="{{ category.get_absolute_url }}"
+     title="{% blocktrans %}Show all entries in {{ category }}{% endblocktrans %}"
+     rel="tag category">{{ category }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.{% endif %}{% endwith %}
+</small></p>
+{% endblock %}
+
+{% block entry-content %}
+	{% if continue_reading %}
+		{{ object.excerpt|markdown }}
+	{% else %}
+		<div class="entry-content">
+			<div class="lead">
+				{% if object.excerpt %}{{ object.excerpt|markdown }}{% endif %}
+			</div>
+			{{ object.content|markdown }}
+	  	</div>
+	{% endif %}
+{% endblock %}
+
+{% block entry-image %}
+{% if object.image %}
+<div class="entry-image">
+  <p>
+    {% if continue_reading %}
+    <a href="{{ object.get_absolute_url }}" title="{{ object.title }}" rel="bookmark">
+      {% endif %}
+      <img src="{{ object.image.url }}" alt="{{ object.title }}" class="img-polaroid">
+      {% if continue_reading %}
+    </a>
+    {% endif %}
+  </p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block entry-tags %}
+	{% if not continue_reading %}
+		<p>
+			{% if object.tags_list %}
+				<small class="muted">{% trans "Tagged" %}</small>
+				{% for tag in object.tags_list %}
+					<small><a class="text-info" href="{% url 'zinnia_tag_detail' tag %}"
+						title="{% blocktrans %}Show all entries tagged by {{ tag }}{% endblocktrans %}"
+						rel="tag">{{ tag }}</a>{% if not forloop.last %},{% endif %}</small>
+				{% endfor %}
+			{% else %}
+				<small class="muted">{% trans "Untagged" %}</small>
+			{% endif %}
+		</p>
+	{% endif %}
+{% endblock %}
+
+{% block entry-last-update %}
+	{# This space intentionally left blank #}
+{% endblock %}
+
+{% block entry-shorturl %}
+	{# This space intentionally left blank #}
+{% endblock %}
+
+{% block entry-comments %}
+	{# This space intentionally left blank #}
+{% endblock %}
+	
+{% block continue-reading %}
+	{# This space intentionally left blank #}
+{% endblock %}

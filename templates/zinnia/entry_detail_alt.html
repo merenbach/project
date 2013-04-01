@@ -1,0 +1,28 @@
+{% extends "zinnia/entry_detail_base.html" %}
+{% load i18n zinnia_tags %}
+
+{% block title %}{{ object.title }}{% endblock %}
+{% block subtitle %} <small><abbr title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr></small>{% endblock %}
+
+{% block entry-content %}
+	{% include object.content_template with object_content=object.content|safe %}
+{% endblock %}
+
+{% block entry-comments %}
+	<h3>{% trans "Comments" %}</h3>
+	{% if not object.comments_are_open %}
+		<p class="muted">{% trans "Comments are closed." %}</p>
+	{% endif %}
+{% endblock %}
+
+{% block entry-pingbacks %}
+	{# This space intentionally left blank #}
+{% endblock %}
+
+{% block entry-trackbacks %}
+	{# This space intentionally left blank #}
+{% endblock %}
+
+{% block entry-widgets %}
+	{# This space intentionally left blank #}
+{% endblock %}
