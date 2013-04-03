@@ -1,7 +1,5 @@
 {% spaceless %}
-	{% load staticfiles compress %}
-	{% compress css %}
+	{% load staticfiles %}
 	<link rel="stylesheet" type="text/less" media="all" href="{% static "less/bootstrap/bootstrap.less" %}">
 	<link rel="stylesheet" type="text/less" media="all" href="{% static "less/bootstrap/responsive.less" %}">
-	{% endcompress css %}
 {% endspaceless %}
