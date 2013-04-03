@@ -15,12 +15,22 @@ MANAGE_CMD='env PYTHONPATH={0} {1} {2}'.format(PYTHON_PATH, PYTHON_EXEC, MANAGE_
 #        local('python manage.py collectstatic --noinput')
 #	local('touch den/wsgi.py')
 
+def compress(settings=None):
+    if settings is not None:
+        cmd = 'sudo -u www-data {0} compress --settings={1}.settings'.format(MANAGE_CMD, settings)
+        print('[+] Running the following command:')
+        print('# {0}'.format(cmd))
+        local(cmd)
+    else:
+        print('Please specify a project.')
+
 def collect(settings=None):
     if settings is not None:
         cmd = 'sudo -u www-data {0} collectstatic --noinput --settings={1}.settings'.format(MANAGE_CMD, settings)
         print('[+] Running the following command:')
         print('# {0}'.format(cmd))
         local(cmd)
+        compress(settings=settings)
     else:
         print('Please specify a project.')
 
