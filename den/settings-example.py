@@ -16,6 +16,14 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+# For Django social auth
+GOOGLE_OAUTH2_CLIENT_ID      = ''
+GOOGLE_OAUTH2_CLIENT_SECRET  = ''
+GOOGLE_OAUTH2_USE_UNIQUE_USER_ID = True
+GOOGLE_DISPLAY_NAME = "My Cool Site"
+GOOGLE_WHITE_LISTED_DOMAINS = ('example.com',)
+GOOGLE_WHITE_LISTED_EMAILS = tuple(e[1] for e in ADMINS)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.

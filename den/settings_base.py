@@ -79,7 +79,22 @@ INSTALLED_APPS += (
     'dajax',
     'software',
     'ciphers',
+    'social_auth',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+)
+
+# For django-social-auth
+# Keys are specified locally
+SOCIAL_AUTH_FORCE_POST_DISCONNECT = True
+SOCIAL_AUTH_CREATE_USERS = False
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+#SOCIAL_AUTH_SESSION_EXPIRATION = False
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ('email',)
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
