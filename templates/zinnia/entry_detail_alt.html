@@ -1,11 +1,11 @@
 {% extends "zinnia/entry_detail_base.html" %}
-{% load i18n zinnia_tags %}
+{% load i18n zinnia_tags markdown_deux_tags %}
 
 {% block title %}{{ object.title }}{% endblock %}
 {% block subtitle %} <small><abbr title="{{ object.creation_date|date:"c" }}">{{ object.creation_date|date:"DATE_FORMAT" }}</abbr></small>{% endblock %}
 
 {% block entry-content %}
-	{% include object.content_template with object_content=object.content|safe %}
+	{% include object.content_template with object_content=object.content|markdown|safe %}
 {% endblock %}
 
 {% block entry-comments %}
