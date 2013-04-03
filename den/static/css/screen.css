@@ -1,10 +1,7 @@
-html body {
-	color: #333;
-	background-color: #fafafa;
-	/*background-color: #eaeaea;*/
-	/*background-color: #eee;*/
-	/*font-family: 'Open Sans', sans-serif;*/
-}
+/* Bootstrap overrides are separate (variables.less) */
+/*html body {
+	/ *font-family: 'Open Sans', sans-serif;* /
+}*/
 
 body {
 	padding-top: 48px;

@@ -1,14 +1,14 @@
-/* Custom styling for The Romantics */
+/* Bootstrap overrides are separate (variables.less) */
 
 #content blockquote {
 	word-wrap: break-word;
 }
 
-html body {
+/*html body {
 	color: #333;
 	background-color: #cc9493;
 	font-family: 'Vollkorn', 'Palatino', 'Times', serif;
-}
+}*/
 
 html article {
 	text-align: justify;

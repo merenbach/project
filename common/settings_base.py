@@ -204,12 +204,9 @@ LOGGING = {
 # MAINTENANCE_DISABLE_FOR_STAFF = True
 
 # Django Compressor
-# COMPRESS_PRECOMPILERS = (
-#     ('text/coffeescript', 'coffee --compile --stdio'),
-#     ('text/less', 'lessc {infile} {outfile}'),
-#     ('text/x-sass', 'sass {infile} {outfile}'),
-#     ('text/x-scss', 'sass --scss {infile} {outfile}'),
-# )
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+)
 
 # COMPRESS_ENABLED = False
 # COMPRESS_OFFLINE = False
