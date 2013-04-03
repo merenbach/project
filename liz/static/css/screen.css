@@ -1,11 +1,4 @@
-html body {
-	/* color scheme: Color Index 2, p. 158 (or 151) */
-	color: #333;
-	/*background-color: rgb(196, 154, 126);*/
-	/*background-color: #eaeaea;*/
-	/*background-color: #eee;*/
-	/*padding-top: 40px;*/
-}
+/* Bootstrap overrides are separate (variables.less) */
 
 #footer {
 	text-align: center;

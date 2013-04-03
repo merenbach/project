@@ -50,10 +50,24 @@ Please see `requirements.txt` for required dependencies.
 
 ## Bootstrap customizations
 
+1. Install `nodejs` and `npm`
+2. Run the following commands:
+
+	# The third command installs dependencies from `package.json`
+	npm update -g
+	npm install -g less
+	npm install -g
+
 ### Scaffolding
 
+#### For `merenbach.com`:
+
 	@bodyBackground = #fafafa
-	@textColor = #333
+
+#### For `theromantics.net`
+
+	@bodyBackground = #cc9493;
+	@sansFontFamily = 'Vollkorn', 'Palatino', 'Times', serif;
 
 ### Typography
 
