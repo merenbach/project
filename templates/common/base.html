@@ -1,4 +1,17 @@
 {% extends "common/html_base.html" %}
+{% load staticfiles %}
+{% block css %}
+	{# CSS includes for Bootstrap #}
+	<link rel="stylesheet" type="text/less" media="all" href="{% static "less/bootstrap/bootstrap.less" %}">
+	{{ block.super }}
+	<link rel="stylesheet" type="text/less" media="all" href="{% static "less/bootstrap/responsive.less" %}">	
+{% endblock css %}
+{% block js %}
+	{# JS includes for Bootstrap #}
+	<script type="text/javascript" charset="utf-8" src="{% static "js/jquery-1.9.1.js" %}"></script>
+	<script type="text/javascript" charset="utf-8" src="{% static "js/bootstrap.js" %}"></script>
+	{{ block.super }}
+{% endblock js %}
 {% block extrahead %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
@@ -42,5 +55,4 @@
 			</div>
 		</div><!-- /.row -->
 	</div><!-- /.container -->
-	{% include "common/bootstrap.html" %}
 {% endblock body_content %}

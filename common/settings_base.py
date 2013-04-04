@@ -105,7 +105,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'sekizai.context_processors.sekizai',
     'common.context_processors.site',
 )
 
@@ -129,7 +128,6 @@ INSTALLED_APPS = (
     'common', # my common extensions
     'south',
     'appconf',
-    'sekizai',
     'pytz',
     'markdown_deux', # the built-in mechanism is deprecated
     'compressor',
@@ -205,7 +203,7 @@ LOGGING = {
 
 # Django Compressor
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/less', '/usr/local/share/npm/bin/lessc {infile} {outfile}'),
 )
 
 # COMPRESS_ENABLED = False

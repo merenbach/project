@@ -1,5 +1,5 @@
 {% extends "common/base.html" %}
-{% load sekizai_tags staticfiles %}
+{% load staticfiles %}
 {% block widths %}span6 offset3{% endblock %}
 {% block extrahead %}
 	{{ block.super }}
@@ -7,10 +7,8 @@
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico">
 {% endblock extrahead %}
 {% block css %}
-	{% addtoblock "css" %}
-		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-		<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
-	{% endaddtoblock %}
+	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
+	<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 	{{ block.super }}
 {% endblock css %}
 {% block footer_content %}

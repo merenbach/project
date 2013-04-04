@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% load i18n sekizai_tags %}
+{% load i18n %}
 {% block header_content %}{% endblock %}
 {% comment %}
 <!DOCTYPE html>
-{% load i18n sekizai_tags %}
+{% load i18n %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
     <title>{% block title %}{% endblock %} | {{ site.name }}</title>
@@ -21,10 +21,8 @@
     <link rel="home" href="{% url 'zinnia_entry_archive_index' %}" />
     {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
     {% block css %}
-      {% addtoblock "css" %}
         <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ STATIC_URL }}zinnia/css/screen.css" />
         <link rel="stylesheet" type="text/css" media="print" href="{{ STATIC_URL }}zinnia/css/print.css" />
-      {% endaddtoblock %}
     {% endblock css %}
     <!--[if lt IE 8]>
         <link rel="stylesheet" type="text/css" media="screen, projection" href="{{ STATIC_URL }}zinnia/css/ie.css" />

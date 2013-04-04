@@ -1,5 +1,5 @@
 {% extends "common/base.html" %}
-{% load sekizai_tags staticfiles %}
+{% load staticfiles %}
 {% block widths %}span6 offset3{% endblock %}
 {% block extrahead %}
 	{{ block.super }}
@@ -12,10 +12,8 @@
 	{% block link %}{% endblock %}
 {% endblock extrahead %}
 {% block css %}
-	{% addtoblock "css" %}
-		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
-		<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
-	{% endaddtoblock %}
+	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
+	<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
 	{# This is not compressable #}
 	{#<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>#}
 	{{ block.super }}

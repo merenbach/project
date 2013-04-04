@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-{% load sekizai_tags analytical %}
+{% load compress analytical %}
 <html lang="{{ LANGUAGE_CODE }}">
 	<head>
 		<meta charset="utf-8">
 		<title>{% block title %}{% endblock %} | {{ site.name }}</title>
 		{% analytical_head_top %}
 		{% block extrahead %}{% endblock %}
-		{% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+		{% compress css %}
 		{% block css %}{% endblock %}
+		{% endcompress %}
 		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
 	</head>
 	<body class="{% block body-class %}{% endblock %}">
 		{% analytical_body_top %}
 		{% block body_content %}{% endblock %}
-		{% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
+		{% compress js %}
 		{% block js %}{% endblock %}
+		{% endcompress %}
 		{% analytical_body_bottom %}
 	</body>
 </html>

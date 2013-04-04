@@ -1,22 +1,18 @@
 {% extends "base.html" %}
-{% load sekizai_tags compress dajaxice_templatetags staticfiles %}
+{% load dajaxice_templatetags staticfiles %}
 
 {% block title %}Ciphers{% endblock %}
 {% block subtitle %} <small>Alpha</small>{% endblock %}
 
 {% block css %}
 	{{ block.super }}
-	{% addtoblock "css" %}
-		<link rel="stylesheet" type="text/css" media="all" href="{% static "css/ciphers.css" %}">
-	{% endaddtoblock %}
+	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/ciphers.css" %}">
 {% endblock %}
 {% block js %}
 	{{ block.super }}
-	{% addtoblock "js" %}
-		{% dajaxice_js_import %}
-		<script type="text/javascript" charset="utf-8" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
-		<script type="text/javascript" charset="utf-8" src="{% static "js/ciphers.js" %}"></script>
-	{% endaddtoblock %}
+	{% dajaxice_js_import %}
+	<script type="text/javascript" charset="utf-8" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
+	<script type="text/javascript" charset="utf-8" src="{% static "js/ciphers.js" %}"></script>
 {% endblock %}
 
 {% block content %}
