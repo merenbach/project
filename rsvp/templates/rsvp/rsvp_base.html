@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+{% load staticfiles compress %}
 
 {% block title %}RSVP{% endblock %}
 {% block header_wrapper %}{% endblock %}
 
 {% block css %}
 	{{ block.super }}
+	{% compress css %}
 	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/rsvp.css" %}">
+	{% endcompress %}
 {% endblock %}

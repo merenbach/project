@@ -1,5 +1,5 @@
 {% extends "common/base.html" %}
-{% load staticfiles %}
+{% load staticfiles compress %}
 {% block widths %}span12{% endblock %}
 {% block extrahead %}
 	{{ block.super }}
@@ -8,8 +8,10 @@
     {% block link %}{% endblock %}
 {% endblock extrahead %}
 {% block css %}
+	{% compress css %}
 	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
 	<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+	{% endcompress %}
 	{{ block.super }}
 {% endblock css %}
 {% block footer_content %}

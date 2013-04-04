@@ -1,5 +1,5 @@
 {% extends "common/base.html" %}
-{% load staticfiles %}
+{% load staticfiles compress %}
 {% block widths %}span6 offset3{% endblock %}
 {% block extrahead %}
 	{{ block.super }}
@@ -9,8 +9,10 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="//fonts.googleapis.com/css?family=Vollkorn:400italic,700italic,400,700">
 {% endblock extrahead %}
 {% block css %}
+	{% compress css %}
 	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/screen.css" %}">
 	<link rel="stylesheet" type="text/css" media="print" href="{% static "css/print.css" %}">
+	{% endcompress %}
 	{{ block.super }}
 {% endblock css %}
 {% block navigation_content %}

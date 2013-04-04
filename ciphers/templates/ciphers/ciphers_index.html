@@ -1,18 +1,22 @@
 {% extends "base.html" %}
-{% load dajaxice_templatetags staticfiles %}
+{% load dajaxice_templatetags staticfiles compress %}
 
 {% block title %}Ciphers{% endblock %}
 {% block subtitle %} <small>Alpha</small>{% endblock %}
 
 {% block css %}
 	{{ block.super }}
+	{% compress css %}
 	<link rel="stylesheet" type="text/css" media="all" href="{% static "css/ciphers.css" %}">
+	{% endcompress %}
 {% endblock %}
 {% block js %}
 	{{ block.super }}
 	{% dajaxice_js_import %}
+	{% compress js %}
 	<script type="text/javascript" charset="utf-8" src="{% static "dajax/jquery.dajax.core.js" %}"></script>
 	<script type="text/javascript" charset="utf-8" src="{% static "js/ciphers.js" %}"></script>
+	{% endcompress %}
 {% endblock %}
 
 {% block content %}

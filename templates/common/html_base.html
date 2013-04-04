@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-{% load compress analytical %}
+{% load analytical %}
 <html lang="{{ LANGUAGE_CODE }}">
 	<head>
 		<meta charset="utf-8">
 		<title>{% block title %}{% endblock %} | {{ site.name }}</title>
 		{% analytical_head_top %}
 		{% block extrahead %}{% endblock %}
-		{% compress css %}
 		{% block css %}{% endblock %}
-		{% endcompress %}
 		{% include "common/js/html5shiv.html" %}
 		{% analytical_head_bottom %}
 	</head>
 	<body class="{% block body-class %}{% endblock %}">
 		{% analytical_body_top %}
 		{% block body_content %}{% endblock %}
-		{% compress js %}
 		{% block js %}{% endblock %}
-		{% endcompress %}
 		{% analytical_body_bottom %}
 	</body>
 </html>
