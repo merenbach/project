@@ -203,7 +203,7 @@ LOGGING = {
 
 # Django Compressor
 COMPRESS_PRECOMPILERS = (
-    ('text/less', '/usr/local/share/npm/bin/lessc {infile} {outfile}'),
+    ('text/less', 'lessc {infile} {outfile}'),
 )
 
 # COMPRESS_ENABLED = False
