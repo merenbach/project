@@ -1,0 +1,7 @@
+{% extends "common/error_base.html" %}
+{% load i18n %}
+
+{% block title %}Bad request (400){% endblock %}
+{% block error_message %}Bad request{% endblock %}
+{% block error_code %}400{% endblock %}
+{% block error_detail %}{% trans "Sorry, but I received some malformed data in the" %} &ldquo;{{ fieldname }}&rdquo; {% trans "field." %}{% endblock %}

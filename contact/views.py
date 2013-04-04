@@ -11,7 +11,7 @@ class ContactView(FormView):
     template_name = 'contact/contact.html'
     form_class = ContactForm
     success_url = reverse_lazy('contact-thanks')
-    
+
     def dispatch(self, request, *args, **kwargs):
         try:
             """ Verify that an entry for this site exists """

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load markdown_deux_tags %}
+{% load markdown_deux_tags honeypot %}
 
 {% block title %}Contact{% endblock %}
 
@@ -13,6 +13,11 @@
 					{% block submit_button %}
 						<button type="submit" class="btn btn-primary">Send Message</button>
 					{% endblock submit_button %}
+				</div><!-- /.controls -->
+			</div><!-- /.control-group -->
+			<div class="control-group">
+				<div class="controls">
+					{% render_honeypot_field %}
 				</div><!-- /.controls -->
 			</div><!-- /.control-group -->
         </form><!-- /.contact-form -->

@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'south',
     'appconf',
     'pytz',
+    'honeypot',
     'markdown_deux', # the built-in mechanism is deprecated
     'compressor',
     'maintenance',
@@ -139,6 +140,10 @@ INSTALLED_APPS = (
     'django_extensions',
     'widget_tweaks', # modify form widgets
 )
+
+# Honeypot
+HONEYPOT_FIELD_NAME = 'website'
+HONEYPOT_VALUE = 'http://'
 
 # Trying to emulate the legacy Markdown from Django
 MARKDOWN_DEUX_STYLES = {
