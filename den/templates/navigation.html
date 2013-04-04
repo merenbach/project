@@ -30,6 +30,9 @@
 				</form><!-- /.navbar-search.pull-left -->
 				<ul class="nav pull-right">
 					<li class="{% active privacy_url %}"><a href="{{ privacy_url }}">Privacy</a></li>
+					{% if user.is_authenticated and user.is_staff %}
+						<li><a href="/admin/">Admin</a></li>
+					{% endif %}
 					{% comment %}
 					<li class="dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
