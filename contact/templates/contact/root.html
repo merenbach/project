@@ -10,14 +10,14 @@
 			{% include "common/bootstrap_form_fields_wide.html" %}
 			<div class="control-group">
 				<div class="controls">
-					{% block submit_button %}
-						<button type="submit" class="btn btn-primary">Send Message</button>
-					{% endblock submit_button %}
+					{% render_honeypot_field %}
 				</div><!-- /.controls -->
 			</div><!-- /.control-group -->
 			<div class="control-group">
 				<div class="controls">
-					{% render_honeypot_field %}
+					{% block submit_button %}
+						<button type="submit" class="btn btn-primary">Send Message</button>
+					{% endblock submit_button %}
 				</div><!-- /.controls -->
 			</div><!-- /.control-group -->
         </form><!-- /.contact-form -->
