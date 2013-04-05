@@ -91,6 +91,27 @@ TEMPLATE_LOADERS = (
 #     'django.middleware.cache.FetchFromCacheMiddleware',
 # )
 
+MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    # Uncomment the next line for simple clickjacking protection:
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'pagination.middleware.PaginationMiddleware',
+    'linaro_django_pagination.middleware.PaginationMiddleware',
+    'breadcrumbs.middleware.BreadcrumbsMiddleware',
+    #'breadcrumbs.middleware.FlatpageFallbackMiddleware',
+    'maintenance.middleware.MaintenanceMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+)
+
 # Cache only anonymous requests
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 # Cache each page for 5 minutes (default)

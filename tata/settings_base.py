@@ -15,27 +15,6 @@ ALLOWED_HOSTS = (
     'thetata.dev',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.http.ConditionalGetMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'pagination.middleware.PaginationMiddleware',
-    'linaro_django_pagination.middleware.PaginationMiddleware',
-    'breadcrumbs.middleware.BreadcrumbsMiddleware',
-    #'breadcrumbs.middleware.FlatpageFallbackMiddleware',
-    'maintenance.middleware.MaintenanceMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-)
-
 # Set a caching key prefix to avoid collisions
 CACHE_MIDDLEWARE_KEY_PREFIX = 'tata'
 
