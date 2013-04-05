@@ -79,6 +79,11 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'noreply@merenbach.com'
 SERVER_EMAIL = 'noreply@merenbach.com'
 
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': 'https://public:secret@sentry.merenbach.com/#',
+}
+
 # caching
 #CACHES = {
 #        'default': {

@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     #'maintenance.heartbeat',
     'robots',
     'analytical',
+    'raven.contrib.django.raven_compat',
     'memcache_status',
     'django_extensions',
     'widget_tweaks', # modify form widgets
@@ -203,6 +204,10 @@ LOGGING = {
         }
     },
     'handlers': {
+        #'sentry': {
+        #    'level': 'WARN',
+        #    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        #},
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
