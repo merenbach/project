@@ -24,18 +24,18 @@
 
 {% block content-title %}
 {% if category %}
-<h1>{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}</h1>
+{% blocktrans %}Category archives: {{ category }}{% endblocktrans %}
 {% if category.description %}
 <p>{{ category.description|striptags|safe }}</p>
 {% endif %}
 {% endif %}
 
 {% if tag %}
-<h1>{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}</h1>
+{% blocktrans %}Tag archives: {{ tag }}{% endblocktrans %}
 {% endif %}
 
 {% if author %}
-<h1>{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}</h1>
+{% blocktrans %}Author archives: {{ author }}{% endblocktrans %}
 {% endif %}
 {% endblock %}
 
