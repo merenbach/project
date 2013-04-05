@@ -10,10 +10,22 @@ SITE_ID = 3
 
 ALLOWED_HOSTS = (
     'www.thetata.net',
-    'www.thetata.dev',
     'thetata.net',
-    'thetata.dev',
 )
+
+from urlparse import urljoin
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+if not DEBUG:
+    MEDIA_URL = '//media.thetata.net/'
+else:
+    MEDIA_URL = '/media/'
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = urljoin(MEDIA_URL, 'static/')
 
 # Set a caching key prefix to avoid collisions
 CACHE_MIDDLEWARE_KEY_PREFIX = 'tata'

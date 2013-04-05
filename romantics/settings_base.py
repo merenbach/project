@@ -10,10 +10,22 @@ SITE_ID = 2
 
 ALLOWED_HOSTS = (
     'www.theromantics.net',
-    'www.theromantics.dev',
     'theromantics.net',
-    'theromantics.dev',
 )
+
+from urlparse import urljoin
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+if not DEBUG:
+    MEDIA_URL = '//media.theromantics.net/'
+else:
+    MEDIA_URL = '/media/'
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = urljoin(MEDIA_URL, 'static/')
 
 # We want to use SSL but NGINX proxies to Gunicorn
 if not DEBUG:

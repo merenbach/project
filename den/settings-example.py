@@ -4,7 +4,6 @@
 from settings_base import *
 
 # for url/path manipulation
-from urlparse import urljoin
 from os.path import join
 
 DEBUG = False
@@ -39,26 +38,11 @@ DATABASES = {
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = '/srv/www/example.com/media/'
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash.
-# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-if not DEBUG:
-    MEDIA_URL = 'http://cdn.example.com/'
-else:
-    MEDIA_URL = 'http://media.example.com/'
-
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = join(MEDIA_ROOT, 'static')
-
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
-STATIC_URL = urljoin(MEDIA_URL, 'static/')
-
-# deprecated but apparently still necessary for some things
-ADMIN_MEDIA_PREFIX = urljoin(STATIC_URL, 'admin/')
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
