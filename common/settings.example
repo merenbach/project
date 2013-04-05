@@ -1,0 +1,7 @@
+# Django settings for project project.
+
+# Import base settings
+try:
+    from settings_base import *
+except Exception as e:
+    raise SystemExit("Could not read settings: " + e.message)

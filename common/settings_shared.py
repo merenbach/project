@@ -1,21 +1,16 @@
 # Django settings for project project.
 
-# Get DEBUG settings
-from settings_local import *
-
 # Datetime fix
 # http://stackoverflow.com/questions/2427240/thread-safe-equivalent-to-pythons-time-strptime
-from datetime import datetime
-datetime.strptime("1986-07-01", "%Y-%m-%d")
+from datetime import datetime, date
+datetime.strptime(str(date.today()), "%Y-%m-%d")
 #datetime.datetime(1986, 7, 1, 0, 0)
 
+import os, sys
 
-import os
-import sys
-
-# get the settings path
-PROJECT_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(__file__)))
-PROJECT_PATH = os.path.abspath(PROJECT_ROOT)
+# Add this shared module to the Python path
+# This may be unnecessary in the future, depending upon refactoring.
+PROJECT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 if PROJECT_PATH not in sys.path:
     sys.path.insert(0, PROJECT_PATH)
@@ -73,23 +68,6 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
     'django.template.loaders.eggs.Loader',
 )
-
-# MIDDLEWARE_CLASSES = (
-#     'django.middleware.cache.UpdateCacheMiddleware',
-#     'django.middleware.gzip.GZipMiddleware',
-#     'django.middleware.http.ConditionalGetMiddleware',
-#     'django.middleware.common.CommonMiddleware',
-#     'django.contrib.sessions.middleware.SessionMiddleware',
-#     'django.middleware.csrf.CsrfViewMiddleware',
-#     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#     'django.contrib.messages.middleware.MessageMiddleware',
-#     #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-#     # Uncomment the next line for simple clickjacking protection:
-#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#     'maintenance.middleware.MaintenanceMiddleware',
-#     'django.middleware.transaction.TransactionMiddleware',
-#     'django.middleware.cache.FetchFromCacheMiddleware',
-# )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -204,10 +182,6 @@ LOGGING = {
         }
     },
     'handlers': {
-        #'sentry': {
-        #    'level': 'WARN',
-        #    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        #},
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -232,13 +206,12 @@ LOGGING = {
 # MAINTENANCE_CACHE_MESSAGES = True
 # MAINTENANCE_DISABLE_FOR_STAFF = True
 
-# Django Compressor
+# Django Compressor (disabled in DEBUG mode)
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
-# COMPRESS_ENABLED = False
-COMPRESS_OFFLINE = not DEBUG
+COMPRESS_OFFLINE = True
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 COMPRESS_PARSER = 'compressor.parser.Html5LibParser'
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
