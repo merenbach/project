@@ -79,14 +79,6 @@ CLICKY_SITE_ID = ''
 GOOGLE_ANALYTICS_PROPERTY_ID = ''
 # GOOGLE_ANALYTICS_SITE_SPEED = False
 
-# my customizations
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'noreply@merenbach.com'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'noreply@merenbach.com'
-SERVER_EMAIL = 'noreply@merenbach.com'
-
 # Set your DSN value
 RAVEN_CONFIG = {
     'dsn': 'https://public:secret@sentry.merenbach.com/#',
