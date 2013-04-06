@@ -32,7 +32,7 @@ if not DEBUG:
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(MEDIA_ROOT, 'whoosh_index'),
+        'PATH': os.path.join(os.path.dirname(MEDIA_ROOT), 'whoosh_index'),
         'TIMEOUT': 60 * 5,
         'INCLUDE_SPELLING': True,
         'BATCH_SIZE': 100,
@@ -88,8 +88,8 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
 BREADCRUMBS_AUTO_HOME = True
 # BREADCRUMBS_HOME_TITLE = 'Home'
 
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
-# HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
+# HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 5
 
 # Dajax/DajaxIce
 DAJAXICE_MEDIA_PREFIX = 'dajaxice'
