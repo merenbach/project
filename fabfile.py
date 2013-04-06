@@ -30,9 +30,23 @@ def collect(settings=None):
         print('[+] Running the following command:')
         print('# {0}'.format(cmd))
         local(cmd)
-        compress(settings=settings)
     else:
         print('Please specify a project.')
+
+def reload_gunicorn():
+    cmd = 'sudo service gunicorn reload'
+    print('[+] Running the following command:')
+    print('# {0}'.format(cmd))
+
+def deploy(settings=None):
+    if settings is not None:
+        compress(settings)
+        collect(settings)
+    else:
+        # A little recursion is in order
+        for s in ('den', 'liz', 'romantics', 'tata'):
+            deploy(s)
+    reload_gunicorn()
 
 def rebuild_index(settings=None):
     if settings is not None:
