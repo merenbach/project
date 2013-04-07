@@ -1,26 +1,15 @@
 """XML-RPC methods of Zinnia metaWeblog API"""
-import os
-from datetime import datetime
-from xmlrpclib import Fault
 from xmlrpclib import DateTime
 
 from django.conf import settings
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
 from django.utils.translation import gettext as _
-from django.utils.text import Truncator
-from django.utils.html import strip_tags
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
 from django.template.defaultfilters import slugify
 
 from zinnia.models import Entry
 from zinnia.models import Category
-from zinnia.settings import PROTOCOL
-from zinnia.settings import UPLOAD_TO
-from zinnia.managers import DRAFT, PUBLISHED
+from zinnia.managers import HIDDEN
 from django_xmlrpc.decorators import xmlrpc_func
 
 from zinnia.xmlrpc import metaweblog
@@ -136,7 +125,12 @@ def post_structure(entry, site):
     if 'description' in s:
         s['description'] = unicode(entry.content)
     # [todo] How is the post status getting sent back for WordPress?
-    s['post_status'] = entry.get_status_display()
+    if s['wp_password'] or entry.login_required:
+        s['post_status'] = u'private'
+    elif entry.status == HIDDEN:
+        s['post_status'] = u'pending'
+    else:
+        s['post_status'] = entry.get_status_display()
     return s
 
 # Copied nearly verbatim from metaweblog.py
