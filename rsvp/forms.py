@@ -19,8 +19,8 @@ class ResponseCardForm(forms.Form):
         if field_name and field_data:
             field = self.fields.get(field_name)
             if field:
-                field.choices = ((member.pk, member.name) for member in field_data)
-                field.initial = (member.pk for member in field_data if member.is_attending)
+                field.choices = [(member.pk, member.name) for member in field_data]
+                field.initial = [member.pk for member in field_data if member.is_attending]
                 return True
         return False
 

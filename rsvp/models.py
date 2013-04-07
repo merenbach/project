@@ -48,12 +48,17 @@ class Party(models.Model):
 
     @property
     def headcount(self):
-       """ Return a headcount for the party """
-       return self.members.filter(is_attending=True).count()
+        """ Return a headcount for the party.  Followers only attend if at least one leader attends. """
+        return self.entourage().count()
 
     def entourage(self):
-       """ Return a headcount for the party """
-       return self.members.filter(is_attending=True).all()
+        """ Return a query for attending party members. Followers only attend if at least one leader attends. """
+        attending = self.members.filter(is_attending=True)
+        leaders_attending = attending.filter(is_party_leader=True).count()
+        if leaders_attending:
+            return attending
+        else:
+            return self.members.none()
 
     @property
     def size(self):

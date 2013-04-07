@@ -63,8 +63,8 @@ class ResponseCardView(FormView):
     def get_form_kwargs(self):
         k = super(ResponseCardView, self).get_form_kwargs()
         extra_dict = {
-            "primary_invitees": self.invitation.party.members.filter(is_party_leader=True).all(),
-            "secondary_invitees": self.invitation.party.members.filter(is_party_leader=False).all(),
+            "primary_invitees": self.invitation.party.members.filter(is_party_leader=True),
+            "secondary_invitees": self.invitation.party.members.filter(is_party_leader=False),
         }
         k.update(extra_dict)
         return k
@@ -79,8 +79,12 @@ class ResponseCardView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ResponseCardView, self).get_context_data(**kwargs)
+        party = self.invitation.party
         context['slug'] = self.invitation.slug
-        context['party'] = self.invitation.party
+        context['party'] = party
+        context['leaders'] = party.members.filter(is_party_leader=True)
+        context['followers'] = party.members.filter(is_party_leader=False)
+        context['missing'] = party.size - party.headcount
         return context
 
     def form_valid(self, form):

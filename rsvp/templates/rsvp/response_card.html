@@ -4,6 +4,7 @@
 {% block content %}
 <div class="box">
 	 {% if form %}
+ {% if not party.is_confirmed %}
 		<form action="{% url 'rsvp-response-card' slug=slug %}" method="post">{% csrf_token %}
 			<div class="row-fluid">
 				<div class="span10 offset1">
@@ -40,7 +41,7 @@
 							</div>
 						</div>
 					{% endif %}
-				</div>
+				</div><!-- /.span10.offset1 -->
 				<div class="control-group">
 					<div class="controls">
 						{% block submit_button %}
@@ -50,6 +51,57 @@
 				</div><!-- /.control-group -->
 			</div><!-- .row-fluid -->
         </form>
+{% else %}
+		<div class="row-fluid">
+			<div class="span10 offset1">
+		   		<header class="clearfix">
+			   		<img src="{% static "img/JaneAustenSilhouette.png" %}" alt="Jane Austen" class="pull-left span2 hidden-phone">
+					<p class="lead">Come celebrate with us!</p>
+					<p class="info muted">Kindly respond by April 4<sup>th</sup>, 2013.</p>
+				</header>
+				<br>
+				<p>So good of you to drop by!  Here are some details regarding your party.</p>
+				
+				{% if party.headcount > 0 %}
+					<p>The following guest{{ party.headcount|pluralize }} {{ party.headcount|pluralize:"is,are" }} listed as planning to attend:</p>
+					<ul class="unstyled text-center">
+						{% for i in leaders %}							
+							{% if i.is_attending %}
+								<li>{{ i.name }}</li>
+							{% endif %}
+						{% endfor %}
+						{% for i in followers %}							
+							{% if i.is_attending and party.headcount > 0 %}
+								<li>{{ i.name }}</li>
+							{% endif %}
+						{% endfor %}
+
+					</ul>
+				{% endif %}
+
+				{% if missing > 0 %}				
+					<p>The following guest{{ missing|pluralize }} {{ missing|pluralize:"is,are" }} listed as unable to attend:</p>
+				
+					<ul class="unstyled text-center">
+						{% for i in leaders %}							
+							{% if not i.is_attending %}
+								<li>{{ i.name }}</li>
+							{% endif %}
+						{% endfor %}
+						{% for i in followers %}							
+							{% if not i.is_attending or party.headcount == 0 %}
+								<li>{{ i.name }}</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+				<p>If you need to make any changes to your invitation, please feel free to get in touch with us.</p>
+				<p>You may reach Liz at 626&#8210;372&#8210;6714.</p>
+				<p>You may reach Andrew at 707&#8210;292&#8210;9374.</p>
+			</div><!-- /.span10.offset1 -->
+		</div><!-- .row-fluid -->
+{% endif %}
     {% else %}
     	<div class="text-error">
     		Please accept our apologies, but a server error has occurred.  Fear not, for Andrew shall be beaten about the head mercilessly for his shoddy workmanship.
