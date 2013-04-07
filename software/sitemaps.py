@@ -1,5 +1,4 @@
 from django.contrib.sitemaps import Sitemap
-from django.core.urlresolvers import reverse
 from software.models import Software
 
 class SoftwareSitemap(Sitemap):
@@ -7,10 +6,7 @@ class SoftwareSitemap(Sitemap):
 	priority = 0.5
 
 	def items(self):
-		return Software.objects.filter(is_published=True).all()
+		return Software.objects.filter(is_published=True)
 
 	def lastmod(self, obj):
 		return obj.pub_date
-
-	#def location(self, obj):
-	#	return obj
