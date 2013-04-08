@@ -130,8 +130,8 @@ def post_structure(entry, site):
     return s
 
 # Copied nearly verbatim from metaweblog.py
-@xmlrpc_func(returns='struct', args=['integer', 'string', 'string', 'post_id', 'array'])
-def get_post(post_id, username, password):
+@xmlrpc_func(returns='struct', args=['integer', 'string', 'string', 'integer', 'array'])
+def get_post(blog_id, username, password, post_id, fields=[]):
     """wp.getPost(blog_id, username, password, post_id, fields=[])
     => post structure"""
     user = metaweblog.authenticate(username, password)

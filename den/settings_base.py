@@ -119,9 +119,6 @@ XMLRPC_METHODS += (
      'blogger.getUserInfo'),
     ('zinnia.xmlrpc.metaweblog.delete_post',
      'blogger.deletePost'),
-    # WordPress
-    ('zinnia.xmlrpc.metaweblog.get_authors',
-     'wp.getAuthors'),
     # MetaWeblog
     # ('zinnia.xmlrpc.metaweblog.get_categories',
     #  'metaWeblog.getCategories'),
@@ -138,7 +135,7 @@ XMLRPC_METHODS += (
     ('zinnia.xmlrpc.metaweblog.new_media_object',
      'metaWeblog.newMediaObject'),
     # Overrides
-    ('zinnia.xmlrpc.metaweblog.get_categories',
+    ('core.xmlrpc.wp.categories.get_categories',
      'mt.getCategoryList'),
     ('core.xmlrpc.wp.categories.new_category',
      'mt.addCategory'),

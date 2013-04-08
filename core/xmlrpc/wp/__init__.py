@@ -1,6 +1,16 @@
 # Replacement for Zinnia XMLRPC methods
 # Maybe someone else might be interested in these someday...
 WP_ZINNIA_XMLRPC_METHODS = [
+    # Users (incomplete)
+    ('core.xmlrpc.wp.users.get_users_blogs',
+     'wp.getUsersBlogs'),
+    ('core.xmlrpc.wp.users.get_authors',
+     'wp.getAuthors'),
+    # Options
+    ('core.xmlrpc.wp.options.get_options',
+     'wp.getOptions'),
+    ('core.xmlrpc.wp.options.set_options',
+     'wp.setOptions'),
     # Pages (all shims)
     ('core.xmlrpc.wp.pages.get_page',
      'wp.getPage'),

@@ -1,12 +1,11 @@
 from django_xmlrpc.decorators import xmlrpc_func
-from zinnia.xmlrpc import metaweblog
 
 ### Needed as a shim for some clients to support WordPress.
 ### https://codex.wordpress.org/XML-RPC_WordPress_API/Pages
 
 # Retrieve a single page.
 @xmlrpc_func(returns='struct',
-             args=['integer', 'integer', 'string', 'integer'])
+             args=['integer', 'integer', 'string', 'string'])
 def get_page(blog_id, page_id, username, password):
     """wp.getPage(blog_id, page_id, username, password)
     => page structure"""
