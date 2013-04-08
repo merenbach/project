@@ -4,13 +4,10 @@ from xmlrpclib import DateTime
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.sites.models import Site
-from django.utils.translation import gettext as _
-from django.template.defaultfilters import slugify
-
-from zinnia.models import Entry
-from zinnia.models import Category
-from zinnia.managers import HIDDEN
 from django_xmlrpc.decorators import xmlrpc_func
+
+#from zinnia.managers import HIDDEN
+from zinnia.models import Entry
 
 from zinnia.xmlrpc import metaweblog
 
@@ -20,7 +17,6 @@ logger = logging.getLogger(__name__)
 
 ## TODO
 #
-# - Can we make wp.addCategory work with MovableType?
 # - Would text filters make our Markdown more flexible?
 # - Make exception checks more exception-specific (?)
 # - Ensure logging is as optimized as it ought to be
@@ -127,72 +123,82 @@ def post_structure(entry, site):
     # [todo] How is the post status getting sent back for WordPress?
     if s['wp_password'] or entry.login_required:
         s['post_status'] = u'private'
-    elif entry.status == HIDDEN:
-        s['post_status'] = u'pending'
+    #elif entry.status == HIDDEN:
+    #    s['post_status'] = u'pending'
     else:
         s['post_status'] = entry.get_status_display()
     return s
 
 # Copied nearly verbatim from metaweblog.py
-@xmlrpc_func(returns='struct', args=['string', 'string', 'string'])
+@xmlrpc_func(returns='struct', args=['integer', 'string', 'string', 'post_id', 'array'])
 def get_post(post_id, username, password):
-    """metaWeblog.getPost(post_id, username, password)
+    """wp.getPost(blog_id, username, password, post_id, fields=[])
     => post structure"""
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return post_structure(Entry.objects.get(id=post_id, authors=user), site)
 
-# Copied nearly verbatim from metaweblog.py
+
 @xmlrpc_func(returns='struct[]',
-             args=['string', 'string', 'string', 'integer'])
-def get_recent_posts(blog_id, username, password, number):
-    """metaWeblog.getRecentPosts(blog_id, username, password, number)
+             args=['integer', 'string', 'string', 'struct'])
+def get_posts(blog_id, username, password, filter={}):
+    """wp.getPosts(blog_id, username, password, number)
     => post structure[]"""
     user = metaweblog.authenticate(username, password)
     site = Site.objects.get_current()
     return [post_structure(entry, site) \
-            for entry in Entry.objects.filter(authors=user, sites__id=blog_id)[:number]]
+            for entry in Entry.objects.filter(authors=user, sites__id=blog_id)]
 
-# Modified for MovableType
-@xmlrpc_func(returns='string', args=['string', 'string', 'string',
-                                     'struct', 'boolean'])
-def new_post(blog_id, username, password, post, publish):
-    """metaWeblog.newPost(blog_id, username, password, post, publish)
+@xmlrpc_func(returns='string', args=['integer', 'string', 'string', 'struct'])
+def new_post(blog_id, username, password, content):
+    """wp.newPost(blog_id, username, password, content)
     => post_id"""
-    return metaweblog.new_post(blog_id, username, password, finesse_fields_to_commit(post), publish)
+    return metaweblog.new_post(blog_id, username, password, finesse_fields_to_commit(content), publish)
 
-# Custom extension for MovableType
-@xmlrpc_func(returns='boolean', args=['string', 'string', 'string',
-                                      'struct', 'boolean'])
-def edit_post(post_id, username, password, post, publish):
-    """metaWeblog.editPost(post_id, username, password, post, publish)
+@xmlrpc_func(returns='boolean', args=['integer', 'string', 'string',
+                                      'integer', 'struct'])
+def edit_post(blog_id, username, password, post_id, content):
+    """wp.editPost(blog_id, username, password, post_id, content)
     => boolean"""
-    return metaweblog.edit_post(post_id, username, password, finesse_fields_to_commit(post), publish)
+    return metaweblog.edit_post(post_id, username, password, finesse_fields_to_commit(content), publish)
 
-# Get categories
-@xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
-def get_post_categories(post_id, username, password):
-    """mt.getPostCategories(post_id, username, password)
-    => struct[]"""
-    user = metaweblog.authenticate(username, password)
-    site = Site.objects.get_current()
-    entry = Entry.objects.get(id=post_id, authors=user)
-    return [metaweblog.category_structure(category, site) \
-        for category in entry.categories.all()]
-    
-# Set categories
-@xmlrpc_func(returns='boolean', args=['string', 'string', 'string', 'struct[]'])
-def set_post_categories(post_id, username, password, categories):
-    """mt.setPostCategories(post_id, username, password, categories)
+@xmlrpc_func(returns='boolean', args=['integer', 'string',
+                                      'string', 'integer'])
+def delete_post(blog_id, username, password, post_id):
+    """wp.deletePost(blog_id, username, password, post_id)
     => boolean"""
-    user = metaweblog.authenticate(username, password)
-    entry = Entry.objects.get(id=post_id, authors=user)
-    try:
-        entry.categories.clear()
-        entry.categories.add(*[Category.objects.get_or_create(
-            title=cat['categoryName'], slug=slugify(cat['categoryName']))[0]
-                           for cat in categories])
-        return True
-    except Exception as e:
-        logger.error(e)
-        return False
+    return metaweblog.delete_post(post_id, username, password)
+
+# Shim
+@xmlrpc_func(returns='struct', args=['integer', 'string',
+                                      'string', 'string', 'array'])
+def get_post_type(blog_id, username, password, post_type_name, fields=[]):
+    """wp.getPostType(blog_id, username, password, post_type_name, fields=[])
+    => struct"""
+    return {}
+
+# Shim
+@xmlrpc_func(returns='struct', args=['integer', 'string',
+                                      'string', 'struct', 'array'])
+def get_post_types(blog_id, username, password, filter={}, fields=[]):
+    """wp.getPostTypes(blog_id, username, password, filter={}, fields=[])
+    => struct"""
+    return {}
+
+# Shim
+@xmlrpc_func(returns='struct', args=['integer', 'string',
+                                      'string', 'array'])
+def get_post_formats(blog_id, username, password, filter={}):
+    """wp.getPostTypes(blog_id, username, password, filter={})
+    => struct"""
+    return {}
+
+@xmlrpc_func(returns='struct', args=['integer', 'string', 'string'])
+def get_post_status_list(blog_id, username, password):
+    """wp.getPostStatusList(blog_id, username, password)
+    => struct"""
+    return {
+        'draft': 'Draft',
+        'hidden': 'Hidden',
+        'published': 'Published',
+    }

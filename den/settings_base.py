@@ -99,30 +99,63 @@ DAJAXICE_NOTIFY_EXCEPTIONS = True
 # Zinnia
 ZINNIA_MARKUP_LANGUAGE = 'markdown'
 ZINNIA_MARKDOWN_EXTENSIONS = 'smartypants'
-ZINNIA_PROTOCOL = 'https'
+if not DEBUG:
+    ZINNIA_PROTOCOL = 'https'
+else:
+    ZINNIA_PROTOCOL = 'http'    
 DATE_FORMAT = 'Y.m.d'
 YEAR_MONTH_FORMAT = 'Y.m'
 #DATETIME_FORMAT = 'c'
 
-from zinnia.xmlrpc import ZINNIA_XMLRPC_METHODS
-XMLRPC_METHODS = ZINNIA_XMLRPC_METHODS + [
-    ('zinnia.xmlrpc.metaweblog.new_category',
-     'mt.addCategory'),
+# Override ZINNIA XMLRPC methods
+from common.xmlrpc.wp import WP_ZINNIA_XMLRPC_METHODS as XMLRPC_METHODS
+from zinnia.xmlrpc import ZINNIA_XMLRPC_PINGBACK
+XMLRPC_METHODS += ZINNIA_XMLRPC_PINGBACK
+XMLRPC_METHODS += (
+    # Blogger
+    ('zinnia.xmlrpc.metaweblog.get_users_blogs',
+     'blogger.getUsersBlogs'),
+    ('zinnia.xmlrpc.metaweblog.get_user_info',
+     'blogger.getUserInfo'),
+    ('zinnia.xmlrpc.metaweblog.delete_post',
+     'blogger.deletePost'),
+    # WordPress
+    ('zinnia.xmlrpc.metaweblog.get_authors',
+     'wp.getAuthors'),
+    # MetaWeblog
+    # ('zinnia.xmlrpc.metaweblog.get_categories',
+    #  'metaWeblog.getCategories'),
+    # ('zinnia.xmlrpc.metaweblog.new_category',
+    #  'wp.newCategory'),
+    # ('zinnia.xmlrpc.metaweblog.get_recent_posts',
+    #  'metaWeblog.getRecentPosts'),
+    # ('zinnia.xmlrpc.metaweblog.get_post',
+    #  'metaWeblog.getPost'),
+    # ('zinnia.xmlrpc.metaweblog.new_post',
+    #  'metaWeblog.newPost'),
+    # ('zinnia.xmlrpc.metaweblog.edit_post',
+    #  'metaWeblog.editPost'),
+    ('zinnia.xmlrpc.metaweblog.new_media_object',
+     'metaWeblog.newMediaObject'),
+    # Overrides
     ('zinnia.xmlrpc.metaweblog.get_categories',
      'mt.getCategoryList'),
-    ('den.xmlrpc.mt.get_post_categories',
-     'mt.getPostCategories'),
-    ('den.xmlrpc.mt.set_post_categories',
-     'mt.setPostCategories'),
-    ('den.xmlrpc.mt.new_post',
-     'metaWeblog.newPost'),
-    ('den.xmlrpc.mt.edit_post',
-     'metaWeblog.editPost'),
-    ('den.xmlrpc.mt.get_post',
-     'metaWeblog.getPost'),
-    ('den.xmlrpc.mt.get_recent_posts',
+    ('common.xmlrpc.wp.categories.new_category',
+     'mt.addCategory'),
+    ('common.xmlrpc.mt.get_recent_posts',
      'metaWeblog.getRecentPosts'),
-]
+    ('common.xmlrpc.mt.get_post',
+     'metaWeblog.getPost'),
+    ('common.xmlrpc.mt.new_post',
+     'metaWeblog.newPost'),
+    ('common.xmlrpc.mt.edit_post',
+     'metaWeblog.editPost'),
+    # Additions
+    ('common.xmlrpc.mt.get_post_categories',
+     'mt.getPostCategories'),
+    ('common.xmlrpc.mt.set_post_categories',
+     'mt.setPostCategories'),
+ )
 
 # Pagination
 # http://packages.python.org/linaro-django-pagination/usage.html#how-to-use-linaro-django-pagination
