@@ -130,7 +130,7 @@ def post_structure(entry, site):
     return s
 
 # Copied nearly verbatim from metaweblog.py
-@xmlrpc_func(returns='struct', args=['integer', 'string', 'string', 'integer', 'array'])
+@xmlrpc_func(returns='struct', args=['integer', 'string', 'string', 'integer', 'string[]'])
 def get_post(blog_id, username, password, post_id, fields=[]):
     """wp.getPost(blog_id, username, password, post_id, fields=[])
     => post structure"""
@@ -171,7 +171,7 @@ def delete_post(blog_id, username, password, post_id):
 
 # Shim
 @xmlrpc_func(returns='struct', args=['integer', 'string',
-                                      'string', 'string', 'array'])
+                                      'string', 'string', 'string[]'])
 def get_post_type(blog_id, username, password, post_type_name, fields=[]):
     """wp.getPostType(blog_id, username, password, post_type_name, fields=[])
     => struct"""
@@ -179,7 +179,7 @@ def get_post_type(blog_id, username, password, post_type_name, fields=[]):
 
 # Shim
 @xmlrpc_func(returns='struct', args=['integer', 'string',
-                                      'string', 'struct', 'array'])
+                                      'string', 'struct', 'string[]'])
 def get_post_types(blog_id, username, password, filter={}, fields=[]):
     """wp.getPostTypes(blog_id, username, password, filter={}, fields=[])
     => struct"""
@@ -187,9 +187,9 @@ def get_post_types(blog_id, username, password, filter={}, fields=[]):
 
 # Shim
 @xmlrpc_func(returns='struct', args=['integer', 'string',
-                                      'string', 'array'])
-def get_post_formats(blog_id, username, password, filter={}):
-    """wp.getPostTypes(blog_id, username, password, filter={})
+                                      'string', 'struct[]'])
+def get_post_formats(blog_id, username, password, filter=[]):
+    """wp.getPostTypes(blog_id, username, password, filter=[])
     => struct"""
     return {}
 
