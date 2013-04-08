@@ -1,8 +1,8 @@
 # Django settings for project project.
 
-# Import common settings
+# Import core settings
 try:
-    from common.settings_shared import *
+    from core.settings_shared import *
 except Exception as e:
     raise SystemExit("Could not read settings: " + e.message)
 

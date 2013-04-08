@@ -108,7 +108,7 @@ YEAR_MONTH_FORMAT = 'Y.m'
 #DATETIME_FORMAT = 'c'
 
 # Override ZINNIA XMLRPC methods
-from common.xmlrpc.wp import WP_ZINNIA_XMLRPC_METHODS as XMLRPC_METHODS
+from core.xmlrpc.wp import WP_ZINNIA_XMLRPC_METHODS as XMLRPC_METHODS
 from zinnia.xmlrpc import ZINNIA_XMLRPC_PINGBACK
 XMLRPC_METHODS += ZINNIA_XMLRPC_PINGBACK
 XMLRPC_METHODS += (
@@ -140,20 +140,20 @@ XMLRPC_METHODS += (
     # Overrides
     ('zinnia.xmlrpc.metaweblog.get_categories',
      'mt.getCategoryList'),
-    ('common.xmlrpc.wp.categories.new_category',
+    ('core.xmlrpc.wp.categories.new_category',
      'mt.addCategory'),
-    ('common.xmlrpc.mt.get_recent_posts',
+    ('core.xmlrpc.mt.get_recent_posts',
      'metaWeblog.getRecentPosts'),
-    ('common.xmlrpc.mt.get_post',
+    ('core.xmlrpc.mt.get_post',
      'metaWeblog.getPost'),
-    ('common.xmlrpc.mt.new_post',
+    ('core.xmlrpc.mt.new_post',
      'metaWeblog.newPost'),
-    ('common.xmlrpc.mt.edit_post',
+    ('core.xmlrpc.mt.edit_post',
      'metaWeblog.editPost'),
     # Additions
-    ('common.xmlrpc.mt.get_post_categories',
+    ('core.xmlrpc.mt.get_post_categories',
      'mt.getPostCategories'),
-    ('common.xmlrpc.mt.set_post_categories',
+    ('core.xmlrpc.mt.set_post_categories',
      'mt.setPostCategories'),
  )
 

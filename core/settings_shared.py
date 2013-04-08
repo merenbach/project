@@ -106,7 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'common.context_processors.site',
+    'core.context_processors.site',
 )
 
 INSTALLED_APPS = (
@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.syndication',
     'django.contrib.comments',
-    'common', # my common extensions
+    'core', # my common extensions
     'south',
     'appconf',
     'pytz',
