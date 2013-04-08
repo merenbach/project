@@ -6,13 +6,14 @@ register = template.Library()
 
 @register.simple_tag(takes_context=True)
 def active(context, pattern):
+    """ Try to determine whether a link is active """
     request = context.get('request', None)
     if request is not None:
         import re
-        pattern = u'^{0}$'.format(pattern)
-        if re.search(pattern, request.path):
-            return 'active'
-    return ''
+        # Use "match" instead of "search" to find from beginning
+        if re.match(pattern, request.path):
+            return u'active'
+    return u''
 
 @register.simple_tag(takes_context=True)
 def make_crumbs(context, *args, **kwargs):
@@ -37,14 +38,3 @@ def is_checkbox(field):
     """ From http://stackoverflow.com/questions/3927018/django-how-to-check-if-field-widget-is-checkbox-in-the-template """
     from django.forms import CheckboxInput
     return field.field.widget.__class__.__name__ == CheckboxInput().__class__.__name__
-
-# [am] added this on 2011-11-05
-#@register.inclusion_tag('cmsplugin_blog/tag_links_detail_snippet.html', takes_context=True)
-#def render_tag_links_detail(context, obj):
-#    request = context["request"]
-#    language = get_language_from_request(request)
-#    kw = get_translation_filter_language(Entry, language)
-#    filters = dict(is_published=True, pub_date__lte=datetime.datetime.now(), **kw)
-#    return {
-#        'tags': Tag.objects.get_for_object(obj)
-#    }
