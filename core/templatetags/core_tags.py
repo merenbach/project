@@ -9,10 +9,13 @@ def active(context, pattern):
     """ Try to determine whether a link is active """
     request = context.get('request', None)
     if request is not None:
-        import re
-        # Use "match" instead of "search" to find from beginning
-        if re.match(pattern, request.path):
+        if pattern == request.path:
             return u'active'
+        elif pattern != '/':
+            import re
+            # Use "match" instead of "search" to find from beginning
+            if re.match(pattern, request.path):
+                return u'active'
     return u''
 
 @register.simple_tag(takes_context=True)
