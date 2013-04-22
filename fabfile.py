@@ -66,3 +66,14 @@ def update_index(settings=None):
     else:
         print('Please specify a project.')
 
+def run(settings=None, user=None):
+    if settings is not None:
+        if user is not None:
+            cmd = 'sudo -u {0} {1} runserver --settings={2}.settings'.format(user, MANAGE_CMD, settings)
+        else:
+            cmd = 'python {0} runserver --settings={1}.settings'.format(MANAGE_FILE, settings)
+        print('[+] Running the following command:')
+        print('# {0}'.format(cmd))
+        local(cmd)
+    else:
+        print('Please specify a project.')
