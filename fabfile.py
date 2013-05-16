@@ -44,7 +44,7 @@ def deploy(settings=None):
         collect(settings)
     else:
         # A little recursion is in order
-        for s in ('den', 'liz', 'romantics', 'tata'):
+        for s in ('den', 'liz', 'romantics'):
             deploy(s)
     reload_gunicorn()
 
