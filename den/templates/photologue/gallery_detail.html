@@ -19,7 +19,7 @@
 {% if object.description %}<p>{{ object.description|markdown }}</p>{% endif %}
 <ul class="thumbnails photo-gallery row">
     {% for photo in object.public %}
-	<li class="span6 gallery-photo">
+	<li class="span2 gallery-photo">
 		<a class="thumbnail" href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"></a>
 	</li><!-- /.span6.gallery-photo -->
     {% endfor %}
