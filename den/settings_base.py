@@ -109,8 +109,8 @@ YEAR_MONTH_FORMAT = 'Y.m'
 
 # Override ZINNIA XMLRPC methods
 from core.xmlrpc.wp import WP_ZINNIA_XMLRPC_METHODS as XMLRPC_METHODS
-from zinnia.xmlrpc import ZINNIA_XMLRPC_PINGBACK
-XMLRPC_METHODS += ZINNIA_XMLRPC_PINGBACK
+#from zinnia.xmlrpc import ZINNIA_XMLRPC_PINGBACK
+#XMLRPC_METHODS += ZINNIA_XMLRPC_PINGBACK
 XMLRPC_METHODS += (
     # Blogger
     ('zinnia.xmlrpc.metaweblog.get_users_blogs',

@@ -14,7 +14,7 @@ from zinnia.xmlrpc import metaweblog
 @xmlrpc_func(returns='struct[]', args=['integer', 'string', 'string', 'string'])
 def get_comment_count(blog_id, username, password, post_id):
     """wp.getCommentCount(blog_id, username, password, post_id)
-    => category structure[]"""
+    => comment structure[]"""
     return [
         {
             'approved': 0,
@@ -27,35 +27,35 @@ def get_comment_count(blog_id, username, password, post_id):
 @xmlrpc_func(returns='struct', args=['integer', 'string', 'string', 'integer'])
 def get_comment(blog_id, username, password, comment_id):
     """wp.getCommentCount(blog_id, username, password, comment_id)
-    => category structure"""
+    => comment structure"""
     return None
 
 @xmlrpc_func(returns='struct[]', args=['integer', 'string', 'string', 'struct'])
 def get_comments(blog_id, username, password, filter):
     """wp.getComments(blog_id, username, password, filter)
-    => category structure[]"""
+    => comment structure[]"""
     return []
 
 @xmlrpc_func(returns='integer', args=['integer', 'string', 'string', 'integer', 'struct'])
 def new_comment(blog_id, username, password, post_id, comment):
     """wp.newComment(blog_id, username, password, post_id, comment)
-    => category integer"""
+    => comment integer"""
     return -1
 
 @xmlrpc_func(returns='boolean', args=['integer', 'string', 'string', 'integer', 'struct'])
 def edit_comment(blog_id, username, password, comment_id, comment):
     """wp.editComment(blog_id, username, password, comment_id, comment)
-    => category boolean"""
+    => comment boolean"""
     return True
 
 @xmlrpc_func(returns='boolean', args=['integer', 'string', 'string', 'integer'])
 def delete_comment(blog_id, username, password, post_id, comment_id):
     """wp.deleteComment(blog_id, username, password, comment_id)
-    => category boolean"""
+    => comment boolean"""
     return True
 
 @xmlrpc_func(returns='struct[]', args=['integer', 'string', 'string'])
 def get_comment_status_list(blog_id, username, password):
     """wp.getCommentStatusList(blog_id, username, password)
-    => category structure[]"""
+    => comment structure[]"""
     return []
