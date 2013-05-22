@@ -121,10 +121,10 @@ def post_structure(entry, site):
     if 'description' in s:
         s['description'] = unicode(entry.content)
     # [todo] How is the post status getting sent back for WordPress?
-    if s['wp_password'] or entry.login_required:
+    if entry.login_required:
         s['post_status'] = u'private'
-    #elif entry.status == HIDDEN:
-    #    s['post_status'] = u'pending'
+    elif entry.status == HIDDEN:
+        s['post_status'] = u'pending'
     else:
         s['post_status'] = entry.get_status_display()
     return s

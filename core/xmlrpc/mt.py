@@ -9,7 +9,7 @@ from django.template.defaultfilters import slugify
 
 from zinnia.models import Entry
 from zinnia.models import Category
-from zinnia.managers import HIDDEN
+from zinnia.managers import DRAFT, HIDDEN, PUBLISHED
 from django_xmlrpc.decorators import xmlrpc_func
 
 from zinnia.xmlrpc import metaweblog
@@ -129,11 +129,11 @@ def post_structure(entry, site):
     # Support Markdown: Burn a Rich Text Editor today!
     if 'description' in s:
         s['description'] = unicode(entry.content)
-    if s['wp_password'] or entry.login_required:
+    if entry.login_required:
         # This could be 'protected' if our client supports it in the future
         s['post_status'] = u'private'
     elif entry.status == HIDDEN:
-        s['post_status'] = u'private'
+        s['post_status'] = u'pending'
     else:
         s['post_status'] = entry.get_status_display()
     return s
@@ -158,13 +158,35 @@ def get_recent_posts(blog_id, username, password, number):
     return [post_structure(entry, site) \
             for entry in Entry.objects.filter(authors=user, sites__id=blog_id)[:number]]
 
+# Internal method to align with WordPress
+def update_post_status(post_id, username, password, post):
+    # Update status as appropriate
+    if u'post_status' in post:
+        user = metaweblog.authenticate(username, password, 'zinnia.change_entry')
+        entry = Entry.objects.get(id=post_id, authors=user)
+        post_status = post.get('post_status')
+        if post_status == u'private':
+            entry.login_required = True
+            entry.status = PUBLISHED
+        else:
+            entry.login_required = False
+            if post_status == u'draft':
+                entry.status = DRAFT
+            elif post_status == u'pending':
+                entry.status = HIDDEN
+            else:
+                entry.status = PUBLISHED
+        entry.save()
+
 # Modified for MovableType
 @xmlrpc_func(returns='string', args=['string', 'string', 'string',
                                      'struct', 'boolean'])
 def new_post(blog_id, username, password, post, publish):
     """metaWeblog.newPost(blog_id, username, password, post, publish)
     => post_id"""
-    return metaweblog.new_post(blog_id, username, password, finesse_fields_to_commit(post), publish)
+    post_id = metaweblog.new_post(blog_id, username, password, finesse_fields_to_commit(post), publish)
+    update_post_status(post_id, username, password, post)
+    return post_id
 
 # Custom extension for MovableType
 @xmlrpc_func(returns='boolean', args=['string', 'string', 'string',
@@ -172,7 +194,9 @@ def new_post(blog_id, username, password, post, publish):
 def edit_post(post_id, username, password, post, publish):
     """metaWeblog.editPost(post_id, username, password, post, publish)
     => boolean"""
-    return metaweblog.edit_post(post_id, username, password, finesse_fields_to_commit(post), publish)
+    success = metaweblog.edit_post(post_id, username, password, finesse_fields_to_commit(post), publish)
+    update_post_status(post_id, username, password, post)
+    return success
 
 # Get categories
 @xmlrpc_func(returns='struct[]', args=['string', 'string', 'string'])
