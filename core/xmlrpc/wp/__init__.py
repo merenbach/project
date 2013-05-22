@@ -57,4 +57,19 @@ WP_ZINNIA_XMLRPC_METHODS = [
     # Tags
     ('core.xmlrpc.wp.tags.get_tags',
      'wp.getTags'),
+     # Comments (just shims)
+     ('core.xmlrpc.wp.comments.get_comment_count',
+      'wp.getCommentCount'),
+     ('core.xmlrpc.wp.comments.get_comment',
+      'wp.getComment'),
+     ('core.xmlrpc.wp.comments.get_comments',
+      'wp.getComments'),
+     ('core.xmlrpc.wp.comments.new_comment',
+      'wp.newComment'),
+     ('core.xmlrpc.wp.comments.edit_comment',
+      'wp.editComment'),
+     ('core.xmlrpc.wp.comments.delete_comment',
+      'wp.deleteComment'),
+     ('core.xmlrpc.wp.comments.get_comment_status_list',
+      'wp.getCommentStatusList'),
 ]
