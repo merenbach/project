@@ -35,7 +35,7 @@
 {% block content %}
 
 {% if category and category.description %}
-	<p class="lead">{{ category.description|striptags|safe }}</p>
+	<div class="lead">{{ category.description|striptags|safe|markdown }}</div>
 {% endif %}
 
 {% block content-loop %}
