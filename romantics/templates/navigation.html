@@ -3,7 +3,6 @@
 {% url 'home' as home_url %}
 {% url 'ball' as ball_url %}
 {% url 'contact' as contact_url %}
-{% url 'registry' as registry_url %}
 {% comment %}
 <div class="container">
 	<div class="row">
@@ -39,13 +38,6 @@
 								{% endif %}
 							</ul>
 							<ul class="nav pull-right">
-								<li class="{% active registry_url %}">
-									<a href="{{ registry_url }}">
-										<small>
-											Registry
-										</small>
-									</a>
-								</li>
 								{% if user.is_authenticated and user.is_staff %}
 									<li><a href="/admin/">Admin</a></li>
 								{% endif %}
